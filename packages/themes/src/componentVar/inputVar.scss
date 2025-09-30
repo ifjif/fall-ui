@@ -1,0 +1,20 @@
+@use '../common/namespace.scss' as *;
+
+@function inputVar($type: '') {
+  $input: (
+    'size':('default':getVarName('component-size', 'default')),
+    'border-size':('default':getVarName('border-size', 'default')),
+    'text-color':('default':getVarName('color', 'text')),
+    'round-size':('default':getVarName('component-round', 'default')),
+    'font-size':('default':getVarName('font-size', 'default')),
+    'horizontal-padding':('default':getVarName('input-horizontal-padding', 'default')),
+    'border-color':('default': getVarName('color', 'text', 'light-7')),
+    'hover-border-color':('default':getVarName('color', 'text', 'light-5')),
+    'focus-border-color':('type': getVarName('color', $type)),
+    'cursor':('default':getVarName('cursor', 'text')),
+    'bg-color':('default':getVarName('color', 'white')),
+    'disabled-bg-color':('default':getVarName('color', 'text', 'light-9')),
+  );
+
+@return $input;
+}

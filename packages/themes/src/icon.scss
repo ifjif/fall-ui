@@ -1,0 +1,17 @@
+@use './common/namespace.scss' as *;
+
+@include b(icon) {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: inherit;
+  height: 1em;
+  width: 1em;
+  fill: currentColor;
+  line-height: 1;
+
+  svg {
+    height: 1em;
+    width: 1em;
+  }
+}

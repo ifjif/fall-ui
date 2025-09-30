@@ -1,0 +1,33 @@
+@use "sass:color";
+@use 'sass:map';
+@use './common/namespace.scss' as *;
+@use './common/var.scss' as *;
+
+@mixin set-theme-color {
+  @each $key, $value in $theme-colors {
+    @each $k, $v in $value {
+      #{getVarName('color',$key, if($k =='base', '', $k))}: $v
+    }
+  }
+}
+
+@mixin set-basic-color {
+  @each $key, $value in $basic-colors {
+    #{getVarName('color',$key)}: $value;
+  }
+}
+
+@mixin set-global-var() {
+  @each $key, $value in $global-var {
+    @each $k, $v in $value {
+      $name: getVarName($key, $k);
+      #{$name}: $v;
+    }
+  }
+}
+
+:root {
+  @include set-basic-color();
+  @include set-theme-color();
+  @include set-global-var();
+}

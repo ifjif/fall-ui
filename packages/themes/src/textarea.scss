@@ -1,0 +1,88 @@
+@use './common/namespace.scss' as *;
+@use './common/componentVar.scss' as *;
+@use './componentVar/inputVar.scss' as *;
+@use './common/var.scss' as *;
+
+@include b(textarea) {
+  @include set-component-var('input', inputVar());
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  cursor: var(#{getVarName('input', 'cursor')});
+
+  @include e(wrapper) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: var(#{getVarName('input', 'border-size')}) solid var(#{getVarName('input', 'border-color')});
+    padding: var(#{getVarName('input', 'horizontal-padding')});
+    border-radius: var(#{getVarName('input', 'round-size')});
+    box-sizing: border-box;
+    background-color: var(#{getVarName('input', 'bg-color')});
+    flex: 1;
+    gap: var(#{getVarName('input', 'horizontal-padding')}) 0;
+
+    &:hover {
+      #{getVarName('input', 'border-color')}: var(#{getVarName('input', 'hover-border-color')});
+    }
+
+    @include e(inner) {
+      flex: 1;
+      background-color: transparent;
+      width: 100%;
+      outline: none;
+      border: none;
+      padding: 0;
+      font-size: var(#{getVarName('input','font-size')});
+      color:var(#{getVarName('input', 'text-color')});
+      cursor: inherit;
+      resize: none;
+    }
+
+    @include e(fix) {
+      display: flex;
+      align-items: center;
+      font-size: var(#{getVarName('input','font-size')});
+      height: 100%;
+      gap: 0 var(#{getVarName('input', 'horizontal-padding')});
+    }
+
+    @include e(prefix) {
+      margin-right: var(#{getVarName('input', 'horizontal-padding')});
+    }
+
+    @include e(suffix) {
+      justify-content: right;
+      margin-left: var(#{getVarName('input', 'horizontal-padding')});
+
+      @include e-and((password-icon, clear-icon)) {
+        cursor: var(#{getVarName('cursor', 'pointer')});
+      }
+    }
+  }
+
+  @include s((focus)) {
+    #{getVarName('input', 'border-color')}: var(#{getVarName('input', 'focus-border-color')});
+    #{getVarName('input', 'hover-border-color')}:var(#{getVarName('input', 'focus-border-color')});
+  }
+
+  @include s((disalbed)) {
+    #{getVarName('input', 'cursor')}: var(#{getVarName('cursor', 'not-allowed')});
+    #{getVarName('input', 'bg-color')}:var(#{getVarName('input', 'disabled-bg-color')});
+    #{getVarName('input', 'hover-border-color')}:var(#{getVarName('input', 'border-color')})
+  }
+
+}
+
+@each $size in $common-size {
+  @include m('size', $size) {
+    #{getVarName('input', 'round-size')}: var(#{getVarName('component-round', $size)});
+    #{getVarName('input','font-size')}:var(#{getVarName('font-size', $size)});
+  }
+}
+
+@each $type in $themes {
+  @include m($type) {
+    @include set-component-var('input', inputVar($type), 'type');
+  }
+}

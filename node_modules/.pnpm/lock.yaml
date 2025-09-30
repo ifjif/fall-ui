@@ -1,0 +1,35 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@ui-library/components':
+        specifier: workspace:^
+        version: link:packages/components
+      '@ui-library/hooks':
+        specifier: workspace:^
+        version: link:packages/hooks
+      '@ui-library/icons':
+        specifier: workspace:^
+        version: link:packages/icons
+      '@ui-library/themes':
+        specifier: workspace:^
+        version: link:packages/themes
+      '@ui-library/utils':
+        specifier: workspace:^
+        version: link:packages/utils
+
+  packages/components: {}
+
+  packages/hooks: {}
+
+  packages/icons: {}
+
+  packages/themes: {}
+
+  packages/utils: {}

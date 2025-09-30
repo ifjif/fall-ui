@@ -1,0 +1,14 @@
+@use './common/namespace.scss' as *;
+
+@include b(container) {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  flex-basis: auto;
+  box-sizing: border-box;
+
+  @include s(vertical) {
+    flex-direction: column;
+  }
+}

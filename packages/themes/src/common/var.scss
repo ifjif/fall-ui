@@ -1,0 +1,89 @@
+@use 'sass:map';
+@use 'sass:color';
+
+$mixin-types: text, primary, success, warning, error;
+$themes: primary, success, warning, error;
+$common-size: small, large;
+$white: white;
+
+$basic-colors: (
+  'white':white,
+  'black':black) !default;
+
+$theme-colors: (
+  'primary':('base':#3069ff),
+  'success':('base':#14cd70),
+  'warning':('base':#ffa81a),
+  'error':('base': #ff4a5b),
+  'text':('base': #212226),
+  ) !default;
+
+@mixin set-level-color($type, $number, $mixColor , $mode: 'light') {
+  $theme-colors: map.deep-merge((#{$type}:('#{$mode}-#{$number}': color.mix($mixColor, map.get($theme-colors, $type, 'base'), $number * 10%))), $theme-colors) !global
+}
+
+@each $type in $mixin-types {
+  @for $i from 1 through 9 {
+    @include set-level-color($type, $i, $white)
+  }
+}
+
+$component-size: (
+  ) !default;
+$component-size: map.deep-merge(('small':24px,
+      'default':32px,
+      'large':40px), $component-size
+);
+$button-horizontal-padding: (
+  ) !default;
+$button-horizontal-padding: map.deep-merge(('small':10px,
+      'default':16px,
+      'large':24px), $button-horizontal-padding
+);
+$component-round: (
+  ) !default;
+
+$component-round: map.deep-merge(('small': 10px,
+      'default':12px,
+      'large':14px,
+      'round':100px), $component-round
+);
+
+$font-size: (
+  ) !default;
+$font-size: map.deep-merge(('small':12px,
+      'default':14px,
+      'large': 16px), $font-size
+);
+
+$border-size: (
+  ) !default;
+$border-size: map.deep-merge(('small':1px,
+      'default':2px,
+      'large':3px), $border-size
+);
+
+$input-horizontal-padding: (
+  ) !default;
+$input-horizontal-padding: map.deep-merge(('default':10px), $input-horizontal-padding
+);
+
+$cursor: (
+  ) !default;
+$cursor: map.deep-merge(('text':text,
+      'pointer':pointer,
+      'not-allowed':not-allowed), $cursor
+);
+
+$global-var: (
+  ) !default;
+
+$global-var: map.deep-merge(('component-size':$component-size,
+      'font-size':$font-size,
+      'component-round':$component-round,
+      'border-size':$border-size,
+      'button-horizontal-padding':$button-horizontal-padding,
+      'input-horizontal-padding':$input-horizontal-padding,
+      'cursor':$cursor,
+    ), $global-var
+);

@@ -1,0 +1,124 @@
+@use 'sass:list';
+$namespace: 'a' !default;
+$connect: '-' !default;
+$element-connect: '__' !default;
+$modifier-connect: '--' !default;
+$modifier-value-connect: '_' !default;
+$state-prefix: 'is-' !default;
+
+@function createVarName($list) {
+  $name: '--' + $namespace;
+
+  @each $item in $list {
+    @if $item !='' {
+      $name: $name + '-' + $item
+    }
+  }
+
+  @return $name;
+}
+
+@function getVarName($args...) {
+  @return createVarName(($args))
+}
+
+$b: null;
+
+@mixin b($block) {
+  $b: '.' + $namespace + $connect + $block !global;
+
+  #{$b} {
+    @content
+  }
+}
+
+@mixin bb($block) {
+  $bb: '.' + $namespace + $connect + $block;
+
+  #{$bb} {
+    @content
+  }
+}
+
+@mixin e($e, $atRoot: true) {
+  $e-name: $b + $element-connect + $e;
+
+  @if $atRoot {
+    @at-root {
+      #{$e-name} {
+        @content
+      }
+    }
+  }
+
+  @else {
+    #{$e-name} {
+      @content
+    }
+  }
+
+}
+
+@mixin e-and($es, $atRoot: true) {
+  $eall: (
+    ) !default;
+
+  @each $e in $es {
+    $ename: $b + $element-connect + $e;
+    $eall: list.append($eall, $ename, comma
+    );
+}
+
+@debug $eall;
+
+@if $atRoot {
+  @at-root {
+    #{$eall} {
+      @content
+    }
+  }
+}
+
+@else {
+  #{$eall} {
+    @content
+  }
+}
+
+}
+
+@mixin m($m, $v: '') {
+  $m-value: '';
+
+  @if($v !='') {
+    $m-value: $modifier-value-connect + $v;
+  }
+
+  $m-name: $b + $modifier-connect + $m + $m-value ;
+
+  @at-root {
+    #{$m-name} {
+      @content
+    }
+  }
+}
+
+@mixin s($attrs, $and: true) {
+  $states: (
+    ) !default;
+
+  @each $attr in $attrs {
+    @if $attr =='&' {
+      $states: list.append($states, '&', comma)
+    }
+
+    @else {
+      $state: if($and, '&', '') + '.' + '#{$state-prefix}#{$attr}';
+      $states: list.append($states, #{$state}, comma)
+    }
+  }
+
+  #{$states} {
+    @content
+  }
+}

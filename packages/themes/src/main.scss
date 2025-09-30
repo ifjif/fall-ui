@@ -1,0 +1,9 @@
+@use './common/namespace.scss' as *;
+
+@include b(main) {
+  display: block;
+  flex: 1;
+  overflow: auto;
+  box-sizing: border-box;
+  flex-basis: auto;
+}

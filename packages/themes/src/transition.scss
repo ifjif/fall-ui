@@ -1,0 +1,15 @@
+@use './common/namespace.scss' as *;
+
+@include s('loading', false) {
+  animation: rotate 1s linear 0s infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

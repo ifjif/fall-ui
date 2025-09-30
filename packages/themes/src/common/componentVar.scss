@@ -1,0 +1,11 @@
+@use 'sass:map';
+@use './namespace.scss' as *;
+
+@mixin set-component-var($name, $var, $property: 'default') {
+  @each $key, $value in $var {
+    $varName: getVarName($name, $key);
+    $varVal: map.get($var, $key, $property);
+
+    #{$varName}: var(#{$varVal});
+  }
+}

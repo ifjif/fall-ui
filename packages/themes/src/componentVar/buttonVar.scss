@@ -1,0 +1,31 @@
+@use '../common/namespace.scss' as *;
+
+@function buttonVar($type: '') {
+  $button: (
+    'size':('default':getVarName('component-size', 'default')),
+    'horizontal-padding':('default':getVarName('button-horizontal-padding', 'default')),
+    'font-size':('default':getVarName('font-size', 'default')),
+    'round-size':('default':getVarName('component-round', 'default')),
+    'border-size':('default':getVarName('border-size', 'default')),
+    'border-color':('default':getVarName('color', 'text', 'light-5'), 'type':getVarName('color', $type)),
+    'bg-color':('default':getVarName('color', 'white'), 'type': getVarName('color', $type)),
+    'text-color':('default':getVarName('color', 'text'), 'type':getVarName('color', 'white')),
+    'hover-bg-color':('default':getVarName('color', 'text', 'light-9'), 'type': getVarName('color', $type, 'light-3')),
+    'hover-border-color':('default':getVarName('color', 'text', 'light-7'), 'type': getVarName('color', $type, 'light-3')),
+    'hover-text-color':('default':getVarName('color', 'text', 'light-3'), 'type': getVarName('color', 'white')),
+    'disabled-bg-color':('default':getVarName('color', 'text', 'light-9'), 'type': getVarName('color', $type, 'light-5')),
+    'disabled-border-color':('default':getVarName('color', 'text', 'light-8'), 'type': getVarName('color', $type, 'light-5')),
+    'disabled-text-color':('default':getVarName('color', 'text', 'light-5'), 'type': getVarName('color', 'white')),
+    'border-bg-color':('default':getVarName('color', 'white'), 'type': getVarName('color', 'white')),
+    'border-border-color':('default':getVarName('color', 'text', 'light-5'), 'type': getVarName('color', $type, 'light-5')),
+    'border-text-color':('default':getVarName('color', 'text', 'light-5'), 'type': getVarName('color', $type)),
+    'text-text-color':('default':getVarName('color', 'text'), 'type': getVarName('color', $type)),
+    'text-border-color':('default':getVarName('color', 'white'), 'type': getVarName('color', 'white')),
+    'text-bg-color':('default':getVarName('color', 'white'), 'type': getVarName('color', 'white')),
+    'text-hover-bg-color':('default':getVarName('color', 'text', 'light-9'), 'type': getVarName('color', $type, 'light-9')),
+    'text-hover-border-color':('default':getVarName('color', 'text', 'light-9'), 'type': getVarName('color', $type, 'light-9')),
+    'text-disabled-text-color':('default':getVarName('color', 'text', 'light-5'), 'type': getVarName('color', $type, 'light-5')),
+  );
+
+@return $button;
+}

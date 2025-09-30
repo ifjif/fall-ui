@@ -1,0 +1,141 @@
+@use './common/namespace.scss' as *;
+@use './common/componentVar.scss' as *;
+@use './componentVar/inputVar.scss' as *;
+@use './common/var.scss' as *;
+
+@include b(input) {
+  @include set-component-var('input', inputVar());
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  cursor: var(#{getVarName('input', 'cursor')});
+
+  @include e-and((pend, wrapper)) {
+    display: inline-flex;
+    align-items: center;
+    border: var(#{getVarName('input', 'border-size')}) solid var(#{getVarName('input', 'border-color')});
+    padding: 0 var(#{getVarName('input', 'horizontal-padding')});
+    border-radius: var(#{getVarName('input', 'round-size')});
+    height: var(#{getVarName('input', 'size')});
+    box-sizing: border-box;
+    font-size: var(#{getVarName('input','font-size')});
+  }
+
+  @include e(b-pend) {
+    @include bb(button) {
+      #{getVarName('button', 'horizontal-padding')}:var(#{getVarName('input','horizontal-padding')});
+      #{getVarName('button', 'round-size')}:var(#{getVarName('input', 'round-size')});
+      #{getVarName('button', 'border-color')}:var(#{getVarName('input', 'border-color')});
+      #{getVarName('button', 'font-size')}:var(#{getVarName('input', 'font-size')});
+      #{getVarName('button', 'border-size')}:var(#{getVarName('input', 'border-size')});
+      #{getVarName('button', 'size')}:var(#{getVarName('input', 'size')});
+      min-width: auto;
+    }
+  }
+
+  @include e(prepend) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+
+    @include bb(button) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: none;
+    }
+  }
+
+  @include e(append) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+
+    @include bb(button) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: none;
+    }
+  }
+
+  @include e(wrapper) {
+    background-color: var(#{getVarName('input', 'bg-color')});
+    flex: 1;
+
+    &:hover {
+      #{getVarName('input', 'border-color')}: var(#{getVarName('input', 'hover-border-color')});
+    }
+
+    @include s((prepend)) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    @include s((append)) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    @include e(inner) {
+      flex: 1;
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+      outline: none;
+      border: none;
+      padding: 0;
+      font-size: var(#{getVarName('input','font-size')});
+      color:var(#{getVarName('input', 'text-color')});
+      cursor: inherit;
+    }
+
+    @include e(fix) {
+      display: inline-flex;
+      align-items: center;
+      font-size: var(#{getVarName('input','font-size')});
+      height: 100%;
+      gap: 0 var(#{getVarName('input', 'horizontal-padding')});
+    }
+
+    @include e(prefix) {
+      margin-right: var(#{getVarName('input', 'horizontal-padding')});
+    }
+
+    @include e(suffix) {
+      margin-left: var(#{getVarName('input', 'horizontal-padding')});
+
+      @include e-and((password-icon, clear-icon)) {
+        cursor: var(#{getVarName('cursor', 'pointer')});
+      }
+    }
+  }
+
+  @include s((focus)) {
+    #{getVarName('input', 'border-color')}: var(#{getVarName('input', 'focus-border-color')});
+    #{getVarName('input', 'hover-border-color')}:var(#{getVarName('input', 'focus-border-color')});
+  }
+
+  @include s((disalbed)) {
+    #{getVarName('input', 'cursor')}: var(#{getVarName('cursor', 'not-allowed')});
+    #{getVarName('input', 'bg-color')}:var(#{getVarName('input', 'disabled-bg-color')});
+    #{getVarName('input', 'hover-border-color')}:var(#{getVarName('input', 'border-color')})
+  }
+
+  @include s((round)) {
+    #{getVarName('input', 'round-size')}:var(#{getVarName('component-round', 'round')});
+  }
+
+}
+
+@each $size in $common-size {
+  @include m('size', $size) {
+    #{getVarName('input', 'round-size')}: var(#{getVarName('component-round', $size)});
+    #{getVarName('input', 'size')}: var(#{getVarName('component-size', $size)});
+    #{getVarName('input','font-size')}:var(#{getVarName('font-size', $size)});
+  }
+}
+
+@each $type in $themes {
+  @include m($type) {
+    @include set-component-var('input', inputVar($type), 'type');
+  }
+}

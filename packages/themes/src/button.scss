@@ -1,0 +1,139 @@
+@use './common/namespace.scss' as *;
+@use './common/componentVar.scss' as *;
+@use './componentVar/buttonVar.scss' as *;
+@use './common/var.scss' as *;
+
+@include b(button) {
+  @include set-component-var('button', buttonVar());
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: var(#{getVarName('button', 'size')});
+  font-size:var(#{getVarName('button', 'font-size')});
+  border-radius: var(#{getVarName('button', 'round-size')});
+  border: var(#{getVarName('button', 'border-size')}) solid var(#{getVarName('button', border-color)});
+  background-color: var(#{getVarName('button', 'bg-color')});
+  color:var(#{getVarName('button', 'text-color')});
+  line-height: 1;
+  min-width: 80px;
+  padding: 0 var(#{getVarName('button', 'horizontal-padding')});
+  box-sizing: border-box;
+  cursor: pointer;
+  vertical-align: middle;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    gap: 0 4px;
+  }
+
+  &:hover {
+    #{getVarName('button', 'bg-color')}: var(#{getVarName('button', 'hover-bg-color')});
+    #{getVarName('button', 'border-color')}: var(#{getVarName('button', 'hover-border-color')});
+    #{getVarName('button', 'text-color')}: var(#{getVarName('button', 'hover-text-color')});
+  }
+
+  @include s((round)) {
+    #{getVarName('button', 'round-size')}: var(#{getVarName('component-round', 'round')});
+  }
+
+  @include s((disabled)) {
+    #{getVarName('button', 'text-color')}: var(#{getVarName('button', 'disabled-text-color')});
+    #{getVarName('button', 'bg-color')}: var(#{getVarName('button', 'disabled-bg-color')});
+    #{getVarName('button', 'border-color')}: var(#{getVarName('button', 'disabled-border-color')});
+    cursor: not-allowed;
+  }
+
+  @include s((border, dashed)) {
+    #{getVarName('button', 'text-color')}: var(#{getVarName('button', 'border-text-color')});
+    #{getVarName('button', 'bg-color')}: var(#{getVarName('button', 'border-bg-color')});
+    #{getVarName('button', 'border-color')}: var(#{getVarName('button', 'border-border-color')});
+  }
+
+  @include s((dashed)) {
+    border-style: dashed;
+  }
+
+
+  @include s((text)) {
+    #{getVarName('button', 'text-color')}: var(#{getVarName('button', 'text-text-color')});
+
+    &:hover {
+      #{getVarName('button', 'bg-color')}: var(#{getVarName('button', 'text-hover-bg-color')});
+      #{getVarName('button', 'border-color')}: var(#{getVarName('button', 'text-hover-border-color')});
+    }
+
+  }
+
+  @include s((link)) {
+    #{getVarName('button', 'text-color')}: var(#{getVarName('button', 'text-text-color')});
+    height: auto;
+    min-width: auto;
+    padding: 0;
+    text-decoration: underline;
+
+    &:hover {
+      #{getVarName('button', 'text-color')}: var(#{getVarName('button', 'hover-border-color')});
+    }
+  }
+
+  @include s((text, link)) {
+    @include s(('&', disabled)) {
+      #{getVarName('button', 'bg-color')}: var(#{getVarName('button', 'text-bg-color')});
+      #{getVarName('button', 'border-color')}: var(#{getVarName('button', 'text-border-color')});
+    }
+
+    @include s((disabled)) {
+      #{getVarName('button', 'text-color')}: var(#{getVarName('button', 'text-disabled-text-color')});
+    }
+  }
+
+  @include s((circle)) {
+    width: var(#{getVarName('button', 'size')});
+    padding: 0;
+    min-width: auto;
+    border-radius: var(#{getVarName('component-round', 'round')});
+  }
+
+  @include s((block)) {
+    display: block;
+    width: 100%;
+  }
+
+  @include s((loading), false) {
+    margin-right: 4px;
+  }
+
+  @include s((button-group)) {
+    border-radius: 0;
+
+    +.is-button-group {
+      margin-left: -2px;
+    }
+
+    &:first-child {
+      border-radius: var(#{getVarName('button', 'round-size')}) 0 0 var(#{getVarName('button', 'round-size')});
+    }
+
+    &:last-child {
+      border-radius: 0 var(#{getVarName('button', 'round-size')}) var(#{getVarName('button', 'round-size')}) 0;
+    }
+  }
+}
+
+@each $size in $common-size {
+  @include m('size', $size) {
+    #{getVarName('button', 'size')}:var(#{getVarName('component-size', $size)});
+    #{getVarName('button', 'font-size')}:var(#{getVarName('font-size', $size)});
+    #{getVarName('button', 'round-size')}:var(#{getVarName('component-round', $size)});
+    #{getVarName('button', 'horizontal-padding')}:var(#{getVarName('button-horizontal-padding', $size)});
+    min-width: auto;
+  }
+}
+
+@each $theme in $themes {
+  @include m($theme) {
+    @include set-component-var('button', buttonVar($theme), 'type');
+  }
+}
