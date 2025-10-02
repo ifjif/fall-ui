@@ -1,7 +1,4 @@
 import { componentInstall } from "@ui-library/utils";
-import Icon from './src/icon.vue'
+import Icon from "./src/icon.vue";
 
-export const AIcon = componentInstall(Icon)
-export default AIcon
-
-
+export const AIcon = componentInstall(Icon);

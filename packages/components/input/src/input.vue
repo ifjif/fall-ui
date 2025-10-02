@@ -45,11 +45,18 @@
     </div>
   </div>
 </template>
-<script setup>
+<script>
 import { useNamespace } from '@ui-library/hooks'
+const ns = useNamespace('input')
+export default {
+  name: ns.b()
+}
+</script>
+<script setup>
 import { useInput } from './composables/use-input'
 import { AIcon } from '@ui-library/components'
 import { useSlots } from 'vue'
+import { useNamespace } from '@ui-library/hooks'
 const ns = useNamespace('input')
 
 const props = defineProps({
@@ -97,10 +104,6 @@ defineExpose({
   focus: focusExpose,
   blur: blurExpose,
   select: selectExpose
-})
-
-defineOptions({
-  name: 'a-input'
 })
 
 </script>

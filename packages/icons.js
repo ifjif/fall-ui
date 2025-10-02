@@ -1,11 +1,25 @@
 import {
-  ACheckCircle, ALoading, ASerch, ACloseCircle, AEyeClose, AEye
-} from '@ui-library/icons'
+  ACheck,
+  ACheckCircle,
+  ACloseCircle,
+  AEye,
+  AEyeClose,
+  ALoading,
+  ASearch,
+} from "@ui-library/icons";
 
-const icons = [ACheckCircle, ALoading, ASerch, ACloseCircle, AEyeClose, AEye]
+const icons = [
+  ACheckCircle,
+  ALoading,
+  ASearch,
+  ACloseCircle,
+  AEyeClose,
+  AEye,
+  ACheck,
+];
 
 export default function install(app) {
-  icons.forEach(icon => {
-    app.use(icon)
-  })
+  icons.forEach((icon) => {
+    app.use(icon);
+  });
 }

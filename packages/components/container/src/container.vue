@@ -3,11 +3,20 @@
     <slot />
   </section>
 </template>
+<script>
+import { useNamespace } from '@ui-library/hooks'
+const ns = useNamespace('container')
+export default {
+  name: ns.b()
+}
+</script>
 
 <script setup>
-import { useNamespace } from '@ui-library/hooks'
 import { computed, useSlots } from 'vue'
+import { useNamespace } from '@ui-library/hooks'
 const ns = useNamespace('container')
+const name2Header = useNamespace('header').b()
+const name2Footer = useNamespace('footer').b()
 
 const props = defineProps({
   directive: String
@@ -21,13 +30,10 @@ const isVertical = computed(() => {
 
   if (slots && slots.default) {
     const slotNodes = slots.default()
-    const tag = slotNodes.some(node => ['a-header', 'a-footer'].includes(node.type.name))
+    const tag = slotNodes.some(node => [name2Header, name2Footer].includes(node.type.name))
     return tag
   }
   return false
 })
 
-defineOptions({
-  name: 'a-container'
-})
 </script>

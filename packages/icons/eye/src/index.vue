@@ -9,9 +9,10 @@
       p-id="9990"></path>
   </svg>
 </template>
-<script setup>
+<script>
+import { genericIconName } from '@ui-library/hooks'
 
-defineOptions({
-  name: 'AEye'
-})
+export default {
+  name: genericIconName('Eye')
+}
 </script>

@@ -9,9 +9,10 @@
       p-id="9547"></path>
   </svg>
 </template>
-<script setup>
+<script>
+import { genericIconName } from '@ui-library/hooks'
 
-defineOptions({
-  name: 'ACheckCircle'
-})
+export default {
+  name: genericIconName('CheckCircle')
+}
 </script>

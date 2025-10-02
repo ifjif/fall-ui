@@ -27,9 +27,10 @@
       opacity=".7" p-id="10449"></path>
   </svg>
 </template>
-<script setup>
+<script>
+import { genericIconName } from '@ui-library/hooks'
 
-defineOptions({
-  name: 'ALoading'
-})
+export default {
+  name: genericIconName('Loading')
+}
 </script>

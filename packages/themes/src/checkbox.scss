@@ -1,0 +1,87 @@
+@use './common/namespace.scss' as *;
+@use './common/componentVar.scss' as *;
+@use './componentVar/checkboxVar.scss' as *;
+@use './common/var.scss' as *;
+
+@include b(checkbox) {
+  @include set-component-var('checkbox', checkboxVar());
+  display: inline-flex;
+  align-items: center;
+  height: var(#{getVarName('checkbox', 'size')});
+  gap: 0 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-right: 24px;
+  font-size: var(#{getVarName('checkbox', 'font-size')});
+
+  @include e(inner) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: var(#{getVarName('checkbox', 'checkbox-size')});
+    height: var(#{getVarName('checkbox', 'checkbox-size')});
+    border: var(#{getVarName('checkbox', 'border-size')}) solid var(#{getVarName('checkbox', 'border-color')});
+    border-radius: var(#{getVarName('checkbox', 'round')});
+    box-sizing: border-box;
+    background-color: var(#{getVarName('checkbox', 'bg-color')});
+    color: var(#{getVarName('checkbox', 'color')});
+
+    @include e(input) {
+      position: relative;
+      display: none;
+      z-index: 1;
+    }
+
+  }
+
+  @include e(label) {
+    line-height: 1;
+    font-size: inherit;
+    color: var(#{getVarName('checkbox', 'text-color')});
+  }
+
+  &:hover {
+    #{getVarName('checkbox', 'border-color')}:var(#{getVarName('checkbox', 'hover-border-color')});
+    #{getVarName('checkbox', 'text-color')}:var(#{getVarName('checkbox', 'hover-text-color')});
+  }
+
+  @include s((selected)) {
+    #{getVarName('checkbox', 'bg-color')}:var(#{getVarName('checkbox', 'selected-bg-color')});
+    #{getVarName('checkbox', 'color')}:var(#{getVarName('checkbox', 'selected-color')});
+    #{getVarName('checkbox', 'border-color')}:var(#{getVarName('checkbox', 'selected-bg-color')});
+    #{getVarName('checkbox', 'text-color')}:var(#{getVarName('checkbox', 'selected-bg-color')});
+  }
+
+  @include s((disabled)) {
+    #{getVarName('checkbox', 'bg-color')}:var(#{getVarName('checkbox', 'disabled-bg-color')});
+    #{getVarName('checkbox', 'border-color')}:var(#{getVarName('checkbox', 'disabled-border-color')});
+    #{getVarName('checkbox', 'text-color')}:var(#{getVarName('checkbox', 'disabled-text-color')});
+    cursor: var(#{getVarName('cursor', 'disabled')});
+  }
+
+  @include s((loading)) {
+    #{getVarName('checkbox', 'bg-color')}:var(#{getVarName('checkbox', 'loading-bg-color')});
+    #{getVarName('checkbox', 'border-color')}:var(#{getVarName('checkbox', 'loading-border-color')});
+    #{getVarName('checkbox', 'text-color')}:var(#{getVarName('checkbox', 'loading-text-color')});
+    cursor: var(#{getVarName('cursor', 'disabled')});
+  }
+
+  @include s((indeterminate)) {
+    #{getVarName('checkbox', 'bg-color')}: white;
+  }
+
+  @include e(indeterminate) {
+    display: block;
+    height: 10px;
+    width: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(#{getVarName('checkbox', 'selected-bg-color')});
+  }
+}
+
+@each $theme in $themes {
+  @include m($theme) {
+    @include set-component-var('checkbox', checkboxVar($theme), 'type');
+  }
+}

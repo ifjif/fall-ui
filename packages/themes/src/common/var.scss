@@ -71,8 +71,24 @@ $input-horizontal-padding: map.deep-merge(('default':10px), $input-horizontal-pa
 $cursor: (
   ) !default;
 $cursor: map.deep-merge(('text':text,
+      'disabled':not-allowed,
       'pointer':pointer,
       'not-allowed':not-allowed), $cursor
+);
+
+$checkbox-size: (
+  ) !default;
+
+$checkbox-size: map.deep-merge(('small':15px,
+      'default':20px,
+      'large':25px), $checkbox-size
+);
+$checkbox-round: (
+  ) !default;
+
+$checkbox-round: map.deep-merge(('small':6px,
+      'default':8px,
+      'large':10px), $checkbox-round
 );
 
 $global-var: (
@@ -85,5 +101,7 @@ $global-var: map.deep-merge(('component-size':$component-size,
       'button-horizontal-padding':$button-horizontal-padding,
       'input-horizontal-padding':$input-horizontal-padding,
       'cursor':$cursor,
+      'checkbox-size':$checkbox-size,
+      'checkbox-round':$checkbox-round,
     ), $global-var
 );

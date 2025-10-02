@@ -1,6 +1,6 @@
 @use './common/namespace.scss' as *;
 
-@include s('loading', false) {
+@include s((loading-transition), false) {
   animation: rotate 1s linear 0s infinite;
 }
 

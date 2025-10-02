@@ -116,16 +116,16 @@ const input2 = ref()
 const text2 = ref('全部选中')
 
 onMounted(() => {
-  console.log(input.value.ref)
+  //console.log(input.value.ref)
   setTimeout(() => {
-    input.value.focus()
+    //input.value.focus()
   }, 2000)
   setTimeout(() => {
-    input.value.blur()
+    //input.value.blur()
   }, 4000)
 })
 
 setTimeout(() => {
-  input2.value.select()
+  //input2.value.select()
 }, 3000)
 </script>

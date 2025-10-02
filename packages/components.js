@@ -1,9 +1,35 @@
 import {
-  AButton, AIcon,
-  AButtonGroup, AInput, ATextarea, ARow, ACol,
-  AContainer, AASide, AMain, AHeader, AFooter
+  AASide,
+  AButton,
+  AButtonGroup,
+  ACheckbox,
+  ACheckboxAll,
+  ACheckboxGroup,
+  ACol,
+  AContainer,
+  AFooter,
+  AHeader,
+  AIcon,
+  AInput,
+  AMain,
+  ARow,
+  ATextarea,
 } from "@ui-library/components";
 
-export default [AButton, AIcon, AButtonGroup, AInput, ATextarea, ARow, ACol,
-  AContainer, AASide, AMain, AHeader, AFooter
-]
+export default [
+  AButton,
+  AIcon,
+  AButtonGroup,
+  AInput,
+  ATextarea,
+  ARow,
+  ACol,
+  AContainer,
+  AASide,
+  AMain,
+  AHeader,
+  AFooter,
+  ACheckbox,
+  ACheckboxGroup,
+  ACheckboxAll,
+];

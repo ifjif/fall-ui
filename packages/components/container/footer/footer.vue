@@ -3,9 +3,17 @@
     <slot />
   </section>
 </template>
+<script>
+import { useNamespace } from '@ui-library/hooks'
+const ns = useNamespace('footer')
+export default {
+  name: ns.b()
+}
+</script>
 
 <script setup>
-import { useNamespace, useStyle } from '@ui-library/hooks'
+import { useStyle } from '@ui-library/hooks'
+import { useNamespace } from '@ui-library/hooks'
 const ns = useNamespace('footer')
 const sStyle = useStyle()
 
@@ -15,7 +23,4 @@ const props = defineProps({
 
 const heightStyle = sStyle.height(props.height)
 
-defineOptions({
-  name: 'a-footer'
-})
 </script>

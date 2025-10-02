@@ -23,10 +23,17 @@
 
   </div>
 </template>
-<script setup>
+<script>
 import { useNamespace } from '@ui-library/hooks'
+const ns = useNamespace('textarea')
+export default {
+  name: ns.b()
+}
+</script>
+<script setup>
 import { useTextarea } from './composables/use-textarea'
 import { AIcon } from '@ui-library/components'
+import { useNamespace } from '@ui-library/hooks'
 const ns = useNamespace('textarea')
 
 const props = defineProps({
@@ -65,8 +72,5 @@ defineExpose({
   focus: focusExpose,
   blur: blurExpose,
   select: selectExpose
-})
-defineOptions({
-  name: 'a-textarea'
 })
 </script>

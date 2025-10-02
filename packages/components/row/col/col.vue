@@ -3,9 +3,17 @@
     <slot />
   </component>
 </template>
+<script>
+import { useNamespace } from '@ui-library/hooks'
+const ns = useNamespace('col')
+export default {
+  name: ns.b()
+}
+</script>
 <script setup>
-import { useNamespace, useParent } from '@ui-library/hooks'
+import { useParent } from '@ui-library/hooks'
 import { computed } from 'vue'
+import { useNamespace } from '@ui-library/hooks'
 const ns = useNamespace('col')
 const useP = useParent('row')
 
@@ -22,8 +30,5 @@ const gutterStyle = computed(() => {
   const gutter = useP.props('gutter')
   const value = gutter ? gutter / 2 + 'px' : null
   return value ? { paddingLeft: value, paddingRight: value } : {}
-})
-defineOptions({
-  name: 'a-col'
 })
 </script>

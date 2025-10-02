@@ -6,9 +6,10 @@
       fill="#333333" p-id="9546"></path>
   </svg>
 </template>
-<script setup>
+<script>
+import { genericIconName } from '@ui-library/hooks'
 
-defineOptions({
-  name: 'ASearch'
-})
+export default {
+  name: genericIconName('Search')
+}
 </script>

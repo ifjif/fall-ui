@@ -69,8 +69,6 @@ $b: null;
     );
 }
 
-@debug $eall;
-
 @if $atRoot {
   @at-root {
     #{$eall} {

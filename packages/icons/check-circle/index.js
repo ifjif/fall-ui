@@ -1,5 +1,4 @@
 import { componentInstall } from "@ui-library/utils";
-import CheckCircle from './src/index.vue'
+import CheckCircle from "./src/index.vue";
 
-export const ACheckCircle = componentInstall(CheckCircle)
-export default ACheckCircle
+export const ACheckCircle = componentInstall(CheckCircle);

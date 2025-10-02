@@ -3,9 +3,16 @@
     <slot />
   </component>
 </template>
-<script setup>
+<script>
 import { useNamespace } from '@ui-library/hooks'
+const ns = useNamespace('row')
+export default {
+  name: ns.b()
+}
+</script>
+<script setup>
 import { computed } from 'vue'
+import { useNamespace } from '@ui-library/hooks'
 const ns = useNamespace('row')
 
 const props = defineProps({
@@ -31,9 +38,5 @@ const marginStyle = computed(() => {
 
 const rowGapStyle = computed(() => {
   return props.gap ? { 'row-gap': `${props.gap}px` } : {}
-})
-
-defineOptions({
-  name: 'a-row'
 })
 </script>

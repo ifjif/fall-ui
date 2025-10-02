@@ -9,9 +9,10 @@
       p-id="9694"></path>
   </svg>
 </template>
-<script setup>
+<script>
+import { genericIconName } from '@ui-library/hooks'
 
-defineOptions({
-  name: 'ACloseCircle'
-})
+export default {
+  name: genericIconName('CloseCircle')
+}
 </script>

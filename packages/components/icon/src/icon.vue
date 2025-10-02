@@ -3,9 +3,17 @@
     <slot />
   </i>
 </template>
+<script>
+import { useNamespace } from '@ui-library/hooks'
+const ns = useNamespace('icon')
+export default {
+  name: ns.b()
+}
+</script>
 <script setup>
-import { useNamespace, useStyle } from '@ui-library/hooks'
+import { useStyle } from '@ui-library/hooks'
 import { computed } from 'vue'
+import { useNamespace } from '@ui-library/hooks'
 const ns = useNamespace('icon')
 const uStyle = useStyle()
 
@@ -21,7 +29,4 @@ const fontSize = computed(() => {
   return uStyle.fontSize(props.size)
 })
 
-defineOptions({
-  name: 'a-icon'
-})
 </script>

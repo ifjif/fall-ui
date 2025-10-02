@@ -5,7 +5,7 @@
   ns.is('block', block), ns.is('button-group', isGroup)
   ]">
     <template v-if="loading | _loading">
-      <AIcon :class="[ns.is('loading', loading | _loading)]">
+      <AIcon :class="[ns.is('loading-transition', loading | _loading)]">
         <ALoading />
       </AIcon>
     </template>
@@ -14,12 +14,20 @@
     </span>
   </button>
 </template>
+<script>
+import { useNamespace } from '@ui-library/hooks'
+const ns = useNamespace('button')
+export default {
+  name: ns.b()
+}
+</script>
 
 <script setup>
 import { AIcon } from '@ui-library/components'
-import { useNamespace, useParent } from '@ui-library/hooks'
+import { useParent } from '@ui-library/hooks'
 import { ALoading } from '@ui-library/icons'
 import { useButton } from './composables/use-button'
+import { useNamespace } from '@ui-library/hooks'
 const ns = useNamespace('button')
 const parent = useParent('button-group')
 const isGroup = parent.group()
@@ -43,8 +51,4 @@ const emit = defineEmits(['click'])
 
 const { _loading, controlSize, clickEvent } = useButton(props, emit, parentSize)
 
-
-defineOptions({
-  name: 'a-button'
-})
 </script>

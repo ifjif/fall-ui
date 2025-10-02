@@ -1,6 +1,4 @@
 import { componentInstall } from "@ui-library/utils";
-import Search from './src/index.vue'
+import Search from "./src/index.vue";
 
-export const ASerch = componentInstall(Search)
-export default ASerch
-
+export const ASearch = componentInstall(Search);
