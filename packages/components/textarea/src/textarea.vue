@@ -13,9 +13,9 @@
         :placeholder="placeholder" :class="[ns.e('inner')]"></textarea>
       <div v-if="isSuffix || $slots.suffixLeft || $slots.suffixRight" :class="[ns.e('fix'), ns.e('suffix')]">
         <slot name="suffixLeft" />
-        <AIcon v-if="clear" :class="[ns.e('clear-icon')]" @click="clearEvent">
+        <FlIcon v-if="clear" :class="[ns.e('clear-icon')]" @click="clearEvent">
           <component :is="clearIcon"></component>
-        </AIcon>
+        </FlIcon>
         <span v-if="showCount">{{ textLength }} / {{ maxlength }}</span>
         <slot name="suffixRight" />
       </div>
@@ -32,7 +32,7 @@ export default {
 </script>
 <script setup>
 import { useTextarea } from './composables/use-textarea'
-import { AIcon } from '@ui-library/components'
+import { FlIcon } from '@ui-library/components'
 import { useNamespace } from '@ui-library/hooks'
 const ns = useNamespace('textarea')
 

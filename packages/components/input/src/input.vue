@@ -9,12 +9,12 @@
       </div>
     </div>
 
-    <div :class="[ns.e('wrapper'), ns.is('prepend', isPrepend), ns.is('append', isAppend)]">
+    <div :class="[ns.e('wrapper'), ns.is('prepend', isPrepend), ns.is('append', isFlppend)]">
       <div v-if="isPrefix" :class="[ns.e('fix'), ns.e('prefix')]">
         <span v-if="prefix">{{ prefix }}</span>
-        <AIcon v-if="prefixIcon">
+        <FlIcon v-if="prefixIcon">
           <component :is="prefixIcon"></component>
-        </AIcon>
+        </FlIcon>
       </div>
       <input v-model="modelValue" ref="_ref" :type="typeControl" :disabled="disabled" :maxlength="maxlength"
         @input="inputEvent" @focus="focusEvent" @blur="blurEvent" @mouseenter="mouseenterEvent"
@@ -23,21 +23,21 @@
       <div v-if="isSuffix" :class="[ns.e('fix'), ns.e('suffix')]">
         <template v-if="!showPassword || !clear">
           <span v-if="suffix">{{ suffix }}</span>
-          <AIcon v-if="suffixIcon">
+          <FlIcon v-if="suffixIcon">
             <component :is="suffixIcon"></component>
-          </AIcon>
+          </FlIcon>
         </template>
-        <AIcon v-if="showPassword" :class="[ns.e('password-icon')]" @click="viewPasswordEvent">
+        <FlIcon v-if="showPassword" :class="[ns.e('password-icon')]" @click="viewPasswordEvent">
           <component :is="passwordIcon"></component>
-        </AIcon>
-        <AIcon v-if="clear" :class="[ns.e('clear-icon')]" @click="clearEvent">
+        </FlIcon>
+        <FlIcon v-if="clear" :class="[ns.e('clear-icon')]" @click="clearEvent">
           <component :is="clearIcon"></component>
-        </AIcon>
+        </FlIcon>
         <span v-if="showCount">{{ textLength }} / {{ maxlength }}</span>
       </div>
     </div>
 
-    <div v-if="isAppend" :class="[(append) && ns.e('pend'), ns.e('append'), ns.e('b-pend')]">
+    <div v-if="isFlppend" :class="[(append) && ns.e('pend'), ns.e('append'), ns.e('b-pend')]">
       <slot name="append" />
       <div v-if="append">
         {{ append }}
@@ -54,7 +54,7 @@ export default {
 </script>
 <script setup>
 import { useInput } from './composables/use-input'
-import { AIcon } from '@ui-library/components'
+import { FlIcon } from '@ui-library/components'
 import { useSlots } from 'vue'
 import { useNamespace } from '@ui-library/hooks'
 const ns = useNamespace('input')
@@ -93,7 +93,7 @@ const modelValue = defineModel()
 const slots = useSlots()
 const emit = defineEmits(['input', 'focus', 'blur', 'mouseenter', 'mouseleave', 'change', 'keyup', 'keydown'])
 
-const { _ref, isFocus, isHover, isPrefix, isSuffix, isPrepend, isAppend,
+const { _ref, isFocus, isHover, isPrefix, isSuffix, isPrepend, isFlppend,
   passwordIcon, clearIcon, typeControl, textLength, showCount, inputWidth,
   focusEvent, blurEvent, viewPasswordEvent, clearEvent, mouseleaveEvent, mouseenterEvent,
   changeEvent, keyupEvent, keydownEvent,

@@ -1,4 +1,4 @@
 import { componentInstall } from "@ui-library/utils";
 import Input from "./src/input.vue";
 
-export const AInput = componentInstall(Input);
+export const FlInput = componentInstall(Input);

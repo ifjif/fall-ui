@@ -1,10 +1,11 @@
 <template>
   <div :class="[ns.b()]">
     <div :class="ns.e('label')">
-      <Checkbox @change="selectAllEvent" v-model="all" label="全选" :indeterminate="indeterminate"></Checkbox>
+      <Checkbox :size="size" @change="selectAllEvent" v-model="all" label="全选" :indeterminate="indeterminate">
+      </Checkbox>
     </div>
     <div :class="[ns.e('wrapper')]">
-      <CheckboxGroup @change="changeEvent" v-model="allModel">
+      <CheckboxGroup :size="size" @change="changeEvent" v-model="allModel">
         <slot />
       </CheckboxGroup>
     </div>
@@ -27,6 +28,10 @@ import Checkbox from '../src/checkbox.vue'
 import CheckboxGroup from '../checkbox-group/checkbox-group.vue'
 import { CHECKBOX_ALL_KEY } from '../contants'
 const ns = useNamespace('checkbox-all')
+
+const props = defineProps({
+  size: String
+})
 
 const emit = defineEmits(['change'])
 

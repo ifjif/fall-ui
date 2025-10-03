@@ -39,10 +39,15 @@ function useCheckboxState(props, groupValue, isGroup, modelValue) {
     },
   });
 
+  const _size = computed(() => {
+    return props.size || groupValue?.size.value;
+  });
+
   return {
     model,
     isSelected,
     _loading,
+    _size,
   };
 }
 

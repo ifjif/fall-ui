@@ -3,7 +3,7 @@ import { useCheckboxState } from "./use-checkbox-state";
 import { useCheckboxGroup } from "./use-checkbox-group";
 function useCheckbox(props, emit, modelValue) {
   const { groupValue, isGroup } = useCheckboxGroup(props);
-  const { model, isSelected, _loading } = useCheckboxState(
+  const { model, isSelected, _loading, _size } = useCheckboxState(
     props,
     groupValue,
     isGroup,
@@ -21,6 +21,7 @@ function useCheckbox(props, emit, modelValue) {
     model,
     isSelected,
     _loading,
+    _size,
     changeEvent,
     clickEvent,
   };

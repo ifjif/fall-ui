@@ -1,21 +1,21 @@
 import {
-  ACheck,
-  ACheckCircle,
-  ACloseCircle,
-  AEye,
-  AEyeClose,
-  ALoading,
-  ASearch,
+  FlCheck,
+  FlCheckCircle,
+  FlCloseCircle,
+  FlEye,
+  FlEyeClose,
+  FlLoading,
+  FlSearch,
 } from "@ui-library/icons";
 
 const icons = [
-  ACheckCircle,
-  ALoading,
-  ASearch,
-  ACloseCircle,
-  AEyeClose,
-  AEye,
-  ACheck,
+  FlCheckCircle,
+  FlLoading,
+  FlSearch,
+  FlCloseCircle,
+  FlEyeClose,
+  FlEye,
+  FlCheck,
 ];
 
 export default function install(app) {

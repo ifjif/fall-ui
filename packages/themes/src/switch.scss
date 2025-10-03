@@ -1,0 +1,92 @@
+@use './common/namespace.scss' as *;
+@use './componentVar/switchVar.scss' as *;
+@use './common/componentVar.scss' as *;
+@use './common/var.scss' as *;
+
+@include b(switch) {
+  @include set-component-var('switch', switchVar());
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: var(#{getVarName('switch', 'size')});
+  width: var(#{getVarName('switch', 'width')});
+  background-color: var(#{getVarName('switch', 'bg-color')});
+  border-radius: var(#{getVarName('switch', 'round')});
+  padding: var(#{getVarName('switch', 'padding')});
+  color:var(#{getVarName('switch', 'text-color')});
+  font-size: var(#{getVarName('switch', 'font-size')});
+  vertical-align: middle;
+
+  @include s((active)) {
+    #{getVarName('switch', 'bg-color')}:var(#{getVarName('switch', 'active-bg-color')});
+    #{getVarName('switch', 'text-color')}:var(#{getVarName('switch', 'active-text-color')});
+  }
+
+  @include s((disabled)) {
+    #{getVarName('switch', 'bg-color')}:var(#{getVarName('switch', 'disabled-bg-color')});
+    #{getVarName('switch', 'text-color')}:var(#{getVarName('switch', 'disabled-text-color')});
+    #{getVarName('switch', 'circle-hover-bg-color')}: var(#{getVarName('switch', 'circle-bg-color')});
+    cursor: var(#{getVarName('cursor', 'disabled')});
+  }
+
+  @include s((loading)) {
+    #{getVarName('switch', 'bg-color')}:var(#{getVarName('switch', 'loading-bg-color')});
+    #{getVarName('switch', 'text-color')}:var(#{getVarName('switch', 'active-text-color')});
+  }
+
+  @include e(checkbox) {
+    display: none;
+  }
+
+  @include e(circle) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    border: none;
+    width: calc(var(#{getVarName('switch', 'size')}) - 8px);
+    height: calc(var(#{getVarName('switch', 'size')}) - 8px);
+    border-radius: var(#{getVarName('switch', 'round')});
+    background-color: var(#{getVarName('switch', 'circle-bg-color')});
+    color: var(#{getVarName('switch', 'center-icon-color')});
+
+
+    &:hover {
+      background-color: var(#{getVarName('switch', 'circle-hover-bg-color')});
+    }
+
+    @include s((checked)) {
+      right: var(#{getVarName('switch', 'padding')});
+    }
+  }
+
+  @include e(inner) {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    line-height: 1;
+
+    @include e(label) {
+      display: flex;
+      flex: 1;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+@each $size in $common-size {
+  @include m('size', $size) {
+    #{getVarName('font-size', 'default')}:var(#{getVarName('font-size', $size)});
+    #{getVarName('switch-size','default')}:var(#{getVarName('switch-size', $size)});
+    #{getVarName('switch-width','default')}:var(#{getVarName('switch-width', $size)});
+  }
+}
+
+@each $theme in $themes {
+  @include m($theme) {
+    @include set-component-var('switch', switchVar($theme), 'type');
+  }
+}

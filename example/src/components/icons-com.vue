@@ -1,9 +1,9 @@
 <template>
   <h2>图标</h2>
   <div>
-    <a-icon size="30">
-      <ACheckCircle />
-    </a-icon>
+    <fl-icon size="30">
+      <FlCheckCircle />
+    </fl-icon>
   </div>
 </template>
 <script setup>

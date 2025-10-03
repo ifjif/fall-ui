@@ -2,82 +2,82 @@
   <h2>输入框</h2>
   <div :style="{ width: '300px' }">
     <h3>基础</h3>
-    <a-input></a-input>
-    <a-input placeholder="成功" input-type="success"></a-input>
-    <a-input placeholder="错误" input-type="error"></a-input>
-    <a-input placeholder="警告" input-type="warning"></a-input>
+    <fl-input></fl-input>
+    <fl-input placeholder="成功" input-type="success"></fl-input>
+    <fl-input placeholder="错误" input-type="error"></fl-input>
+    <fl-input placeholder="警告" input-type="warning"></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>禁用</h3>
-    <a-input disabled></a-input>
+    <fl-input disabled></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>长度限制</h3>
-    <a-input maxlength="10"></a-input>
+    <fl-input maxlength="10"></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>圆角</h3>
-    <a-input round></a-input>
+    <fl-input round></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>尺寸</h3>
-    <a-input size="small"></a-input>
-    <a-input></a-input>
-    <a-input size="large" round></a-input>
+    <fl-input size="small"></fl-input>
+    <fl-input></fl-input>
+    <fl-input size="large" round></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>前缀和后缀</h3>
-    <a-input prefix="前缀" suffix="后缀"></a-input>
-    <a-input prefixIcon="a-search" suffixIcon="a-close-circle"></a-input>
+    <fl-input prefix="前缀" suffix="后缀"></fl-input>
+    <fl-input prefixIcon="a-search" suffixIcon="a-close-circle"></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>前置和后置</h3>
-    <a-input prepend="前置" append="后置"></a-input>
-    <a-input prepend="http://" append=".com"></a-input>
-    <a-input prefix="http://" suffix=".com">
+    <fl-input prepend="前置" append="后置"></fl-input>
+    <fl-input prepend="http://" append=".com"></fl-input>
+    <fl-input prefix="http://" suffix=".com">
       <template #prepend>
-        <a-button><a-icon>
-            <ASearch />
-          </a-icon></a-button>
+        <fl-button><fl-icon>
+            <FlSearch />
+          </fl-icon></fl-button>
       </template>
       <template #append>
-        <a-button>发送</a-button>
+        <fl-button>发送</fl-button>
       </template>
-    </a-input>
+    </fl-input>
   </div>
 
   <div :style="{ width: '300px' }">
     <h3>密码框</h3>
-    <a-input show-password></a-input>
+    <fl-input show-password></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>清除框</h3>
-    <a-input clear></a-input>
+    <fl-input clear></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>数量统计</h3>
-    <a-input maxlength="10" count clear></a-input>
+    <fl-input maxlength="10" count clear></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>双向绑定</h3>
-    <a-input @input="inputEvent" v-model="text" clear></a-input>
+    <fl-input @input="inputEvent" v-model="text" clear></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>输入、获焦、失焦、鼠标进入、鼠标离开、change、keyup、keydown事件</h3>
-    <a-input @input="inputEvent2" @focus="focusEvent" @blur="blurEvent" @mouseenter="mouseenterEvent"
-      @mouseleave="mouseleaveEvent" @change="changeEvent" @keyup="keyupEvent" @keydown="keydownEvent"></a-input>
+    <fl-input @input="inputEvent2" @focus="focusEvent" @blur="blurEvent" @mouseenter="mouseenterEvent"
+      @mouseleave="mouseleaveEvent" @change="changeEvent" @keyup="keyupEvent" @keydown="keydownEvent"></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>自动获焦、失焦</h3>
-    <a-input ref="input"></a-input>
+    <fl-input ref="input"></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>全选</h3>
-    <a-input v-model="text2" ref="input2"></a-input>
+    <fl-input v-model="text2" ref="input2"></fl-input>
   </div>
   <div :style="{ width: '300px' }">
     <h3>指定宽度</h3>
-    <a-input width="200"></a-input>
+    <fl-input width="200"></fl-input>
   </div>
 </template>
 

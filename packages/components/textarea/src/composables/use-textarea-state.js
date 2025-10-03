@@ -1,21 +1,21 @@
-import { shallowRef, computed } from 'vue'
-import { ACloseCircle as clearIcon } from '@ui-library/icons'
-import { useStyle } from '@ui-library/hooks'
+import { computed, shallowRef } from "vue";
+import { FlCloseCircle as clearIcon } from "@ui-library/icons";
+import { useStyle } from "@ui-library/hooks";
 function useTextareaState(props, modelValue) {
-  const uStyle = useStyle()
-  const _ref = shallowRef(null)
+  const uStyle = useStyle();
+  const _ref = shallowRef(null);
   const inputWidth = computed(() => {
-    return uStyle.width(props.width)
-  })
+    return uStyle.width(props.width);
+  });
   const textLength = computed(() => {
-    return modelValue.value ? modelValue.value.length : 0
-  })
+    return modelValue.value ? modelValue.value.length : 0;
+  });
   const showCount = computed(() => {
-    return props.maxlength && props.count
-  })
+    return props.maxlength && props.count;
+  });
   const isSuffix = computed(() => {
-    return props.clear || showCount.value
-  })
+    return props.clear || showCount.value;
+  });
 
   return {
     _ref,
@@ -23,9 +23,8 @@ function useTextareaState(props, modelValue) {
     clearIcon,
     textLength,
     showCount,
-    inputWidth
-  }
-
+    inputWidth,
+  };
 }
 
-export { useTextareaState }
+export { useTextareaState };

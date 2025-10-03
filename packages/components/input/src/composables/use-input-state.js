@@ -1,40 +1,45 @@
-import { ref, shallowRef, computed } from 'vue'
-import { AEyeClose, AEye, ACloseCircle as clearIcon } from '@ui-library/icons'
-import { useStyle } from '@ui-library/hooks'
+import { computed, ref, shallowRef } from "vue";
+import {
+  FlCloseCircle as clearIcon,
+  FlEye,
+  FlEyeClose,
+} from "@ui-library/icons";
+import { useStyle } from "@ui-library/hooks";
 function useInputState(props, slots, modelValue) {
-  const uStyle = useStyle()
-  const _ref = shallowRef(null)
-  const viewPassword = ref(false)
+  const uStyle = useStyle();
+  const _ref = shallowRef(null);
+  const viewPassword = ref(false);
   const inputWidth = computed(() => {
-    return uStyle.width(props.width)
-  })
+    return uStyle.width(props.width);
+  });
   const textLength = computed(() => {
-    return modelValue.value ? modelValue.value.length : 0
-  })
+    return modelValue.value ? modelValue.value.length : 0;
+  });
   const showCount = computed(() => {
-    return props.maxlength && props.count
-  })
+    return props.maxlength && props.count;
+  });
   const isPrefix = computed(() => {
-    return props.prefix || props.prefixIcon
-  })
+    return props.prefix || props.prefixIcon;
+  });
   const isSuffix = computed(() => {
-    return props.suffix || props.suffixIcon || props.showPassword || props.clear || showCount.value
-  })
+    return props.suffix || props.suffixIcon || props.showPassword ||
+      props.clear || showCount.value;
+  });
   const isPrepend = computed(() => {
-    return props.prepend || slots.prepend
-  })
+    return props.prepend || slots.prepend;
+  });
   const isAppend = computed(() => {
-    return props.append || slots.append
-  })
+    return props.append || slots.append;
+  });
   const passwordIcon = computed(() => {
-    if (!props.showPassword) return
-    return viewPassword.value ? AEye : AEyeClose
-  })
+    if (!props.showPassword) return;
+    return viewPassword.value ? FlEye : FlEyeClose;
+  });
   const typeControl = computed(() => {
-    if (props.showPassword && !viewPassword.value) return 'password'
-    if (props.showPassword && !!viewPassword.value) return 'text'
-    return props.type
-  })
+    if (props.showPassword && !viewPassword.value) return "password";
+    if (props.showPassword && !!viewPassword.value) return "text";
+    return props.type;
+  });
 
   return {
     _ref,
@@ -48,9 +53,8 @@ function useInputState(props, slots, modelValue) {
     viewPassword,
     textLength,
     showCount,
-    inputWidth
-  }
-
+    inputWidth,
+  };
 }
 
-export { useInputState }
+export { useInputState };

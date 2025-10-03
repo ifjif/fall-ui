@@ -6,3 +6,5 @@ export * from "./textarea";
 export * from "./row";
 export * from "./container";
 export * from "./checkbox";
+export * from "./radio";
+export * from "./switch";

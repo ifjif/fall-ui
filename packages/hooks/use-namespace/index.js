@@ -1,5 +1,5 @@
-const namespace = "a";
-const iconNamespace = "A";
+const namespace = "fl";
+const iconNamespace = "Fl";
 
 const genericIconName = (name) => {
   return iconNamespace + name;

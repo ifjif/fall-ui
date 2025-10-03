@@ -22,6 +22,8 @@
     'loading-bg-color':('type':getVarName('color', $type, 'light-5')),
     'loading-border-color':('type':getVarName('color', $type, 'light-5')),
     'loading-text-color':('type':getVarName('color', $type, 'light-5')),
+    'indeterminate-size':('default':getVarName('checkbox-indeterminate-size', 'default')),
+    'indeterminate-round':('default':getVarName('checkbox-indeterminate-round', 'default')),
   );
 
 @return $checkboxVar;

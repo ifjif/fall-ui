@@ -90,6 +90,36 @@ $checkbox-round: map.deep-merge(('small':6px,
       'default':8px,
       'large':10px), $checkbox-round
 );
+$checkbox-indeterminate-size: (
+  ) !default;
+$checkbox-indeterminate-size: map.deep-merge(('small':7.5px,
+      'default':10px,
+      'large':12.5px), $checkbox-indeterminate-size
+);
+$checkbox-indeterminate-round: (
+  ) !default;
+$checkbox-indeterminate-round: map.deep-merge(('small':3px,
+      'default':4px,
+      'large':5px), $checkbox-indeterminate-round
+);
+$switch-size: (
+  ) !default;
+$switch-size: map.deep-merge(('small':24px,
+      'default':28px,
+      'large':32px), $switch-size
+);
+$switch-width: (
+  ) !default;
+$switch-width: map.deep-merge(('small':40px,
+      'default':48px,
+      'large':56px), $switch-width
+);
+$switch-padding: (
+  ) !default;
+$switch-padding: map.deep-merge(('default':4px,
+    ), $switch-padding
+);
+
 
 $global-var: (
   ) !default;
@@ -103,5 +133,10 @@ $global-var: map.deep-merge(('component-size':$component-size,
       'cursor':$cursor,
       'checkbox-size':$checkbox-size,
       'checkbox-round':$checkbox-round,
+      "checkbox-indeterminate-size":$checkbox-indeterminate-size,
+      "checkbox-indeterminate-round":$checkbox-indeterminate-round,
+      "switch-size":$switch-size,
+      "switch-width":$switch-width,
+      "switch-padding":$switch-padding,
     ), $global-var
 );

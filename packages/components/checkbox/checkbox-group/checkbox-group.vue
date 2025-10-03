@@ -13,9 +13,13 @@ export default {
 </script>
 <script setup>
 import { useNamespace } from '@ui-library/hooks'
-import { provide } from 'vue';
+import { provide, toRefs } from 'vue';
 import { CHECKBOX_GROUP_KEY } from '../contants'
 const ns = useNamespace('checkbox-group')
+
+const props = defineProps({
+  size: String
+})
 
 const groupModel = defineModel({ type: Array, default: () => [] })
 const emit = defineEmits(['change'])
@@ -24,6 +28,7 @@ const changeEvent = (value) => {
   groupModel.value = value
   emit('change', value)
 }
-provide(CHECKBOX_GROUP_KEY, { groupModel, changeEvent })
+
+provide(CHECKBOX_GROUP_KEY, { ...toRefs(props), groupModel, changeEvent })
 
 </script>

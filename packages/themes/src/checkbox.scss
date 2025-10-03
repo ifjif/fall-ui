@@ -72,11 +72,22 @@
 
   @include e(indeterminate) {
     display: block;
-    height: 10px;
-    width: 10px;
-    border-radius: 4px;
     box-sizing: border-box;
+    height: var(#{getVarName('checkbox', 'indeterminate-size')});
+    width: var(#{getVarName('checkbox', 'indeterminate-size')});
+    border-radius: var(#{getVarName('checkbox', 'indeterminate-round')});
     background-color: var(#{getVarName('checkbox', 'selected-bg-color')});
+  }
+}
+
+@each $size in $common-size {
+  @include m('size', $size) {
+    #{getVarName('checkbox', 'size')}:var(#{getVarName('component-size', $size)});
+    #{getVarName('checkbox', 'font-size')}:var(#{getVarName('font-size', $size)});
+    #{getVarName('checkbox', 'checkbox-size')}:var(#{getVarName('checkbox-size', $size)});
+    #{getVarName('checkbox', 'round')}:var(#{getVarName('checkbox-round', $size)});
+    #{getVarName('checkbox', 'indeterminate-size')}:var(#{getVarName('checkbox-indeterminate-size', $size)});
+    #{getVarName('checkbox', 'indeterminate-round')}:var(#{getVarName('checkbox-indeterminate-round', $size)});
   }
 }
 

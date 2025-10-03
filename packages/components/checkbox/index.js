@@ -1,12 +1,12 @@
 import { componentInstall } from "@ui-library/utils";
-import ACheckbox from "./src/checkbox.vue";
-import ACheckboxGroup from "./checkbox-group/checkbox-group.vue";
-import ACheckboxAll from "./checkbox-all/checkbox-all.vue";
+import FlCheckbox from "./src/checkbox.vue";
+import FlCheckboxGroup from "./checkbox-group/checkbox-group.vue";
+import FlCheckboxAll from "./checkbox-all/checkbox-all.vue";
 
-const coms = [ACheckbox, ACheckboxGroup, ACheckboxAll];
+const coms = [FlCheckbox, FlCheckboxGroup, FlCheckboxAll];
 
 coms.forEach((com) => {
   componentInstall(com);
 });
 
-export { ACheckbox, ACheckboxAll, ACheckboxGroup };
+export { FlCheckbox, FlCheckboxAll, FlCheckboxGroup };

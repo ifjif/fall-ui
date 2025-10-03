@@ -2,69 +2,88 @@
   <h2>多选框</h2>
   <div>
     <h3>基础</h3>
-    <a-checkbox label="主要" value="主要"></a-checkbox>
-    <a-checkbox type="success" label="成功" value="成功"></a-checkbox>
-    <a-checkbox type="warning" label="警告" value="警告"></a-checkbox>
-    <a-checkbox type="error" label="错误" value="错误"></a-checkbox>
+    <fl-checkbox label="主要" value="主要"></fl-checkbox>
+    <fl-checkbox type="success" label="成功" value="成功"></fl-checkbox>
+    <fl-checkbox type="warning" label="警告" value="警告"></fl-checkbox>
+    <fl-checkbox type="error" label="错误" value="错误"></fl-checkbox>
   </div>
   <div>
     <h3>禁用</h3>
-    <a-checkbox disabled label="主要" value="主要"></a-checkbox>
-    <a-checkbox disabled type="success" label="成功" value="成功"></a-checkbox>
-    <a-checkbox disabled type="warning" label="警告" value="警告"></a-checkbox>
-    <a-checkbox disabled type="error" label="错误" value="错误"></a-checkbox>
+    <fl-checkbox disabled label="主要" value="主要"></fl-checkbox>
+    <fl-checkbox disabled type="success" label="成功" value="成功"></fl-checkbox>
+    <fl-checkbox disabled type="warning" label="警告" value="警告"></fl-checkbox>
+    <fl-checkbox disabled type="error" label="错误" value="错误"></fl-checkbox>
   </div>
   <div>
     <h3>多选框组</h3>
-    <a-checkbox-group v-model="value">
-      <a-checkbox label="主要" value="主要"></a-checkbox>
-      <a-checkbox type="success" label="成功" value="成功"></a-checkbox>
-      <a-checkbox type="warning" label="警告" value="警告"></a-checkbox>
-      <a-checkbox type="error" label="错误" value="错误"></a-checkbox>
-    </a-checkbox-group>
+    <fl-checkbox-group v-model="value">
+      <fl-checkbox label="主要" value="主要"></fl-checkbox>
+      <fl-checkbox type="success" label="成功" value="成功"></fl-checkbox>
+      <fl-checkbox type="warning" label="警告" value="警告"></fl-checkbox>
+      <fl-checkbox type="error" label="错误" value="错误"></fl-checkbox>
+    </fl-checkbox-group>
   </div>
   <div>
     <h3>初始数据，默认选中</h3>
     <h4>组中存在数据</h4>
-    <a-checkbox-group v-model="value2">
-      <a-checkbox label="主要" value="主要"></a-checkbox>
-      <a-checkbox type="success" label="成功" value="成功"></a-checkbox>
-      <a-checkbox type="warning" label="警告" value="警告"></a-checkbox>
-      <a-checkbox type="error" label="错误" value="错误"></a-checkbox>
-    </a-checkbox-group>
+    <fl-checkbox-group v-model="value2">
+      <fl-checkbox label="主要" value="主要"></fl-checkbox>
+      <fl-checkbox type="success" label="成功" value="成功"></fl-checkbox>
+      <fl-checkbox type="warning" label="警告" value="警告"></fl-checkbox>
+      <fl-checkbox type="error" label="错误" value="错误"></fl-checkbox>
+    </fl-checkbox-group>
     <h4>单独设置true</h4>
-    <a-checkbox v-model="value3" type="success" label="设置true选中"></a-checkbox>
-    <a-checkbox type="error" label="未设置"></a-checkbox>
+    <fl-checkbox v-model="value3" type="success" label="设置true选中"></fl-checkbox>
+    <fl-checkbox type="error" label="未设置"></fl-checkbox>
   </div>
   <div>
     <h3>事件</h3>
     <h4>组事件</h4>
-    <a-checkbox-group @change="changeEvent" v-model="value4">
-      <a-checkbox label="主要" value="主要"></a-checkbox>
-      <a-checkbox type="success" label="成功" value="成功"></a-checkbox>
-      <a-checkbox type="warning" label="警告" value="警告"></a-checkbox>
-      <a-checkbox type="error" label="错误" value="错误"></a-checkbox>
-    </a-checkbox-group>
+    <fl-checkbox-group @change="changeEvent" v-model="value4">
+      <fl-checkbox label="主要" value="主要"></fl-checkbox>
+      <fl-checkbox type="success" label="成功" value="成功"></fl-checkbox>
+      <fl-checkbox type="warning" label="警告" value="警告"></fl-checkbox>
+      <fl-checkbox type="error" label="错误" value="错误"></fl-checkbox>
+    </fl-checkbox-group>
     <h4>单checkbox事件</h4>
-    <a-checkbox @change="changeEvent2" type="error" label="值" value="值"></a-checkbox>
+    <fl-checkbox @change="changeEvent2" type="error" label="值" value="值"></fl-checkbox>
   </div>
   <div>
     <h3>异步</h3>
     <h4>属性触发</h4>
-    <a-checkbox loading label="主要"></a-checkbox>
-    <a-checkbox loading type="success" label="成功"></a-checkbox>
+    <fl-checkbox loading label="主要"></fl-checkbox>
+    <fl-checkbox loading type="success" label="成功"></fl-checkbox>
     <h4>点击触发</h4>
-    <a-checkbox :beforeChange="beforeChange1" type="warning" label="警告"></a-checkbox>
-    <a-checkbox :beforeChange="beforeChange2" type="error" label="错误"></a-checkbox>
+    <fl-checkbox :beforeChange="beforeChange1" type="warning" label="警告"></fl-checkbox>
+    <fl-checkbox :beforeChange="beforeChange2" type="error" label="错误"></fl-checkbox>
   </div>
   <div>
     <h3>全选</h3>
-    <a-checkbox-all @change="changeEvent3" v-model="value5">
-      <a-checkbox label="主要" value="主要"></a-checkbox>
-      <a-checkbox type="success" label="成功" value="成功"></a-checkbox>
-      <a-checkbox type="warning" label="警告" value="警告"></a-checkbox>
-      <a-checkbox type="error" label="错误" value="错误"></a-checkbox>
-    </a-checkbox-all>
+    <fl-checkbox-all @change="changeEvent3" v-model="value5">
+      <fl-checkbox label="主要" value="主要"></fl-checkbox>
+      <fl-checkbox type="success" label="成功" value="成功"></fl-checkbox>
+      <fl-checkbox type="warning" label="警告" value="警告"></fl-checkbox>
+      <fl-checkbox type="error" label="错误" value="错误"></fl-checkbox>
+    </fl-checkbox-all>
+  </div>
+  <div>
+    <h3>大小</h3>
+    <h4>单个</h4>
+    <fl-checkbox size="small" label="主要" value="主要"></fl-checkbox>
+    <fl-checkbox type="success" label="成功" value="成功"></fl-checkbox>
+    <fl-checkbox size="large" type="warning" label="警告" value="警告"></fl-checkbox>
+    <h4>组</h4>
+    <fl-checkbox-group size="small">
+      <fl-checkbox label="主要" value="主要"></fl-checkbox>
+      <fl-checkbox type="success" label="成功" value="成功"></fl-checkbox>
+      <fl-checkbox type="warning" label="警告" value="警告"></fl-checkbox>
+    </fl-checkbox-group>
+    <h4>全选</h4>
+    <fl-checkbox-all size="large">
+      <fl-checkbox label="主要" value="主要"></fl-checkbox>
+      <fl-checkbox type="success" label="成功" value="成功"></fl-checkbox>
+      <fl-checkbox type="warning" label="警告" value="警告"></fl-checkbox>
+    </fl-checkbox-all>
   </div>
 </template>
 <script setup>

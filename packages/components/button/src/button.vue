@@ -5,9 +5,9 @@
   ns.is('block', block), ns.is('button-group', isGroup)
   ]">
     <template v-if="loading | _loading">
-      <AIcon :class="[ns.is('loading-transition', loading | _loading)]">
-        <ALoading />
-      </AIcon>
+      <FlIcon :class="[ns.is('loading-transition', loading | _loading)]">
+        <FlLoading />
+      </FlIcon>
     </template>
     <span v-if="$slots.default">
       <slot />
@@ -23,9 +23,9 @@ export default {
 </script>
 
 <script setup>
-import { AIcon } from '@ui-library/components'
+import { FlIcon } from '@ui-library/components'
 import { useParent } from '@ui-library/hooks'
-import { ALoading } from '@ui-library/icons'
+import { FlLoading } from '@ui-library/icons'
 import { useButton } from './composables/use-button'
 import { useNamespace } from '@ui-library/hooks'
 const ns = useNamespace('button')
