@@ -1,0 +1,18 @@
+@use '../common/namespace.scss' as *;
+
+@function messageVar($type: '') {
+  $messageVar: (
+    'bg-color':('default':#{getVarName('color', 'white')}),
+    'theme-bg-color':('type':#{getVarName('color', $type)}),
+    'shadow-color':('default':#{getVarName('color', 'text', 'light-5')}),
+    'icon-color':('type':#{getVarName('color', $type)}),
+    'text-color':('default':#{getVarName('color', 'text')}),
+    'border-round':('default':#{getVarName('component-round', 'default')}),
+    'font-size':('default':#{getVarName('font-size', 'default')}),
+    'size':('default':#{getVarName('component-size', 'default')}),
+    'shadow-degree':('default':#{getVarName('message-shadow-degree', 'default')}),
+    'padding-horizontal-left':('default':#{getVarName('message-padding-horizontal-left', 'default')}),
+    'padding-horizontal-right':('default':#{getVarName('message-padding-horizontal-right', 'default')}),
+  );
+@return $messageVar;
+}

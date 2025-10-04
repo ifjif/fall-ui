@@ -119,6 +119,21 @@ $switch-padding: (
 $switch-padding: map.deep-merge(('default':4px,
     ), $switch-padding
 );
+$message-shadow-degree: (
+  ) !default;
+$message-shadow-degree: map.deep-merge(('default':10px,
+    ), $message-shadow-degree
+);
+$message-padding-horizontal-left: (
+  ) !default;
+$message-padding-horizontal-left: map.deep-merge(('default':20px,
+    ), $message-padding-horizontal-left
+);
+$message-padding-horizontal-right: (
+  ) !default;
+$message-padding-horizontal-right: map.deep-merge(('default':10px,
+    ), $message-padding-horizontal-right
+);
 
 
 $global-var: (
@@ -138,5 +153,8 @@ $global-var: map.deep-merge(('component-size':$component-size,
       "switch-size":$switch-size,
       "switch-width":$switch-width,
       "switch-padding":$switch-padding,
+      'message-shadow-degree':$message-shadow-degree,
+      'message-padding-horizontal-left':$message-padding-horizontal-left,
+      'message-padding-horizontal-right':$message-padding-horizontal-right,
     ), $global-var
 );

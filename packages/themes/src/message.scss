@@ -1,0 +1,57 @@
+@use './common/namespace.scss' as *;
+@use './common/componentVar.scss' as *;
+@use './componentVar/messageVar.scss' as *;
+@use './common/var.scss' as *;
+
+@include b(message) {
+  @include set-component-var('message', messageVar());
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(#{getVarName('message', 'bg-color')});
+  color: var(#{getVarName('message', 'text-color')});
+  box-shadow: 0 0 var(#{getVarName('message', 'shadow-degree')}) 0 var(#{getVarName('message','shadow-color')});
+  border-radius: var(#{getVarName('message', 'border-round')});
+  font-size: var(#{getVarName('message', 'font-size')});
+  height: var(#{getVarName('message', 'size')});
+  padding: 0 var(#{getVarName('message', 'padding-horizontal-right')}) 0 var(#{getVarName('message', 'padding-horizontal-left')});
+  left: 50%;
+  box-sizing: border-box;
+  line-height: 1;
+  transform: translateX(-50%);
+  white-space: nowrap;
+
+  @include e(icon) {
+    color:var(#{getVarName('message', 'icon-color')});
+  }
+
+  @include e(label) {
+    flex: 1;
+    padding: 0 var(#{getVarName('message', 'padding-horizontal-left')}) 0 var(#{getVarName('message', 'padding-horizontal-right')});
+    box-sizing: border-box;
+  }
+
+  @include e(close) {
+    cursor: pointer;
+  }
+
+  @include s((background)) {
+    #{getVarName('message', 'bg-color')}:var(#{getVarName('message', 'theme-bg-color')});
+    #{getVarName('message', 'text-color')}:var(#{getVarName('color', 'white')});
+    #{getVarName('message', 'icon-color')}:var(#{getVarName('color', 'white')});
+  }
+}
+
+@each $size in $common-size {
+  @include m('size', $size) {
+    #{getVarName('message', 'font-size')}:var(#{getVarName('font-size', $size)});
+    #{getVarName('message', 'size')}:var(#{getVarName('component-size', $size)});
+  }
+}
+
+@each $theme in $themes {
+  @include m($theme) {
+    @include set-component-var('message', messageVar($theme), 'type');
+  }
+}
