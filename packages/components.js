@@ -14,6 +14,7 @@ import {
   FlMain,
   FlMask,
   FlMessage,
+  FlMessageBox,
   FlModal,
   FlRadio,
   FlRadioGroup,
@@ -44,4 +45,5 @@ export default [
   FlMessage,
   FlMask,
   FlModal,
+  FlMessageBox,
 ];

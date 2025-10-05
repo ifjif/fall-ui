@@ -8,11 +8,15 @@ function types() {
   const isFunction = (obj) => {
     return (typeof obj) === "function";
   };
+  const isString = (obj) => {
+    return (typeof obj) === "string";
+  };
 
   return {
     isFunction,
     isBoolean,
     isArray,
+    isString,
   };
 }
 

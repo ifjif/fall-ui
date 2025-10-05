@@ -1,6 +1,7 @@
 <script setup>
 import ButtonCom from './components/button-com.vue';
 import CheckboxCom from './components/checkbox-com.vue';
+import MessageboxCom from './components/messagebox-com.vue';
 import IconsCom from './components/icons-com.vue';
 import InputCom from './components/input-com.vue';
 import LayoutCom from './components/layout-com.vue';
@@ -27,4 +28,5 @@ import TextareaCom from './components/textarea-com.vue';
   <MessageCom></MessageCom>
   <MaskCom></MaskCom>
   <ModalCom></ModalCom>
+  <MessageboxCom></MessageboxCom>
 </template>

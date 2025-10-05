@@ -1,0 +1,50 @@
+@use './common/namespace.scss' as *;
+@use './common/componentVar.scss' as *;
+@use './componentVar/messageboxVar.scss' as *;
+@use './common/var.scss' as *;
+
+@include b(messagebox) {
+  @include set-component-var('messagebox', messageBoxVar());
+  position: absolute;
+  width: 400px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(#{getVarName('messagebox', 'bg-color')});
+  border-radius: var(#{getVarName('messagebox', 'border-round')});
+  padding: 24px 24px 16px;
+  box-sizing: border-box;
+
+  @include e(header) {
+    display: flex;
+    align-items: center;
+    font-size: calc(var(#{getVarName('messagebox', 'font-size')}) + 2px);
+
+    @include bb(icon) {
+      font-size: 24px;
+      color: var(#{getVarName('messagebox', 'icon-color')});
+    }
+  }
+
+
+  @include e(title) {
+    margin-left: 16px;
+  }
+
+  @include e(content) {
+    font-size: var(#{getVarName('messagebox', 'font-size')});
+    padding: 16px 0 24px 42px;
+    white-space: wrap;
+  }
+
+  @include e(footer) {
+    display: flex;
+    justify-content: right;
+  }
+}
+
+@each $theme in $themes {
+  @include e($theme) {
+    @include set-component-var("messagebox", messageBoxVar($theme), 'type');
+  }
+}

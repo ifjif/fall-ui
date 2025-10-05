@@ -1,0 +1,11 @@
+@use '../common/namespace.scss' as *;
+
+@function messageBoxVar($type: '') {
+  $messageBoxVar: (
+    'bg-color':('default':#{getVarName('color', 'white')}),
+    'icon-color':('type':#{getVarName('color', $type)}),
+    'border-round':('default':#{getVarName('component-round', 'default')}),
+    'font-size':('default':#{getVarName('font-size', 'default')}),
+  );
+@return $messageBoxVar;
+}
