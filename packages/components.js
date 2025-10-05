@@ -12,7 +12,9 @@ import {
   FlIcon,
   FlInput,
   FlMain,
+  FlMask,
   FlMessage,
+  FlModal,
   FlRadio,
   FlRadioGroup,
   FlRow,
@@ -40,4 +42,6 @@ export default [
   FlRadioGroup,
   FlSwitch,
   FlMessage,
+  FlMask,
+  FlModal,
 ];

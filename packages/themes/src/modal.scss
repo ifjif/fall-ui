@@ -1,0 +1,59 @@
+@use './common/namespace.scss' as *;
+
+@include b(modal) {
+  height: 100%;
+  width: 100%;
+  padding: 15vh 0;
+  box-sizing: border-box;
+  overflow: auto;
+
+  @include e(wrapper) {
+    display: flex;
+    position: relative;
+    left: 50%;
+    width: 450px;
+    transform: translateX(-50%);
+    flex-direction: column;
+    border-radius: 12px;
+    background-color: white;
+
+    @include s((fixedScreen)) {
+      max-height: 100%;
+    }
+  }
+
+  @include e(header) {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 24px 0;
+    line-height: 1;
+
+    @include e(title) {
+      margin: 0;
+    }
+
+    @include e(close) {
+      cursor: pointer;
+    }
+  }
+
+  @include e(content) {
+    display: flex;
+    flex: 1;
+    padding: 24px 24px 16px;
+    white-space: wrap;
+    min-height: 0;
+
+    @include e(render-content) {
+      @include s((fixedScreen)) {
+        overflow: auto;
+      }
+    }
+  }
+
+  @include e(footer) {
+    display: flex;
+    justify-content: right;
+    padding: 0 24px 16px;
+  }
+}
