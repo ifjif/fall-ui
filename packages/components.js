@@ -7,6 +7,7 @@ import {
   FlCheckboxGroup,
   FlCol,
   FlContainer,
+  FlDrawer,
   FlFooter,
   FlHeader,
   FlIcon,
@@ -46,4 +47,5 @@ export default [
   FlMask,
   FlModal,
   FlMessageBox,
+  FlDrawer,
 ];

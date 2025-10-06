@@ -12,6 +12,7 @@ import RadioCom from './components/radio-com.vue';
 import RowColCom from './components/row-col-com.vue';
 import SwitchCom from './components/switch-com.vue';
 import TextareaCom from './components/textarea-com.vue';
+import DrawerCom from './components/drawer-com.vue';
 
 </script>
 
@@ -29,4 +30,5 @@ import TextareaCom from './components/textarea-com.vue';
   <MaskCom></MaskCom>
   <ModalCom></ModalCom>
   <MessageboxCom></MessageboxCom>
+  <DrawerCom></DrawerCom>
 </template>

@@ -1,0 +1,60 @@
+@use './common/namespace.scss' as *;
+
+@include b(drawer) {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+
+  @include e(wrapper) {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    padding: 24px;
+    box-sizing: border-box;
+
+    @include s((fixedScreen)) {
+      height: 100%;
+    }
+  }
+
+  @include m(placement, left) {
+    width: 400px;
+    left: 0;
+  }
+
+  @include m(placement, right) {
+    width: 400px;
+    right: 0;
+  }
+
+  @include m(placement, top) {
+    top: 0;
+  }
+
+  @include m(placement, bottom) {
+    bottom: 0;
+  }
+
+  @include e(header) {}
+
+  @include e(content) {
+    display: flex;
+    flex: 1;
+    padding: 24px 0;
+    min-height: 0;
+
+    @include e(render-content) {
+      @include s((fixedScreen)) {
+        overflow: auto;
+      }
+    }
+  }
+
+  @include e(footer) {
+    display: flex;
+    justify-content: right;
+  }
+}

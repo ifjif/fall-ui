@@ -1,7 +1,7 @@
 import MessageBox from "./message-box.vue";
 import { createVNode, render } from "vue";
 
-const defaultOptions = { type: "info", maskClose: false };
+const defaultOptions = { type: "info", maskClose: true };
 
 function createMessageBox(params = {}) {
   const options = { ...defaultOptions, ...params };
