@@ -1,6 +1,13 @@
 import { computed, ref } from "vue";
 import { types } from "@ui-library/utils";
-function useCheckboxState(props, groupValue, isGroup, modelValue) {
+function useCheckboxState(
+  props,
+  groupValue,
+  isGroup,
+  modelValue,
+  formItemKey,
+  isFormItem,
+) {
   const model = computed({
     get() {
       return isGroup ? groupValue.groupModel.value : modelValue.value;
@@ -11,6 +18,7 @@ function useCheckboxState(props, groupValue, isGroup, modelValue) {
       } else {
         modelValue.value = val;
       }
+      if (isFormItem) formItemKey.observer("change");
     },
   });
 

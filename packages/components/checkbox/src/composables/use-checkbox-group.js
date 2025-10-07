@@ -1,4 +1,5 @@
 import { CHECKBOX_ALL_KEY, CHECKBOX_GROUP_KEY } from "../../contants";
+import { FORM_ITEM_KEY } from "../../../form/constant.js";
 import { inject } from "vue";
 
 function useCheckboxGroup(props) {
@@ -10,9 +11,14 @@ function useCheckboxGroup(props) {
     allValue.setValue4All(props.value);
   }
 
+  const formItemKey = inject(FORM_ITEM_KEY, undefined);
+  const isFormItem = formItemKey ? true : false;
+
   return {
     groupValue,
     isGroup,
+    formItemKey,
+    isFormItem,
   };
 }
 

@@ -17,8 +17,8 @@
         </FlIcon>
       </div>
       <input v-model="modelValue" ref="_ref" :type="typeControl" :disabled="disabled" :maxlength="maxlength"
-        @input="inputEvent" @focus="focusEvent" @blur="blurEvent" @mouseenter="mouseenterEvent"
-        @mouseleave="mouseleaveEvent" @change="changeEvent" @keyup="keyupEvent" @keydown="keydownEvent"
+        @input="inputEvent" @focus="focusEvent" @blur="_blurEvent" @mouseenter="mouseenterEvent"
+        @mouseleave="mouseleaveEvent" @change="_changeEvent" @keyup="keyupEvent" @keydown="keydownEvent"
         :placeholder="placeholder" :class="[ns.e('inner')]" />
       <div v-if="isSuffix" :class="[ns.e('fix'), ns.e('suffix')]">
         <template v-if="!showPassword || !clear">
@@ -95,8 +95,8 @@ const emit = defineEmits(['input', 'focus', 'blur', 'mouseenter', 'mouseleave', 
 
 const { _ref, isFocus, isHover, isPrefix, isSuffix, isPrepend, isFlppend,
   passwordIcon, clearIcon, typeControl, textLength, showCount, inputWidth,
-  focusEvent, blurEvent, viewPasswordEvent, clearEvent, mouseleaveEvent, mouseenterEvent,
-  changeEvent, keyupEvent, keydownEvent,
+  focusEvent, _blurEvent, viewPasswordEvent, clearEvent, mouseleaveEvent, mouseenterEvent,
+  _changeEvent, keyupEvent, keydownEvent,
   inputEvent, focusExpose, blurExpose, selectExpose } = useInput(props, slots, modelValue, emit)
 
 defineExpose({

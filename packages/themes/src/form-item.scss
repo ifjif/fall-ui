@@ -1,0 +1,44 @@
+@use './common/namespace.scss' as *;
+
+@include b(form-item) {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+
+  @include e(label-wrapper) {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    justify-content: right;
+    width: 100px;
+
+    @include s((required)) {
+      &::before {
+        content: '*';
+        color: red;
+      }
+    }
+
+    @include e(label) {
+      padding: 0 2px;
+    }
+
+    @include s((colon)) {
+      &:after {
+        content: ':';
+      }
+    }
+
+    @include e(content) {
+      position: relative;
+    }
+
+    @include e(tip) {
+      position: absolute;
+      font-size: 14px;
+      color: red;
+    }
+
+  }
+
+}

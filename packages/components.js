@@ -9,6 +9,8 @@ import {
   FlContainer,
   FlDrawer,
   FlFooter,
+  FlForm,
+  FlFormItem,
   FlHeader,
   FlIcon,
   FlInput,
@@ -48,4 +50,6 @@ export default [
   FlModal,
   FlMessageBox,
   FlDrawer,
+  FlForm,
+  FlFormItem,
 ];

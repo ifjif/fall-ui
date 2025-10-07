@@ -1,0 +1,7 @@
+@use './common/namespace.scss' as *;
+
+@include b(form) {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}

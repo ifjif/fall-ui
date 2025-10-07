@@ -1,5 +1,12 @@
 import { computed, ref } from "vue";
-function useRadioState(props, groupValue, isGroup, modelValue) {
+function useRadioState(
+  props,
+  groupValue,
+  isGroup,
+  modelValue,
+  isFormItem,
+  formItemKey,
+) {
   const model = computed({
     get() {
       return isGroup ? groupValue.groupModel.value : modelValue.value;
@@ -10,6 +17,7 @@ function useRadioState(props, groupValue, isGroup, modelValue) {
       } else {
         modelValue.value = val;
       }
+      if (isFormItem) formItemKey.observer("change");
     },
   });
 

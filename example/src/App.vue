@@ -13,6 +13,7 @@ import RowColCom from './components/row-col-com.vue';
 import SwitchCom from './components/switch-com.vue';
 import TextareaCom from './components/textarea-com.vue';
 import DrawerCom from './components/drawer-com.vue';
+import FormCom from './components/form-com.vue';
 
 </script>
 
@@ -31,4 +32,5 @@ import DrawerCom from './components/drawer-com.vue';
   <ModalCom></ModalCom>
   <MessageboxCom></MessageboxCom>
   <DrawerCom></DrawerCom>
+  <FormCom></FormCom>
 </template>

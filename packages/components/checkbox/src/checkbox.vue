@@ -29,7 +29,7 @@ import { useCheckbox } from './composables/use-checkbox'
 import { useNamespace } from '@ui-library/hooks'
 const ns = useNamespace('checkbox')
 
-const modelValue = defineModel({ type: [String, Number, Boolean], default: () => '' })
+const modelValue = defineModel({ type: [String, Number, Boolean, Array], default: () => '' })
 const props = defineProps({
   tag: {
     type: [String, Object],

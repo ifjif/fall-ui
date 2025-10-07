@@ -1,15 +1,45 @@
 import { useInputState } from "./use-input-state";
 import { useInputEvent } from "./use-input-event";
 import { useInputExpose } from "./use-input-expose";
+import { useInputGroup } from "./use-input-group";
 function useInput(props, slots, modelValue, emit) {
-  const { _ref, isPrefix, isSuffix, isPrepend, isAppend, passwordIcon, typeControl,
-    viewPassword, clearIcon, textLength, showCount, inputWidth
-  } = useInputState(props, slots, modelValue)
-  const { focusExpose, blurExpose, selectExpose } = useInputExpose(_ref)
-  const { isFocus, isHover, focusEvent, blurEvent, viewPasswordEvent,
-    clearEvent, inputEvent, mouseleaveEvent, mouseenterEvent,
-    changeEvent, keyupEvent, keydownEvent
-  } = useInputEvent(viewPassword, modelValue, emit, focusExpose)
+  const { formItemKey, isFormItem } = useInputGroup();
+  const {
+    _ref,
+    isPrefix,
+    isSuffix,
+    isPrepend,
+    isAppend,
+    passwordIcon,
+    typeControl,
+    viewPassword,
+    clearIcon,
+    textLength,
+    showCount,
+    inputWidth,
+  } = useInputState(props, slots, modelValue);
+  const { focusExpose, blurExpose, selectExpose } = useInputExpose(_ref);
+  const {
+    isFocus,
+    isHover,
+    focusEvent,
+    _blurEvent,
+    viewPasswordEvent,
+    clearEvent,
+    inputEvent,
+    mouseleaveEvent,
+    mouseenterEvent,
+    _changeEvent,
+    keyupEvent,
+    keydownEvent,
+  } = useInputEvent(
+    viewPassword,
+    modelValue,
+    emit,
+    focusExpose,
+    formItemKey,
+    isFormItem,
+  );
 
   return {
     _ref,
@@ -26,7 +56,7 @@ function useInput(props, slots, modelValue, emit) {
     showCount,
     inputWidth,
     focusEvent,
-    blurEvent,
+    _blurEvent,
     viewPasswordEvent,
     clearEvent,
     inputEvent,
@@ -35,10 +65,10 @@ function useInput(props, slots, modelValue, emit) {
     focusExpose,
     blurExpose,
     selectExpose,
-    changeEvent,
+    _changeEvent,
     keyupEvent,
-    keydownEvent
-  }
+    keydownEvent,
+  };
 }
 
-export { useInput }
+export { useInput };

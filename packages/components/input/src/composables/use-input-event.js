@@ -1,34 +1,58 @@
-import { useEvent } from '@ui-library/hooks'
-function useInputEvent(viewPassword, modelValue, emit, focusExpose) {
-  const { isFocus, isHover, focusEvent, blurEvent, mouseleaveEvent, mouseenterEvent,
-    changeEvent, keyupEvent, keydownEvent
-  } = useEvent()
+import { useEvent } from "@ui-library/hooks";
+function useInputEvent(
+  viewPassword,
+  modelValue,
+  emit,
+  focusExpose,
+  formItemKey,
+  isFormItem,
+) {
+  const {
+    isFocus,
+    isHover,
+    focusEvent,
+    blurEvent,
+    mouseleaveEvent,
+    mouseenterEvent,
+    changeEvent,
+    keyupEvent,
+    keydownEvent,
+  } = useEvent();
+
+  const _blurEvent = () => {
+    blurEvent();
+    if (isFormItem) formItemKey.observer("blur");
+  };
+  const _changeEvent = () => {
+    changeEvent();
+    if (isFormItem) formItemKey.observer("change");
+  };
   const viewPasswordEvent = () => {
-    viewPassword.value = !viewPassword.value
-  }
+    viewPassword.value = !viewPassword.value;
+  };
   const inputEvent = (e) => {
-    emit('input', e)
-  }
+    emit("input", e);
+  };
   const clearEvent = () => {
-    modelValue.value = ''
+    modelValue.value = "";
     //获取焦点
-    focusExpose()
-  }
+    focusExpose();
+  };
 
   return {
     isFocus,
     isHover,
     focusEvent,
-    blurEvent,
+    _blurEvent,
     viewPasswordEvent,
     clearEvent,
     inputEvent,
     mouseenterEvent,
     mouseleaveEvent,
-    changeEvent,
+    _changeEvent,
     keyupEvent,
-    keydownEvent
-  }
+    keydownEvent,
+  };
 }
 
-export { useInputEvent }
+export { useInputEvent };
