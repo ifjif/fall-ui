@@ -1,12 +1,30 @@
 {
   "name": "fall-ui",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./lib/index.cjs",
+  "module": "./es/index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "UI组件库",
+    "vue3.js"
+  ],
+  "exports": {
+    ".": {
+      "import": "./es/index.mjs",
+      "require": "./lib/index.cjs"
+    },
+    "./themes/*": "./themes/*",
+    "./*": "./*"
+  },
+  "author": {
+    "name": "zzc",
+    "email": "ch.en.g@qq.com"
+  },
+  "peerDependencies": {
+    "vue": "> 3.x.x"
+  },
   "license": "ISC"
 }

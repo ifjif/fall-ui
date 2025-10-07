@@ -7,11 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+fall-ui
 node_modules
-example
-build
 .DS_Store
-dist
+./dist
 dist-ssr
 coverage
 *.local
