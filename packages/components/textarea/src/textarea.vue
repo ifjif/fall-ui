@@ -24,7 +24,7 @@
   </div>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('textarea')
 export default {
   name: ns.b()
@@ -32,8 +32,8 @@ export default {
 </script>
 <script setup>
 import { useTextarea } from './composables/use-textarea'
-import { FlIcon } from '@ui-library/components'
-import { useNamespace } from '@ui-library/hooks'
+import { FlIcon } from '@fall-ui/components'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('textarea')
 
 const props = defineProps({

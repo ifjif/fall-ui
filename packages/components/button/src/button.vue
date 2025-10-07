@@ -15,7 +15,7 @@
   </button>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('button')
 export default {
   name: ns.b()
@@ -23,11 +23,11 @@ export default {
 </script>
 
 <script setup>
-import { FlIcon } from '@ui-library/components'
-import { useParent } from '@ui-library/hooks'
-import { FlLoading } from '@ui-library/icons'
+import { FlIcon } from '@fall-ui/components'
+import { useParent } from '@fall-ui/hooks'
+import { FlLoading } from '@fall-ui/icons'
 import { useButton } from './composables/use-button'
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('button')
 const parent = useParent('button-group')
 const isGroup = parent.group()

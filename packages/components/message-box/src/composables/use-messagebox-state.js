@@ -2,11 +2,11 @@ import {
   FlButton as Button,
   FlIcon as Icon,
   FlMask as Mask,
-} from "@ui-library/components";
-import { typeIcons } from "@ui-library/icons";
-import { themes, types } from "@ui-library/utils";
+} from "@fall-ui/components";
+import { typeIcons } from "@fall-ui/icons";
+import { themes, types } from "@fall-ui/utils";
 import { computed, isVNode } from "vue";
-import { useStyle, useZIndex } from "@ui-library/hooks";
+import { useStyle, useZIndex } from "@fall-ui/hooks";
 export function useMessageBoxState(props) {
   const uStyle = useStyle();
   const themeIcon = computed(() => {

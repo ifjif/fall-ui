@@ -21,7 +21,7 @@
   </Mask>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks';
+import { useNamespace } from '@fall-ui/hooks';
 import { onMounted } from 'vue';
 const ns = useNamespace('messagebox')
 
@@ -31,7 +31,7 @@ export default {
 </script>
 <script setup>
 import { useMessageBox } from './composables/use-messagebox.js'
-import { useNamespace } from '@ui-library/hooks';
+import { useNamespace } from '@fall-ui/hooks';
 const ns = useNamespace('messagebox')
 
 const props = defineProps({

@@ -1,4 +1,4 @@
-import { useStyle } from "@ui-library/hooks";
+import { useStyle } from "@fall-ui/hooks";
 import { computed } from "vue";
 export function useModalState(props) {
   const uStyle = useStyle();

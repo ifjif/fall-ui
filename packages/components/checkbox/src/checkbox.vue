@@ -16,17 +16,17 @@
   </component>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('checkbox')
 export default {
   name: ns.b()
 }
 </script>
 <script setup>
-import { FlIcon } from '@ui-library/components'
-import { FlCheck, FlLoading } from '@ui-library/icons';
+import { FlIcon } from '@fall-ui/components'
+import { FlCheck, FlLoading } from '@fall-ui/icons';
 import { useCheckbox } from './composables/use-checkbox'
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('checkbox')
 
 const modelValue = defineModel({ type: [String, Number, Boolean, Array], default: () => '' })

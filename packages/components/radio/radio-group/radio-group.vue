@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('radio-group')
 
 export default {
@@ -12,7 +12,7 @@ export default {
 }
 </script>
 <script setup>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 import { provide, toRefs } from 'vue';
 import { RADIO_GROUP_KEY } from '../contants'
 const ns = useNamespace('checkbox-group')

@@ -15,7 +15,7 @@
   </component>
 </template>
 <script>
-import { useNamespace } from "@ui-library/hooks"
+import { useNamespace } from "@fall-ui/hooks"
 const ns = useNamespace('radio')
 
 export default {
@@ -23,10 +23,10 @@ export default {
 }
 </script>
 <script setup>
-import { FlIcon } from '@ui-library/components'
-import { FlCheck, FlLoading } from '@ui-library/icons';
+import { FlIcon } from '@fall-ui/components'
+import { FlCheck, FlLoading } from '@fall-ui/icons';
 import { useRadio } from './composables/use-radio'
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('radio')
 
 const modelValue = defineModel({ type: [String, Number, Boolean], default: () => '' })

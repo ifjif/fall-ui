@@ -1,12 +1,12 @@
-import { useExpose } from '@ui-library/hooks'
+import { useExpose } from "@fall-ui/hooks";
 function useTextareaExpose(elem) {
-  const { focusExpose, blurExpose, selectExpose } = useExpose(elem)
+  const { focusExpose, blurExpose, selectExpose } = useExpose(elem);
 
   return {
     focusExpose,
     blurExpose,
-    selectExpose
-  }
+    selectExpose,
+  };
 }
 
-export { useTextareaExpose }
+export { useTextareaExpose };

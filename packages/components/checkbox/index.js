@@ -1,4 +1,4 @@
-import { componentInstall } from "@ui-library/utils";
+import { componentInstall } from "@fall-ui/utils";
 import FlCheckbox from "./src/checkbox.vue";
 import FlCheckboxGroup from "./checkbox-group/checkbox-group.vue";
 import FlCheckboxAll from "./checkbox-all/checkbox-all.vue";

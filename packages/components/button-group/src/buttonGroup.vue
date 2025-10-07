@@ -4,14 +4,14 @@
   </div>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('button-group')
 export default {
   name: ns.b()
 }
 </script>
 <script setup>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('button-group')
 const props = defineProps({
   size: String

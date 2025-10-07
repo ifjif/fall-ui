@@ -1,6 +1,6 @@
 import { computed, shallowRef } from "vue";
-import { FlCloseCircle as clearIcon } from "@ui-library/icons";
-import { useStyle } from "@ui-library/hooks";
+import { FlCloseCircle as clearIcon } from "@fall-ui/icons";
+import { useStyle } from "@fall-ui/hooks";
 function useTextareaState(props, modelValue) {
   const uStyle = useStyle();
   const _ref = shallowRef(null);

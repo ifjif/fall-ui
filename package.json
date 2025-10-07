@@ -10,11 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ui-library/components": "workspace:^",
-    "@ui-library/hooks": "workspace:^",
-    "@ui-library/icons": "workspace:^",
-    "@ui-library/themes": "workspace:^",
-    "@ui-library/utils": "workspace:^",
+    "@fall-ui/components": "workspace:^",
+    "@fall-ui/hooks": "workspace:^",
+    "@fall-ui/icons": "workspace:^",
+    "@fall-ui/themes": "workspace:^",
+    "@fall-ui/utils": "workspace:^",
     "async-validator": "^4.2.5"
   }
 }

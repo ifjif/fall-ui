@@ -21,7 +21,7 @@
   </Mask>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks';
+import { useNamespace } from '@fall-ui/hooks';
 const ns = useNamespace('drawer')
 
 export default {
@@ -29,7 +29,7 @@ export default {
 }
 </script>
 <script setup>
-import { useNamespace } from '@ui-library/hooks';
+import { useNamespace } from '@fall-ui/hooks';
 import { useDrawer } from './composables/use-drawer'
 const ns = useNamespace('drawer')
 

@@ -1,4 +1,4 @@
-import { componentInstall } from "@ui-library/utils";
+import { componentInstall } from "@fall-ui/utils";
 import Form from "./src/form.vue";
 import FormItem from "./form-item/form-item.vue";
 

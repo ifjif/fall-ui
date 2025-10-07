@@ -1,7 +1,7 @@
-import { useStyle, useZIndex } from "@ui-library/hooks";
+import { useStyle, useZIndex } from "@fall-ui/hooks";
 import { computed, ref } from "vue";
-import { typeIcons } from "@ui-library/icons";
-import { themes } from "@ui-library/utils";
+import { typeIcons } from "@fall-ui/icons";
+import { themes } from "@fall-ui/utils";
 import { getPrevBottomOffset } from "../message.js";
 
 export function useMessageState(props) {

@@ -46,7 +46,7 @@
   </div>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('input')
 export default {
   name: ns.b()
@@ -54,9 +54,9 @@ export default {
 </script>
 <script setup>
 import { useInput } from './composables/use-input'
-import { FlIcon } from '@ui-library/components'
+import { FlIcon } from '@fall-ui/components'
 import { useSlots } from 'vue'
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('input')
 
 const props = defineProps({

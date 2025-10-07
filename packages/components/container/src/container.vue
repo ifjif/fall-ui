@@ -4,7 +4,7 @@
   </section>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('container')
 export default {
   name: ns.b()
@@ -13,7 +13,7 @@ export default {
 
 <script setup>
 import { computed, useSlots } from 'vue'
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('container')
 const name2Header = useNamespace('header').b()
 const name2Footer = useNamespace('footer').b()

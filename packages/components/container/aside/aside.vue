@@ -4,15 +4,15 @@
   </section>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('aside')
 export default {
   name: ns.b()
 }
 </script>
 <script setup>
-import { useStyle } from '@ui-library/hooks'
-import { useNamespace } from '@ui-library/hooks'
+import { useStyle } from '@fall-ui/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('aside')
 
 const sStyle = useStyle()

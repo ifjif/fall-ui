@@ -10,7 +10,7 @@
   </svg>
 </template>
 <script>
-import { genericIconName } from '@ui-library/hooks'
+import { genericIconName } from '@fall-ui/hooks'
 
 export default {
   name: genericIconName('InfoCircle')

@@ -1,5 +1,5 @@
 import MessageNode from "./message.vue";
-import { createVNode, ref, render } from "vue";
+import { createVNode, render } from "vue";
 
 const instances = [];
 let instanceId = 0;

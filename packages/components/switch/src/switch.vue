@@ -20,7 +20,7 @@
   </label>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks';
+import { useNamespace } from '@fall-ui/hooks';
 const ns = useNamespace('switch')
 
 export default {
@@ -28,9 +28,9 @@ export default {
 }
 </script>
 <script setup>
-import { useNamespace } from '@ui-library/hooks';
-import { FlIcon } from '@ui-library/components'
-import { FlLoading } from '@ui-library/icons';
+import { useNamespace } from '@fall-ui/hooks';
+import { FlIcon } from '@fall-ui/components'
+import { FlLoading } from '@fall-ui/icons';
 import { useSwitch } from './composables/use-switch'
 const ns = useNamespace('switch')
 

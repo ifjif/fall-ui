@@ -1,5 +1,5 @@
 import { createVNode, defineComponent, h, renderSlot } from "vue";
-import { useNamespace } from "@ui-library/hooks";
+import { useNamespace } from "@fall-ui/hooks";
 const ns = useNamespace("mask");
 
 export default defineComponent({

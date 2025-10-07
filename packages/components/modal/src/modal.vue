@@ -30,7 +30,7 @@
   </Teleport>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks';
+import { useNamespace } from '@fall-ui/hooks';
 const ns = useNamespace('modal')
 
 export default {
@@ -38,8 +38,8 @@ export default {
 }
 </script>
 <script setup>
-import { FlMask as Mask, FlButton as Button } from '@ui-library/components'
-import { useNamespace } from '@ui-library/hooks';
+import { FlMask as Mask, FlButton as Button } from '@fall-ui/components'
+import { useNamespace } from '@fall-ui/hooks';
 import { useModal } from './composables/use-modal'
 const ns = useNamespace('modal')
 

@@ -1,16 +1,24 @@
-import { useEvent } from '@ui-library/hooks'
+import { useEvent } from "@fall-ui/hooks";
 function useTextareaEvent(modelValue, emit, focusExpose) {
-  const { isFocus, isHover, focusEvent, blurEvent, mouseleaveEvent, mouseenterEvent,
-    changeEvent, keyupEvent, keydownEvent
-  } = useEvent()
+  const {
+    isFocus,
+    isHover,
+    focusEvent,
+    blurEvent,
+    mouseleaveEvent,
+    mouseenterEvent,
+    changeEvent,
+    keyupEvent,
+    keydownEvent,
+  } = useEvent();
   const inputEvent = (e) => {
-    emit('input', e)
-  }
+    emit("input", e);
+  };
   const clearEvent = () => {
-    modelValue.value = ''
+    modelValue.value = "";
     //获取焦点
-    focusExpose()
-  }
+    focusExpose();
+  };
 
   return {
     isFocus,
@@ -23,8 +31,8 @@ function useTextareaEvent(modelValue, emit, focusExpose) {
     mouseleaveEvent,
     changeEvent,
     keyupEvent,
-    keydownEvent
-  }
+    keydownEvent,
+  };
 }
 
-export { useTextareaEvent }
+export { useTextareaEvent };

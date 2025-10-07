@@ -10,8 +10,8 @@
 </template>
 
 <script setup>
-import { useNamespace } from '@ui-library/hooks';
-import { FlIcon as Icon } from '@ui-library/components';
+import { useNamespace } from '@fall-ui/hooks';
+import { FlIcon as Icon } from '@fall-ui/components';
 import { onMounted } from 'vue';
 import { useMessage } from './composables/use-message'
 const ns = useNamespace('message')

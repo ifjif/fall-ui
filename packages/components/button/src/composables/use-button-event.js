@@ -1,21 +1,20 @@
-import { types } from '@ui-library/utils'
+import { types } from "@fall-ui/utils";
 function useButtonEvent(props, emit, _loading) {
-
   const clickEvent = async (e) => {
-    const isFn = types().isFunction(props.beforeChange)
+    const isFn = types().isFunction(props.beforeChange);
     if (!isFn) {
-      emit('click', e)
-      return false
+      emit("click", e);
+      return false;
     }
 
-    _loading.value = true
+    _loading.value = true;
 
-    props.beforeChange().finally(() => _loading.value = false)
-  }
+    props.beforeChange().finally(() => _loading.value = false);
+  };
 
   return {
-    clickEvent
-  }
+    clickEvent,
+  };
 }
 
-export { useButtonEvent }
+export { useButtonEvent };

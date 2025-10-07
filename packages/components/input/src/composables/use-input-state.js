@@ -1,10 +1,6 @@
 import { computed, ref, shallowRef } from "vue";
-import {
-  FlCloseCircle as clearIcon,
-  FlEye,
-  FlEyeClose,
-} from "@ui-library/icons";
-import { useStyle } from "@ui-library/hooks";
+import { FlCloseCircle as clearIcon, FlEye, FlEyeClose } from "@fall-ui/icons";
+import { useStyle } from "@fall-ui/hooks";
 function useInputState(props, slots, modelValue) {
   const uStyle = useStyle();
   const _ref = shallowRef(null);

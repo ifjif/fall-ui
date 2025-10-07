@@ -24,7 +24,7 @@
   <fl-button @click="clickAll">关闭所有</fl-button>
 </template>
 <script setup>
-import { FlMessage } from '@ui-library/components';
+import { FlMessage } from '@fall-ui/components';
 //import { getCurrentInstance } from 'vue';
 
 //const { appContext } = getCurrentInstance()

@@ -1,12 +1,12 @@
-import { useExpose } from '@ui-library/hooks'
+import { useExpose } from "@fall-ui/hooks";
 function useInputExpose(elem) {
-  const { focusExpose, blurExpose, selectExpose } = useExpose(elem)
+  const { focusExpose, blurExpose, selectExpose } = useExpose(elem);
 
   return {
     focusExpose,
     blurExpose,
-    selectExpose
-  }
+    selectExpose,
+  };
 }
 
-export { useInputExpose }
+export { useInputExpose };

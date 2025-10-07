@@ -1,4 +1,4 @@
-import { types } from "@ui-library/utils";
+import { types } from "@fall-ui/utils";
 import { computed } from "vue";
 export function useSwitchEvent(props, emit, _loading, checked) {
   const isFunction = computed(() => {

@@ -12,7 +12,7 @@ import {
   FlSearch,
   FlWarningCircle,
   FlWarningCircleFill,
-} from "@ui-library/icons";
+} from "@fall-ui/icons";
 
 const icons = [
   FlCheckCircle,

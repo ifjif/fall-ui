@@ -8,19 +8,19 @@ importers:
 
   .:
     dependencies:
-      '@ui-library/components':
+      '@fall-ui/components':
         specifier: workspace:^
         version: link:packages/components
-      '@ui-library/hooks':
+      '@fall-ui/hooks':
         specifier: workspace:^
         version: link:packages/hooks
-      '@ui-library/icons':
+      '@fall-ui/icons':
         specifier: workspace:^
         version: link:packages/icons
-      '@ui-library/themes':
+      '@fall-ui/themes':
         specifier: workspace:^
         version: link:packages/themes
-      '@ui-library/utils':
+      '@fall-ui/utils':
         specifier: workspace:^
         version: link:packages/utils
       async-validator:

@@ -33,7 +33,7 @@
   </div>
 </template>
 <script setup>
-import { FlMessageBox } from '@ui-library/components';
+import { FlMessageBox } from '@fall-ui/components';
 import { h } from 'vue'
 const open1 = () => {
   FlMessageBox({ title: '标题', content: '这是内容这是内容这是内容' })

@@ -1,7 +1,7 @@
-import { useStyle } from "@ui-library/hooks";
+import { useStyle } from "@fall-ui/hooks";
 import { computed, isVNode } from "vue";
-import { FlButton as Button, FlMask as Mask } from "@ui-library/components";
-import { types } from "@ui-library/utils";
+import { FlButton as Button, FlMask as Mask } from "@fall-ui/components";
+import { types } from "@fall-ui/utils";
 export function useDrawerState(props) {
   const uStyle = useStyle();
   const widthStyle = computed(() => {

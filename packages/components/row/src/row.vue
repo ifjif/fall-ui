@@ -4,7 +4,7 @@
   </component>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('row')
 export default {
   name: ns.b()
@@ -12,7 +12,7 @@ export default {
 </script>
 <script setup>
 import { computed } from 'vue'
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('row')
 
 const props = defineProps({

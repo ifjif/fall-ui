@@ -1,4 +1,4 @@
-import { componentInstall } from "@ui-library/utils";
+import { componentInstall } from "@fall-ui/utils";
 import Row from "./src/row.vue";
 import Col from "./col/col.vue";
 

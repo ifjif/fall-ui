@@ -39,8 +39,8 @@
   </div>
 </template>
 <script setup>
-import { FlDrawer } from '@ui-library/components';
-import { FlInput } from '@ui-library/components';
+import { FlDrawer } from '@fall-ui/components';
+import { FlInput } from '@fall-ui/components';
 import { h } from 'vue';
 const title = '这是头部'
 const content = `

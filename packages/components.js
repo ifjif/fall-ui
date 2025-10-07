@@ -24,7 +24,7 @@ import {
   FlRow,
   FlSwitch,
   FlTextarea,
-} from "@ui-library/components";
+} from "@fall-ui/components";
 
 export default [
   FlButton,

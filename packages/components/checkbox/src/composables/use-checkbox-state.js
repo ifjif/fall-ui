@@ -1,5 +1,5 @@
 import { computed, ref } from "vue";
-import { types } from "@ui-library/utils";
+import { types } from "@fall-ui/utils";
 function useCheckboxState(
   props,
   groupValue,

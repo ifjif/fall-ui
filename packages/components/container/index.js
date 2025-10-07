@@ -1,4 +1,4 @@
-import { componentInstall } from "@ui-library/utils";
+import { componentInstall } from "@fall-ui/utils";
 import FlContainer from "./src/container.vue";
 import FlASide from "./aside/aside.vue";
 import FlMain from "./main/main.vue";

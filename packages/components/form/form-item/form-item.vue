@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('form-item')
 
 export default {
@@ -19,7 +19,7 @@ export default {
 }
 </script>
 <script setup>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 import { onMounted, provide } from 'vue';
 import { FORM_ITEM_KEY } from '../constant.js'
 import { useFormItem } from './composables/use-form-item.js'

@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 import { provide } from 'vue'
 import { ref } from 'vue'
 const ns = useNamespace('checkbox-all')
@@ -23,7 +23,7 @@ export default {
 }
 </script>
 <script setup>
-import { useNamespace } from '@ui-library/hooks'
+import { useNamespace } from '@fall-ui/hooks'
 import Checkbox from '../src/checkbox.vue'
 import CheckboxGroup from '../checkbox-group/checkbox-group.vue'
 import { CHECKBOX_ALL_KEY } from '../contants'
