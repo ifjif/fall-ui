@@ -48,6 +48,10 @@ const {
   mouseenterEvent,
 } = useMessage(props)
 
+defineExpose({
+  close
+})
+
 onMounted(() => {
   nextZIndex()
   show.value = true
@@ -57,4 +61,5 @@ onMounted(() => {
   })
   resizeObserver.observe(messageRef.value)
 })
+
 </script>

@@ -25,6 +25,7 @@
 </template>
 <script setup>
 import { FlMessage } from '@fall-ui/components';
+//import { FlMessage } from '../../../fall-ui/es/index.mjs';
 //import { getCurrentInstance } from 'vue';
 
 //const { appContext } = getCurrentInstance()

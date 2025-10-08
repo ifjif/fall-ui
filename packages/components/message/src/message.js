@@ -57,20 +57,22 @@ function message(params = {}) {
     },
   });
   render(vNode, container);
+  body.appendChild(container.firstElementChild);
   const vm = vNode.component;
   Object.assign(instance, {
-    id: params.id,
     component: vm,
     handler: {
       close() {
-        vm.setupState.close();
+        /** vm.setupState.close()
+         * 在 prod 中 vue默认不暴露 setupState供外部访问
+         */
+        vm.exposed.close();
         render(null, container);
       },
     },
   });
   instances.push(instance);
   setId(instance);
-  body.appendChild(container.firstElementChild);
 }
 
 message.closeAll = closeAll;

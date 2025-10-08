@@ -1,0 +1,7 @@
+:::demo
+
+```html
+button/index
+```
+
+:::

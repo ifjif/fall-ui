@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../node_modules/packages/icons.js"],
+  "sourcesContent": ["import {\n  FlCheck,\n  FlCheckCircle,\n  FlCheckCircleFill,\n  FlCloseCircle,\n  FlCloseCircleFill,\n  FlEye,\n  FlEyeClose,\n  FlInfoCircle,\n  FlInfoCircleFill,\n  FlLoading,\n  FlSearch,\n  FlWarningCircle,\n  FlWarningCircleFill,\n} from \"@fall-ui/icons\";\n\nconst icons = [\n  FlCheckCircle,\n  FlLoading,\n  FlSearch,\n  FlCloseCircle,\n  FlEyeClose,\n  FlEye,\n  FlCheck,\n  FlInfoCircle,\n  FlWarningCircle,\n  FlCheckCircleFill,\n  FlCloseCircleFill,\n  FlInfoCircleFill,\n  FlWarningCircleFill,\n];\n\nexport default function install(app) {\n  icons.forEach((icon) => {\n    app.use(icon);\n  });\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;AAgBA,IAAM,QAAQ;EACZ;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;AACF;AAEA,SAAwB,QAAQ,KAAK;AACnC,QAAM,QAAQ,CAAC,SAAS;AACtB,QAAI,IAAI,IAAI;EACd,CAAC;AACH;",
+  "names": []
+}
