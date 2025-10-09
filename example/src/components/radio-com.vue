@@ -13,6 +13,11 @@
     <fl-radio disabled v-model="value1" type="success" value="成功" label="成功"></fl-radio>
     <fl-radio disabled v-model="value1" type="warning" value="警告" label="警告"></fl-radio>
     <fl-radio disabled v-model="value1" type="error" value="错误" label="错误"></fl-radio>
+
+    <fl-radio disabled v-model="checked1" value="1" label="主要"></fl-radio>
+    <fl-radio disabled v-model="checked1" value="1" type="success" label="成功"></fl-radio>
+    <fl-radio disabled v-model="checked1" value="1" type="warning" label="警告"></fl-radio>
+    <fl-radio disabled v-model="checked1" value="1" type="error" label="错误"></fl-radio>
   </div>
   <div>
     <h3>单选框组</h3>
@@ -79,6 +84,7 @@ const value5 = ref('')
 const value6 = ref('')
 const value7 = ref('主要')
 const value8 = ref('错误')
+const checked1 = ref('1')
 
 const beforeChange1 = () => {
   return new Promise((resolve, reject) => {

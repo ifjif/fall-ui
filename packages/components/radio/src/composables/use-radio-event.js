@@ -18,7 +18,7 @@ function useRadioEvent(
         }).catch(() => {
           _loading.value = false;
         });
-      } else if (isSelected.value) {
+      } else if (!props.disabled && isSelected.value) {
         model.value = "";
         emit("change", false);
       }

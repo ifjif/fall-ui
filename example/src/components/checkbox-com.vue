@@ -13,6 +13,11 @@
     <fl-checkbox disabled type="success" label="成功" value="成功"></fl-checkbox>
     <fl-checkbox disabled type="warning" label="警告" value="警告"></fl-checkbox>
     <fl-checkbox disabled type="error" label="错误" value="错误"></fl-checkbox>
+    <fl-checkbox disabled v-model="checked1" label="主要" value="主要"></fl-checkbox>
+    <fl-checkbox disabled v-model="checked1" type="success" label="成功" value="成功"></fl-checkbox>
+    <fl-checkbox disabled v-model="checked1" type="warning" label="警告" value="警告"></fl-checkbox>
+    <fl-checkbox disabled v-model="checked1" type="error" label="错误" value="错误"></fl-checkbox>
+    <fl-checkbox disabled v-model="checked1" type="error" label="错误" value="错误"></fl-checkbox>
   </div>
   <div>
     <h3>多选框组</h3>
@@ -92,6 +97,7 @@ const value = ref([])
 const value2 = ref(['主要', '警告'])
 const value3 = ref(true)
 const value4 = ref([])
+const checked1 = ref(true)
 const changeEvent = (val) => {
   console.log('组change事件', val)
 }

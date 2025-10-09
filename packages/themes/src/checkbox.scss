@@ -50,6 +50,7 @@
     #{getVarName('checkbox', 'color')}:var(#{getVarName('checkbox', 'selected-color')});
     #{getVarName('checkbox', 'border-color')}:var(#{getVarName('checkbox', 'selected-bg-color')});
     #{getVarName('checkbox', 'text-color')}:var(#{getVarName('checkbox', 'selected-bg-color')});
+
   }
 
   @include s((disabled)) {
@@ -94,5 +95,9 @@
 @each $theme in $themes {
   @include m($theme) {
     @include set-component-var('checkbox', checkboxVar($theme), 'type');
+
+    @include s((selected)) {
+      @include set-component-var('checkbox', checkboxSelectedVar($theme), 'selected');
+    }
   }
 }

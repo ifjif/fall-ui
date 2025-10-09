@@ -79,5 +79,9 @@
 @each $theme in $themes {
   @include m($theme) {
     @include set-component-var('checkbox', checkboxVar($theme), 'type');
+
+    @include s((selected)) {
+      @include set-component-var('checkbox', checkboxSelectedVar($theme), 'selected');
+    }
   }
 }

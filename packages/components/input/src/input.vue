@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div :class="[ns.e('wrapper'), ns.is('prepend', isPrepend), ns.is('append', isFlppend)]">
+    <div :class="[ns.e('wrapper'), ns.is('prepend', isPrepend), ns.is('append', isAppend)]">
       <div v-if="isPrefix" :class="[ns.e('fix'), ns.e('prefix')]">
         <span v-if="prefix">{{ prefix }}</span>
         <FlIcon v-if="prefixIcon">
@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <div v-if="isFlppend" :class="[(append) && ns.e('pend'), ns.e('append'), ns.e('b-pend')]">
+    <div v-if="isAppend" :class="[(append) && ns.e('pend'), ns.e('append'), ns.e('b-pend')]">
       <slot name="append" />
       <div v-if="append">
         {{ append }}
@@ -93,7 +93,7 @@ const modelValue = defineModel()
 const slots = useSlots()
 const emit = defineEmits(['input', 'focus', 'blur', 'mouseenter', 'mouseleave', 'change', 'keyup', 'keydown'])
 
-const { _ref, isFocus, isHover, isPrefix, isSuffix, isPrepend, isFlppend,
+const { _ref, isFocus, isHover, isPrefix, isSuffix, isPrepend, isAppend,
   passwordIcon, clearIcon, typeControl, textLength, showCount, inputWidth,
   focusEvent, _blurEvent, viewPasswordEvent, clearEvent, mouseleaveEvent, mouseenterEvent,
   _changeEvent, keyupEvent, keydownEvent,

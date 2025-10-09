@@ -18,7 +18,7 @@
     'selected-color':('type': getVarName('color', 'white')),
     'disabled-bg-color':('default': getVarName('color', 'text', 'light-9')),
     'disabled-border-color':('default': getVarName('color', 'text', 'light-8')),
-    'disabled-text-color':('default': getVarName('color', 'text', 'light-5')),
+    'disabled-text-color':('default': getVarName('color', 'text', 'light-5'), 'selected':getVarName('color', $type, 'light-5')),
     'loading-bg-color':('type':getVarName('color', $type, 'light-5')),
     'loading-border-color':('type':getVarName('color', $type, 'light-5')),
     'loading-text-color':('type':getVarName('color', $type, 'light-5')),
@@ -27,4 +27,14 @@
   );
 
 @return $checkboxVar;
+}
+
+@function checkboxSelectedVar($type: '') {
+  $checkboxSelectedVar: (
+    'disabled-bg-color':('selected':getVarName('color', $type, 'light-5')),
+    'disabled-border-color':('selected':getVarName('color', $type, 'light-5')),
+    'disabled-text-color':('selected':getVarName('color', $type, 'light-5')),
+  );
+
+@return $checkboxSelectedVar;
 }
