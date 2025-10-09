@@ -4,8 +4,10 @@ import {
   FlCheckCircleFill,
   FlCloseCircle,
   FlCloseCircleFill,
+  FlCode,
   FlEye,
   FlEyeClose,
+  FlFileCopy,
   FlInfoCircle,
   FlInfoCircleFill,
   FlLoading,
@@ -28,6 +30,8 @@ const icons = [
   FlCloseCircleFill,
   FlInfoCircleFill,
   FlWarningCircleFill,
+  FlFileCopy,
+  FlCode,
 ];
 
 export default function install(app) {

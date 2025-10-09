@@ -37,7 +37,7 @@ const getPrevBottomOffset = (id) => {
     return 0;
   }
   const prev = instances[currentIdx - 1];
-  return prev.component.setupState.bottomOffset;
+  return prev.component.exposed.bottomOffset.value;
 };
 
 function message(params = {}) {

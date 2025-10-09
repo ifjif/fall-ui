@@ -49,7 +49,8 @@ const {
 } = useMessage(props)
 
 defineExpose({
-  close
+  close,
+  bottomOffset
 })
 
 onMounted(() => {

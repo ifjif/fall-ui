@@ -4,15 +4,17 @@ import {
   FlCheckCircleFill,
   FlCloseCircle,
   FlCloseCircleFill,
+  FlCode,
   FlEye,
   FlEyeClose,
+  FlFileCopy,
   FlInfoCircle,
   FlInfoCircleFill,
   FlLoading,
   FlSearch,
   FlWarningCircle,
   FlWarningCircleFill
-} from "./chunk-LWTMSZCB.js";
+} from "./chunk-RHSQRLEA.js";
 import "./chunk-ZZEIC257.js";
 import "./chunk-BUSYA2B4.js";
 
@@ -30,7 +32,9 @@ var icons = [
   FlCheckCircleFill,
   FlCloseCircleFill,
   FlInfoCircleFill,
-  FlWarningCircleFill
+  FlWarningCircleFill,
+  FlFileCopy,
+  FlCode
 ];
 function install(app) {
   icons.forEach((icon) => {

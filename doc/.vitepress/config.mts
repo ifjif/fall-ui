@@ -9,7 +9,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "主页", link: "/" },
-      { text: "组件", link: "/examples/" },
+      { text: "组件", link: "/examples/button" },
     ],
 
     sidebar: {
@@ -17,8 +17,21 @@ export default defineConfig({
         {
           text: "基础",
           items: [
-            { text: "Markdown Examples", link: "/markdown-examples" },
-            { text: "Runtime API Examples", link: "/api-examples" },
+            { text: "button", link: "/examples/button" },
+            { text: "checkbox", link: "/examples/checkbox" },
+            { text: "radio", link: "/examples/radio" },
+            { text: "input", link: "/examples/input" },
+            { text: "form", link: "/examples/form" },
+            { text: "container", link: "/examples/container" },
+            { text: "row", link: "/examples/row" },
+            { text: "message", link: "/examples/message" },
+            { text: "messagebox", link: "/examples/messagebox" },
+            { text: "drawer", link: "/examples/drawer" },
+            { text: "modal", link: "/examples/modal" },
+            { text: "icon", link: "/examples/icon" },
+            { text: "textarea", link: "/examples/textarea" },
+            { text: "mask", link: "/examples/mask" },
+            { text: "switch", link: "/examples/switch" },
           ],
         },
       ],

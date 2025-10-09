@@ -7,6 +7,8 @@ function createDemoContainer(md: any) {
   md.use(mkContainer, "demo", {
     render(tokens: Token[], idx: number) {
       if (tokens[idx].nesting === 1) {
+        const info = tokens[idx].info;
+        const description = info.replace(/^demo\s+/g, "");
         const nextTokens = tokens[idx + 1];
         let componentPath = nextTokens.type === "fence"
           ? nextTokens.content
@@ -23,6 +25,9 @@ function createDemoContainer(md: any) {
         }
 
         return `<Demo path="${componentPath}">
+                <template #description>
+                    ${description}
+                </template>
                 <template #source>
                   <pre><code class="language-html">${md.utils.escapeHtml(source)
           }</code></pre>

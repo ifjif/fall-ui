@@ -593,7 +593,7 @@ var FlCloseCircleFill = componentInstall(CloseCircleFill);
 
 // node_modules/fall-ui/es/icons/info-circle-fill/src/index.vue.mjs
 var _sfc_main12 = {
-  name: genericIconName()
+  name: genericIconName("InfoCircleFill")
 };
 var _hoisted_112 = {
   t: "1759490568790",
@@ -657,6 +657,93 @@ var WarningCircleFill = _export_sfc(_sfc_main13, [["render", _sfc_render13]]);
 // node_modules/fall-ui/es/icons/warning-circle-fill/index.mjs
 var FlWarningCircleFill = componentInstall(WarningCircleFill);
 
+// node_modules/fall-ui/es/icons/file-copy/src/index.vue.mjs
+var _sfc_main14 = {
+  name: genericIconName("FileCopy")
+};
+var _hoisted_114 = {
+  t: "1759912628352",
+  class: "icon",
+  viewBox: "0 0 1024 1024",
+  version: "1.1",
+  xmlns: "http://www.w3.org/2000/svg",
+  "p-id": "9545",
+  width: "200",
+  height: "200"
+};
+function _sfc_render14(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("svg", _hoisted_114, [..._cache[0] || (_cache[0] = [
+    createBaseVNode(
+      "path",
+      {
+        d: "M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32z",
+        "p-id": "9546"
+      },
+      null,
+      -1
+      /* CACHED */
+    ),
+    createBaseVNode(
+      "path",
+      {
+        d: "M704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z",
+        "p-id": "9547"
+      },
+      null,
+      -1
+      /* CACHED */
+    )
+  ])]);
+}
+var FileCopy = _export_sfc(_sfc_main14, [["render", _sfc_render14]]);
+
+// node_modules/fall-ui/es/icons/file-copy/index.mjs
+var FlFileCopy = componentInstall(FileCopy);
+
+// node_modules/fall-ui/es/icons/code/src/index.vue.mjs
+var _sfc_main15 = {
+  name: genericIconName("Code")
+};
+var _hoisted_115 = {
+  t: "1759913918475",
+  class: "icon",
+  viewBox: "0 0 1024 1024",
+  version: "1.1",
+  xmlns: "http://www.w3.org/2000/svg",
+  "p-id": "9693",
+  width: "200",
+  height: "200"
+};
+function _sfc_render15(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("svg", _hoisted_115, [..._cache[0] || (_cache[0] = [
+    createBaseVNode(
+      "path",
+      {
+        d: "M438.4 849.1l222.7-646.7c0.2-0.5 0.3-1.1 0.4-1.6L438.4 849.1z",
+        opacity: ".224",
+        "p-id": "9694"
+      },
+      null,
+      -1
+      /* CACHED */
+    ),
+    createBaseVNode(
+      "path",
+      {
+        d: "M661.2 168.7h-67.5c-3.4 0-6.5 2.2-7.6 5.4L354.7 846c-0.3 0.8-0.4 1.7-0.4 2.6 0 4.4 3.6 8 8 8h67.8c3.4 0 6.5-2.2 7.6-5.4l0.7-2.1 223.1-648.3 7.4-21.4c0.3-0.8 0.4-1.7 0.4-2.6-0.1-4.5-3.6-8.1-8.1-8.1zM954.6 502.1c-0.8-1-1.7-1.9-2.7-2.7l-219-171.3c-3.5-2.7-8.5-2.1-11.2 1.4-1.1 1.4-1.7 3.1-1.7 4.9v81.3c0 2.5 1.1 4.8 3.1 6.3l115 90-115 90c-1.9 1.5-3.1 3.8-3.1 6.3v81.3c0 4.4 3.6 8 8 8 1.8 0 3.5-0.6 4.9-1.7l219-171.3c6.9-5.4 8.2-15.5 2.7-22.5zM291.1 328.1l-219 171.3c-1 0.8-1.9 1.7-2.7 2.7-5.4 7-4.2 17 2.7 22.5l219 171.3c1.4 1.1 3.1 1.7 4.9 1.7 4.4 0 8-3.6 8-8v-81.3c0-2.5-1.1-4.8-3.1-6.3l-115-90 115-90c1.9-1.5 3.1-3.8 3.1-6.3v-81.3c0-1.8-0.6-3.5-1.7-4.9-2.7-3.5-7.7-4.1-11.2-1.4z",
+        "p-id": "9695"
+      },
+      null,
+      -1
+      /* CACHED */
+    )
+  ])]);
+}
+var Code = _export_sfc(_sfc_main15, [["render", _sfc_render15]]);
+
+// node_modules/fall-ui/es/icons/code/index.mjs
+var FlCode = componentInstall(Code);
+
 export {
   componentInstall,
   functionInstall,
@@ -674,6 +761,8 @@ export {
   FlCheckCircleFill,
   FlCloseCircleFill,
   FlInfoCircleFill,
-  FlWarningCircleFill
+  FlWarningCircleFill,
+  FlFileCopy,
+  FlCode
 };
-//# sourceMappingURL=chunk-LWTMSZCB.js.map
+//# sourceMappingURL=chunk-RHSQRLEA.js.map

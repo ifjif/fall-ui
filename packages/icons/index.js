@@ -11,5 +11,7 @@ export * from "./check-circle-fill";
 export * from "./close-circle-fill";
 export * from "./info-circle-fill";
 export * from "./warning-circle-fill";
+export * from "./file-copy";
+export * from "./code";
 // 组件类型 和 图标的 mapping
 export * from "./mappings";

@@ -1,7 +1,0 @@
-:::demo
-
-```html
-button/index
-```
-
-:::

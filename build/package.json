@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postBuild": "copy ../packages/README.md ../fall-ui/README.md & copy ../packages/package.json ../fall-ui/package.json"
+    "postbuild": "copy ../packages/README.md ../fall-ui/README.md & copy ../packages/package.json ../fall-ui/package.json"
   },
   "keywords": [],
   "author": "",

@@ -10,6 +10,6 @@
 import { genericIconName } from '@fall-ui/hooks'
 
 export default {
-  name: genericIconName()
+  name: genericIconName("InfoCircleFill")
 }
 </script>

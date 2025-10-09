@@ -1,24 +1,29 @@
 <template>
   <div>
-    <component :is="demo"></component>
-    <div>
-      <span @click="openEvent">{{ open ? '收起' : '展开' }}</span>
-      <span @click="copyEvent">复制</span>
+    <div :class="['com-description']">
+      <h2>
+        <slot name="description" />
+      </h2>
     </div>
-    <div v-show="open">
+    <component :is="demo"></component>
+    <div :class="['code-action']" @mouseleave="mouseleaveEvent">
+      <CodeAction @open="openEvent" @copy="copyEvent"></CodeAction>
+    </div>
+    <div v-if="open">
       <slot name="source" />
     </div>
   </div>
 </template>
 <script setup>
-import { computed, onMounted, ref, useSlots } from 'vue';
+import { computed, nextTick, ref, useSlots } from 'vue';
 import modules from '../component';
 import prism from 'prismjs'
 import 'prismjs/themes/prism-tomorrow.min.css'
 import { FlMessage } from 'fall-ui'
 
 const props = defineProps({
-  path: String
+  path: String,
+  codeAction: [String, Object]
 })
 
 const demo = computed(() => {
@@ -28,16 +33,25 @@ const demo = computed(() => {
 
 const slots = useSlots()
 
-const open = ref(true)
+const open = ref(false)
 
-const openEvent = computed(() => {
+const openEvent = () => {
   open.value = !open.value
-})
-const isCopySuccessfully = ref('')
+  nextTick(() => {
+    prism.highlightAll()
+  })
+}
+
+const copySuccessfully = ref('')
+
+const mouseleaveEvent = () => {
+  copySuccessfully.value = false
+}
 
 const copyEvent = async () => {
-
-  if (isCopySuccessfully.value) return
+  if (copySuccessfully.value) {
+    return
+  }
   const content = slots.source()[0]?.children[0]?.children
   if (!content) {
     return
@@ -45,12 +59,12 @@ const copyEvent = async () => {
   const text = typeof content === 'string' ? content : ''
 
   await navigator.clipboard.writeText(text)
-  isCopySuccessfully.value = true
-  FlMessage({ type: 'success', content: '复制成功', onClose: () => { } })
-  FlMessage.closeAll()
+  copySuccessfully.value = true
+  FlMessage({ type: 'success', content: '复制成功' })
 }
-
-onMounted(() => {
-  prism.highlightAll()
-})
 </script>
+<style scoped>
+.com-description {
+  padding: 10px 0;
+}
+</style>

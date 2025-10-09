@@ -12,7 +12,7 @@ import {
   functionInstall,
   useNamespace,
   useZIndex
-} from "./chunk-LWTMSZCB.js";
+} from "./chunk-RHSQRLEA.js";
 import {
   Fragment,
   Teleport,
@@ -3100,7 +3100,7 @@ var _sfc_main15 = {
     bg: Boolean,
     onClose: Function
   },
-  setup(__props) {
+  setup(__props, { expose: __expose }) {
     const ns25 = useNamespace("message");
     const props = __props;
     const {
@@ -3117,6 +3117,10 @@ var _sfc_main15 = {
       start,
       mouseenterEvent
     } = useMessage(props);
+    __expose({
+      close,
+      bottomOffset
+    });
     onMounted(() => {
       nextZIndex();
       show.value = true;
@@ -3211,7 +3215,7 @@ var getPrevBottomOffset = (id) => {
     return 0;
   }
   const prev = instances[currentIdx - 1];
-  return prev.component.setupState.bottomOffset;
+  return prev.component.exposed.bottomOffset.value;
 };
 function message(params = {}) {
   const instance = {};
@@ -3227,22 +3231,19 @@ function message(params = {}) {
     }
   });
   render(vNode, container);
+  body.appendChild(container.firstElementChild);
   const vm = vNode.component;
   Object.assign(instance, {
-    id: params.id,
     component: vm,
     handler: {
       close() {
-        console.log(vm.setupState);
-        console.log(typeof vm.setupState.close);
-        vm.setupState.close();
+        vm.exposed.close();
         render(null, container);
       }
     }
   });
   instances.push(instance);
   setId(instance);
-  body.appendChild(container.firstElementChild);
 }
 message.closeAll = closeAll;
 
@@ -4717,4 +4718,4 @@ export {
   FlButton,
   install
 };
-//# sourceMappingURL=chunk-SD3R7GCU.js.map
+//# sourceMappingURL=chunk-B44UDHGM.js.map
