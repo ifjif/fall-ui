@@ -7,6 +7,13 @@ input/index
 ```
 
 :::
+:::demo round属性 来设置输入框的 角为圆角
+
+```html
+input/round
+```
+
+:::
 :::demo placeholder属性，指定提示词
 
 ```html
@@ -67,6 +74,20 @@ input/prefix-suffix
 
 ```html
 input/prepend-append
+```
+
+:::
+:::demo 双向绑定
+
+```html
+input/v-model
+```
+
+:::
+:::demo 事件
+
+```html
+input/event
 ```
 
 :::

@@ -26,7 +26,7 @@ import {
   _sfc_main8,
   install,
   typeIcons
-} from "./chunk-B44UDHGM.js";
+} from "./chunk-CI474YYD.js";
 import {
   FlCheck,
   FlCheckCircle,

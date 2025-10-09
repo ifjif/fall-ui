@@ -1,55 +1,55 @@
 {
-  "hash": "ebd46011",
+  "hash": "43c651c6",
   "configHash": "f09cf14c",
-  "lockfileHash": "0cc1e4fd",
-  "browserHash": "12e1c68c",
+  "lockfileHash": "7204afd4",
+  "browserHash": "3aaa4305",
   "optimized": {
     "vue": {
       "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "e64fd2be",
+      "fileHash": "d16283c6",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "68f5d422",
+      "fileHash": "e750f23f",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "89f37333",
+      "fileHash": "3ac8432f",
       "needsInterop": false
     },
     "fall-ui/es/index.mjs": {
       "src": "../../../node_modules/fall-ui/es/index.mjs",
       "file": "fall-ui_es_index__mjs.js",
-      "fileHash": "69020459",
+      "fileHash": "d77803a1",
       "needsInterop": false
     },
     "fall-ui/es/icons.mjs": {
       "src": "../../../node_modules/fall-ui/es/icons.mjs",
       "file": "fall-ui_es_icons__mjs.js",
-      "fileHash": "28d570a1",
+      "fileHash": "9d995004",
       "needsInterop": false
     },
     "prismjs": {
       "src": "../../../node_modules/prismjs/prism.js",
       "file": "prismjs.js",
-      "fileHash": "7fae630c",
+      "fileHash": "252964a0",
       "needsInterop": true
     },
     "fall-ui": {
       "src": "../../../node_modules/fall-ui/es/index.mjs",
       "file": "fall-ui.js",
-      "fileHash": "7eafa874",
+      "fileHash": "5c595ab4",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-B44UDHGM": {
-      "file": "chunk-B44UDHGM.js"
+    "chunk-CI474YYD": {
+      "file": "chunk-CI474YYD.js"
     },
     "chunk-RHSQRLEA": {
       "file": "chunk-RHSQRLEA.js"

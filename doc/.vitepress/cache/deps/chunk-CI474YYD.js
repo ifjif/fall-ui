@@ -3464,7 +3464,7 @@ function useRadioEvent(props, emit, model, _loading, isSelected) {
         }).catch(() => {
           _loading.value = false;
         });
-      } else if (isSelected.value) {
+      } else if (!props.disabled && isSelected.value) {
         model.value = "";
         emit("change", false);
       }
@@ -4335,7 +4335,7 @@ var _sfc_main23 = Object.assign(__default__22, {
       isPrefix,
       isSuffix,
       isPrepend,
-      isFlppend,
+      isAppend,
       passwordIcon,
       clearIcon,
       typeControl,
@@ -4399,7 +4399,7 @@ var _sfc_main23 = Object.assign(__default__22, {
           createBaseVNode(
             "div",
             {
-              class: normalizeClass([unref(ns25).e("wrapper"), unref(ns25).is("prepend", unref(isPrepend)), unref(ns25).is("append", unref(isFlppend))])
+              class: normalizeClass([unref(ns25).e("wrapper"), unref(ns25).is("prepend", unref(isPrepend)), unref(ns25).is("append", unref(isAppend))])
             },
             [
               unref(isPrefix) ? (openBlock(), createElementBlock(
@@ -4513,7 +4513,7 @@ var _sfc_main23 = Object.assign(__default__22, {
             2
             /* CLASS */
           ),
-          unref(isFlppend) ? (openBlock(), createElementBlock(
+          unref(isAppend) ? (openBlock(), createElementBlock(
             "div",
             {
               key: 1,
@@ -4718,4 +4718,4 @@ export {
   FlButton,
   install
 };
-//# sourceMappingURL=chunk-B44UDHGM.js.map
+//# sourceMappingURL=chunk-CI474YYD.js.map
