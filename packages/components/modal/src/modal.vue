@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body">
-    <Mask v-show="visible" :maskClose="maskClose" @close="visible = false">
+    <Mask v-show="visible" :maskClose="maskClose" @close="visible = false" :style="[zIndexStyle]">
       <div :class="[ns.b()]">
         <div @click.stop :class="[ns.e('wrapper'), ns.is('fixedScreen', fixedScreen)]" :style="[widthStyle]">
           <div :class="[ns.e('header')]">
@@ -41,6 +41,7 @@ export default {
 import { FlMask as Mask, FlButton as Button } from '@fall-ui/components'
 import { useNamespace } from '@fall-ui/hooks';
 import { useModal } from './composables/use-modal'
+import { onMounted } from 'vue'
 const ns = useNamespace('modal')
 
 const visible = defineModel({ type: Boolean })
@@ -80,6 +81,10 @@ const props = defineProps({
 })
 const emit = defineEmits(['ok', 'cancel'])
 
-const { widthStyle, cancelEvent, confirmEvent } = useModal(props, emit, visible)
+const { widthStyle, zIndexStyle, nextZIndex, cancelEvent, confirmEvent } = useModal(props, emit, visible)
 
+onMounted(() => {
+  nextZIndex()
+  console.log(zIndexStyle.value)
+})
 </script>

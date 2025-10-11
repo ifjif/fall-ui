@@ -6,7 +6,7 @@ export function useDrawerState(props) {
   const uStyle = useStyle();
   const { zIndex, nextZIndex } = useZIndex()
   const zIndexStyle = computed(() => {
-    return uStyle.zIndex(zIndex)
+    return uStyle.zIndex(zIndex.value)
   })
   const widthStyle = computed(() => {
     return uStyle.width(props.width);

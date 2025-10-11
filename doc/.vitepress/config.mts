@@ -38,7 +38,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/vuejs/vitepress" },
+      { icon: "gitee", link: "https://gitee.com/zcfong/fall-ui" },
     ],
   },
   markdown: {

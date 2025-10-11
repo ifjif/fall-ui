@@ -2235,6 +2235,10 @@ function types2() {
 // node_modules/fall-ui/es/components/drawer/src/composables/use-drawer-state.mjs
 function useDrawerState(props) {
   const uStyle = useStyle();
+  const { zIndex, nextZIndex } = useZIndex();
+  const zIndexStyle = computed(() => {
+    return uStyle.zIndex(zIndex.value);
+  });
   const widthStyle = computed(() => {
     return uStyle.width(props.width);
   });
@@ -2257,7 +2261,9 @@ function useDrawerState(props) {
     widthStyle,
     heightStyle,
     isStringContent,
-    isVNodeContent
+    isVNodeContent,
+    zIndexStyle,
+    nextZIndex
   };
 }
 
@@ -2269,10 +2275,14 @@ function useDrawer(props, emit) {
     widthStyle,
     heightStyle,
     isStringContent,
-    isVNodeContent
+    isVNodeContent,
+    zIndexStyle,
+    nextZIndex
   } = useDrawerState(props);
   const { close, cancelEvent, confirmEvent } = useDrawerEvent(props, emit);
   return {
+    zIndexStyle,
+    nextZIndex,
     Button,
     Mask: Mask2,
     widthStyle,
@@ -2320,14 +2330,20 @@ var _sfc_main12 = Object.assign(__default__12, {
       heightStyle,
       isStringContent,
       isVNodeContent,
+      zIndexStyle,
+      nextZIndex,
       close,
       cancelEvent,
       confirmEvent
     } = useDrawer(props, emit);
+    onMounted(() => {
+      nextZIndex();
+    });
     return (_ctx, _cache) => {
       return openBlock(), createBlock(unref(Mask2), {
         onClose: unref(close),
-        maskClose: __props.maskClose
+        maskClose: __props.maskClose,
+        style: normalizeStyle([unref(zIndexStyle)])
       }, {
         default: withCtx(() => [
           createBaseVNode(
@@ -2444,7 +2460,7 @@ var _sfc_main12 = Object.assign(__default__12, {
         ]),
         _: 1
         /* STABLE */
-      }, 8, ["onClose", "maskClose"]);
+      }, 8, ["onClose", "maskClose", "style"]);
     };
   }
 });
@@ -2750,11 +2766,17 @@ var FlMessageBox = functionInstall(createMessageBox);
 // node_modules/fall-ui/es/components/modal/src/composables/use-modal-state.mjs
 function useModalState(props) {
   const uStyle = useStyle();
+  const { zIndex, nextZIndex } = useZIndex();
   const widthStyle = computed(() => {
     return uStyle.width(props.width);
   });
+  const zIndexStyle = computed(() => {
+    return uStyle.zIndex(zIndex.value);
+  });
   return {
-    widthStyle
+    widthStyle,
+    zIndexStyle,
+    nextZIndex
   };
 }
 
@@ -2775,10 +2797,16 @@ function useModalEvent(emit, visible) {
 
 // node_modules/fall-ui/es/components/modal/src/composables/use-modal.mjs
 function useModal(props, emit, visible) {
-  const { widthStyle } = useModalState(props);
+  const {
+    widthStyle,
+    zIndexStyle,
+    nextZIndex
+  } = useModalState(props);
   const { cancelEvent, confirmEvent } = useModalEvent(emit, visible);
   return {
     widthStyle,
+    zIndexStyle,
+    nextZIndex,
     cancelEvent,
     confirmEvent
   };
@@ -2832,12 +2860,17 @@ var _sfc_main14 = Object.assign(__default__14, {
     const visible = useModel(__props, "modelValue");
     const props = __props;
     const emit = __emit;
-    const { widthStyle, cancelEvent, confirmEvent } = useModal(props, emit, visible);
+    const { widthStyle, zIndexStyle, nextZIndex, cancelEvent, confirmEvent } = useModal(props, emit, visible);
+    onMounted(() => {
+      nextZIndex();
+      console.log(zIndexStyle.value);
+    });
     return (_ctx, _cache) => {
       return openBlock(), createBlock(Teleport, { to: "body" }, [
         withDirectives(createVNode(unref(FlMask), {
           maskClose: __props.maskClose,
-          onClose: _cache[2] || (_cache[2] = ($event) => visible.value = false)
+          onClose: _cache[2] || (_cache[2] = ($event) => visible.value = false),
+          style: normalizeStyle([unref(zIndexStyle)])
         }, {
           default: withCtx(() => [
             createBaseVNode(
@@ -2969,7 +3002,7 @@ var _sfc_main14 = Object.assign(__default__14, {
           ]),
           _: 3
           /* FORWARDED */
-        }, 8, ["maskClose"]), [
+        }, 8, ["maskClose", "style"]), [
           [vShow, visible.value]
         ])
       ]);
@@ -4718,4 +4751,4 @@ export {
   FlButton,
   install
 };
-//# sourceMappingURL=chunk-2AHX2KWK.js.map
+//# sourceMappingURL=chunk-QLULDW5C.js.map

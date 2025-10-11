@@ -1,6 +1,6 @@
 <template>
-  <Mask @close="close" :maskClose="maskClose">
-    <div :class="[ns.b()]" :style="{ zIndexStyle }">
+  <Mask @close="close" :maskClose="maskClose" :style="[zIndexStyle]">
+    <div :class="[ns.b()]">
       <div @click.stop :class="[ns.e('wrapper'), ns.m('placement', placement),
       ns.is('fixedScreen', fixedScreen)]" :style="[widthStyle, heightStyle]">
         <div :class="[ns.e('header')]">{{ title }}</div>
@@ -31,6 +31,7 @@ export default {
 <script setup>
 import { useNamespace } from '@fall-ui/hooks';
 import { useDrawer } from './composables/use-drawer'
+import { onMounted } from 'vue'
 const ns = useNamespace('drawer')
 
 const props = defineProps({

@@ -15,7 +15,7 @@ export function useDrawer(props, emit) {
   const { close, cancelEvent, confirmEvent } = useDrawerEvent(props, emit);
   return {
     zIndexStyle,
-    extZIndex,
+    nextZIndex,
     Button,
     Mask,
     widthStyle,
