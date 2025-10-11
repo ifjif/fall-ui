@@ -1,6 +1,6 @@
 <template>
   <Mask @close="close" :maskClose="maskClose">
-    <div :class="[ns.b()]">
+    <div :class="[ns.b()]" :style="{ zIndexStyle }">
       <div @click.stop :class="[ns.e('wrapper'), ns.m('placement', placement),
       ns.is('fixedScreen', fixedScreen)]" :style="[widthStyle, heightStyle]">
         <div :class="[ns.e('header')]">{{ title }}</div>
@@ -60,9 +60,14 @@ const {
   heightStyle,
   isStringContent,
   isVNodeContent,
+  zIndexStyle,
+  nextZIndex,
   close,
   cancelEvent,
   confirmEvent
 } = useDrawer(props, emit)
 
+onMounted(() => {
+  nextZIndex()
+})
 </script>

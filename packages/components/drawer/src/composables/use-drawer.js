@@ -9,9 +9,13 @@ export function useDrawer(props, emit) {
     heightStyle,
     isStringContent,
     isVNodeContent,
+    zIndexStyle,
+    nextZIndex
   } = useDrawerState(props);
   const { close, cancelEvent, confirmEvent } = useDrawerEvent(props, emit);
   return {
+    zIndexStyle,
+    extZIndex,
     Button,
     Mask,
     widthStyle,

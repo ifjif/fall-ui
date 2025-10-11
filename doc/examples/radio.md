@@ -1,5 +1,7 @@
 # radio组件
 
+## type属性
+
 :::demo type属性指定选中主题，可选：primary(默认)、success、warning、error
 
 ```html
@@ -7,6 +9,9 @@ radio/index
 ```
 
 :::
+
+## label属性
+
 :::demo label属性指定提示文本
 
 ```html
@@ -14,6 +19,9 @@ radio/label
 ```
 
 :::
+
+## value属性
+
 :::demo value属性指定值
 
 ```html
@@ -21,6 +29,9 @@ radio/value
 ```
 
 :::
+
+## disabled属性
+
 :::demo disabled属性禁用（无法选择）
 
 ```html
@@ -28,6 +39,9 @@ radio/disabled
 ```
 
 :::
+
+## 加载状态
+
 :::demo 加载状态
 
 ```html
@@ -35,6 +49,9 @@ radio/loading
 ```
 
 :::
+
+## 事件
+
 :::demo 事件
 
 ```html
@@ -42,6 +59,9 @@ radio/event
 ```
 
 :::
+
+## 单选框组
+
 :::demo 单选框组
 
 ```html
@@ -49,6 +69,9 @@ radio/group
 ```
 
 :::
+
+## 事件
+
 :::demo 单选框组事件
 
 ```html
@@ -56,6 +79,9 @@ radio/group-event
 ```
 
 :::
+
+## 尺寸
+
 :::demo 尺寸 size属性，可选值：small、default(默认不用设置) 、large
 
 ```html

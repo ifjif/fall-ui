@@ -1,5 +1,7 @@
 # checkbox组件
 
+## type属性
+
 :::demo 基础,拥有四种选中主题:primary、success、error、warning,默认为primary
 
 ```html
@@ -7,6 +9,9 @@ checkbox/index
 ```
 
 :::
+
+## label属性
+
 :::demo label属性，可为右边设置文本信息
 
 ```html
@@ -14,6 +19,9 @@ checkbox/label
 ```
 
 :::
+
+## value属性
+
 :::demo value属性，为多选框的值
 
 ```html
@@ -21,6 +29,9 @@ checkbox/value
 ```
 
 :::
+
+## disabled属性
+
 :::demo disabled属性,被禁用无法点击
 
 ```html
@@ -28,6 +39,9 @@ checkbox/disabled
 ```
 
 :::
+
+## 加载状态
+
 :::demo 加载状态
 
 ```html
@@ -35,6 +49,9 @@ checkbox/loading
 ```
 
 :::
+
+## 事件
+
 :::demo 事件
 
 ```html
@@ -42,6 +59,9 @@ checkbox/event
 ```
 
 :::
+
+## 多选框组
+
 :::demo 多选框组
 
 ```html
@@ -49,6 +69,9 @@ checkbox/checkbox-group
 ```
 
 :::
+
+## 多选框组 事件
+
 :::demo 多选框组 事件
 
 ```html
@@ -56,6 +79,9 @@ checkbox/checkbox-group-event
 ```
 
 :::
+
+## 全选框
+
 :::demo 全选框
 
 ```html
@@ -63,6 +89,9 @@ checkbox/checkbox-all
 ```
 
 :::
+
+## 事件
+
 :::demo 全选框事件
 
 ```html
@@ -70,6 +99,9 @@ checkbox/checkbox-all-event
 ```
 
 :::
+
+## 尺寸
+
 :::demo 尺寸 属性：size，有small、default(默认需要写)、large
 
 ```html

@@ -1,9 +1,9 @@
 <template>
   <div>
     <div :class="['com-description']">
-      <h2>
+      <h3>
         <slot name="description" />
-      </h2>
+      </h3>
     </div>
     <component :is="demo"></component>
     <div :class="['code-action']" @mouseleave="mouseleaveEvent">

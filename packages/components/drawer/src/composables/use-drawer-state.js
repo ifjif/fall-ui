@@ -1,9 +1,13 @@
-import { useStyle } from "@fall-ui/hooks";
+import { useStyle, useZIndex } from "@fall-ui/hooks";
 import { computed, isVNode } from "vue";
 import { FlButton as Button, FlMask as Mask } from "@fall-ui/components";
 import { types } from "@fall-ui/utils";
 export function useDrawerState(props) {
   const uStyle = useStyle();
+  const { zIndex, nextZIndex } = useZIndex()
+  const zIndexStyle = computed(() => {
+    return uStyle.zIndex(zIndex)
+  })
   const widthStyle = computed(() => {
     return uStyle.width(props.width);
   });
@@ -29,5 +33,7 @@ export function useDrawerState(props) {
     heightStyle,
     isStringContent,
     isVNodeContent,
+    zIndexStyle,
+    nextZIndex
   };
 }

@@ -335,7 +335,7 @@ var FORM_ITEM_KEY = Symbol("FORM_ITEM_KEY");
 
 // node_modules/fall-ui/es/components/input/src/composables/use-input-group.mjs
 function useInputGroup() {
-  const formItemKey = inject(FORM_ITEM_KEY, () => void 0);
+  const formItemKey = inject(FORM_ITEM_KEY, void 0);
   const isFormItem = formItemKey ? true : false;
   return {
     formItemKey,
@@ -4718,4 +4718,4 @@ export {
   FlButton,
   install
 };
-//# sourceMappingURL=chunk-CI474YYD.js.map
+//# sourceMappingURL=chunk-2AHX2KWK.js.map
