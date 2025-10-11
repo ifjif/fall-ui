@@ -49,6 +49,4 @@
   </div>
 </template>
 <script setup>
-import { FlCode } from '@fall-ui/icons';
-
 </script>
