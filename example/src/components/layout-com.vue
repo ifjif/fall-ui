@@ -8,10 +8,14 @@
       </fl-header>
       <fl-container class="gray">
         <fl-aside width="80" class="yellow">
-          <div style="height: 500px;">aside</div>
+          <fl-scrollbar>
+            <div style="height: 500px;">aside</div>
+          </fl-scrollbar>
         </fl-aside>
         <fl-main class="beige">
-          <div style="height: 500px;width: 1000px;">main</div>
+          <fl-scrollbar>
+            <div style="height: 500px;width: 1000px;">main</div>
+          </fl-scrollbar>
         </fl-main>
       </fl-container>
       <fl-footer height="60" class="skyblue">
@@ -23,14 +27,18 @@
     <h3>布局2</h3>
     <fl-container class="gray">
       <fl-aside width="80" class="yellow">
-        <div style="height: 500px;">aside</div>
+        <fl-scrollbar>
+          <div style="height: 500px;">aside</div>
+        </fl-scrollbar>
       </fl-aside>
       <fl-container class="gray">
         <fl-header height="60" class="skyblue">
           header
         </fl-header>
         <fl-main class="beige">
-          <div style="height: 500px;width: 1000px;">main</div>
+          <fl-scrollbar>
+            <div style="height: 500px;width: 1000px;">main</div>
+          </fl-scrollbar>
         </fl-main>
         <fl-footer height="60" class="skyblue">
           footer
@@ -46,15 +54,21 @@
       </fl-header>
       <fl-container class="gray">
         <fl-aside width="80" class="yellow">
-          <div style="height: 500px;">aside</div>
+          <fl-scrollbar>
+            <div style="height: 500px;">aside</div>
+          </fl-scrollbar>
         </fl-aside>
         <fl-container class="gray">
           <fl-container class="gray">
             <fl-main class="beige">
-              <div style="height: 500px;width: 1000px;">main</div>
+              <fl-scrollbar>
+                <div style="height: 500px;width: 1000px;">main</div>
+              </fl-scrollbar>
             </fl-main>
             <fl-aside width="80" class="yellow">
-              <div style="height: 500px;">aside</div>
+              <fl-scrollbar>
+                <div style="height: 500px;">aside</div>
+              </fl-scrollbar>
             </fl-aside>
           </fl-container>
           <fl-footer height="60" class="skyblue">
@@ -68,13 +82,19 @@
     <h3>布局4</h3>
     <fl-container class="gray">
       <fl-aside width="80" class="yellow">
-        <div style="height: 500px;">aside</div>
+        <fl-scrollbar>
+          <div style="height: 500px;">aside</div>
+        </fl-scrollbar>
       </fl-aside>
       <fl-main class="beige">
-        <div style="height: 500px;width: 1000px;">main</div>
+        <fl-scrollbar>
+          <div style="height: 500px;width: 1000px;">main</div>
+        </fl-scrollbar>
       </fl-main>
       <fl-aside width="80" class="yellow">
-        <div style="height: 500px;">aside</div>
+        <fl-scrollbar>
+          <div style="height: 500px;">aside</div>
+        </fl-scrollbar>
       </fl-aside>
     </fl-container>
   </div>

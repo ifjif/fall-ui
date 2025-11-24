@@ -24,6 +24,7 @@ import {
   FlRow,
   FlSwitch,
   FlTextarea,
+  FlScrollBar
 } from "@fall-ui/components";
 
 export default [
@@ -52,4 +53,5 @@ export default [
   FlDrawer,
   FlForm,
   FlFormItem,
+  FlScrollBar,
 ];

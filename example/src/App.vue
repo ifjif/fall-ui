@@ -14,6 +14,7 @@ import SwitchCom from './components/switch-com.vue';
 import TextareaCom from './components/textarea-com.vue';
 import DrawerCom from './components/drawer-com.vue';
 import FormCom from './components/form-com.vue';
+import ScrollbarCom from './components/scrollbar-com.vue';
 
 </script>
 
@@ -33,4 +34,5 @@ import FormCom from './components/form-com.vue';
   <MessageboxCom></MessageboxCom>
   <DrawerCom></DrawerCom>
   <FormCom></FormCom>
+  <ScrollbarCom></ScrollbarCom>
 </template>
