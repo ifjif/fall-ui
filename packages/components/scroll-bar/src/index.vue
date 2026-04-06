@@ -1,6 +1,7 @@
 <template>
   <div @mouseenter="showScrollBar = true" @mouseleave="showScrollBar = false" ref="containerRef" :class="[ns.b()]"
-    @scroll.passive="onScroll" @wheel="onWheel" :style="[width, height]">
+    @scroll.passive="onScroll" @wheel="onWheel" :style="[width, height]" @touchstart="onTouchStart"
+    @touchmove.passive="onTouchMove" @touchend="onTouchEnd">
     <div ref="contentRef">
       <slot />
     </div>
@@ -61,7 +62,10 @@ const {
   onScroll,
   scrollDown,
   scrollRight,
-  onWheel
+  onWheel,
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd
 } = useScrollBar(props, emit)
 
 onMounted(() => {

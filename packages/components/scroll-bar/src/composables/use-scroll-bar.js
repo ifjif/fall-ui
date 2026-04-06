@@ -42,7 +42,10 @@ export function useScrollBar(props, emit) {
     onScroll,
     scrollDown,
     scrollRight,
-    onWheel
+    onWheel,
+    onTouchStart,
+    onTouchMove,
+    onTouchEnd
   } = useScrollBarEvent(
     emit,
     containerRef,
@@ -84,6 +87,9 @@ export function useScrollBar(props, emit) {
     scrollDown,
     scrollRight,
     onWheel,
+    onTouchStart,
+    onTouchMove,
+    onTouchEnd
   }
 }
 

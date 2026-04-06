@@ -166,6 +166,100 @@ export function useScrollBarEvent(
     //进行水平滚动
     //containerRef.value.scrollLeft += delta
   }
+
+  // 新增 用于判断方向的变量
+  let isScrolling
+
+  // 统一触摸开始处理
+  const onTouchStart = (e) => {
+    e.preventDefault()
+    // 记录手指按下的初始位置
+    startX.value = e.changedTouches[0].clientX
+    startY.value = e.changedTouches[0].clientY
+
+    // 重置方向判断
+    isScrolling = undefined
+  }
+  // 统一的触摸移动处理
+  const onTouchMove = (e) => {
+    e.preventDefault()
+    const currentX = e.changedTouches[0].clientX
+    const currentY = e.changedTouches[0].clientY
+    // 计算位移差
+    const diffX = currentX - startX.value
+    const diffY = currentY - startY.value
+
+    // 判断方向，看谁滑动的距离大
+    if (isScrolling === undefined) {
+      // 阈值：滑动超过 2px 才开始判断方向，防止微小手抖
+      if (Math.abs(diffX) > 2 || math.abs(diffY) > 2) {
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+          isScrolling = 'horizontal' // 判定为水平
+          verticalScroll = false
+
+          dragging.value = true
+          // 计算已走的 left
+          const trackRate = trackWidth.value / maxScrollLeft.value
+          const currentScrollLeft = containerRef.value.scrollLeft
+          trackHorizontalOffset.value = currentScrollLeft * trackRate
+        } else {
+          isScrolling = 'vertical' // 判断为垂直
+          verticalScroll = true
+
+          dragging.value = true
+          const trackRate = trackHeight.value / maxScrollTop.value
+          const currentScrollTop = containerRef.value.scrollTop
+          //当前已走的 轨道
+          trackOffset.value = currentScrollTop * trackRate
+        }
+      }
+
+    }
+
+    // 阻止页面滚动（只有判定出方向后才阻止）
+    if (isScrolling) {
+      // 执行滚动逻辑
+      if (isScrolling == 'vertical') {
+        onDragMoveTouch(currentY)
+      } else {
+        onDragMoveHorizontalTouch(currentX)
+      }
+    }
+  }
+
+  const onTouchEnd = () => {
+    isScrolling = undefined
+    dragging.value = false
+  }
+
+  // --- 修改点 2: 新增触摸移动逻辑 (垂直) ---
+  // 往上，内容应该往下 (也就是滚动条往下)
+  const onDragMoveTouch = (clientY) => {
+    // 复用边界检查逻辑 (参考原有的 onDragMove)
+    if (topY && topY >= clientY) { topY = 0 }
+    else if (topPosition) { if (!topY) topY = clientY; return }
+
+    if (endY && endY <= clientY) { endY = 0 }
+    else if (endPosition) { if (!endY) endY = clientY; return }
+
+    const offset = startY.value - clientY + trackOffset.value
+    const offsetRate = offset / trackHeight.value
+    containerRef.value.scrollTop = maxScrollTop.value * offsetRate
+  }
+  // --- 修改点 3: 新增触摸移动逻辑 (水平) ---
+  // 往左，右边内容 (也就是滚动条往右)
+  const onDragMoveHorizontalTouch = (clientX) => {
+    if (rightX && rightX <= clientX) { rightX = 0 }
+    else if (rightPostion) { if (!rightX) rightX = clientX; return }
+
+    if (leftX && leftX >= clientX) { leftX = 0 }
+    else if (leftPosition) { if (!leftX) leftX = clientX; return }
+
+    const offset = startX.value - clientX + trackHorizontalOffset.value
+    const offsetRate = offset / trackWidth.value
+    containerRef.value.scrollLeft = maxScrollLeft.value * offsetRate
+  }
+
   return {
     onScroll,
     scrollDown,
@@ -173,5 +267,8 @@ export function useScrollBarEvent(
     onDragEnd,
     scrollRight,
     onWheel,
+    onTouchStart,
+    onTouchMove,
+    onTouchEnd
   }
 }
