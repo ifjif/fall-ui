@@ -19,6 +19,7 @@
   }
 
   @include e(thumb) {
+    z-index: 1000;
     position: absolute;
     right: 0;
     width: 10px;
@@ -32,6 +33,7 @@
   }
 
   @include e(thumbb) {
+    z-index: 1000;
     position: absolute;
     bottom: 0;
     height: 10px;

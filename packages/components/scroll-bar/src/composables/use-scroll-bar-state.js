@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 export function useScrollBarState() {
   const containerRef = ref(null)
   const contentRef = ref(null)
+  const innerContentRef = ref(null)
 
   const existScrollBar = ref(false)
   const existHorizontalScrollBar = ref(false)
@@ -67,9 +68,16 @@ export function useScrollBarState() {
   const thumbLeft = computed(() => {
     return maxThumbLeft.value * thumbLeftRate.value + scrollLeft.value
   })
+
+
+  const topPosition = ref(true)
+  const endPosition = ref(false)
+  const leftPosition = ref(true)
+  const rightPostion = ref(false)
   return {
     containerRef,
     contentRef,
+    innerContentRef,
     existScrollBar,
     showScrollBar,
     thumbHeightRatio,
@@ -91,6 +99,10 @@ export function useScrollBarState() {
     scrollLeft,
     thumbLeftRate,
     trackHorizontalOffset,
-    existHorizontalScrollBar
+    existHorizontalScrollBar,
+    topPosition,
+    endPosition,
+    leftPosition,
+    rightPostion,
   }
 }

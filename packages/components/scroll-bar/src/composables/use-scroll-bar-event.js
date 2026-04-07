@@ -1,6 +1,7 @@
 export function useScrollBarEvent(
   emit,
   containerRef,
+  existScrollBar,
   scrollTop,
   thumbTopRate,
   dragging,
@@ -13,17 +14,16 @@ export function useScrollBarEvent(
   maxScrollLeft,
   scrollLeft,
   thumbLeftRate,
-  trackHorizontalOffset
+  trackHorizontalOffset,
+  topPosition,
+  endPosition,
+  leftPosition,
+  rightPostion,
 ) {
   let endY = 0
   let topY = 0
   let leftX = 0
   let rightX = 0
-
-  let topPosition = true
-  let endPosition = false
-  let leftPosition = true
-  let rightPostion = false
 
   //是否是垂直滚动
   let verticalScroll = false
@@ -31,38 +31,40 @@ export function useScrollBarEvent(
   const onScroll = (e) => {
     const el = e.target
     scrollTop.value = el.scrollTop
-    thumbTopRate.value = el.scrollTop / maxScrollTop.value
+    // 不存在 滚动条时，maxScrollTop为 0
+    thumbTopRate.value = maxScrollTop.value === 0 ? 0 : el.scrollTop / maxScrollTop.value
     scrollLeft.value = el.scrollLeft
-    thumbLeftRate.value = el.scrollLeft / maxScrollLeft.value
+    // 不存在 滚动条时，maxScrollLeft为 0
+    thumbLeftRate.value = maxScrollLeft.value === 0 ? 0 : el.scrollLeft / maxScrollLeft.value
     //console.log(able, el.scrollTop, el.clientHeight, el.scrollHeight)
     if (verticalScroll) { // 垂直方向的判断
       const able = el.scrollHeight - (el.scrollTop + el.clientHeight)
       if (able < 1) {
-        endPosition = true
+        endPosition.value = true
         emit('bottom')
         return
       }
       if (scrollTop.value === 0) {
-        topPosition = true
+        topPosition.value = true
         emit('top')
         return
       }
-      endPosition = false
-      topPosition = false
+      endPosition.value = false
+      topPosition.value = false
     } else {            // 水平方向的判断
       const able = el.scrollWidth - (el.scrollLeft + el.clientWidth)
       if (able < 1) {
-        rightPostion = true
+        rightPostion.value = true
         emit('right')
         return
       }
       if (scrollLeft.value === 0) {
-        leftPosition = true
+        leftPosition.value = true
         emit('left')
         return
       }
-      rightPostion = false
-      leftPosition = false
+      rightPostion.value = false
+      leftPosition.value = false
     }
   }
 
@@ -83,7 +85,7 @@ export function useScrollBarEvent(
     //到达顶部不计算
     if (topY && topY <= e.clientY) {
       topY = 0
-    } else if (topPosition) {
+    } else if (topPosition.value) {
       if (!topY) {
         topY = e.clientY
       }
@@ -92,7 +94,7 @@ export function useScrollBarEvent(
     //到达底部不计算
     if (endY && endY >= e.clientY) {
       endY = 0
-    } else if (endPosition) {
+    } else if (endPosition.value) {
       if (!endY) {
         endY = e.clientY
       }
@@ -134,7 +136,7 @@ export function useScrollBarEvent(
     //到达右边不计算
     if (rightX && rightX >= e.clientX) {
       rightX = 0
-    } else if (rightPostion) {
+    } else if (rightPostion.value) {
       if (!rightX) {
         rightX = e.clientX
       }
@@ -144,7 +146,7 @@ export function useScrollBarEvent(
     //到达左边不计算
     if (leftX && leftX <= e.clientX) {
       leftX = 0
-    } else if (leftPosition) {
+    } else if (leftPosition.value) {
       if (!leftX) {
         leftX = e.clientX
       }
@@ -158,11 +160,17 @@ export function useScrollBarEvent(
 
   //鼠标滚轮事件
   const onWheel = (e) => {
+    if (!existScrollBar.value) return
     verticalScroll = true
     e.preventDefault()
     const delta = e.deltaY
-    //进行垂直滚动
-    containerRef.value.scrollTop += delta
+    //进行垂直滚动, 如果不加限制，容器如果没有固定高度，它会滚动并增加容器高度
+    //if (delta > 0 && endPosition) return
+    let newScrollTop = containerRef.value.scrollTop + delta
+    if (newScrollTop > maxScrollTop.value) {
+      newScrollTop = maxScrollTop.value
+    }
+    containerRef.value.scrollTop = newScrollTop
     //进行水平滚动
     //containerRef.value.scrollLeft += delta
   }
@@ -237,10 +245,10 @@ export function useScrollBarEvent(
   const onDragMoveTouch = (clientY) => {
     // 复用边界检查逻辑 (参考原有的 onDragMove)
     if (topY && topY >= clientY) { topY = 0 }
-    else if (topPosition) { if (!topY) topY = clientY; return }
+    else if (topPosition.value) { if (!topY) topY = clientY; return }
 
     if (endY && endY <= clientY) { endY = 0 }
-    else if (endPosition) { if (!endY) endY = clientY; return }
+    else if (endPosition.value) { if (!endY) endY = clientY; return }
 
     const offset = startY.value - clientY + trackOffset.value
     const offsetRate = offset / trackHeight.value
@@ -250,10 +258,10 @@ export function useScrollBarEvent(
   // 往左，右边内容 (也就是滚动条往右)
   const onDragMoveHorizontalTouch = (clientX) => {
     if (rightX && rightX <= clientX) { rightX = 0 }
-    else if (rightPostion) { if (!rightX) rightX = clientX; return }
+    else if (rightPostion.value) { if (!rightX) rightX = clientX; return }
 
     if (leftX && leftX >= clientX) { leftX = 0 }
-    else if (leftPosition) { if (!leftX) leftX = clientX; return }
+    else if (leftPosition.value) { if (!leftX) leftX = clientX; return }
 
     const offset = startX.value - clientX + trackHorizontalOffset.value
     const offsetRate = offset / trackWidth.value
