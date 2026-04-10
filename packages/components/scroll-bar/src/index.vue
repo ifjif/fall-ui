@@ -4,6 +4,7 @@
     @touchmove.passive="onTouchMove" @touchend="onTouchEnd">
     <div ref="contentRef">
       <div style="display: inline-block;" ref="innerContentRef">
+        <!-- slot为宽高跟随内容增长 -->
         <slot />
       </div>
     </div>
@@ -25,7 +26,7 @@ export default {
 }
 </script>
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { useScrollBar } from './composables/use-scroll-bar';
 import { useNamespace } from '@fall-ui/hooks';
 const ns = useNamespace('scrollbar')
@@ -40,7 +41,7 @@ const props = defineProps({
     default: () => 0
   }
 })
-const emit = defineEmits(['top', 'bottom', 'left', 'right'])
+const emit = defineEmits(['top', 'bottom', 'left', 'right', 'resize', 'scroll'])
 
 const {
   containerRef,
@@ -84,6 +85,21 @@ const scrollToTop = () => {
     endPosition.value = false
   })
 }
+const scrollTopInc = (x) => {
+  nextTick(() => {
+    let newTop = containerRef.value.scrollTop + x
+    if (newTop <= 0) {
+      newTop = 0
+      topPosition.value = true
+      endPosition.value = false
+    } else if (newTop >= maxScrollTop.value) {
+      newTop = maxScrollTop.value
+      topPosition.value = false
+      endPosition.value = true
+    }
+    containerRef.value.scrollTop = newTop
+  })
+}
 /*
  * changed 表示 是否是容器大小改变完成后 再进行 滚动到底部
  * true 滚动到改变后的真实的底部
@@ -107,6 +123,22 @@ const scrollToLeft = () => {
   })
 }
 
+const scrollLeftInc = (x) => {
+  nextTick(() => {
+    let newLeft = containerRef.value.scrollLeft + x
+    if (newLeft <= 0) {
+      newLeft = 0
+      leftPosition.value = true
+      rightPostion.value = false
+    } else if (newLeft >= maxScrollLeft.value) {
+      newLeft = maxScrollLeft.value
+      leftPosition.value = false
+      rightPostion.value = true
+    }
+    containerRef.value.scrollLeft = newLeft
+  })
+}
+
 const scrollToRight = (changed) => {
   nextTick(() => {
     if (changed && !resizeChange.value) scrollToRightForChange = scrollToRight
@@ -120,43 +152,80 @@ let scrollToRightForChange = null
 
 defineExpose({
   scrollToTop,
+  scrollTopInc,
   scrollToBottom,
   scrollToLeft,
+  scrollLeftInc,
   scrollToRight
 })
+let resizeObserver = null
+let rafId = null // 用于取消动画帧
+const handleResize = (entries) => {
+  //取消上一帧的渲染任务，防止高频触发导致的性能浪费
+  if (rafId) cancelAnimationFrame(rafId)
 
-onMounted(() => {
-  const resizeObserver = new ResizeObserver((entries) => {
+  rafId = requestAnimationFrame(() => {
     resizeChange.value = true
+    const container = containerRef.value
+    const innerContainer = innerContentRef.value
+    if (!container || !innerContainer) return
+
     const height = entries[0].contentRect.height
-    existScrollBar.value = height > containerRef.value.clientHeight
-    existHorizontalScrollBar.value = containerRef.value.scrollWidth > containerRef.value.clientWidth
+    const clientHeight = container.clientHeight
+    const clientWidth = container.clientWidth
+    const scrollHeight = innerContainer.scrollHeight
+    const scrollWidth = innerContainer.scrollWidth
+
+    existScrollBar.value = height > clientHeight
+    existHorizontalScrollBar.value = scrollWidth > clientWidth
+
     if (existScrollBar.value) {
-      maxScrollTop.value = containerRef.value.scrollHeight - containerRef.value.clientHeight
+      maxScrollTop.value = scrollHeight - clientHeight
       // 判断 当前 scrollTop是否合法
-      if (containerRef.value.scrollTop > maxScrollTop.value) {
-        containerRef.value.scrollTop = maxScrollTop.value
+      if (containerRef.scrollTop > maxScrollTop.value) {
+        containerRef.scrollTop = maxScrollTop.value
       }
+
+      // 更改状态
+      if (containerRef.scrollTop === 0) {
+        topPosition.value = true
+        endPosition.value = false
+      } else if (containerRef.scrollTop === maxScrollTop.value) {
+        topPosition.value = false
+        endPosition.value = true
+      } else {
+        topPosition.value = false
+        endPosition.value = false
+      }
+
     } else {
       topPosition.value = false
       endPosition.value = false
       maxScrollTop.value = 0
     }
     if (existHorizontalScrollBar.value) {
-      maxScrollLeft.value = containerRef.value.scrollWidth - containerRef.value.clientWidth
+      maxScrollLeft.value = scrollWidth - clientWidth
       // 判断 当前 scrollLeft是否合法
-      if (containerRef.value.scrollLeft > maxScrollLeft.value) {
-        containerRef.value.scrollLeft = maxScrollLeft.value
+      if (containerRef.scrollLeft > maxScrollLeft.value) {
+        containerRef.scrollLeft = maxScrollLeft.value
+      }
+
+      // 更改状态
+      if (containerRef.scrollLeft === 0) {
+        leftPosition.value = true
+        rightPostion.value = false
+      } else if (containerRef.scrollLeft === maxScrollLeft.value) {
+        leftPosition.value = false
+        rightPostion.value = true
+      } else {
+        leftPosition.value = false
+        rightPostion.value = false
       }
     } else {
       leftPosition.value = false
       rightPostion.value = false
       maxScrollLeft.value = 0
     }
-    const clientHeight = containerRef.value.clientHeight
-    const scrollHeight = containerRef.value.scrollHeight
-    const clientWidth = containerRef.value.clientWidth
-    const scrollWidth = containerRef.value.scrollWidth
 
     thumbHeightRatio.value = Math.max(clientHeight / scrollHeight, 0.1) //最小10%
     thumbWidthRate.value = Math.max(clientWidth / scrollWidth, 0.1) // 最小10%
@@ -166,8 +235,29 @@ onMounted(() => {
     resizeChange.value = false
     scrollToBottomForChange = null
     scrollToRightForChange = null
+
+    // 触发滚动，重新计算 thumb top rate
+    scrollTopInc(-1)
+    // 触发滚动，从新计算 thumb left rate
+    scrollLeftInc(-1)
+    /*
+      * 注意 表格中的 absolute td 会 增加 scrollWidth
+      * 而clientWidth 不会有 absolute td的 width
+      * 随内容增长的容器 请使用 
+      *       clientWidth 来 充当 scrollWidth
+      *       clientHeight 来 充当 scrollHeight
+      */
+    emit('resize', { clientWidth, clientHeight, scrollWidth: innerContainer.clientWidth, scrollHeight: innerContainer.clientHeight })
   })
+}
+onMounted(() => {
+  resizeObserver = new ResizeObserver(handleResize)
   resizeObserver.observe(contentRef.value)
   resizeObserver.observe(innerContentRef.value)
+})
+
+onUnmounted(() => {
+  if (resizeObserver) resizeObserver.disconnect()
+  if (rafId) cancelAnimationFrame(rafId)
 })
 </script>

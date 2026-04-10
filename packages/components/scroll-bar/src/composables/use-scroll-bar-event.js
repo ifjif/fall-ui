@@ -31,11 +31,13 @@ export function useScrollBarEvent(
   const onScroll = (e) => {
     const el = e.target
     scrollTop.value = el.scrollTop
+
     // 不存在 滚动条时，maxScrollTop为 0
     thumbTopRate.value = maxScrollTop.value === 0 ? 0 : el.scrollTop / maxScrollTop.value
     scrollLeft.value = el.scrollLeft
     // 不存在 滚动条时，maxScrollLeft为 0
     thumbLeftRate.value = maxScrollLeft.value === 0 ? 0 : el.scrollLeft / maxScrollLeft.value
+    emit('scroll', { top: scrollTop.value, left: scrollLeft.value })
     //console.log(able, el.scrollTop, el.clientHeight, el.scrollHeight)
     if (verticalScroll) { // 垂直方向的判断
       const able = el.scrollHeight - (el.scrollTop + el.clientHeight)
