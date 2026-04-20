@@ -25,7 +25,18 @@ import {
   FlSwitch,
   FlTextarea,
   FlScrollBar,
-  FlTable
+  FlTable,
+  FlLoading,
+  FlPopover,
+  FlPopconfirm,
+  FlPagination,
+  FlMenu,
+  FlMenuItem,
+  FlTree,
+  FlBreadcrumb,
+  FlBreadcrumbItem,
+  FlTabs,
+  FlTabPane,
 } from "@fall-ui/components";
 
 export default [
@@ -56,4 +67,15 @@ export default [
   FlFormItem,
   FlScrollBar,
   FlTable,
+  FlLoading,
+  FlPopover,
+  FlPopconfirm,
+  FlPagination,
+  FlMenu,
+  FlMenuItem,
+  FlTree,
+  FlBreadcrumb,
+  FlBreadcrumbItem,
+  FlTabs,
+  FlTabPane,
 ];

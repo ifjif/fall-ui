@@ -1,0 +1,29 @@
+@use './common/namespace.scss' as *;
+
+@include b('loading') {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include e('spinner') {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    border: 3px solid #ebeef5;
+    border-top-color: #409eff;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

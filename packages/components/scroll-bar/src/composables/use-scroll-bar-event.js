@@ -1,7 +1,9 @@
 export function useScrollBarEvent(
+  props,
   emit,
   containerRef,
   existScrollBar,
+  existHorizontalScrollBar,
   scrollTop,
   thumbTopRate,
   dragging,
@@ -162,7 +164,8 @@ export function useScrollBarEvent(
 
   //鼠标滚轮事件
   const onWheel = (e) => {
-    if (!existScrollBar.value) return
+    if (props.wheel === 'y' && !existScrollBar.value) return
+    if (props.wheel === 'x' && !existHorizontalScrollBar.value) return
     verticalScroll = true
     e.preventDefault()
     const delta = e.deltaY
@@ -172,9 +175,13 @@ export function useScrollBarEvent(
     if (newScrollTop > maxScrollTop.value) {
       newScrollTop = maxScrollTop.value
     }
-    containerRef.value.scrollTop = newScrollTop
-    //进行水平滚动
-    //containerRef.value.scrollLeft += delta
+
+    if (props.wheel === 'y') {
+      containerRef.value.scrollTop = newScrollTop
+    } else {
+      //进行水平滚动
+      containerRef.value.scrollLeft += delta
+    }
   }
 
   // 新增 用于判断方向的变量

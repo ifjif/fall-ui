@@ -7,7 +7,10 @@ import "../../packages/themes/src/index.scss";
 //import ChenUIcon from "../../fall-ui/es/icons.mjs";
 //import "../../fall-ui/themes/index.css";
 
+import router from "./router";
+
 const app = createApp(App);
 app.use(ChengUI);
 app.use(ChenUIcon);
+app.use(router)
 app.mount("#app");

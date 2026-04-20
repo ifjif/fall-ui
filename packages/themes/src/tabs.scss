@@ -1,0 +1,359 @@
+@use './common/namespace.scss' as *;
+
+@include b(tabs) {
+  display: flex;
+  flex-direction: column;
+
+  //==============================================type card
+  @include m(type, card) {
+
+    //==============================================type card bottom
+    @include m-conn(position, bottom) {
+
+      @include e(nav-item, false) {
+        border-radius: 0 0 4px 4px;
+
+        @include s((active)) {
+          border-bottom: 1px solid #e4e7ed;
+          border-top: none;
+        }
+      }
+
+      @include e(new-btn, false) {
+        bottom: 0;
+        top: -1px;
+        border-radius: 0 0 4px 4px;
+      }
+    }
+
+    //==============================================type card bottom end
+
+    //==============================================type card left
+    @include m-conn(position, left) {
+
+      @include e(header, false) {
+        @include s((add)) {
+          padding-bottom: 40px;
+        }
+      }
+
+      @include e(nav-wrapper, false) {
+        padding-right: 0;
+      }
+
+      @include e(nav-item, false) {
+        margin-right: 0;
+        margin-bottom: 2px;
+        border-radius: 4px 0 0 4px;
+
+        @include s((active)) {
+          border-bottom: 1px solid #e4e7ed;
+          border-right: none;
+        }
+      }
+
+      @include e(new-btn, false) {
+        width: 100%;
+        bottom: 0;
+        right: -1px;
+        border-radius: 4px 0 0 4px;
+      }
+
+    }
+
+    //==============================================type card left end
+
+    //==============================================type card right
+    @include m-conn(position, right) {
+
+      @include e(header, false) {
+        @include s((add)) {
+          padding-bottom: 40px;
+        }
+      }
+
+      @include e(nav-wrapper, false) {
+        padding-left: 0;
+      }
+
+      @include e(nav-item, false) {
+        margin-left: 0;
+        margin-bottom: 2px;
+        border-radius: 0 4px 4px 0;
+
+        @include s((active)) {
+          border-bottom: 1px solid #e4e7ed;
+          border-left: none;
+        }
+      }
+
+      @include e(new-btn, false) {
+        width: 100%;
+        bottom: 0;
+        left: -1px;
+        border-radius: 0 4px 4px 0;
+      }
+
+    }
+
+    //==============================================type card right end
+
+    @include e(nav, false) {
+      gap: 0;
+    }
+
+    @include e(nav-item, false) {
+      margin-right: 2px;
+      padding: 0 20px;
+      border: 1px solid #e4e7ed;
+      border-radius: 4px 4px 0 0;
+      background-color: #f5f7fa;
+
+      @include s((active)) {
+        border-bottom: none;
+        background-color: #fff;
+      }
+    }
+  }
+
+  //==============================================type card end
+
+  //==============================================type border-card
+  @include m(type, border-card) {
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+
+    //==============================================type border-card bottom
+    @include m-conn(position, bottom) {
+      @include e(nav-item, false) {
+
+        @include s((active)) {
+          border-bottom-color: #dcdfe6;
+          border-top: none;
+        }
+      }
+    }
+
+    //==============================================type border-card bottom end
+
+    //==============================================type border-card left
+    @include m-conn(position, left) {
+      @include e(nav-wrapper, false) {
+        padding-right: 0;
+      }
+
+      @include e(nav-item, false) {
+        margin-bottom: -1px;
+
+        @include s((active)) {
+          border-right: none;
+          border-bottom: 1px solid #e4e7ed;
+        }
+      }
+
+    }
+
+    //==============================================type border-card left end
+
+    //==============================================type border-card right
+    @include m-conn(position, right) {
+      @include e(nav-wrapper, false) {
+        padding-left: 0;
+      }
+
+      @include e(nav-item, false) {
+        margin-bottom: -1px;
+
+        @include s((active)) {
+          border-left: none;
+          border-bottom: 1px solid #e4e7ed;
+        }
+      }
+
+    }
+
+    //==============================================type border-card right end
+
+
+    @include e(nav, false) {
+      gap: 0;
+    }
+
+    @include e(header, false) {
+      background-color: #f5f7fa;
+    }
+
+    @include e(nav-item, false) {
+      padding: 0 20px;
+      border: 1px solid transparent;
+      margin: 0 -1px 0;
+
+      @include s((active)) {
+        background-color: #fff;
+        border-top-color: #dcdfe6;
+        border-right-color: #dcdfe6;
+        border-left-color: #dcdfe6;
+      }
+    }
+  }
+
+  //==============================================type border-card end
+
+  //============================================== bottom
+  @include m(position, bottom) {
+    @include e(header, false) {
+      order: 2;
+      border-bottom: none;
+      border-top: 1px solid #e4e7ed;
+      margin: 15px 0 0;
+    }
+
+    @include e(nav-wrapper) {
+      position: relative;
+      margin-bottom: 0;
+      margin-top: -1px;
+    }
+
+    @include e(content, false) {
+      order: 1;
+    }
+  }
+
+  //============================================== bottom end
+
+  //============================================== left
+  @include m(position, left) {
+    flex-direction: row;
+
+    @include e(header, false) {
+      border-bottom: none;
+      border-right: 1px solid #e4e7ed;
+      margin: 0;
+    }
+
+    @include e(nav-wrapper, false) {
+      margin-bottom: 0;
+      margin-right: -1px;
+      padding-right: 8px;
+    }
+
+    @include e(nav, false) {
+      display: flex;
+      flex-direction: column;
+    }
+
+  }
+
+  //============================================== left end
+
+  //============================================== right
+  @include m(position, right) {
+    flex-direction: row;
+
+    @include e(header, false) {
+      order: 2;
+      border-bottom: none;
+      border-left: 1px solid #e4e7ed;
+      margin: 0;
+    }
+
+    @include e(nav-wrapper, false) {
+      margin-bottom: 0;
+      margin-left: -1px;
+      padding-left: 8px;
+    }
+
+    @include e(content, false) {
+      order: 1;
+    }
+
+    @include e(nav, false) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  //============================================== right end
+
+  @include e(header) {
+    padding: 0;
+    margin: 0 0 15px;
+    border-bottom: 1px solid #e4e7ed;
+    position: relative;
+  }
+
+  @include e(new-btn) {
+    box-sizing: border-box;
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    border: 1px solid #dcdfe6;
+    height: 38px;
+    width: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    color: #909399;
+    background: #f5f7fa;
+    bottom: -1px;
+
+    &:hover {
+      color: #409eff;
+    }
+  }
+
+  @include e(nav-wrapper) {
+    position: relative;
+    margin-bottom: -1px;
+  }
+
+  @include e(nav) {
+    white-space: nowrap;
+    display: flex;
+    gap: 20px;
+  }
+
+  @include e(nav-item) {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    color: #303133;
+    height: 40px;
+    line-height: 40px;
+    transition: all .3s;
+    cursor: pointer;
+
+    &:hover {
+      color: #409eff;
+    }
+
+    @include s((active)) {
+      color: #409eff;
+    }
+
+    @include s((disabled)) {
+      color: #909399;
+      cursor: not-allowed;
+    }
+  }
+
+  @include e(close) {
+    margin-left: 8px;
+    color: #909399;
+  }
+
+  @include e(active-bar) {
+    position: absolute;
+    background-color: #409eff;
+    z-index: 1;
+    // 贝赛尔曲线 让动画更自然
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  @include e(content) {
+    flex: 1;
+  }
+}

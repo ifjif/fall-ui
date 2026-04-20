@@ -16,6 +16,15 @@ import DrawerCom from './components/drawer-com.vue';
 import FormCom from './components/form-com.vue';
 import ScrollbarCom from './components/scrollbar-com.vue';
 import TableCom from './components/table-com.vue';
+import LoadingCom from './components/loading-com.vue';
+import DirectiveTooltipCom from './components/directive-tooltip-com.vue';
+import PopoverCom from './components/popover-com.vue';
+import PopconfirmCom from './components/popconfirm-com.vue';
+import PaginationCom from './components/pagination-com.vue';
+import MenuCom from './components/menu-com.vue';
+import TreeCom from './components/tree-com.vue';
+import BreadcrumbCom from './components/breadcrumb-com.vue';
+import TabsCom from './components/tabs-com.vue';
 
 </script>
 
@@ -36,5 +45,14 @@ import TableCom from './components/table-com.vue';
   <DrawerCom></DrawerCom>
   <FormCom></FormCom>
   <ScrollbarCom></ScrollbarCom>
+  <LoadingCom></LoadingCom>
+  <DirectiveTooltipCom></DirectiveTooltipCom>
+  <PopoverCom></PopoverCom>
+  <PopconfirmCom></PopconfirmCom>
+  <PaginationCom></PaginationCom>
+  <BreadcrumbCom></BreadcrumbCom>
+  <TabsCom></TabsCom>
+  <MenuCom></MenuCom>
+  <TreeCom></TreeCom>
   <TableCom></TableCom>
 </template>

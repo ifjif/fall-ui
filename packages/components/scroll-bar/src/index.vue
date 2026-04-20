@@ -39,6 +39,13 @@ const props = defineProps({
   height: {
     type: [Number, String],
     default: () => 0
+  },
+  wheel: {
+    type: String,
+    validator(m) {
+      return ['x', 'y'].includes(m)
+    },
+    default: 'y'
   }
 })
 const emit = defineEmits(['top', 'bottom', 'left', 'right', 'resize', 'scroll'])
@@ -173,8 +180,8 @@ const handleResize = (entries) => {
     const height = entries[0].contentRect.height
     const clientHeight = container.clientHeight
     const clientWidth = container.clientWidth
-    const scrollHeight = innerContainer.scrollHeight
-    const scrollWidth = innerContainer.scrollWidth
+    const scrollHeight = innerContainer.clientHeight
+    const scrollWidth = innerContainer.clientWidth
 
     existScrollBar.value = height > clientHeight
     existHorizontalScrollBar.value = scrollWidth > clientWidth
@@ -247,7 +254,7 @@ const handleResize = (entries) => {
       *       clientWidth 来 充当 scrollWidth
       *       clientHeight 来 充当 scrollHeight
       */
-    emit('resize', { clientWidth, clientHeight, scrollWidth: innerContainer.clientWidth, scrollHeight: innerContainer.clientHeight })
+    emit('resize', { clientWidth, clientHeight, scrollWidth, scrollHeight })
   })
 }
 onMounted(() => {

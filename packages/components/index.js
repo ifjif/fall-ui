@@ -16,3 +16,12 @@ export * from "./drawer";
 export * from "./form";
 export * from "./scroll-bar"
 export * from "./table"
+export * from "./loading"
+export * from './raw-popover'
+export * from './popover'
+export * from './popconfirm'
+export * from './pagination'
+export * from './menu'
+export * from './tree'
+export * from './breadcrumb'
+export * from './tabs'

@@ -11,6 +11,9 @@ importers:
       '@fall-ui/components':
         specifier: workspace:^
         version: link:packages/components
+      '@fall-ui/directives':
+        specifier: workspace:^
+        version: link:packages/directives
       '@fall-ui/hooks':
         specifier: workspace:^
         version: link:packages/hooks
@@ -28,6 +31,8 @@ importers:
         version: 4.2.5
 
   packages/components: {}
+
+  packages/directives: {}
 
   packages/hooks: {}
 

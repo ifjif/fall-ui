@@ -1,16 +1,16 @@
 <template>
-  <div style="margin-top:100px;">
-  </div>
-
+  <h3>table</h3>
   <div style="height: 500px;display: flex;flex-direction: column;">
     <fl-container class="gray">
       <fl-header height="60" class="skyblue">
         header
       </fl-header>
       <fl-container class="gray">
-        <fl-aside width="80" class="yellow">
+        <fl-aside class="yellow">
           <fl-scrollbar>
-            <div style="height: 500px;">aside</div>
+            <div style="width:80px;height: 500px;">
+              aside
+            </div>
           </fl-scrollbar>
         </fl-aside>
         <fl-container class="gray">
@@ -19,14 +19,9 @@
 
               <!-- 注意：跨页全选需要完整数据或知道总数 -->
               <fl-table :data="fullData" :columns="visibleColumns" v-model:selection="selectedRows" :loading="loading"
-                :pagination="{
-                  currentPage: page,
-                  pageSize: size,
-                  total: total,
-                  onPageChange: handlePageChange,
-                  onSizeChange: handleSizeChange
-                }" border stripe row-key="id" enableResize :remote-sort="false" :remote-filter="false"
-                @sort-change="handleSortChange" @filter-change="handleFilterChange">
+                :pagination="pagination" border stripe row-key="id" enableResize :remote-sort="false"
+                :remote-filter="false" @page-change="handlePageChange" @sort-change="handleSortChange"
+                @filter-change="handleFilterChange">
                 <template #operation="{ row }">
                   <button @click="edit(row)">编辑</button>
                 </template>
@@ -34,7 +29,7 @@
                 <template #toolbar>
                   <button type="primary" @click="exportExcel">导出 Excel</button>
                   <input type="checkbox" v-model="selectAllAcrossPages" @change="handleSelectAllAcross">
-                  跨页全选（共 {{ total }} 条）
+                  跨页全选（共 {{ pagination.total }} 条）
                   </input>
                   <button @click="showColumnPanel = true">列设置</button>
                 </template>
@@ -73,12 +68,14 @@
 
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
 const loading = ref(false)
-const page = ref(1)
-const size = ref(10)
-const total = ref(20)
+const pagination = reactive({
+  currentPage: 1,
+  pageSize: 10,
+  total: 20
+})
 const selectAllAcrossPages = ref(false)
 const sortState = ref({ prop: null, order: null })
 const filterState = ref({})
@@ -88,7 +85,7 @@ const showColumnPanel = ref(false)
 const handleSelectAllAcross = (e) => {
   if (e.target.checked) {
     // 标记“全选所有”，不实际加载全部数据
-    selectedRows.value = [{ __all_selected__: true, total: total.value }]
+    selectedRows.value = [{ __all_selected__: true, total: pagination.total }]
   } else {
     selectedRows.value = []
   }
@@ -96,20 +93,13 @@ const handleSelectAllAcross = (e) => {
 
 const selectedRows = ref([])
 
-const handlePageChange = (newPage) => {
-  page.value = newPage
+const handlePageChange = ({ page, pageSize }) => {
+  console.log(page, pageSize)
+  console.log(pagination.currentPage, pagination.pageSize)
   // 模拟加载
   loading.value = true
   setTimeout(() => {
-    loading.value = false
-  }, 500)
-}
-const handleSizeChange = (newSize) => {
-  size.value = newSize
-  page.value = 1
-  // 模拟加载
-  loading.value = true
-  setTimeout(() => {
+    fetchData()
     loading.value = false
   }, 500)
 }
@@ -118,8 +108,8 @@ const edit = (row) => console.log('Edit', row)
 
 // 模拟从 API 获取当前页数据
 const fetchData = () => {
-  const start = (page.value - 1) * size.value
-  const mockData = Array.from({ length: size.value }, (_, i) => ({
+  const start = (pagination.currentPage - 1) * pagination.pageSize
+  const mockData = Array.from({ length: pagination.pageSize }, (_, i) => ({
     id: start + i + 1,
     name: `用户${start + i + 1}`,
     age: 20 + (i % 10),
@@ -137,15 +127,15 @@ const fetchData2 = async () => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      page: page.value,
-      size: size.value,
+      page: pagination.currentPage,
+      size: pagination.pageSize,
       sortProp: sortState.value.prop,
       sortOrder: sortState.value.order,
       filters: filterState.value
     })
   }).then(r => r.json())
   currentData.value = res.data
-  total.value = res.total
+  pagination.total = res.total
   loading.value = false
 }
 
@@ -165,7 +155,22 @@ const handleFilterChange = (filters) => {
 }
 // 如果前端有全量数据，否则需要后端配合
 const fullData = ref([
-  { id: 1, name: '张三', status: 'active', age: 12, gener: '男', city: '深圳', email: 'xxxx', birthday: '2023', phone: '1111111111', },
+  {
+    id: 1, name: '张三', status: 'active', age: 12, gener: '男', city: '深圳', email: 'xxxx', birthday: '2023', phone: '1111111111',
+    children: [
+      {
+        id: 12, name: '李四', status: 'active', age: 13, gener: '男', city: '上海', email: 'shanghan', birthday: '2024', phone: '2222222222',
+        children: [
+          { id: 121, name: '李四', status: 'active', age: 13, gener: '男', city: '上海', email: 'shanghan', birthday: '2024', phone: '2222222222', },
+          { id: 122, name: '张三', status: 'active', age: 12, gener: '男', city: '深圳', email: 'xxxx', birthday: '2023', phone: '1111111111', },
+          { id: 123, name: '李四', status: 'active', age: 13, gener: '男', city: '上海', email: 'shanghan', birthday: '2024', phone: '2222222222', },
+          { id: 124, name: '张三', status: 'active', age: 12, gener: '男', city: '深圳', email: 'xxxx', birthday: '2023', phone: '1111111111', },
+        ]
+      },
+      { id: 13, name: '张三', status: 'active', age: 12, gener: '男', city: '深圳', email: 'xxxx', birthday: '2023', phone: '1111111111', },
+      { id: 14, name: '李四', status: 'active', age: 13, gener: '男', city: '上海', email: 'shanghan', birthday: '2024', phone: '2222222222', },
+    ]
+  },
   { id: 2, name: '李四', status: 'active', age: 13, gener: '男', city: '上海', email: 'shanghan', birthday: '2024', phone: '2222222222', },
   { id: 3, name: '张三', status: 'active', age: 12, gener: '男', city: '深圳', email: 'xxxx', birthday: '2023', phone: '1111111111', },
   { id: 4, name: '李四', status: 'active', age: 13, gener: '男', city: '上海', email: 'shanghan', birthday: '2024', phone: '2222222222', },

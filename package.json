@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@fall-ui/components": "workspace:^",
+    "@fall-ui/directives": "workspace:^",
     "@fall-ui/hooks": "workspace:^",
     "@fall-ui/icons": "workspace:^",
     "@fall-ui/themes": "workspace:^",

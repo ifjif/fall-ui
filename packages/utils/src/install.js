@@ -13,4 +13,12 @@ const functionInstall = (com, name) => {
   return com;
 };
 
-export { componentInstall, functionInstall };
+const directiveInstall = (directive, name) => {
+  directive.install = (app) => {
+    app.directive(name, directive)
+  }
+
+  return directive
+}
+
+export { componentInstall, functionInstall, directiveInstall };

@@ -1,0 +1,6 @@
+@use './common/namespace.scss' as *;
+
+@include b(tab-pane) {
+  box-sizing: border-box;
+  padding: 15px;
+}

@@ -58,6 +58,7 @@
                 <div v-if="props.enableResize && col.resizable === true" class="resize-handle"
                   @mousedown="startResize($event, col)">
                 </div>
+
               </th>
 
               <!-- 占位-->
@@ -67,11 +68,27 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(row, index) in paginatedData" :key="getRowKey(row)"
+            <tr v-for="(row, index) in flatData" :key="getRowKey(row)"
               :class="{ 'selected-row': selectionMap.has(getRowKey(row)) }" style="position:relative;">
-              <td v-for="col in visibleColumns" :key="col.prop || col.type" :style="getCellStyle(col)"
+              <td v-for="col in visibleColumns" :key="col.prop || col.type" :style="getCellStyle(col, row.__level)"
                 :class="{ 'is-fixed-left': col.fixed === 'left', 'is-fixed-right': col.fixed === 'right' }">
                 <div class="cell">
+                  <!-- 树形控件，是树形节点 且 仅在第一列显示 -->
+                  <template v-if="col === visibleColumns[0] && isTreeData">
+                    <!-- 有叶子节点才显示展开图标 -->
+                    <span v-if="!row.__isLeaf" class="tree-toggle"
+                      :class="{ 'tree-toggle-expanded': expandedKeys.has(row[props.rowKey]) }"
+                      @click.stop="toggleExpand(row)">
+                      {{ expandedKeys.has(row[props.rowKey]) ? '▼' : '▶' }}
+                    </span>
+                    <!-- 无叶子节点，保持占位空间 -->
+                    <span v-else class="tree-toggle"></span>
+
+                    <!--缩进占位 -->
+                    <span v-if="col === visibleColumns[0]" class="tree-indent"
+                      :style="{ width: `${row.__level * props.indexSize}px` }"></span>
+                  </template>
+
                   <template v-if="col.type === 'selection'">
                     <input type="checkbox" :checked="selectionMap.has(getRowKey(row))"
                       @change="toggleRowSelection(row, $event)" />
@@ -204,6 +221,13 @@ const props = defineProps({
   enableResize: { type: Boolean, default: false }, // 列宽拖拽
   remoteSort: { type: Boolean, default: false },
   remoteFilter: { type: Boolean, default: false },
+  // 树形数据
+  treeProps: {
+    type: Object,
+    default: () => ({ children: 'children', hasChildren: null })
+  },
+  expandAll: Boolean,
+  indentSize: { type: Number, default: 8 }
 })
 
 const emit = defineEmits([
@@ -488,6 +512,76 @@ const emitSizeChange = (onSizeChange, size) => {
   onSizeChange(size)
 }
 
+// 树形状态
+const flatData = ref([]) // 扁平化后的数据（用于渲染）
+const expandedKeys = ref(new Set()) // 已展开的节点key的集合
+// 辅助函数，判断是否是树形节点
+const isTreeData = computed(() => {
+  return paginatedData.value.some(item =>
+    item[props.treeProps.children] && Array.isArray(item[props.treeProps.children])
+  )
+})
+// 计算扁平化数据
+const flattenTree = (data, level = 0, parent = null) => {
+  const result = []
+  data.forEach(item => {
+    const key = item[props.rowKey]
+    const isExpanded = expandedKeys.value.has(key)
+
+    // 添加当前节点
+    result.push({
+      ...item,
+      __level: level,
+      __isLeaf: !item[props.treeProps.children]?.length,
+      __parent: parent
+    })
+
+    // 递归添加子节点
+    if (item[props.treeProps.children] && isExpanded) {
+      result.push(...flattenTree(
+        item[props.treeProps.children],
+        level + 1,
+        item
+      ))
+    }
+  })
+
+  return result
+}
+
+//切换节点展开状态
+const toggleExpand = (row) => {
+  const key = row[props.rowKey]
+  if (expandedKeys.value.has(key)) {
+    expandedKeys.value.delete(key)
+  } else {
+    expandedKeys.value.add(key)
+  }
+
+  // 重新计算扁平数据
+  flatData.value = flattenTree(paginatedData.value)
+}
+
+// 监听分页数据的变化
+watch(() => paginatedData.value, (newData) => {
+  flatData.value = flattenTree(newData)
+
+  // 处理 expandAll
+  if (props.expandAll) {
+    const collectKeys = (items) => {
+      items.forEach(item => {
+        if (item[props.treeProps.children]?.length) {
+          expandedKeys.value.add(item[props.rowKey])
+          collectKeys(item[props.treeProps.children])
+        }
+      })
+    }
+
+    collectKeys(newData)
+  }
+}, { immediate: true })
+
+
 //==================
 // 多选 & 全选 & 跨页全选
 //==================
@@ -629,11 +723,16 @@ const getHeaderCellStyle = (col) => {
   return style
 }
 
-const getCellStyle = (col) => {
+const getCellStyle = (col, level = 0) => {
   const style = {
     width: col.width,
     minWidth: col.minWidth || col.width,
     textAlign: col.align || 'left',
+  }
+
+  // 树形节点，第一列需要特殊处理
+  if (isTreeData.value && col === props.columns[0]) {
+    style.paddingLeft = `${8 * (level + 1)}px`
   }
 
   if (col.fixed === 'left') {
@@ -1034,5 +1133,41 @@ watch(() => props.columns, () => {
 
 .filter-footer .confirm-btn:hover {
   background: #4096ff;
+}
+
+/* 树形控件样式 */
+.tree-toggle {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  margin-right: 4px;
+  color: #000;
+}
+
+.tree-toggle-expanded {
+  color: #1890ff;
+}
+
+.tree-indent {
+  display: inline-block;
+  height: 1px;
+}
+
+.expanded-row {
+  background-color: #f0f9ff;
+  /* 可选：高亮展开行 */
+}
+
+/* 暗色主题适配 */
+.dark-theme .tree-toggle {
+  color: #69c0ff;
+}
+
+.dark-theme .expanded-row {
+  background-color: #1a3a5f;
 }
 </style>

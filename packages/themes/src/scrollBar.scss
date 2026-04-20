@@ -3,9 +3,9 @@
 @include b(scrollbar) {
   position: relative;
   overflow: hidden;
-  scrollbar-width: none;
   width: 100%;
   height: 100%;
+  scrollbar-width: none;
   /* 🔑 关键：告诉浏览器允许水平和垂直滑动手势 */
   /* 如果不加这个，浏览器可能会拦截水平滑动，导致只能垂直滚 */
   touch-action: pan-x pan-y;

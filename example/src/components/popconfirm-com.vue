@@ -1,0 +1,161 @@
+<template>
+  <h3>popconfirm</h3>
+  <div style="margin-left:200px">
+    <fl-popconfirm @cancel="topCancel" @confirm="topConfirm">
+      <template #reference>
+        <button>top</button>
+      </template>
+      top
+    </fl-popconfirm>
+    <fl-popconfirm placement="top-start" @cancel="topStartCancel" @confirm="topStartConfirm">
+      <template #reference>
+        <button>top-start</button>
+      </template>
+      top-start
+    </fl-popconfirm>
+    <fl-popconfirm placement="top-end" @cancel="topEndCancel" @confirm="topEndConfirm">
+      <template #reference>
+        <button>top-end</button>
+      </template>
+      top-end
+    </fl-popconfirm>
+  </div>
+  <div style="margin-left:250px">
+    <fl-popconfirm placement="bottom" @cancel="bottomCancel" @confirm="bottomConfirm">
+      <template #reference>
+        <button>bottom</button>
+      </template>
+      bottom
+    </fl-popconfirm>
+    <fl-popconfirm placement="bottom-start" @cancel="bottomStartCancel" @confirm="bottomStartConfirm">
+      <template #reference>
+        <button>bottom-start</button>
+      </template>
+      bottom-start
+    </fl-popconfirm>
+    <fl-popconfirm placement="bottom-end" @cancel="bottomEndCancel" @confirm="bottomEndConfirm">
+      <template #reference>
+        <button>bottom-end</button>
+      </template>
+      bottom-end
+    </fl-popconfirm>
+  </div>
+  <div style="margin-left:300px">
+    <fl-popconfirm placement="left" @cancel="leftCancel" @confirm="leftConfirm">
+      <template #reference>
+        <button>left</button>
+      </template>
+      left
+    </fl-popconfirm>
+    <fl-popconfirm placement="left-start" @cancel="leftStartCancel" @confirm="leftStartConfirm">
+      <template #reference>
+        <button>left-start</button>
+      </template>
+      left-start
+    </fl-popconfirm>
+    <fl-popconfirm placement="left-end" @cancel="leftEndCancel" @confirm="leftEndConfirm">
+      <template #reference>
+        <button>left-end</button>
+      </template>
+      left-end
+    </fl-popconfirm>
+  </div>
+  <div style="margin-left:350px">
+    <fl-popconfirm tag="button" placement="right" @cancel="rightCancel" @confirm="rightConfirm">
+      <template #reference>
+        right
+      </template>
+      right
+    </fl-popconfirm>
+    <fl-popconfirm tag="button" placement="right-start" @cancel="rightStartCancel" @confirm="rightStartConfirm">
+      <template #reference>
+        right-start
+      </template>
+      right-start
+    </fl-popconfirm>
+    <fl-popconfirm tag="button" placement="right-end" @cancel="rightEndCancel" @confirm="rightEndConfirm">
+      <template #reference>
+        right-end
+      </template>
+      right-end
+    </fl-popconfirm>
+  </div>
+</template>
+
+<script setup>
+const topCancel = () => {
+  console.log('top-cancel')
+}
+const topConfirm = () => {
+  console.log('top-confirm')
+}
+const topStartCancel = () => {
+  console.log('top-start-cancel')
+}
+const topStartConfirm = () => {
+  console.log('top-start-confirm')
+}
+const topEndCancel = () => {
+  console.log("top-end-cancel")
+}
+const topEndConfirm = () => {
+  console.log('top-end-confirm')
+}
+
+const bottomCancel = () => {
+  console.log('bottom-cancel')
+}
+const bottomConfirm = () => {
+  console.log('bottom-confirm')
+}
+const bottomStartCancel = () => {
+  console.log('bottom-start-cancel')
+}
+const bottomStartConfirm = () => {
+  console.log('bottom-start-confirm')
+}
+const bottomEndCancel = () => {
+  console.log('bottom-end-cancel')
+}
+const bottomEndConfirm = () => {
+  console.log('bottom-end-confirm')
+}
+
+const leftCancel = () => {
+  console.log('left-cancel')
+}
+const leftConfirm = () => {
+  console.log('left-confirm')
+}
+const leftStartCancel = () => {
+  console.log('left-start-cancel')
+}
+const leftStartConfirm = () => {
+  console.log('left-start-confirm')
+}
+const leftEndCancel = () => {
+  console.log('left-end-cancel')
+}
+const leftEndConfirm = () => {
+  console.log('left-end-confirm')
+}
+
+const rightCancel = () => {
+  console.log('right-cancel')
+}
+const rightConfirm = () => {
+  console.log('right-confirm')
+}
+const rightStartCancel = () => {
+  console.log('right-start-cancel')
+}
+const rightStartConfirm = () => {
+  console.log('right-start-confirm')
+}
+const rightEndCancel = () => {
+  console.log('right-end-cancel')
+}
+const rightEndConfirm = () => {
+  console.log('right-end-confirm')
+}
+</script>

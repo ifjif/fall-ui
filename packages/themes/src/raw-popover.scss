@@ -1,0 +1,176 @@
+@use "./common/namespace.scss" as *;
+
+@include b(raw-popover) {
+  position: absolute;
+  z-index: 2000;
+  padding: 12px;
+  background-color: #fff;
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 1.5;
+  color: #606266;
+
+  @include e(title) {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #303133;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  @include e(content) {
+    line-height: 1.5;
+  }
+
+  @include e(arrow) {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px;
+    border-color: transparent;
+  }
+
+  @include m(position, top) {
+    @include e(arrow, false) {
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-top-color: #fff;
+    }
+  }
+
+  @include m(position, top-start) {
+    @include e(arrow, false) {
+      bottom: -12px;
+      transform: translateX(-50%);
+      border-top-color: #fff;
+      left: var(--arrow-x); // tooltip所在的元素中的 对象设置 xx.style.setProperty('--arrow-x', xx)
+    }
+  }
+
+  @include m(position, top-end) {
+    @include e(arrow, false) {
+      bottom: -12px;
+      transform: translateX(-50%);
+      border-top-color: #fff;
+      left: var(--arrow-x);
+    }
+  }
+
+  @include m(position, bottom) {
+    @include e(arrow, false) {
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom-color: #fff;
+    }
+  }
+
+  @include m(position, bottom-start) {
+    @include e(arrow, false) {
+      top: -12px;
+      transform: translateX(-50%);
+      border-bottom-color: #fff;
+      left: var(--arrow-x);
+    }
+  }
+
+  @include m(position, bottom-end) {
+    @include e(arrow, false) {
+      top: -12px;
+      transform: translateX(-50%);
+      border-bottom-color: #fff;
+      left: var(--arrow-x);
+    }
+  }
+
+  @include m(position, left) {
+    @include e(arrow, false) {
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-left-color: #fff;
+    }
+  }
+
+  @include m(position, left-start) {
+    @include e(arrow, false) {
+      right: -12px;
+      transform: translateY(-50%);
+      border-left-color: #fff;
+      top: var(--arrow-y);
+    }
+  }
+
+  @include m(position, left-end) {
+    @include e(arrow, false) {
+      right: -12px;
+      transform: translateY(-50%);
+      border-left-color: #fff;
+      top: var(--arrow-y);
+    }
+  }
+
+  @include m(position, right) {
+    @include e(arrow, false) {
+      left: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-right-color: #fff;
+    }
+  }
+
+  @include m(position, right-start) {
+    @include e(arrow, false) {
+      left: -12px;
+      transform: translateY(-50%);
+      border-right-color: #fff;
+      top: var(--arrow-y);
+    }
+  }
+
+  @include m(position, right-end) {
+    @include e(arrow, false) {
+      left: -12px;
+      transform: translateY(-50%);
+      border-right-color: #fff;
+      top: var(--arrow-y);
+    }
+  }
+
+  @include e(footer) {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f0f0;
+
+    button {
+      padding: 4px 10px;
+      border: 1px solid #d9d9d9;
+      background: white;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #f5f5f5;
+    }
+
+    @include e(confirm-btn, false) {
+      background-color: #1890ff;
+      color: white;
+      border-color: #1890ff;
+
+      &:hover {
+        background: #4096ff;
+      }
+    }
+  }
+}

@@ -52,9 +52,11 @@ export function useScrollBar(props, emit) {
     onTouchMove,
     onTouchEnd
   } = useScrollBarEvent(
+    props,
     emit,
     containerRef,
     existScrollBar,
+    existHorizontalScrollBar,
     scrollTop,
     thumbTopRate,
     dragging,

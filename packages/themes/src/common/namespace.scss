@@ -101,6 +101,22 @@ $b: null;
   }
 }
 
+@mixin m-conn($m, $v: '') {
+  $m-value: '';
+
+  @if($v !='') {
+    $m-value: $modifier-value-connect + $v;
+  }
+
+  $m-name: '&' + $b + $modifier-connect + $m + $m-value ;
+
+  @at-root {
+    #{$m-name} {
+      @content
+    }
+  }
+}
+
 @mixin s($attrs, $and: true) {
   $states: (
     ) !default;
