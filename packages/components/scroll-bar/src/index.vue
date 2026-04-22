@@ -3,7 +3,8 @@
     @scroll.passive="onScroll" @wheel="onWheel" :style="[width, height]" @touchstart="onTouchStart"
     @touchmove.passive="onTouchMove" @touchend="onTouchEnd">
     <div ref="contentRef">
-      <div style="display: inline-block;" ref="innerContentRef">
+      <!-- 判断水平方向是否会滚动 -->
+      <div :style="['display: inline-block;', x ? 'width:max-content;' : 'width:100%;']" ref="innerContentRef">
         <!-- slot为宽高跟随内容增长 -->
         <slot />
       </div>
@@ -46,6 +47,10 @@ const props = defineProps({
       return ['x', 'y'].includes(m)
     },
     default: 'y'
+  },
+  x: { // 是否有水平滚动
+    type: Boolean,
+    default: true
   }
 })
 const emit = defineEmits(['top', 'bottom', 'left', 'right', 'resize', 'scroll'])

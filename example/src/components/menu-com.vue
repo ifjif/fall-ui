@@ -3,20 +3,20 @@
   <div style="height: 500px;display: flex;flex-direction: column;margin-bottom: 50px;">
     <fl-container class="gray">
       <fl-header style="overflow:visible;" class="skyblue">
-        <fl-menu :active-index="currentPath" @select="handleSelect" :menuData="menuData" :accordion="true"
+        <fl-menu :active-index="currentPath" @select="handleSelect" :data="menuData" :accordion="true"
           mode="horizontal"></fl-menu>
       </fl-header>
       <fl-container class="gray">
-        <fl-aside style="display:flex;flex-direction:column;background-color:#fff;">
+        <fl-aside style="overflow:visible;display:flex;flex-direction:column;background-color:#fff;">
           <button style="width:64px;font-size:12px;" @click="toggleCollapse">
             {{ isCollapse ? '展开' : '折叠' }}
           </button>
-          <div style="flex:1;overflow:auto;">
-            <fl-scrollbar>
-              <fl-menu :active-index="currentPath" @select="handleSelect" :accordion="false" :menuData="menuData"
+          <fl-scrollbar>
+            <div style="flex:1;">
+              <fl-menu :active-index="currentPath" @select="handleSelect" :accordion="false" :data="menuData"
                 :is-collapse="isCollapse"></fl-menu>
-            </fl-scrollbar>
-          </div>
+            </div>
+          </fl-scrollbar>
         </fl-aside>
         <fl-container class="gray">
           <fl-container class="gray">
@@ -29,7 +29,7 @@
               </button>
               <fl-scrollbar>
                 <div>
-                  <fl-menu :active-index="currentPath" @select="handleSelect" :accordion="true" :menuData="menuData"
+                  <fl-menu :active-index="currentPath" @select="handleSelect" :accordion="true" :data="menuData"
                     :is-collapse="isCollapse"></fl-menu>
                 </div>
               </fl-scrollbar>

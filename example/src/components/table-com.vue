@@ -1,53 +1,21 @@
 <template>
-  <h3>table</h3>
-  <div style="height: 500px;display: flex;flex-direction: column;">
-    <fl-container class="gray">
-      <fl-header height="60" class="skyblue">
-        header
-      </fl-header>
-      <fl-container class="gray">
-        <fl-aside class="yellow">
-          <fl-scrollbar>
-            <div style="width:80px;height: 500px;">
-              aside
-            </div>
-          </fl-scrollbar>
-        </fl-aside>
-        <fl-container class="gray">
-          <fl-container class="gray">
-            <fl-main class="beige">
+  <div style="height:100%;">
+    <!-- 注意：跨页全选需要完整数据或知道总数 -->
+    <fl-table :data="fullData" :columns="visibleColumns" v-model:selection="selectedRows" :loading="loading"
+      :pagination="pagination" border stripe row-key="id" enableResize :remote-sort="false" :remote-filter="false"
+      @page-change="handlePageChange" @sort-change="handleSortChange" @filter-change="handleFilterChange">
+      <template #operation="{ row }">
+        <button @click="edit(row)">编辑</button>
+      </template>
 
-              <!-- 注意：跨页全选需要完整数据或知道总数 -->
-              <fl-table :data="fullData" :columns="visibleColumns" v-model:selection="selectedRows" :loading="loading"
-                :pagination="pagination" border stripe row-key="id" enableResize :remote-sort="false"
-                :remote-filter="false" @page-change="handlePageChange" @sort-change="handleSortChange"
-                @filter-change="handleFilterChange">
-                <template #operation="{ row }">
-                  <button @click="edit(row)">编辑</button>
-                </template>
-
-                <template #toolbar>
-                  <button type="primary" @click="exportExcel">导出 Excel</button>
-                  <input type="checkbox" v-model="selectAllAcrossPages" @change="handleSelectAllAcross">
-                  跨页全选（共 {{ pagination.total }} 条）
-                  </input>
-                  <button @click="showColumnPanel = true">列设置</button>
-                </template>
-              </fl-table>
-
-            </fl-main>
-            <fl-aside width="80" class="yellow">
-              <fl-scrollbar>
-                <div style="height: 500px;">aside</div>
-              </fl-scrollbar>
-            </fl-aside>
-          </fl-container>
-          <fl-footer height="60" class="skyblue">
-            footer
-          </fl-footer>
-        </fl-container>
-      </fl-container>
-    </fl-container>
+      <template #toolbar>
+        <button type="primary" @click="exportExcel">导出 Excel</button>
+        <input type="checkbox" v-model="selectAllAcrossPages" @change="handleSelectAllAcross">
+        跨页全选（共 {{ pagination.total }} 条）
+        </input>
+        <button @click="showColumnPanel = true">列设置</button>
+      </template>
+    </fl-table>
   </div>
 
   <!-- 列配置 面板 -->

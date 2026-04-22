@@ -1,0 +1,27 @@
+@use './common/namespace.scss' as *;
+
+@include b(menu) {
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @include m(mode, vertical) {
+    width: 240px;
+  }
+
+  @include s((collapse)) {
+    width: 64px;
+  }
+
+  @include m(mode, horizontal) {
+    width: 100%;
+
+    @include e(menu-list, false) {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}

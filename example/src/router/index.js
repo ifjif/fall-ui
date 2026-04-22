@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
-
+import comData from "@/assets/com-data";
 import { menuData } from "@/assets/menuData";
+
 const dir = '../views'
+const comDir = '../components'
 
 const modules = import.meta.glob('../views/**/*.vue')
-console.log(modules)
+const comModules = import.meta.glob('../components/**/*.vue')
 
 // 根据菜单 动态生成路由
 function generateRoutes(menus, parentPath = '') {
@@ -27,8 +29,31 @@ function generateRoutes(menus, parentPath = '') {
   })
 }
 
+// 组件路由
+function generateComRoutes(coms) {
+  return coms.map(com => {
+    const path = comDir + com.index + '.vue'
+    const component = comModules[path]
+    const route = {
+      path: com.index,
+      name: com.title,
+      component,
+      meta: { title: com.title, icon: com.icon }
+    }
+
+    if (com.children && com.children.length > 0) {
+      route.children = generateComRoutes(com.children)
+      route.component = () => import('../views/EmptyLayout.vue')
+    } else if (com.title === 'menu') {
+      route.children = generateRoutes(menuData)
+    }
+
+    return route
+  })
+}
+
 const routes = [
-  ...generateRoutes(menuData)
+  ...generateComRoutes(comData),
 ]
 
 const router = createRouter({

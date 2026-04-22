@@ -45,11 +45,13 @@ export function useScrollBarEvent(
       const able = el.scrollHeight - (el.scrollTop + el.clientHeight)
       if (able < 1) {
         endPosition.value = true
+        topPosition.value = false
         emit('bottom')
         return
       }
       if (scrollTop.value === 0) {
         topPosition.value = true
+        endPosition.value = false
         emit('top')
         return
       }
@@ -59,11 +61,13 @@ export function useScrollBarEvent(
       const able = el.scrollWidth - (el.scrollLeft + el.clientWidth)
       if (able < 1) {
         rightPostion.value = true
+        leftPosition.value = false
         emit('right')
         return
       }
       if (scrollLeft.value === 0) {
         leftPosition.value = true
+        rightPostion.value = false
         emit('left')
         return
       }

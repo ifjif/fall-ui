@@ -166,3 +166,8 @@ const handleRemove2 = (name) => {
 
 const activeTab3 = ref('safe')
 </script>
+<style scoped>
+.aa {
+  --bac-a: yellow;
+}
+</style>

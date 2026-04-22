@@ -1,0 +1,114 @@
+@use './common/namespace.scss' as *;
+
+@include b(submenu) {
+  background-color: #f3f4f5;
+
+  &,
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  z-index: 1000;
+  position: absolute;
+}
+
+@include b(menu-item) {
+  position: relative;
+
+  @include m(mode, vertical) {
+
+    @include s(collapse) {
+
+      @include e(submenu, false) {
+        z-index: 1000;
+        position: absolute;
+        top: 0;
+        left: 100%;
+
+        @include e(submenu, false) {
+          top: 100%;
+        }
+      }
+    }
+  }
+
+  @include m(mode, horizontal) {
+
+    @include e(header, false) {
+      @include s((active)) {
+        background-color: #ecf5ff;
+        color: #409eff;
+        border-right: none;
+        border-bottom: 2px solid #409eff;
+      }
+    }
+
+    @include e(submenu, false) {
+      z-index: 10;
+      position: absolute;
+      top: 100%;
+      left: 0;
+
+      @include e(submenu, false) {
+        left: 100%;
+      }
+    }
+  }
+
+  @include e(header) {
+    display: flex;
+    padding: 10px 0;
+    align-items: center;
+    color: #333;
+    transition: background-color 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      color: #409eff;
+      background-color: #f5f7fa;
+    }
+
+    @include s((active)) {
+      background-color: #ecf5ff;
+      color: #409eff;
+      border-right: 2px solid #409eff;
+    }
+  }
+
+  @include e(icon) {
+    margin-left: 15px;
+    width: 24px;
+    text-align: center;
+
+    @include s((collapse)) {
+      margin: 0;
+      flex: 1;
+    }
+  }
+
+  @include e(title) {
+    flex: 1;
+    padding: 0 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @include e(arrow) {
+    margin-left: auto;
+    margin-right: 15px;
+    font-size: 12px;
+    transform: rotate(-90deg);
+    transition: transform 0.3s;
+
+    @include s((active)) {
+      transform: rotate(0deg)
+    }
+  }
+
+  @include e(submenu, false) {
+    background-color: #f0f0f0;
+  }
+}
