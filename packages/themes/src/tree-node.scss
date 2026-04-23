@@ -1,0 +1,29 @@
+@use './common/namespace.scss' as *;
+
+@include b(tree-node) {
+  @include e(wrapper-content) {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f5f7fa;
+    }
+  }
+
+  @include e-and((expand-icon, leaf-icon)) {
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+    margin-right: 4px;
+    color: #606266;
+    font-weight: bold;
+  }
+
+  @include e(label) {
+    font-size: 14px;
+    color: #606266;
+  }
+}
