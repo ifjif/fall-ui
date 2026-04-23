@@ -1,5 +1,5 @@
 import { nextTick } from 'vue'
-export function useTabsEvent(ns, emit, panes, navRef, activeTabRect) {
+export function useTabsEvent(ns, emit, panes, navRef, activeTabRect, activeName) {
   // 注册 pane
   const registerPane = (pane) => {
     // 避免重复注册
@@ -13,9 +13,12 @@ export function useTabsEvent(ns, emit, panes, navRef, activeTabRect) {
     const i = panes.findIndex(p => p.name === name)
     if (i === -1) return
     // 删除后，激活前一个，如果没有，则后一个
-    const nextPane = panes[i - 1] || panes[i + 1]
+    // 只针对删除活跃的
+    if (name === activeName.value) {
+      const nextPane = panes[i - 1] || panes[i + 1]
+      emit('update:modelValue', nextPane ? nextPane.name : '')
+    }
     panes.splice(i, 1)
-    emit('update:modelValue', nextPane ? nextPane.name : '')
   }
 
   const updateBar = () => {

@@ -8,6 +8,17 @@ const comDir = '../components'
 const modules = import.meta.glob('../views/**/*.vue')
 const comModules = import.meta.glob('../components/**/*.vue')
 
+// 首页路由
+function generateHomeRoutes() {
+  const route = {
+    path: '/',
+    name: 'home',
+    component: () => import('../views/home.vue')
+  }
+
+  return route
+}
+
 // 根据菜单 动态生成路由
 function generateRoutes(menus, parentPath = '') {
   return menus.map(menu => {
@@ -44,7 +55,7 @@ function generateComRoutes(coms) {
     if (com.children && com.children.length > 0) {
       route.children = generateComRoutes(com.children)
       route.component = () => import('../views/EmptyLayout.vue')
-    } else if (com.title === 'menu') {
+    } else if (com.index === '/menu-com') {
       route.children = generateRoutes(menuData)
     }
 
@@ -53,6 +64,7 @@ function generateComRoutes(coms) {
 }
 
 const routes = [
+  generateHomeRoutes(),
   ...generateComRoutes(comData),
 ]
 

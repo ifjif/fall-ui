@@ -1,5 +1,5 @@
 <template>
-  <div :class="[ns.b(), ns.m('type', type), ns.m('position', tabPosition)]">
+  <div :class="[ns.b(), ns.m('type', type), ns.m('position', tabPosition), ns.is('only-header', onlyHeader)]">
     <!-- 头部导航 -->
     <div :class="[ns.e('header'), ns.is('add', type === 'card' && addable)]">
       <!-- 增加按钮, card且addable -->
@@ -70,6 +70,10 @@ const props = defineProps({
       return ['top', 'bottom', 'left', 'right'].includes(p)
     },
     default: 'top'
+  },
+  onlyHeader: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -79,6 +83,7 @@ const {
   navRef,
   activeName,
   panes,
+  onlyHeader2,
   registerPane,
   removePane,
   updateBar,
@@ -96,6 +101,7 @@ watch(() => props.modelValue, () => {
 
 provide(Root_Tabs, {
   activeName,
+  onlyHeader2,
   registerPane,
   removePane
 })

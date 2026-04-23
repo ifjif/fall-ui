@@ -168,6 +168,10 @@ export function useScrollBarEvent(
 
   //鼠标滚轮事件
   const onWheel = (e) => {
+    if ((props.wheel === 'y' && existScrollBar.value) || (props.wheel === 'x' && existHorizontalScrollBar.value)) {
+      // 阻止冒泡
+      e.stopPropagation()
+    }
     if (props.wheel === 'y' && !existScrollBar.value) return
     if (props.wheel === 'x' && !existHorizontalScrollBar.value) return
     verticalScroll = true

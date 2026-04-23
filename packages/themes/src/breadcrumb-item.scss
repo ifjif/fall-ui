@@ -1,0 +1,24 @@
+@use './common/namespace.scss' as *;
+
+@include b(breadcrumb-item) {
+  display: inline-block;
+
+  --breadcrumb-item-color: #606266;
+  --breadcrumb-item-hover-color: #409eff;
+  color: var(--breadcrumb-item-color);
+
+  a {
+    text-decoration: none;
+  }
+
+  @include e(inner) {
+    display: inline-flex;
+    align-items: center;
+    color: var(--breadcrumb-item-color);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--breadcrumb-item-hover-color);
+    }
+  }
+}

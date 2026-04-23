@@ -9,10 +9,14 @@ export function useTabsState(props) {
   // 活跃 pane 的rect信息
   const activeTabRect = reactive({})
 
+  // 是否只展示头
+  const onlyHeader2 = computed(() => props.onlyHeader)
+
   return {
     navRef,
     activeName,
     panes,
-    activeTabRect
+    activeTabRect,
+    onlyHeader2
   }
 }

@@ -3,4 +3,8 @@
 @include b(tab-pane) {
   box-sizing: border-box;
   padding: 15px;
+
+  @include s((only-header)) {
+    padding: 0;
+  }
 }

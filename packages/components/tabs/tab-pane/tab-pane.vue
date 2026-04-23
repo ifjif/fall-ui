@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isShow" :class="[ns.b()]">
+  <div v-if="isShow" :class="[ns.b(), ns.is('only-header', onlyHeader)]">
     <slot />
   </div>
 </template>
@@ -42,7 +42,7 @@ const props = defineProps({
 
 const rootTabs = inject(Root_Tabs)
 
-const { isShow } = useTabPane(props, rootTabs)
+const { isShow, onlyHeader } = useTabPane(props, rootTabs)
 
 onMounted(() => {
   rootTabs.registerPane({

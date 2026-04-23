@@ -4,6 +4,14 @@
   display: flex;
   flex-direction: column;
 
+  @include s((only-header)) {
+    border-bottom: none;
+
+    @include e(header, false) {
+      margin: 0;
+    }
+  }
+
   //==============================================type card
   @include m(type, card) {
 
@@ -275,6 +283,7 @@
   }
 
   //============================================== right end
+
 
   @include e(header) {
     padding: 0;
