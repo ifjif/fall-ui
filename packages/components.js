@@ -37,6 +37,7 @@ import {
   FlBreadcrumbItem,
   FlTabs,
   FlTabPane,
+  FlAnchor,
 } from "@fall-ui/components";
 
 export default [
@@ -78,4 +79,5 @@ export default [
   FlBreadcrumbItem,
   FlTabs,
   FlTabPane,
+  FlAnchor,
 ];

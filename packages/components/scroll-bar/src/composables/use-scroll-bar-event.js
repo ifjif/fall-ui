@@ -177,18 +177,23 @@ export function useScrollBarEvent(
     verticalScroll = true
     e.preventDefault()
     const delta = e.deltaY
-    //进行垂直滚动, 如果不加限制，容器如果没有固定高度，它会滚动并增加容器高度
-    //if (delta > 0 && endPosition) return
-    let newScrollTop = containerRef.value.scrollTop + delta
-    if (newScrollTop > maxScrollTop.value) {
-      newScrollTop = maxScrollTop.value
-    }
 
     if (props.wheel === 'y') {
+      //进行垂直滚动, 如果不加限制，容器如果没有固定高度，它会滚动并增加容器高度
+      //if (delta > 0 && endPosition) return
+      let newScrollTop = containerRef.value.scrollTop + delta
+      if (newScrollTop > maxScrollTop.value) {
+        newScrollTop = maxScrollTop.value
+      }
       containerRef.value.scrollTop = newScrollTop
     } else {
-      //进行水平滚动
-      containerRef.value.scrollLeft += delta
+      //进行水平滚动, 如果不加限制，容器如果没有固定宽度，它会滚动并增加容器宽度
+      //if (delta > 0 && endPosition) return
+      let newScrollLeft = containerRef.value.scrollLeft + delta
+      if (newScrollLeft > maxScrollLeft.value) {
+        newScrollLeft = maxScrollLeft.value
+      }
+      containerRef.value.scrollLeft = newScrollLeft
     }
   }
 

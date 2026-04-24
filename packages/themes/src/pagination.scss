@@ -1,0 +1,114 @@
+@use './common/namespace.scss' as *;
+
+@include b(pagination) {
+  --pagination-height: 32px;
+  --pagination-font-size: 14px;
+  --pagination-border-radius: 4px;
+  --pagination-gap: 8px;
+  --pagination-padding: 0 8px;
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--pagination-gap);
+  font-size: var(--pagination-font-size);
+  color: #606266;
+
+  @include m(size, small) {
+    --pagination-height: 24px;
+    --pagination-font-size: 12px;
+    --pagination-gap: 4px;
+    --pagination-padding: 0 5px;
+  }
+
+  @include e(total) {
+    min-width: 60px;
+  }
+
+  @include e-and((btn-prev, btn-next)) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #dcdfe6;
+    border-radius: var(--pagination-border-radius);
+    color: #606266;
+    min-width: var(--pagination-height);
+    height: var(--pagination-height);
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      color: #409eff;
+      background-color: #ecf5ff;
+      border-color: #c6e2ff;
+    }
+  }
+
+  @include e(pager-wrapper) {
+    flex: 1;
+    min-width: 120px;
+    overflow: hidden;
+  }
+
+  @include e(pager) {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 4px;
+  }
+
+  @include e(pager-item) {
+    box-sizing: border-box;
+    min-width: var(--pagination-height);
+    height: var(--pagination-height);
+    line-height: var(--pagination-height);
+    text-align: center;
+    color: #606266;
+    //border: 1px solid #e3e4ef;
+    border-radius: var(--pagination-border-radius);
+    cursor: pointer;
+    padding: var(--pagination-padding);
+
+    &:hover {
+      color: #409eff;
+    }
+
+    @include s((active)) {
+      background-color: #409eff;
+      color: #fff;
+    }
+  }
+
+  @include e-and((sizes, jumper)) {
+    min-width: 60px;
+
+    select,
+    input {
+      outline: none;
+      height: var(--pagination-height);
+      line-height: var(--pagination-height);
+      padding: var(--pagination-padding);
+      border: 1px solid #dcdfe6;
+      color: #606266;
+      border-radius: var(--pagination-border-radius);
+      font-size: var(--pagination-font-size);
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-color: #409eff;
+
+      }
+    }
+  }
+
+  @include e(jumper) {
+    min-width: 120px;
+
+    input {
+      width: 50px;
+      text-align: center;
+    }
+  }
+}

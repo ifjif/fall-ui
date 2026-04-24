@@ -11,31 +11,31 @@
     </div>
 
     <!-- 画布区域 -->
-
     <div class="canvas-area" ref="canvasRef" @click="deselectAll">
-      <fl-scrollbar>
-        <!-- 1. SVG 连线层 (底层) -->
-        <svg class="connections-layer">
-          <path v-for="edge in edges" :key="edge.id" :d="getPath(edge)" class="connection-line"
-            marker-end="url(#arrowhead)" />
-        </svg>
+      <!-- 1. SVG 连线层 (底层) -->
+      <svg class="connections-layer">
+        <path v-for="edge in edges" :key="edge.id" :d="getPath(edge)" class="connection-line"
+          marker-end="url(#arrowhead)" />
+      </svg>
 
-        <!-- 2. 节点层 (上层) -->
-        <div v-for="node in nodes" :key="node.id" class="node-item" :class="`node-${node.type}`"
-          :style="{ left: node.x + 'px', top: node.y + 'px' }" @mousedown="onNodeMouseDown($event, node)"
-          @click.stop="selectNode(node)">
-          <div class="node-header">{{ node.label }}</div>
-          <div class="node-body">ID: {{ node.id }}</div>
+      <!-- 2. 节点层 (上层) -->
+      <div v-for="node in nodes" :key="node.id" class="node-item" :class="`node-${node.type}`"
+        :style="{ left: node.x + 'px', top: node.y + 'px' }" @mousedown="onNodeMouseDown($event, node)"
+        @click.stop="selectNode(node)">
+        <div class="node-header">{{ node.label }}</div>
+        <div class="node-body">ID: {{ node.id }}</div>
 
-          <!-- 简单的锚点示意 (实际开发可做复杂交互) -->
-          <div class="anchor output" @mousedown.stop="startConnection(node)"></div>
-        </div>
+        <!-- 简单的锚点示意 (实际开发可做复杂交互) -->
+        <div class="anchor output" @mousedown.stop="startConnection(node)"></div>
+        <div class="anchor-l output" @mousedown.stop="startConnection(node)"></div>
+        <div class="anchor-t output" @mousedown.stop="startConnection(node)"></div>
+        <div class="anchor-b output" @mousedown.stop="startConnection(node)"></div>
+      </div>
 
-        <!-- 正在拖拽的连线 (临时) -->
-        <svg v-if="draggingEdge" class="temp-connection-layer">
-          <path :d="getTempPath()" class="connection-line temp" />
-        </svg>
-      </fl-scrollbar>
+      <!-- 正在拖拽的连线 (临时) -->
+      <svg v-if="draggingEdge" class="temp-connection-layer">
+        <path :d="getTempPath()" class="connection-line temp" />
+      </svg>
     </div>
 
 
@@ -179,6 +179,8 @@ const onConnectionMouseUp = (e) => {
         source: sourceNodeForConnection.id,
         target: targetNode.id
       });
+
+      console.log(edges)
     }
   }
 
@@ -344,8 +346,57 @@ const deselectAll = () => {
   transition: opacity 0.2s;
 }
 
-.node-item:hover .anchor {
-  opacity: 1;
+.anchor-l {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #409eff;
+  border-radius: 50%;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: crosshair;
+  opacity: 0;
+  /* 悬停显示 */
+  transition: opacity 0.2s;
+}
+
+.anchor-t {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #409eff;
+  border-radius: 50%;
+  left: 50%;
+  top: -5px;
+  cursor: crosshair;
+  opacity: 0;
+  /* 悬停显示 */
+  transition: opacity 0.2s;
+}
+
+.anchor-b {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #409eff;
+  border-radius: 50%;
+  left: 50%;
+  bottom: -5px;
+  cursor: crosshair;
+  opacity: 0;
+  /* 悬停显示 */
+  transition: opacity 0.2s;
+}
+
+.node-item:hover {
+
+  .anchor,
+  .anchor-l,
+  .anchor-t,
+  .anchor-b {
+    opacity: 1;
+  }
 }
 
 .status-bar {

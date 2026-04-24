@@ -162,13 +162,18 @@ const scrollToRight = (changed) => {
 
 let scrollToRightForChange = null
 
+const getScrollContainer = () => {
+  return containerRef.value
+}
+
 defineExpose({
   scrollToTop,
   scrollTopInc,
   scrollToBottom,
   scrollToLeft,
   scrollLeftInc,
-  scrollToRight
+  scrollToRight,
+  getScrollContainer
 })
 let resizeObserver = null
 let rafId = null // 用于取消动画帧

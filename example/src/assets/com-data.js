@@ -129,4 +129,9 @@ export default [
     title: 'table 表格',
     index: '/table-com'
   },
+  {
+    icon: '🏠',
+    title: 'anchor 锚点',
+    index: '/anchor-com'
+  }
 ]
