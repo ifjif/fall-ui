@@ -1,6 +1,36 @@
 export default [
   {
     icon: '🏠',
+    title: 'test6',
+    index: '/test6-com'
+  },
+  {
+    icon: '🏠',
+    title: 'test5',
+    index: '/test5-com'
+  },
+  {
+    icon: '🏠',
+    title: 'test4',
+    index: '/test4-com'
+  },
+  {
+    icon: '🏠',
+    title: 'test3',
+    index: '/test3-com'
+  },
+  {
+    icon: '🏠',
+    title: 'test2',
+    index: '/test2-com'
+  },
+  {
+    icon: '🏠',
+    title: 'test',
+    index: '/test-com'
+  },
+  {
+    icon: '🏠',
     title: 'button 按钮',
     index: '/button-com'
   },
@@ -133,5 +163,15 @@ export default [
     icon: '🏠',
     title: 'anchor 锚点',
     index: '/anchor-com'
-  }
+  },
+  {
+    icon: '🏠',
+    title: 'timeline 时间线',
+    index: '/timeline-com'
+  },
+  {
+    icon: '🏠',
+    title: 'date-picker 日期选择',
+    index: '/date-picker-com'
+  },
 ]

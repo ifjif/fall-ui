@@ -38,6 +38,8 @@ import {
   FlTabs,
   FlTabPane,
   FlAnchor,
+  FlTimeline,
+  FlDatePicker,
 } from "@fall-ui/components";
 
 export default [
@@ -80,4 +82,6 @@ export default [
   FlTabs,
   FlTabPane,
   FlAnchor,
+  FlTimeline,
+  FlDatePicker,
 ];

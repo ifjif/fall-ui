@@ -1,5 +1,5 @@
 <template>
-  <button @click="clickEvent" :disabled="disabled || loading || _loading" :class="[ns.b(), ns.m(type), ns.is('round', round),
+  <button @click="clickEvent" :style="btStyle" :disabled="disabled || loading || _loading" :class="[ns.b(), ns.m(type), ns.is('round', round),
   ns.is('disabled', disabled || loading || _loading), ns.is('border', border), ns.is('dashed', dashed),
   ns.is('text', text), ns.is('link', link), ns.is('circle', circle), ns.m('size', controlSize),
   ns.is('block', block), ns.is('button-group', isGroup)
@@ -45,10 +45,41 @@ const props = defineProps({
   block: Boolean,
   loading: Boolean,
   size: String,
-  beforeChange: Function
+  beforeChange: Function,
+  scale: [Number, String],
+  styles: Object,
 })
 const emit = defineEmits(['click'])
+/*
+ * 自定义样式
+ * styles
+ * {
+ *  root:{
+ *    bg_color:
+ *    bd_color
+ *    color
+ *  },
+ *  hover:{
+ *    bg_color:
+ *    bd_color
+ *    color
+ *  },
+ *  disabled:{
+ *    bg_color:
+ *    bd_color
+ *    color
+ *  },
+ *  active:{
+ *    bg_color:
+ *    bd_color
+ *    color
+ *  }
+ * }
+ *
+ *
+ *
+ */
 
-const { _loading, controlSize, clickEvent } = useButton(props, emit, parentSize)
+const { _loading, controlSize, clickEvent, btStyle } = useButton(props, emit, parentSize)
 
 </script>
