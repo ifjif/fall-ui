@@ -5,26 +5,28 @@
 
 @include b(checkbox) {
   @include set-component-var('checkbox', checkboxVar());
+  @include set-component-var('checkbox', checkboxCurrentVar());
+
   display: inline-flex;
   align-items: center;
-  height: var(#{getVarName('checkbox', 'size')});
   gap: 0 10px;
   box-sizing: border-box;
   cursor: pointer;
   margin-right: 24px;
-  font-size: var(#{getVarName('checkbox', 'font-size')});
+  height: calc(var(#{getVarName('checkbox', 'size')}) * var(#{getVarName('checkbox', 'scale')}));
+  font-size: calc(var(#{getVarName('checkbox', 'font-size')}) * var(#{getVarName('checkbox', 'scale')}));
 
   @include e(inner) {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: var(#{getVarName('checkbox', 'checkbox-size')});
-    height: var(#{getVarName('checkbox', 'checkbox-size')});
-    border: var(#{getVarName('checkbox', 'border-size')}) solid var(#{getVarName('checkbox', 'border-color')});
-    border-radius: var(#{getVarName('checkbox', 'round')});
     box-sizing: border-box;
-    background-color: var(#{getVarName('checkbox', 'bg-color')});
-    color: var(#{getVarName('checkbox', 'color')});
+    width: calc(var(#{getVarName('checkbox', 'checkbox-size')}) * var(#{getVarName('checkbox', 'scale')}));
+    height: calc(var(#{getVarName('checkbox', 'checkbox-size')}) * var(#{getVarName('checkbox', 'scale')}));
+    border: var(#{getVarName('checkbox', 'border-size')}) solid var(#{getVarName('checkbox', 'current','bd-color')});
+    border-radius:calc(var(#{getVarName('checkbox', 'round')}) * var(#{getVarName('checkbox', 'scale')}));
+    background-color: var(#{getVarName('checkbox', 'current','bg-color')});
+    color: var(#{getVarName('checkbox','current' ,'icon-color')});
 
     @include e(input) {
       position: relative;
@@ -37,47 +39,48 @@
   @include e(label) {
     line-height: 1;
     font-size: inherit;
-    color: var(#{getVarName('checkbox', 'text-color')});
+    color: var(#{getVarName('checkbox','current','color')});
   }
 
   &:hover {
-    #{getVarName('checkbox', 'border-color')}:var(#{getVarName('checkbox', 'hover-border-color')});
-    #{getVarName('checkbox', 'text-color')}:var(#{getVarName('checkbox', 'hover-text-color')});
+    #{getVarName('checkbox','current', 'bg-color')}:var(#{getVarName('checkbox', 'hover-bg-color')});
+    #{getVarName('checkbox','current','bd-color')}:var(#{getVarName('checkbox', 'hover-border-color')});
+    #{getVarName('checkbox','current', 'color')}:var(#{getVarName('checkbox', 'hover-text-color')});
   }
 
   @include s((selected)) {
-    #{getVarName('checkbox', 'bg-color')}:var(#{getVarName('checkbox', 'selected-bg-color')});
-    #{getVarName('checkbox', 'color')}:var(#{getVarName('checkbox', 'selected-color')});
-    #{getVarName('checkbox', 'border-color')}:var(#{getVarName('checkbox', 'selected-bg-color')});
-    #{getVarName('checkbox', 'text-color')}:var(#{getVarName('checkbox', 'selected-bg-color')});
-
+    #{getVarName('checkbox','current', 'bg-color')}:var(#{getVarName('checkbox', 'selected-bg-color')});
+    #{getVarName('checkbox','current', 'icon-color')}:var(#{getVarName('checkbox', 'selected-color')});
+    #{getVarName('checkbox','current', 'bd-color')}:var(#{getVarName('checkbox', 'selected-border-color')});
+    #{getVarName('checkbox','current', 'color')}:var(#{getVarName('checkbox', 'selected-text-color')});
   }
 
   @include s((disabled)) {
-    #{getVarName('checkbox', 'bg-color')}:var(#{getVarName('checkbox', 'disabled-bg-color')});
-    #{getVarName('checkbox', 'border-color')}:var(#{getVarName('checkbox', 'disabled-border-color')});
-    #{getVarName('checkbox', 'text-color')}:var(#{getVarName('checkbox', 'disabled-text-color')});
-    cursor: var(#{getVarName('cursor', 'disabled')});
+    #{getVarName('checkbox','current','bg-color')}:var(#{getVarName('checkbox', 'disabled-bg-color')});
+    #{getVarName('checkbox','current','bd-color')}:var(#{getVarName('checkbox', 'disabled-border-color')});
+    #{getVarName('checkbox','current','color')}:var(#{getVarName('checkbox', 'disabled-text-color')});
+    #{getVarName('checkbox','current','icon-color')}:var(#{getVarName('checkbox', 'disabled-icon-color')});
+    cursor: var(#{getVarName('cursor','disabled')});
   }
 
   @include s((loading)) {
-    #{getVarName('checkbox', 'bg-color')}:var(#{getVarName('checkbox', 'loading-bg-color')});
-    #{getVarName('checkbox', 'border-color')}:var(#{getVarName('checkbox', 'loading-border-color')});
-    #{getVarName('checkbox', 'text-color')}:var(#{getVarName('checkbox', 'loading-text-color')});
-    cursor: var(#{getVarName('cursor', 'disabled')});
+    #{getVarName('checkbox','current','bg-color')}:var(#{getVarName('checkbox', 'loading-bg-color')});
+    #{getVarName('checkbox','current','bd-color')}:var(#{getVarName('checkbox', 'loading-border-color')});
+    #{getVarName('checkbox','current','color')}:var(#{getVarName('checkbox', 'loading-text-color')});
+    cursor: var(#{getVarName('cursor','disabled')});
   }
 
   @include s((indeterminate)) {
-    #{getVarName('checkbox', 'bg-color')}: white;
+    #{getVarName('checkbox','current', 'bg-color')}: white;
   }
 
   @include e(indeterminate) {
     display: block;
     box-sizing: border-box;
-    height: var(#{getVarName('checkbox', 'indeterminate-size')});
-    width: var(#{getVarName('checkbox', 'indeterminate-size')});
-    border-radius: var(#{getVarName('checkbox', 'indeterminate-round')});
-    background-color: var(#{getVarName('checkbox', 'selected-bg-color')});
+    height: calc(var(#{getVarName('checkbox', 'indeterminate-size')}) *var(#{getVarName('checkbox', 'scale')}));
+    width: calc(var(#{getVarName('checkbox', 'indeterminate-size')}) *var(#{getVarName('checkbox', 'scale')}));
+    border-radius:calc(var(#{getVarName('checkbox', 'indeterminate-round')}) *var(#{getVarName('checkbox', 'scale')}));
+    background-color: var(#{getVarName('checkbox','selected-bg-color')});
   }
 }
 

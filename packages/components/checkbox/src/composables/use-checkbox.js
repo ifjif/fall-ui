@@ -1,6 +1,7 @@
 import { useCheckboxEvent } from "./use-checkbox-event";
 import { useCheckboxState } from "./use-checkbox-state";
 import { useCheckboxGroup } from "./use-checkbox-group";
+import { useCheckboxStyle } from "./use-checkbox-style";
 function useCheckbox(props, emit, modelValue) {
   const { groupValue, isGroup, formItemKey, isFormItem } = useCheckboxGroup(
     props,
@@ -21,6 +22,10 @@ function useCheckbox(props, emit, modelValue) {
     _loading,
   );
 
+  const {
+    checkboxStyle
+  } = useCheckboxStyle(props)
+
   return {
     model,
     isSelected,
@@ -28,6 +33,7 @@ function useCheckbox(props, emit, modelValue) {
     _size,
     changeEvent,
     clickEvent,
+    checkboxStyle,
   };
 }
 

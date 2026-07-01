@@ -29,6 +29,12 @@ $theme-colors: (
   }
 }
 
+$component-scale: (
+  ) !default;
+$component-scale: map.deep-merge(('default':1),
+    $component-scale
+);
+
 $component-size: (
   ) !default;
 $component-size: map.deep-merge(('small':24px,
@@ -140,7 +146,8 @@ $message-padding-horizontal-right: map.deep-merge(('default':10px,
 $global-var: (
   ) !default;
 
-$global-var: map.deep-merge(('component-size':$component-size,
+$global-var: map.deep-merge(('component-scale':$component-scale,
+      'component-size':$component-size,
       'font-size':$font-size,
       'component-round':$component-round,
       'border-size':$border-size,

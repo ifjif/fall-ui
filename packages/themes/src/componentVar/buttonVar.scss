@@ -2,6 +2,7 @@
 
 @function buttonVar($type: '') {
   $button: (
+    'scale':('default':getVarName('component-scale', 'default')),
     'size':('default':getVarName('component-size', 'default')),
     'horizontal-padding':('default':getVarName('button-horizontal-padding', 'default')),
     'font-size':('default':getVarName('font-size', 'default')),
@@ -28,4 +29,14 @@
   );
 
 @return $button;
+}
+
+@function buttonCurrentVar() {
+  $buttonCurrentVar: (
+    'current-bg-color': ('default':getVarName('button', 'bg-color')),
+    'current-bd-color':('default':getVarName('button', 'border-color')),
+    'current-color':('default':getVarName('button', 'text-color')),
+  );
+
+@return $buttonCurrentVar;
 }

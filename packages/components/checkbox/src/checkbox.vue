@@ -1,5 +1,5 @@
 <template>
-  <component @click="clickEvent" :is="tag" :class="[ns.b(), ns.m(type), ns.is('selected', isSelected || indeterminate),
+  <component :style="checkboxStyle" @click="clickEvent" :is="tag" :class="[ns.b(), ns.m(type), ns.is('selected', isSelected || indeterminate),
   ns.is('disabled', disabled || (!isSelected && _loading)), ns.is('loading', _loading && isSelected),
   ns.is('indeterminate', indeterminate), ns.m('size', _size)
   ]">
@@ -45,11 +45,21 @@ const props = defineProps({
   loading: Boolean,
   indeterminate: Boolean,
   beforeChange: Function,
-  size: String
+  size: String,
+  scale: [String, Number],
+  styles: Object
 })
 const emit = defineEmits(['change'])
 
 
-const { model, isSelected, _loading, _size, changeEvent, clickEvent } = useCheckbox(props, emit, modelValue)
+const {
+  model,
+  isSelected,
+  _loading,
+  _size,
+  changeEvent,
+  clickEvent,
+  checkboxStyle
+} = useCheckbox(props, emit, modelValue)
 
 </script>

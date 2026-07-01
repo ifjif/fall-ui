@@ -1,6 +1,6 @@
 <template>
-  <div style="height:100%;display:flex;">
-    <div style="flex:1">
+  <fl-container style="height:100%;width:100%;">
+    <fl-main>
       <fl-scrollbar @resize="handleResize" ref="scrollbarRef" :x="false">
         <h2>按钮</h2>
         <div>
@@ -317,7 +317,11 @@
           <div>
             <h4 id="button-size-scale">自伸缩</h4>
             <fl-button scale="0.6">0.6倍</fl-button>
-            <fl-button scale="1.5" type="primary">1.5倍</fl-button>
+            <fl-button scale="1.5" type="primary">
+              <fl-icon>
+                <FlCheckCircle />
+              </fl-icon>
+              1.5倍</fl-button>
             <fl-button scale="2" type="success">2倍</fl-button>
           </div>
           <div :style="{ width: '200px' }">
@@ -374,12 +378,12 @@
           <fl-table row-key="prop" stripe :data="data" :columns="columns"></fl-table>
         </div>
       </fl-scrollbar>
-    </div>
+    </fl-main>
 
-    <div style="width:200px;">
+    <fl-aside style="width:200px;">
       <fl-anchor :container="scrollContaner" :data="anchors"></fl-anchor>
-    </div>
-  </div>
+    </fl-aside>
+  </fl-container>
 
 </template>
 
@@ -387,7 +391,6 @@
 import { ref, computed } from 'vue'
 const tableWidth = ref(0)
 const handleResize = ({ clientWidth }) => {
-  console.log(clientWidth)
   tableWidth.value = clientWidth
 }
 

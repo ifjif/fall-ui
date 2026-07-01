@@ -5,23 +5,20 @@
 
 @include b(button) {
   @include set-component-var('button', buttonVar());
-  --btn-scale: 1;
-  #{getVarName(button, current, bg-color)}: var(#{getVarName('button', 'bg-color')});
-  #{getVarName(button, current, color)}: var(#{getVarName('button', 'text-color')});
-  #{getVarName(button, current, bd-color)}: var(#{getVarName('button', 'border-color')});
+  @include set-component-var('button', buttonCurrentVar());
 
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  height: calc(var(#{getVarName('button', 'size')}) * var(--btn-scale));
-  font-size:calc(var(#{getVarName('button', 'font-size')}) *var(--btn-scale));
-  padding: 0 calc(var(#{getVarName('button', 'horizontal-padding')}) * var(--btn-scale));
+  height: calc(var(#{getVarName('button', 'size')}) * var(#{getVarName('button', 'scale')}));
+  font-size:calc(var(#{getVarName('button', 'font-size')}) *var(#{getVarName('button','scale')}));
+  padding: 0 calc(var(#{getVarName('button', 'horizontal-padding')}) * var(#{getVarName('button','scale')}));
   border-radius: var(#{getVarName('button', 'round-size')});
   border: var(#{getVarName('button', 'border-size')}) solid var(#{getVarName(button, current, bd-color)});
-  background-color: var(#{getVarName(button, current, bg-color)});
-  color: var(#{getVarName(button, current, color)});
+  background-color: var(#{getVarName('button', 'current', 'bg-color')});
+  color: var(#{getVarName('button', 'current', 'color')});
   line-height: 1;
-  min-width: calc(80px * var(--btn-scale));
+  min-width: calc(80px * var(#{getVarName('button','scale')}));
   box-sizing: border-box;
   cursor: pointer;
   vertical-align: middle;
@@ -30,17 +27,17 @@
     display: inline-flex;
     align-items: center;
     line-height: 1;
-    gap: 0 4px;
+    gap: 0 calc(4px * var(#{getVarName('button','scale')}));
   }
 
   &:hover {
-    #{getVarName('button',current,'bg-color')}: var(#{getVarName('button', 'hover-bg-color')});
-    #{getVarName('button',current,'bd-color')}: var(#{getVarName('button', 'hover-border-color')});
-    #{getVarName('button',current,'color')}: var(#{getVarName('button', 'hover-text-color')});
+    #{getVarName('button','current','bg-color')}: var(#{getVarName('button', 'hover-bg-color')});
+    #{getVarName('button','current','bd-color')}: var(#{getVarName('button', 'hover-border-color')});
+    #{getVarName('button','current','color')}: var(#{getVarName('button', 'hover-text-color')});
   }
 
   @include s((round)) {
-    #{getVarName('button', 'round-size')}: calc(var(#{getVarName('component-round', 'round')}) * var(--btn-scale));
+    #{getVarName('button', 'round-size')}: calc(var(#{getVarName('component-round', 'round')}) * var(#{getVarName('button','scale')}));
   }
 
   @include s((disabled)) {
@@ -113,10 +110,10 @@
   }
 
   @include s((circle)) {
-    width: calc(var(#{getVarName('button', 'size')}) * var(--btn-scale));
+    width: calc(var(#{getVarName('button', 'size')}) * var(#{getVarName('button','scale')}));
     padding: 0;
     min-width: auto;
-    border-radius: calc(var(#{getVarName('component-round', 'round')}) *var(--btn-scale));
+    border-radius: calc(var(#{getVarName('component-round', 'round')}) *var(#{getVarName('button','scale')}));
   }
 
   @include s((block)) {

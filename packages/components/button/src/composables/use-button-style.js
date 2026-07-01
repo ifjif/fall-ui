@@ -17,54 +17,23 @@ import { computed } from "vue"
 *    bd_color
 *    color
 *  },
-*  active:{
-*    bg_color:
-*    bd_color
-*    color
-*  }
 * }
-*
-*size
-*horizontal-padding
-*font-size
-*round-size
-*border-size
-*border-color
-*bg-color
-*text-color
-*hover-bg-color
-*hover-border-color
-*hover-text-color
-*disabled-bg-color
-*disabled-border-color
-*disabled-text-color
-*border-bg-color
-*border-border-color
-*border-text-color
-*text-text-color
-*text-border-color
-*text-bg-color
-*text-hover-bg-color
-*text-hover-border-color
-*text-disabled-text-color
-*
-*
-*
-*
-*
-*
-*
-*
 *
 *
  */
-import { generateStyle } from "../generate-style"
+import { generateStyle } from "../tools/generate-style"
+import { useNamespace } from "@fall-ui/hooks"
+
+const ns = useNamespace('button')
+const com = ns.b()
 export function useButtonStyle(props) {
   const btStyle = computed(() => {
-    return {
-      '--btn-scale': props.scale,
-      ...generateStyle('button', props.styles)
+    const styles = {
+      ...generateStyle(props.styles)
     }
+    styles[`--${com}-scale`] = props.scale
+
+    return styles
   })
 
   return {
