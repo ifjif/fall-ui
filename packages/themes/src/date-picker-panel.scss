@@ -1,0 +1,144 @@
+@use './common/namespace.scss' as *;
+
+@include b(date-picker-panel) {
+  display: inline-block;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  --cell-bg-color: #fff;
+  --cell-color: #c0c4cc;
+
+  @include e(header) {
+    display: flex;
+    justify-content: space-between;
+    color: #606266;
+  }
+
+  @include e(title) {
+    font-weight: 500;
+    font-size: 16px;
+    color: #606266;
+  }
+
+  @include e-and((prev-icon, next-icon)) {
+    display: flex;
+    align-items: center;
+    color: #c0c4cc;
+    cursor: pointer;
+
+    &:hover {
+      color: var(#{getVarName('color', 'primary', 'light-5')})
+    }
+  }
+
+  @include e(body) {
+    display: flex;
+    margin-top: 10px;
+  }
+
+  @include s((in-range), false) {
+    background-color: #ebf5ff;
+  }
+
+  @include e(table) {
+    border-collapse: collapse;
+
+    tr {
+      @include s(week) {
+        &:hover {
+          --cell-bg-color: #f5f7fa;
+        }
+      }
+    }
+  }
+
+  @include e-and((header-cell, cell)) {
+    padding: 8px;
+    font-size: 14px;
+    color: var(--cell-color);
+    background-color: var(--cell-bg-color);
+  }
+
+  @include e(week-number) {
+    font-weight: normal;
+    font-size: 12px;
+    color: #c0c4cc;
+  }
+
+  @include e(cell) {
+    cursor: pointer;
+
+    &:hover {
+      --cell-bg-color: #f5f7fa;
+    }
+
+    @include s((current)) {
+      --cell-color: #606266;
+    }
+
+
+    @include s((today)) {
+      --cell-color: var(#{getVarName('color', 'primary')});
+      font-weight: bold;
+    }
+
+
+    @include s((disabled)) {
+      --cell-bg-color: #e4e7ed;
+      --cell-color: #c0c4cc;
+      cursor: not-allowed;
+    }
+  }
+
+  @include e(cell_text) {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    margin: 0 auto;
+    border-radius: 50%;
+
+    @include s((selected)) {
+      background-color: var(#{getVarName('color', 'primary')});
+      color: #fff;
+    }
+  }
+
+  @include e(month-table) {
+    display: grid;
+    min-width: 280px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    font-size: 14px;
+    color: #606266;
+
+  }
+
+  @include e(month-table-cell) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 20px;
+
+    &:hover {
+      background-color: #f5f7fa;
+    }
+
+    @include s((current)) {
+      color: var(#{getVarName('color', 'primary')})
+    }
+
+    @include s((disabled)) {
+      background-color: transparent;
+      color: #c0c4cc;
+      cursor: not-allowed;
+    }
+
+    @include s((selected)) {
+      background-color: var(#{getVarName('color', 'primary')});
+      color: #fff;
+    }
+
+  }
+}

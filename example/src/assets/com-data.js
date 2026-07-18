@@ -174,4 +174,9 @@ export default [
     title: 'date-picker 日期选择',
     index: '/date-picker-com'
   },
+  {
+    icon: '🏠',
+    title: 'date-picker-panel 日期选择面板',
+    index: '/date-picker-panel-com'
+  },
 ]

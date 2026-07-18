@@ -49,6 +49,8 @@ const props = defineProps({
   // 用于从外部设置位置
   top: { type: Number, default: () => 0 },
   left: { type: Number, default: () => 0 },
+  padding: { type: Number, default: () => 12 },
+  toBody: { type: Boolean, default: true }, // 是否插入到body
   // 显示尾部
   footer: { type: Boolean, default: () => false },
   onCancel: { type: Function },
@@ -59,7 +61,8 @@ const top = ref(props.top)
 const left = ref(props.left)
 const style = computed(() => ({
   top: `${top.value}px`,
-  left: `${top.value}px`
+  left: `${top.value}px`,
+  padding: `${props.padding}px`
 }))
 
 onMounted(() => {

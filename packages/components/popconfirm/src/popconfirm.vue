@@ -33,6 +33,10 @@ const props = defineProps({
     type: String,
     default: () => 'click'
   },
+  toBody: {
+    type: Boolean,
+    default: () => true
+  },
   placement: {
     type: String,
     validator(position) {
@@ -56,6 +60,7 @@ const popoverProps = computed(() => {
     footer: true,
     slots: { default: slots.default },
     placement: props.placement,
+    toBody: props.toBody,
     onCancel: () => {
       emit('cancel')
     },

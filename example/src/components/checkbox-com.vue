@@ -9,35 +9,7 @@
           <fl-checkbox type="success" label="成功" value="成功"></fl-checkbox>
           <fl-checkbox type="warning" label="警告" value="警告"></fl-checkbox>
           <fl-checkbox type="error" label="错误" value="错误"></fl-checkbox>
-          <fl-checkbox :styles="{
-            root: {
-              bg_color: '#000',
-              bd_color: 'blue',
-              color: 'brown'
-            },
-            hover: {
-              bg_color: 'red',
-              bd_color: 'yellow',
-              color: 'red'
-            },
-            selected: {
-              bg_color: 'beige',
-              bd_color: '#000',
-              color: 'skyblue',
-              icon_color: 'red'
-            },
-            disabled: {
-              bg_color: 'brown',
-              bd_color: 'yellow',
-              color: 'blue',
-              icon_color: '#000'
-            },
-            loading: {
-              bg_color: '#fff',
-              bd_color: '#000',
-              color: 'gray',
-            }
-          }" label="自定义" scale="1"></fl-checkbox>
+          <fl-checkbox :styles="styles" label="自定义" scale="1"></fl-checkbox>
         </div>
         <div>
           <h3 id="checkbox-disabled">禁用</h3>
@@ -45,68 +17,12 @@
           <fl-checkbox disabled type="success" label="成功" value="成功"></fl-checkbox>
           <fl-checkbox disabled type="warning" label="警告" value="警告"></fl-checkbox>
           <fl-checkbox disabled type="error" label="错误" value="错误"></fl-checkbox>
-          <fl-checkbox :styles="{
-            root: {
-              bg_color: '#000',
-              bd_color: 'blue',
-              color: 'brown'
-            },
-            hover: {
-              bg_color: 'red',
-              bd_color: 'yellow',
-              color: 'red'
-            },
-            selected: {
-              bg_color: 'beige',
-              bd_color: '#000',
-              color: 'skyblue',
-              icon_color: 'red'
-            },
-            disabled: {
-              bg_color: 'brown',
-              bd_color: 'yellow',
-              color: 'blue',
-              icon_color: '#000'
-            },
-            loading: {
-              bg_color: '#fff',
-              bd_color: '#000',
-              color: 'gray',
-            }
-          }" disabled label="自定义" scale="1"></fl-checkbox>
+          <fl-checkbox :styles="styles" disabled label="自定义" scale="1"></fl-checkbox>
           <fl-checkbox disabled v-model="checked1" label="主要" value="主要"></fl-checkbox>
           <fl-checkbox disabled v-model="checked1" type="success" label="成功" value="成功"></fl-checkbox>
           <fl-checkbox disabled v-model="checked1" type="warning" label="警告" value="警告"></fl-checkbox>
           <fl-checkbox disabled v-model="checked1" type="error" label="错误" value="错误"></fl-checkbox>
-          <fl-checkbox :styles="{
-            root: {
-              bg_color: '#000',
-              bd_color: 'blue',
-              color: 'brown'
-            },
-            hover: {
-              bg_color: 'red',
-              bd_color: 'yellow',
-              color: 'red'
-            },
-            selected: {
-              bg_color: 'beige',
-              bd_color: '#000',
-              color: 'skyblue',
-              icon_color: 'red'
-            },
-            disabled: {
-              bg_color: 'brown',
-              bd_color: 'yellow',
-              color: 'blue',
-              icon_color: '#000'
-            },
-            loading: {
-              bg_color: '#fff',
-              bd_color: '#000',
-              color: 'gray',
-            }
-          }" disabled v-model="checked1" label="自定义" scale="1"></fl-checkbox>
+          <fl-checkbox :styles="styles" disabled v-model="checked1" label="自定义" scale="1"></fl-checkbox>
         </div>
         <div>
           <h3 id="checkbox-group">多选框组</h3>
@@ -119,6 +35,7 @@
         </div>
         <div>
           <h3 id="checkbox-init-data-selected">初始数据，默认选中</h3>
+
           <h4 id="checkbox-group-data">组中存在数据</h4>
           <fl-checkbox-group v-model="value2">
             <fl-checkbox label="主要" value="主要"></fl-checkbox>
@@ -126,12 +43,14 @@
             <fl-checkbox type="warning" label="警告" value="警告"></fl-checkbox>
             <fl-checkbox type="error" label="错误" value="错误"></fl-checkbox>
           </fl-checkbox-group>
+
           <h4 id="checkbox-data">单独设置true</h4>
           <fl-checkbox v-model="value3" type="success" label="设置true选中"></fl-checkbox>
           <fl-checkbox type="error" label="未设置"></fl-checkbox>
         </div>
         <div>
           <h3 id="checkbox-event">事件</h3>
+
           <h4 id="checkbox-group-event">组事件</h4>
           <fl-checkbox-group @change="changeEvent" v-model="value4">
             <fl-checkbox label="主要" value="主要"></fl-checkbox>
@@ -139,6 +58,7 @@
             <fl-checkbox type="warning" label="警告" value="警告"></fl-checkbox>
             <fl-checkbox type="error" label="错误" value="错误"></fl-checkbox>
           </fl-checkbox-group>
+
           <h4 id="checkbox-single-event">单checkbox事件</h4>
           <fl-checkbox @change="changeEvent2" type="error" label="值" value="值"></fl-checkbox>
         </div>
@@ -147,67 +67,12 @@
           <h4 id="checkbox-async-by-attribute">属性触发</h4>
           <fl-checkbox loading label="主要"></fl-checkbox>
           <fl-checkbox loading type="success" label="成功"></fl-checkbox>
-          <fl-checkbox :styles="{
-            root: {
-              bg_color: '#000',
-              bd_color: 'blue',
-              color: 'brown'
-            },
-            hover: {
-              bg_color: 'red',
-              bd_color: 'yellow',
-              color: 'red'
-            },
-            selected: {
-              bg_color: 'beige',
-              bd_color: '#000',
-              color: 'skyblue',
-              icon_color: 'red'
-            },
-            disabled: {
-              bg_color: 'brown',
-              bd_color: 'yellow',
-              color: 'blue',
-              icon_color: '#000'
-            },
-            loading: {
-              bg_color: '#fff',
-              bd_color: '#000',
-              color: 'gray',
-            }
-          }" loading label="自定义" scale="1"></fl-checkbox>
+          <fl-checkbox :styles="styles" loading label="自定义" scale="1"></fl-checkbox>
+
           <h4 id="checkbox-async-by-click">点击触发</h4>
           <fl-checkbox :beforeChange="beforeChange1" type="warning" label="警告"></fl-checkbox>
           <fl-checkbox :beforeChange="beforeChange2" type="error" label="错误"></fl-checkbox>
-          <fl-checkbox :styles="{
-            root: {
-              bg_color: '#000',
-              bd_color: 'blue',
-              color: 'brown'
-            },
-            hover: {
-              bg_color: 'red',
-              bd_color: 'yellow',
-              color: 'red'
-            },
-            selected: {
-              bg_color: 'beige',
-              bd_color: '#000',
-              color: 'skyblue',
-              icon_color: 'red'
-            },
-            disabled: {
-              bg_color: 'brown',
-              bd_color: 'yellow',
-              color: 'blue',
-              icon_color: '#000'
-            },
-            loading: {
-              bg_color: '#fff',
-              bd_color: '#000',
-              color: 'gray',
-            }
-          }" :beforeChange="beforeChange3" label="自定义" scale="1"></fl-checkbox>
+          <fl-checkbox :styles="styles" :beforeChange="beforeChange3" label="自定义" scale="1"></fl-checkbox>
         </div>
         <div>
           <h3 id="checkbox-all">全选</h3>
@@ -412,4 +277,34 @@ const data = [
   }`
   }
 ]
+
+const styles = {
+  root: {
+    bg_color: '#000',
+    bd_color: 'blue',
+    color: 'brown'
+  },
+  hover: {
+    bg_color: 'red',
+    bd_color: 'yellow',
+    color: 'red'
+  },
+  selected: {
+    bg_color: 'beige',
+    bd_color: '#000',
+    color: 'skyblue',
+    icon_color: 'red'
+  },
+  disabled: {
+    bg_color: 'brown',
+    bd_color: 'yellow',
+    color: 'blue',
+    icon_color: 'green'
+  },
+  loading: {
+    bg_color: '#fff',
+    bd_color: '#000',
+    color: 'gray',
+  }
+}
 </script>

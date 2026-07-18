@@ -1,6 +1,7 @@
 import { useRadioEvent } from "./use-radio-event";
 import { useRadioState } from "./use-radio-state";
 import { useRadioGroup } from "./use-radio-group";
+import { useRadioStyle } from "./use-radio-style";
 function useRadio(props, emit, modelValue) {
   const { groupValue, isGroup, isFormItem, formItemKey } = useRadioGroup();
   const { model, isSelected, _loading, _size } = useRadioState(
@@ -19,6 +20,10 @@ function useRadio(props, emit, modelValue) {
     isSelected,
   );
 
+  const {
+    radioStyle
+  } = useRadioStyle(props)
+
   return {
     model,
     isSelected,
@@ -26,6 +31,7 @@ function useRadio(props, emit, modelValue) {
     _size,
     changeEvent,
     clickEvent,
+    radioStyle,
   };
 }
 

@@ -40,7 +40,7 @@
       bottom-end
     </fl-popconfirm>
   </div>
-  <div style="margin-left:300px">
+  <div style="margin-left:0;width:100px;">
     <fl-popconfirm placement="left" @cancel="leftCancel" @confirm="leftConfirm">
       <template #reference>
         <button>left</button>
@@ -78,11 +78,13 @@
         right-end
       </template>
       right-end
+
     </fl-popconfirm>
   </div>
 </template>
 
 <script setup>
+
 const topCancel = () => {
   console.log('top-cancel')
 }

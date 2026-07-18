@@ -1,5 +1,5 @@
 <template>
-  <component @click="clickEvent" :is="tag" :class="[ns.b(), ns.m(type), ns.is('selected', isSelected),
+  <component :style="radioStyle" @click="clickEvent" :is="tag" :class="[ns.b(), ns.m(type), ns.is('selected', isSelected),
   ns.is('disabled', disabled || (!isSelected && _loading)), ns.is('loading', _loading && isSelected),
     , ns.m('size', _size)
   ]">
@@ -44,10 +44,20 @@ const props = defineProps({
   disabled: Boolean,
   loading: Boolean,
   beforeChange: Function,
-  size: String
+  size: String,
+  scale: [String, Number],
+  styles: Object,
 })
 const emit = defineEmits(['change'])
 
 
-const { model, isSelected, _loading, _size, changeEvent, clickEvent } = useRadio(props, emit, modelValue)
+const {
+  model,
+  isSelected,
+  _loading,
+  _size,
+  changeEvent,
+  clickEvent,
+  radioStyle,
+} = useRadio(props, emit, modelValue)
 </script>

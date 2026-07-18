@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" :class="props.class" v-if="$slots.reference" v-fl-tool-tip="popoverProps">
+  <component style="padding:0;" :is="tag" :class="props.class" v-if="$slots.reference" v-fl-tool-tip="popoverProps">
     <slot name="reference" />
   </component>
 </template>
@@ -29,8 +29,10 @@ const props = defineProps({
     type: String,
     default: () => ''
   },
+  padding: { type: Number, default: () => 12 },
   showArrow: { type: Boolean, default: () => true },
   trigger: { type: String, default: () => 'click' }, // hover | click
+  toBody: { type: Boolean, default: true },
   placement: {
     type: String,
     validator(position) {
@@ -49,9 +51,11 @@ const popoverProps = computed(() => {
   return {
     title: props.title,
     showArrow: props.showArrow,
+    padding: props.padding,
     slots: { default: slots.default },
     trigger: props.trigger,
-    placement: props.placement
+    placement: props.placement,
+    toBody: props.toBody
   }
 })
 </script>

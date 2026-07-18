@@ -1,69 +1,40 @@
 <template>
-  <div ref="datePickerRef" class="ep-date-picker">
-    <!-- 输入框 -->
-    <div class="ep-input__wrapper" @click="togglePicker">
-      <span class="ep-input__prefix-icon">
-        <InputPrefixIcon />
-      </span>
-      <input class="ep-input__inner" type="text" :value="displayValue" :placeholder="placeholder" readonly />
-      <span class="ep-input__suffix-icon" v-if="modelValue" @click.stop="clearDate">
-        <InputSuffixIcon />
-      </span>
-    </div>
+  <div class="ep-date-picker">
+    <FlPopover :showArrow="false" :toBody="true" class="fl-test" :padding="0" placement="bottom-start">
+      <template #reference>
+        <!-- 输入框 -->
+        <div class="ep-input__wrapper" @click="togglePicker">
+          <span class="ep-input__prefix-icon">
+            <InputPrefixIcon />
+          </span>
+          <input class="ep-input__inner" type="text" :value="displayValue" :placeholder="placeholder" readonly />
+          <span class="ep-input__suffix-icon" v-if="modelValue" @click.stop="clearDate">
+            <InputSuffixIcon />
+          </span>
+        </div>
+      </template>
 
-    <!-- 日历弹窗 -->
-    <div v-show="showPicker" class="ep-picker-panel">
-      <!-- 快捷选项 -->
-      <div class="ep-picker-panel__sidebar">
-        <button @click="handleShortcutClick(shortCut)" v-for="shortCut in shortCuts" :key="shortCut.text">
-          {{ shortCut.text }}
-        </button>
-      </div>
-
-      <!-- 日历主体 -->
-      <div class="ep-picker-panel__body">
-        <!-- 头部日历切换 -->
-        <div class="ep-picker-panel__header">
-          <button @click="prevMonth">
-            <TogglePrevIcon />
-          </button>
-          <span>{{ currentMonthName }} {{ currentYear }}</span>
-          <button @click="nextMonth">
-            <ToggleNextIcon />
+      <div class="ep-picker-panel">
+        <!-- 快捷选项 -->
+        <div class="ep-picker-panel__sidebar">
+          <button class="ep-button--text" @click="handleShortcutClick(shortCut)" v-for="shortCut in props.shortCuts"
+            :key="shortCut.text">
+            {{ shortCut.text }}
           </button>
         </div>
-        <!-- 星期标题 -->
-        <div class="ep-picker-panel__content">
-          <table class="ep-date-table">
-            <thead>
-              <tr>
-                <th class="ep-date-table-cell" v-for="day in weekDays" :key="day">{{ day }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(week, index) in calendarDays" :key="index">
-                <th @click="selectDate(dayObj)" class="ep-date-table-cell" :class="{
-                  'current': dayObj.isCurrentMonth,
-                  'today': dayObj.isToday,
-                  'selected': dayObj.isSelected,
-                  'disabled': dayObj.isDisabled
-                }" v-for="dayObj in week" :key="dayObj.date.toISOString()">
-                  <div class="ep-date-table-cell__text">{{ dayObj.date.getDate() }}</div>
-                </th>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+
+        <FlDatePickerPanel :range="props.range" :type="props.type" v-model="modelValue"></FlDatePickerPanel>
       </div>
-    </div>
+
+    </FlPopover>
+
   </div>
 </template>
 <script>
 import { useNamespace } from '@fall-ui/hooks';
 import InputPrefixIcon from './icons/input-prefix-icon.vue';
 import InputSuffixIcon from './icons/input-suffix-icon.vue';
-import TogglePrevIcon from './icons/toggle-prev-icon.vue';
-import ToggleNextIcon from './icons/toggle-next-icon.vue';
+import { FlDatePickerPanel, FlPopover } from '@fall-ui/components'
 const ns = useNamespace('date-picker')
 export default {
   name: ns.b()
@@ -71,17 +42,59 @@ export default {
 </script>
 <script setup>
 import { useNamespace } from '@fall-ui/hooks';
-import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { computed, watch } from 'vue'
 const ns = useNamespace('date-picker')
 
 const props = defineProps({
-  modelValue: {
-    type: [String, Date],
-    default: ''
-  },
   placeholder: {
     type: String,
     default: '请选择日期'
+  },
+  type: {
+    type: String,
+    default: 'date',
+    validator(v) {
+      return ['date', 'dates', 'week', 'month', 'months', 'year', 'years'].includes(v)
+    }
+  },
+  range: {
+    type: Boolean,
+    default: false,
+  },
+  shortCuts: {
+    type: Array,
+    default: [
+      {
+        text: '今天',
+        value: () => {
+          const d = new Date()
+          return d
+        }
+      },
+      {
+        text: '昨天',
+        value: () => {
+          const d = new Date()
+          d.setDate(d.getDate() - 1)
+          return d
+        }
+      },
+      {
+        text: '本周',
+        value: () => {
+          const d = new Date()
+          return new Date(d.setDate(d.getDate() - d.getDay() + 1))
+
+        }
+      },
+      {
+        text: '本月',
+        value: () => {
+          const d = new Date()
+          return new Date(d.getFullYear(), d.getMonth(), 1)
+        }
+      }
+    ]
   },
   format: {
     type: String,
@@ -89,155 +102,39 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue', 'change'])
-const datePickerRef = ref(null)
-
-// 常量与计算属性
-const showPicker = ref(false)
-const currentDate = ref(new Date()) // 当前日期,用于控制面板显示信息
-const weekDays = ['日', '一', '二', '三', '四', '五', '六']
-const monthNames = [
-  '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'
-]
-const currentYear = computed(() => currentDate.value.getFullYear())
-const currentMonth = computed(() => currentDate.value.getMonth())
-const currentMonthName = computed(() => monthNames[currentMonth.value])
-
-const displayValue = computed(() => {
-  if (!props.modelValue) return ''
-  return formatDate(new Date(props.modelValue), props.format)
+const modelValue = defineModel({
+  type: [String, Date, Array],
+  default: ''
 })
 
-// 快捷选项
-const shortCuts = [
-  {
-    text: '今天',
-    value: () => new Date()
-  },
-  {
-    text: '昨天',
-    value: () => {
-      const d = new Date()
-      d.setDate(d.getDate() - 1)
-      return d
-    }
-  },
-  {
-    text: '本周',
-    value: () => {
-      const d = new Date()
-      return new Date(d.setDate(d.getDate() - d.getDay() + 1))
-    }
-  },
-  {
-    text: '本月',
-    value: () => {
-      const d = new Date()
-      return new Date(d.getFullYear(), d.getMonth(), 1)
-    }
+const emit = defineEmits(['change'])
+
+const displayValue = computed(() => {
+  if (!modelValue.value) return ''
+  const values = modelValue.value
+
+  if (Array.isArray(values)) {
+    const result = values.map(v => {
+      return formatDate(new Date(v), props.format)
+    })
+    return result.join(',')
   }
-]
 
-// 上个月
-const prevMonth = () => {
-  currentDate.value = new Date(currentYear.value, currentMonth.value - 1, 1)
-}
-// 下个月
-const nextMonth = () => {
-  currentDate.value = new Date(currentYear.value, currentMonth.value + 1, 1)
-}
-// 选择日期
-const selectDate = (dayObj) => {
-  if (dayObj.isDisabled || !dayObj.isCurrentMonth) return
+  return formatDate(new Date(values), props.format)
+})
 
-  const newDate = dayObj.date
-  emit('update:modelValue', newDate)
-  emit('change', newDate)
-}
 // 清空日期
 const clearDate = () => {
-  emit('update:modelValue', '')
-  emit('change', '')
+  modelValue.value = ''
 }
 // 处理shortCut点击
 const handleShortcutClick = (shortCut) => {
-  const date = shortCut.value()
-  emit('update:modelValue', date)
-  emit('change', date)
-}
-// 展示面板
-const togglePicker = () => {
-  showPicker.value = !showPicker.value
-  if (showPicker.value) {
-    // 打开时，显示选择的月份
-    if (props.modelValue) {
-      currentDate.value = new Date(props.modelValue)
-    } else {
-      currentDate.value = new Date()
-    }
-  }
+  modelValue.value = shortCut.value()
 }
 
-// 日历网格生成逻辑
-const calendarDays = computed(() => {
-  const year = currentYear.value
-  const month = currentMonth.value
-  const firstDayOfMonth = new Date(year, month, 1)
-  const lastDayOfMonth = new Date(year, month + 1, 0)
-  const firstDayOfWeek = firstDayOfMonth.getDay() // 0 sun 6 sat
-  const daysInMonth = lastDayOfMonth.getDate()
-
-  const days = []
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-
-  // 填充上个月的日子
-  const prevMonthLastDay = new Date(year, month, 0).getDate()
-  for (let i = firstDayOfWeek - 1; i >= 0; i--) {
-    days.push(createDateObject(new Date(year, month - 1, prevMonthLastDay - i), false))
-  }
-
-  // 填充当月的日子
-  for (let i = 1; i <= daysInMonth; i++) {
-    days.push(createDateObject(new Date(year, month, i), true))
-  }
-
-  // 填充下个月的日子，凑够 42格 (6r * 7c)
-  const remainingCells = 42 - days.length
-  for (let i = 1; i <= remainingCells; i++) {
-    days.push(createDateObject(new Date(year, month + 1, i), false))
-  }
-
-  // 将一维数组转换为 二维数组，方便渲染
-  const weeks = []
-  for (let i = 0; i < days.length; i += 7) {
-    weeks.push(days.slice(i, i + 7))
-  }
-
-  return weeks
+watch(() => modelValue.value, (v) => {
+  emit('change', v)
 })
-
-// 生成要显示的 日期结构
-const createDateObject = (date, isCurrentMonth) => {
-  const d = new Date(date)
-  d.setHours(0, 0, 0, 0)
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  const isSelected = props.modelValue && d.getTime() === new Date(props.modelValue).getTime()
-  const isToday = d.getTime() === today.getTime()
-  let isDisabled = false
-  if (props.disalbedDate) {
-    isDisabled = props.disabledDate[date]
-  }
-
-  return {
-    date,
-    isCurrentMonth,
-    isSelected,
-    isToday,
-    isDisabled
-  }
-}
 
 // 格式化日期函数
 const formatDate = (date, formatStr) => {
@@ -257,19 +154,6 @@ const formatDate = (date, formatStr) => {
 
 }
 
-onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-})
-onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
-
-const handleClickOutside = (event) => {
-  // 非当前 组件，进行关闭
-  if (datePickerRef.value && !datePickerRef.value.contains(event.target)) {
-    showPicker.value = false
-  }
-}
 </script>
 <style scoped>
 .ep-date-picker {
@@ -315,63 +199,8 @@ const handleClickOutside = (event) => {
   cursor: pointer;
 }
 
-.ep-date-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.ep-date-table-cell {
-  padding: 8px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  color: #606266;
-  transition: background-color 0.2s;
-}
-
-.ep-date-table-cell__text {
-  width: 28px;
-  height: 28px;
-  line-height: 28px;
-  margin: 0 auto;
-  border-radius: 50%;
-}
-
-.ep-date-table-cell:hover:not(.disabled) {
-  background-color: #f5f7fa;
-}
-
-.ep-date-table-cell.current {
-  color: #606266;
-}
-
-.ep-date-table-cell:not(.current) {
-  color: #c0c4cc;
-}
-
-.ep-date-table-cell.today .ep-date-table-cell__text {
-  color: #409eff;
-  font-weight: bold;
-}
-
-.ep-date-table-cell.selected .ep-date-table-cell__text {
-  background-color: #409eff;
-  color: #fff;
-}
-
-.ep-date-table-cell.disabled {
-  color: #e4e7ed;
-  cursor: not-allowed;
-}
-
 .ep-picker-panel {
   display: flex;
-  position: absolute;
-  z-index: 2000;
-  left: 0;
-  top: 100%;
-  background-color: #fff;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
 .ep-picker-panel__sidebar {
@@ -382,8 +211,45 @@ const handleClickOutside = (event) => {
   width: 80px;
 }
 
-.ep-picker-panel__body {
-  flex: 1;
-  padding: 10px;
+.ep-button--text {
+  background: none;
+  border: none;
+  color: #606266;
+  text-align: left;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.ep-button--text:hover {
+  background-color: #f5f7fa;
+  color: #409eff;
+}
+
+.ep-picker-panel__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ep-picker-panel__title {
+  font-weight: 500;
+  font-size: 16px;
+  color: #606266;
+}
+
+.ep-picker-panel__icon-btn {
+  background: none;
+  border: none;
+  color: #606266;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.ep-picker-panel__icon-btn:hover {
+  background-color: #f5f7fa;
 }
 </style>

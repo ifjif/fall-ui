@@ -5,6 +5,7 @@
       展示浮层
     </button>
   </div>
+
   <div style="margin-left:200px">
     <button v-fl-tooltip="{ placement: 'top', content: 'top' }">
       top
@@ -35,7 +36,9 @@
     <button style="width:200px" v-fl-tooltip="{ placement: 'bottom-start', content: 'bottom-start' }">
       bottom-start
     </button>
-    <button style="width:200px" v-fl-tooltip="{ placement: 'bottom-end', content: 'bottom-end' }">
+    <button style="width:400px" v-fl-tooltip="{
+      placement: 'bottom-end', content: 'bottom-end'
+    }">
       bottom-end
     </button>
   </div>
@@ -77,7 +80,7 @@
 <script setup>
 import { reactive } from 'vue'
 const aa = reactive({
-  title: '这是title', placement: 'left', trigger: 'click', content: '这是内容'
+  title: '这是title', placement: 'top-start', trigger: 'click', content: '这是内容'
 })
 
 setTimeout(() => {

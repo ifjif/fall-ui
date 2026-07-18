@@ -22,7 +22,7 @@
               <fl-breadcrumb-item to="/">首页</fl-breadcrumb-item>
               <template v-for="item in crumbs" :key="item.path">
                 <fl-breadcrumb-item :to="item.path">{{ item.name
-                  }}</fl-breadcrumb-item>
+                }}</fl-breadcrumb-item>
               </template>
             </fl-breadcrumb>
           </div>

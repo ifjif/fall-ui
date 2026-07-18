@@ -1,6 +1,7 @@
 @use "./common/namespace.scss" as *;
 
 @include b(raw-popover) {
+  contain: paint;
   position: absolute;
   z-index: 2000;
   padding: 12px;
