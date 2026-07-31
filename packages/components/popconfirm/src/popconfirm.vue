@@ -25,14 +25,15 @@ const props = defineProps({
     type: String,
     default: () => 'div'
   },
-  display: {
-    type: String,
-    default: () => 'block'
-  },
   trigger: {
     type: String,
-    default: () => 'click'
+    default: () => 'click',
+    validator(v) {
+      return ['click', 'hover'].includes(v)
+    }
   },
+  padding: { type: Number, default: () => 12 },
+  showArrow: { type: Boolean, default: () => true },
   toBody: {
     type: Boolean,
     default: () => true
@@ -58,6 +59,8 @@ const popoverProps = computed(() => {
   return {
     trigger: props.trigger,
     footer: true,
+    showArrow: props.showArrow,
+    padding: props.padding,
     slots: { default: slots.default },
     placement: props.placement,
     toBody: props.toBody,

@@ -1,0 +1,19 @@
+@use '../common/componentVar.scss' as *;
+@use '../common/namespace.scss' as *;
+
+@mixin setComVar($var, $property: 'default') {
+  @include set-component-var('tree-node', $var, $property)
+}
+
+@function getComVarName($args...) {
+  @return getVarName('tree-node', $args...)
+}
+
+@function treeNodeVar($type: '') {
+  $treeNodeVar: (
+    'color':('default':getVarName('color', 'text')),
+    'bg-color':('default':getVarName('color', 'transparent')),
+    'hover-bg-color':('default':getVarName('color', 'text', 'light', 9)),
+  );
+@return $treeNodeVar;
+}

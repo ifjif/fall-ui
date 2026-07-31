@@ -88,16 +88,39 @@ const props = defineProps({
   width: [String, Number]
 })
 
-const modelValue = defineModel()
+const modelValue = defineModel({ type: String, default: '' })
 
 const slots = useSlots()
 const emit = defineEmits(['input', 'focus', 'blur', 'mouseenter', 'mouseleave', 'change', 'keyup', 'keydown'])
 
-const { _ref, isFocus, isHover, isPrefix, isSuffix, isPrepend, isAppend,
-  passwordIcon, clearIcon, typeControl, textLength, showCount, inputWidth,
-  focusEvent, _blurEvent, viewPasswordEvent, clearEvent, mouseleaveEvent, mouseenterEvent,
-  _changeEvent, keyupEvent, keydownEvent,
-  inputEvent, focusExpose, blurExpose, selectExpose } = useInput(props, slots, modelValue, emit)
+const {
+  _ref,
+  isFocus,
+  isHover,
+  isPrefix,
+  isSuffix,
+  isPrepend,
+  isAppend,
+  passwordIcon,
+  clearIcon,
+  typeControl,
+  textLength,
+  showCount,
+  inputWidth,
+  focusEvent,
+  _blurEvent,
+  viewPasswordEvent,
+  clearEvent,
+  mouseleaveEvent,
+  mouseenterEvent,
+  _changeEvent,
+  keyupEvent,
+  keydownEvent,
+  inputEvent,
+  focusExpose,
+  blurExpose,
+  selectExpose
+} = useInput(props, slots, modelValue, emit)
 
 defineExpose({
   ref: _ref,

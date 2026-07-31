@@ -9,6 +9,6 @@
 
   @include e(separator) {
     margin: 0 8px;
-    color: #c0c4cc;
+    color: var(#{getVarName('color', 'text')});
   }
 }

@@ -36,6 +36,8 @@ export function useScrollBar(props, emit) {
   const {
     width,
     height,
+    maxHeight,
+    maxWidth,
     thumbHeightStyle,
     thumbTopStyle,
     thumbWidthStyle,
@@ -85,6 +87,8 @@ export function useScrollBar(props, emit) {
     thumbHeightRatio,
     width,
     height,
+    maxHeight,
+    maxWidth,
     thumbHeightStyle,
     thumbTopStyle,
     thumbWidthStyle,

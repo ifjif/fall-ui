@@ -1,0 +1,31 @@
+@use '../common/componentVar.scss' as *;
+@use '../common/namespace.scss' as *;
+
+@mixin setComVar($var, $property: 'default') {
+  @include set-component-var('menu-item', $var, $property)
+}
+
+@function getComVarName($args...) {
+  @return getVarName('menu-item', $args...)
+}
+
+@function menuItemVar($type: '') {
+  $menuItemVar: (
+    'bg-color':('default':getVarName('color', 'transparent')),
+    'sub-bg-color':('default':getVarName('color', 'text', 'light', 8)),
+    'color':('default':getVarName('color', 'text', 'dark', 9)),
+    'hover-color':('default':getVarName('color', 'primary')),
+    'hover-bg-color':('default':getVarName('color', 'text', 'light', 9)),
+    'active-color':('default':getVarName('color', 'primary')),
+    'active-bg-color':('default':getVarName('color', 'primary', 'light', 9)),
+    'active-bar-color':('default':getVarName('color', 'primary')),
+  );
+@return $menuItemVar;
+}
+
+@function subMenuVar($type: '') {
+  $subMenuVar: (
+    'sub-bg-color':('default':getVarName('color', 'text', 'light', 8)),
+  );
+@return $subMenuVar;
+}

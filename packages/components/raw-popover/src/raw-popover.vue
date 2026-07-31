@@ -44,7 +44,13 @@ const props = defineProps({
     }
   },
   showArrow: { type: Boolean, default: () => true },
-  trigger: { type: String, default: () => 'hover' }, // 'click' | 'hover'
+  trigger: {
+    type: String,
+    default: () => 'hover',
+    validator(v) {
+      return ['hover', 'click'].includes(v)
+    }
+  },
   slots: { type: Object, default: () => { } },
   // 用于从外部设置位置
   top: { type: Number, default: () => 0 },

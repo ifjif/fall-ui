@@ -1,6 +1,16 @@
 import { computed } from 'vue'
+import { generateStyle } from '../tools/generateStyle'
+
 
 export function useTabsStyle(props, activeTabRect) {
+  const styles = computed(() => {
+    const styles = {
+      ...generateStyle(props.styles)
+    }
+
+    return styles
+  })
+
   const barStyle = computed(() => {
     const style = {}
     if (!activeTabRect.rect || ['card', 'border-card'].includes(props.type)) return style
@@ -31,6 +41,7 @@ export function useTabsStyle(props, activeTabRect) {
   })
 
   return {
+    styles,
     barStyle
   }
 }

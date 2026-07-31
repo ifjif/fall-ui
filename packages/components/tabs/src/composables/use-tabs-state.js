@@ -12,11 +12,21 @@ export function useTabsState(props) {
   // 是否只展示头
   const onlyHeader2 = computed(() => props.onlyHeader)
 
+  // 滚动方向
+  const wheel = computed(() => {
+    if (['left', 'right'].includes(props.topPosition)) {
+      return 'y'
+    }
+
+    return 'x'
+  })
+
   return {
     navRef,
     activeName,
     panes,
     activeTabRect,
-    onlyHeader2
+    onlyHeader2,
+    wheel
   }
 }

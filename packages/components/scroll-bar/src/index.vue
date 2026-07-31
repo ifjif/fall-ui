@@ -1,6 +1,6 @@
 <template>
   <div @mouseenter="showScrollBar = true" @mouseleave="showScrollBar = false" ref="containerRef" :class="[ns.b()]"
-    @scroll.passive="onScroll" @wheel="onWheel" :style="[width, height]" @touchstart="onTouchStart"
+    @scroll.passive="onScroll" @wheel="onWheel" :style="[width, height, maxHeight, maxWidth]" @touchstart="onTouchStart"
     @touchmove.passive="onTouchMove" @touchend="onTouchEnd">
     <div ref="contentRef">
       <!-- 判断水平方向是否会滚动 -->
@@ -41,6 +41,14 @@ const props = defineProps({
     type: [Number, String],
     default: () => 0
   },
+  maxHeight: {
+    type: [Number, String],
+    default: () => 0
+  },
+  maxWidth: {
+    type: [Number, String],
+    default: () => 0
+  },
   wheel: {
     type: String,
     validator(m) {
@@ -64,6 +72,8 @@ const {
   thumbHeightRatio,
   width,
   height,
+  maxHeight,
+  maxWidth,
   thumbHeightStyle,
   thumbTopStyle,
   thumbWidthStyle,

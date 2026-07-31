@@ -5,6 +5,12 @@ function useStyle() {
   const height = (height) => {
     return height ? { height: `${height}px` } : {};
   };
+  const maxHeight = (maxHeight) => {
+    return maxHeight ? { maxHeight: `${maxHeight}px` } : {};
+  }
+  const maxWidth = (maxWidth) => {
+    return maxWidth ? { maxWidth: `${maxWidth}px` } : {};
+  }
   const width = (width) => {
     return width ? { width: `${width}px` } : {};
   };
@@ -43,6 +49,8 @@ function useStyle() {
   return {
     fontSize,
     height,
+    maxHeight,
+    maxWidth,
     width,
     color,
     top,

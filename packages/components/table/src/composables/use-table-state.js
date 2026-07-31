@@ -1,11 +1,18 @@
 import { computed, ref } from 'vue'
-export function useTableState(props) {
-
+export function useTableState(props, getRowKeys) {
+  const selectionMap = ref({
+    data: new Map(),
+    change: false,
+  })
   const visibleColumns = computed(() => {
     return props.columns
   })
 
   const placeholderWidth = ref(2)
+  const placeholderRight = computed(() => {
+    const change = props.border ? 1 : 0
+    return -(placeholderWidth.value + change)
+  })
 
   // 筛选状态
   const filterValues = ref({}) // {prop:value, ...}
@@ -74,7 +81,7 @@ export function useTableState(props) {
           result = String(aVal).localeCompare(String(bVal))
         }
 
-        // 不相等，更据升降序 返回结果
+        // 不相等，根据升降序 返回结果
         if (result !== 0) {
           return result * factor
         }
@@ -89,8 +96,8 @@ export function useTableState(props) {
 
 
   // 分页信息
-  const innerCurrentPage = ref(props.pagination.currentPage)
-  const innerPageSize = ref(props.pagination.pageSize)
+  const innerCurrentPage = ref(props.pagination?.currentPage)
+  const innerPageSize = ref(props.pagination?.pageSize)
   // 分页数据
   // 以这个来表示数据，页数变化会有两次触发，一次本地的结果，然后是远程的新结果
   const paginatedData = computed(() => {
@@ -99,14 +106,46 @@ export function useTableState(props) {
     return sortedData.value.slice(start, start + innerPageSize.value)
   })
 
+  // 扁平化数据，用于渲染
+  const flatData = ref([])
+  // 已展开的节点key集合
+  const expandedKeys = ref(new Set())
+  // 判断是否是树形节点
+  const isTreeData = computed(() => {
+    return paginatedData.value.some(item =>
+      item[props.treeProps.children] && Array.isArray(item[props.treeProps.children])
+    )
+  })
+
+  // 页全选
+  const allSelected = computed(() => {
+    const keys = getRowKeys(paginatedData.value, props.treeProps)
+    return keys.length > 0 && keys.every(key => selectionMap.value.data.has(key))
+  })
+
+  // 页部分选中
+  const partialSelected = computed(() => {
+    const keys = getRowKeys(paginatedData.value, props.treeProps)
+    const selectedCount = keys.filter(key => selectionMap.value.data.has(key)).length
+    return keys.length > 0 && selectedCount > 0 && selectedCount < keys.length
+  })
+
+
   return {
+    selectionMap,
     visibleColumns,
     placeholderWidth,
+    placeholderRight,
     sortStates,
     paginatedData,
     innerCurrentPage,
     innerPageSize,
     filterValues,
-    debounceTimers
+    debounceTimers,
+    isTreeData,
+    expandedKeys,
+    flatData,
+    allSelected,
+    partialSelected,
   }
 }

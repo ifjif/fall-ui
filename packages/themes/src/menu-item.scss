@@ -1,7 +1,12 @@
 @use './common/namespace.scss' as *;
+@use './componentVar/menuItemVar.scss' as *;
 
 @include b(submenu) {
-  background-color: #f3f4f5;
+  @include setComVar(subMenuVar());
+
+  z-index: 1000;
+  position: absolute;
+  background-color: var(#{getComVarName('sub-bg-color')});
 
   &,
   ul {
@@ -10,11 +15,11 @@
     list-style: none;
   }
 
-  z-index: 1000;
-  position: absolute;
 }
 
+
 @include b(menu-item) {
+  @include setComVar(menuItemVar());
   position: relative;
 
   @include m(mode, vertical) {
@@ -38,10 +43,8 @@
 
     @include e(header, false) {
       @include s((active)) {
-        background-color: #ecf5ff;
-        color: #409eff;
         border-right: none;
-        border-bottom: 2px solid #409eff;
+        border-bottom: 2px solid var(#{getComVarName('active-bar-color')});
       }
     }
 
@@ -61,19 +64,20 @@
     display: flex;
     padding: 10px 0;
     align-items: center;
-    color: #333;
     transition: background-color 0.3s;
     cursor: pointer;
+    color: var(#{getComVarName('color')});
+    background-color: var(#{getComVarName('bg-color')});
 
     &:hover {
-      color: #409eff;
-      background-color: #f5f7fa;
+      #{getComVarName('color')}:var(#{getComVarName('hover-color')});
+      #{getComVarName('bg-color')}:var(#{getComVarName('hover-bg-color')});
     }
 
     @include s((active)) {
-      background-color: #ecf5ff;
-      color: #409eff;
-      border-right: 2px solid #409eff;
+      #{getComVarName('color')}:var(#{getComVarName('active-color')});
+      #{getComVarName('bg-color')}:var(#{getComVarName('active-bg-color')});
+      border-right: 2px solid var(#{getComVarName('active-bar-color')});
     }
   }
 
@@ -108,7 +112,7 @@
     }
   }
 
-  @include e(submenu, false) {
-    background-color: #f0f0f0;
+  @include e(submenu) {
+    background-color:var(#{getComVarName('sub-bg-color')});
   }
 }

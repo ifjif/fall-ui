@@ -1,0 +1,34 @@
+@use '../common/componentVar.scss' as *;
+@use '../common/namespace.scss' as *;
+
+@mixin setComVar($var, $property: 'default') {
+  @include set-component-var('raw-popover', $var, $property)
+}
+
+@function getComVarName($args...) {
+  @return getVarName('raw-popover', $args...)
+}
+
+@function rawPopoverVar($type: '') {
+  $rawPopoverVar: (
+    'font-size':('default':getVarName('font-size', 'default')),
+    'title-font-size':('default':getVarName('font-size', 'large')),
+    'btn-font-size':('default':getVarName('font-size', 'small')),
+    'round-size':('default': getVarName('component', 'round', 'small-1')),
+    'bd-size':('default':getVarName('border-size', 'small')),
+    'bg-color':('default':getVarName('color', 'white')),
+    'bd-color':('default':getVarName('color', 'text', 'light', 9)),
+    'bs-color':('default':getVarName('color', 'text', 'light', 8)),
+    'color':('default':getVarName('color', 'text')),
+    'title-color':('default':getVarName('color', 'text', 'dark', 9)),
+    'footer-bd-top-color':('default':getVarName('color', 'text', 'light', 9)),
+    'btn-bd-color':('default':getVarName('color', 'text', 'light', 8)),
+    'btn-bg-color':('default':getVarName('color', 'white')),
+    'btn-text-color':('default':getVarName('color', 'text')),
+    'btn-hover-bg-color':('default':getVarName('color', 'text', 'light', 9)),
+    'confirm-btn-bg-color':('default':getVarName('color', 'primary')),
+    'confirm-btn-text-color':('default':getVarName('color', 'white')),
+    'confirm-btn-hover-bg-color':('default':getVarName('color', 'primary', 'light', 5)),
+  );
+@return $rawPopoverVar;
+}

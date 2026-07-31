@@ -1,0 +1,24 @@
+@use './common/namespace.scss' as *;
+
+@include b(anchor) {
+  position: relative;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+
+  @include e(active-bar) {
+    position: absolute;
+    width: 2px;
+    background-color: #409eff;
+    left: 0;
+    transition: top 0.3s ease-in-out, height 0.3s ease-in-out;
+  }
+
+  @include e(list, false) {
+    padding-left: 10px;
+  }
+}

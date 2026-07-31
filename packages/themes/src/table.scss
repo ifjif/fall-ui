@@ -1,6 +1,9 @@
 @use './common/namespace.scss' as *;
+@use './componentVar/tableVar.scss' as *;
 
 @include b(table) {
+  @include setComVar(tableVar());
+
   position: relative;
   display: flex;
   height: 100%;
@@ -11,13 +14,13 @@
 
     th,
     td {
-      border: 1px solid #ebeef5;
+      border:var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
     }
   }
 
   @include s((stripe)) {
     tr:nth-child(even) {
-      background-color: #fafafa;
+      background-color: var(#{getComVarName('stripe-bg-color')});
     }
   }
 
@@ -37,7 +40,7 @@
   @include e(thead) {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 20;
   }
 
   @include e(inner) {
@@ -47,26 +50,27 @@
     min-height: 100%;
     border-collapse: collapse;
     table-layout: auto;
-    color: #606266;
-    font-size: 14px;
     box-sizing: border-box;
+    color: var(#{getComVarName('color')});
+    font-size: var(#{getComVarName('font-size')});
   }
 
   tbody {
     @include e(tr, false) {
 
       &:hover {
-        background-color: #f5f7fa;
+        background-color: var(#{getComVarName('hover-bg-color')});
       }
     }
   }
 
   @include e(tr) {
     position: relative;
+    background-color: var(#{getComVarName('tr-bg-color')});
 
     th {
       position: relative;
-      background-color: #f5f7fa;
+      background-color: var(#{getComVarName('th-bg-color')});
       text-align: left;
       font-width: bold;
     }
@@ -74,7 +78,7 @@
     th,
     td {
       padding: 12px 8px;
-      border-bottom: 1px solid #ebeef5;
+      border-bottom: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
       vertical-align: middle;
     }
 
@@ -82,16 +86,25 @@
       background-color: inherit;
       position: absolute;
       padding: 0;
-      height: 100%;
+      height: calc(100% - 1px);
       min-width: 2px;
       z-index: 2;
-      top: 0;
-      border: 0 !important;
+      top: -0.5px;
+      border-bottom: none !important;
+
+      @include s((last-placeholder)) {
+        border-bottom: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')}) !important;
+      }
+
+      @include s((placeholder-non-border)) {
+        border-bottom: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')}) !important;
+        border-top: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')}) !important;
+      }
     }
 
     @include e(placeholder-th, false) {
-      z-index: 10;
-      background-color: #f5f7fa;
+      z-index: 20;
+      background-color: var(#{getComVarName('th-bg-color')});
     }
 
   }
@@ -112,7 +125,7 @@
 
       @include s((active)) {
         opacity: 1;
-        color: #409eff;
+        color:var(#{getComVarName('sort-icon-active-color')});
       }
     }
 
@@ -134,14 +147,14 @@
     align-items: center;
     cursor: pointer;
     font-size: 12px;
-    color: #666;
+    color: var(#{getComVarName('filter-icon-color')});
     margin-left: 4px;
 
     @include e(filter-icon) {
       transition: transform 0.2s;
 
       &:hover {
-        color: #1890ff;
+        color: var(#{getComVarName('filter-icon-hover-color')});
       }
     }
 
@@ -151,7 +164,7 @@
       right: -4px;
       width: 6px;
       height: 6px;
-      color: #1890ff;
+      color: var(#{getComVarName('filter-icon-badge-color')});
       border-radius: 50%;
       z-index: 1;
     }
@@ -196,6 +209,35 @@
         color: #1890ff;
       }
     }
+  }
+
+
+  /* 树形控件样式 */
+  @include e(tree-toggle) {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    margin-right: 4px;
+    color: var(#{getComVarName('tree-icon-color')});
+
+    @include s((tree-toggle-expanded)) {
+      color: var(#{getComVarName('tree-icon-expanded-color')});
+      transform: rotate(90deg);
+
+    }
+  }
+
+  @include e(tree-indent) {
+    display: inline-block;
+    height: 1px;
+  }
+
+  @include e(pagination) {
+    margin: 10px 0;
   }
 
 }

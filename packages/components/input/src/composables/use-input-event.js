@@ -19,12 +19,12 @@ function useInputEvent(
     keydownEvent,
   } = useEvent();
 
-  const _blurEvent = () => {
-    blurEvent();
+  const _blurEvent = (e) => {
+    blurEvent(e);
     if (isFormItem) formItemKey.observer("blur");
   };
-  const _changeEvent = () => {
-    changeEvent();
+  const _changeEvent = (e) => {
+    changeEvent(e);
     if (isFormItem) formItemKey.observer("change");
   };
   const viewPasswordEvent = () => {

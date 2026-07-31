@@ -16,8 +16,10 @@ export function useMenuItem(props, emit) {
   } = useMenuItemEvent(props, emit, hasChildren)
 
   const {
+    styles,
     indentStyle,
-    subMenuStyle
+    subMenuStyle,
+    updatePosition
   } = useMenuItemStyle(props, submenuRef, ssubmenuRef, isOpen)
 
   return {
@@ -27,7 +29,9 @@ export function useMenuItem(props, emit) {
     isOpen,
     isActive,
     toggleMenu,
+    styles,
     indentStyle,
-    subMenuStyle
+    subMenuStyle,
+    updatePosition
   }
 }

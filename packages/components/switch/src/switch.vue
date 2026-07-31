@@ -1,5 +1,5 @@
 <template>
-  <label @click="clickEvent" :class="[ns.b(), ns.m(type), ns.is('active', checked), ns.is('disabled', disabled || _loading),
+  <label :style="switchStyle" @click="clickEvent" :class="[ns.b(), ns.m(type), ns.is('active', checked), ns.is('disabled', disabled || _loading),
   ns.is('loading', _loading && checked), ns.m('size', size)
   ]">
     <input :disabled="disabled || _loading" @click.stop @change="changeEvent" v-model="checked"
@@ -44,11 +44,25 @@ const props = defineProps({
   uncheckedIcon: [String, Object],
   loading: Boolean,
   beforeChange: Function,
-  size: String
+  size: String,
+  scale: {
+    type: [Number, String],
+    default: 1
+  },
+  styles: {
+    type: Object,
+  }
 })
 
 const modelValue = defineModel({ type: Boolean })
 const emit = defineEmits(['change'])
 
-const { checked, centerIcon, _loading, clickEvent, changeEvent } = useSwitch(props, emit, modelValue)
+const {
+  checked,
+  centerIcon,
+  _loading,
+  clickEvent,
+  changeEvent,
+  switchStyle,
+} = useSwitch(props, emit, modelValue)
 </script>

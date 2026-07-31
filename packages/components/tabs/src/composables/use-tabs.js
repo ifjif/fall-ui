@@ -8,7 +8,8 @@ export function useTabs(ns, props, emit) {
     activeName,
     panes,
     activeTabRect,
-    onlyHeader2
+    onlyHeader2,
+    wheel
   } = useTabsState(props)
 
   const {
@@ -21,6 +22,7 @@ export function useTabs(ns, props, emit) {
   } = useTabsEvent(ns, emit, panes, navRef, activeTabRect, activeName)
 
   const {
+    styles,
     barStyle,
   } = useTabsStyle(props, activeTabRect)
 
@@ -29,12 +31,14 @@ export function useTabs(ns, props, emit) {
     activeName,
     panes,
     onlyHeader2,
+    wheel,
     registerPane,
     removePane,
     updateBar,
     toggleTab,
     handleAdd,
     handleRemove,
+    styles,
     barStyle
   }
 }

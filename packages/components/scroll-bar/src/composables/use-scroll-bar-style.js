@@ -17,6 +17,12 @@ export function useScrollBarStyle(
   const height = computed(() => {
     return uStyle.height(props.height)
   })
+  const maxHeight = computed(() => {
+    return uStyle.maxHeight(props.maxHeight)
+  })
+  const maxWidth = computed(() => {
+    return uStyle.maxWidth(props.maxWidth)
+  })
 
   const thumbHeightStyle = computed(() => {
     return uStyle.height(thumbHeight.value)
@@ -41,6 +47,8 @@ export function useScrollBarStyle(
   return {
     width,
     height,
+    maxHeight,
+    maxWidth,
     thumbHeightStyle,
     thumbTopStyle,
     thumbWidthStyle,

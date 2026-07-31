@@ -1,11 +1,24 @@
 <template>
-  <h2>滚动栏</h2>
-  <fl-scrollbar style="background-color: yellow;" @top="topEvent" @bottom="bottomEvent" @left="leftEvent"
-    @right="rightEvent" height="400" width="400">
-    {{ content }}
-  </fl-scrollbar>
+  <ComponentLayout :anchors="anchors">
+    <h2>滚动栏</h2>
+    <h3 id="fl-scrollbar-basic">基础</h3>
+    <fl-scrollbar style="background-color: yellow;" @top="topEvent" @bottom="bottomEvent" @left="leftEvent"
+      @right="rightEvent" height="400" width="400">
+      {{ content }}
+    </fl-scrollbar>
+    <h3 id="fl-scrollbar-attrs">属性</h3>
+    <fl-table :data="data" :columns="columns"></fl-table>
+    <h3 id="fl-scrollbar-slots">插槽</h3>
+    <fl-table :data="slotData" :columns="slotColumns"></fl-table>
+    <h3 id="fl-scrollbar-events">事件</h3>
+    <fl-table :data="eventData" :columns="eventColumns"></fl-table>
+    <h3 id="fl-scrollbar-expose">暴露</h3>
+    <fl-table :data="exposeData" :columns="exposeColumns"></fl-table>
+  </ComponentLayout>
 </template>
 <script setup>
+import ComponentLayout from '@/layout/component-layout.vue'
+import { columns, eventColumns, exposeColumns, slotColumns } from '@/assets/com-props'
 import { ref } from 'vue'
 const content = ref(`
     fjdlsfjlsdjfsdlkfjdslfjsdlfjsdlkfjsdlfjsldfjsdlkfjsdklfjsdlfjsdlfjs
@@ -58,4 +71,48 @@ const leftEvent = () => {
 const rightEvent = () => {
   console.log('触发右部事件')
 }
+
+const anchors = [
+  { title: '基础', href: '#fl-scrollbar-basic' },
+  { title: '属性', href: '#fl-scrollbar-attrs' },
+  { title: '插槽', href: '#fl-scrollbar-slots' },
+  { title: '事件', href: '#fl-scrollbar-events' },
+  { title: '暴露', href: '#fl-scrollbar-expose' },
+]
+
+const data = [
+  { name: 'width', type: 'Number, String', default: '0', value: '', desc: '' },
+  { name: 'height', type: 'Number, String', default: '0', value: '', desc: '' },
+  { name: 'maxHeight', type: 'Number, String', default: '0', value: '', desc: '' },
+  { name: 'maxWidth', type: 'Number, String', default: '0', value: '', desc: '' },
+  { name: 'wheel', type: 'String', default: 'y', value: 'x, y', desc: '' },
+  { name: 'x', type: 'Boolean', default: 'true', value: 'true, false', desc: '' },
+]
+
+const slotData = [
+  { name: 'default', param: '', desc: '' },
+]
+
+const eventData = [
+  { name: 'top', params: '', desc: '向上滚动事件' },
+  { name: 'bottom', params: '', desc: '向下滚动事件' },
+  { name: 'left', params: '', desc: '向左滚动事件' },
+  { name: 'right', params: '', desc: '向右滚动事件' },
+  {
+    name: 'resize', params: '{ clientWidth, clientHeight, scrollWidth, scrollHeight }', desc:
+      '滚动容器宽高改变触发，内部内容容器宽高改变触发'
+  },
+  { name: 'scroll', params: '{ top , left  }', desc: '滚动事件' },
+
+]
+
+const exposeData = [
+  { name: 'scrollToTop', type: '函数', desc: '滚动到顶部' },
+  { name: 'scrollTopInc', type: '函数:(inc)', desc: '向上滚动增加值,接受一个数字' },
+  { name: 'scrollToBottom', type: '函数', desc: '滚动到底部' },
+  { name: 'scrollToLeft', type: '函数', desc: '滚动到左边' },
+  { name: 'scrollLeftInc', type: '函数:(inc)', desc: '向左滚动增加值,接受一个数字' },
+  { name: 'scrollToRight', type: '函数', desc: '滚动到右边' },
+  { name: 'getScrollContainer', type: '函数', desc: '得到内部滚动容器' },
+]
 </script>

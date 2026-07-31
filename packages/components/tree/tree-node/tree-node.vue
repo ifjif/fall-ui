@@ -11,12 +11,18 @@
         @change="handleCheckChange($event.target.checked)" />
 
       <span :class="[ns.e('label')]">
-        {{ node.label }}
+        <slot v-if="$slots.label" name="label" :item="node" />
+        <template v-else>
+          {{ node.label }}
+        </template>
       </span>
     </div>
     <ul v-if="hasChildren" v-show="expanded">
-      <TreeNode v-for="child in node.children" :node="child" :level="level + 1" :show-checkbox="showCheckbox"
-        :parent="node">
+      <TreeNode @check-change="$emit('check-change')" v-for="child in node.children" :node="child" :level="level + 1"
+        :show-checkbox="showCheckbox" :parent="node">
+        <template v-if="$slots.label" #label="{ item }">
+          <slot name="label" :item="item" />
+        </template>
       </TreeNode>
     </ul>
   </li>
@@ -55,6 +61,7 @@ const props = defineProps({
 
 // 设置父节点
 props.node.parent = props.parent
+const emit = defineEmits(['check-change'])
 
 const {
   hasChildren,
@@ -62,5 +69,6 @@ const {
   handleClick,
   handleCheckChange,
   indentStyle
-} = useTreeNode(props)
+} = useTreeNode(props, emit)
+
 </script>

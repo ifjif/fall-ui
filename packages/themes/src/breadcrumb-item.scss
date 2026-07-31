@@ -2,10 +2,7 @@
 
 @include b(breadcrumb-item) {
   display: inline-block;
-
-  --breadcrumb-item-color: #606266;
-  --breadcrumb-item-hover-color: #409eff;
-  color: var(--breadcrumb-item-color);
+  color: var(#{getVarName('color', 'text')});
 
   a {
     text-decoration: none;
@@ -14,11 +11,11 @@
   @include e(inner) {
     display: inline-flex;
     align-items: center;
-    color: var(--breadcrumb-item-color);
     cursor: pointer;
+    color: var(#{getVarName('color', 'text')});
 
     &:hover {
-      color: var(--breadcrumb-item-hover-color);
+      color: var(#{getVarName('color', 'primary')});
     }
   }
 }

@@ -1,0 +1,32 @@
+@use '../common/componentVar.scss' as *;
+@use '../common/namespace.scss' as *;
+
+@mixin setComVar($var, $property: 'default') {
+  @include set-component-var('table', $var, $property)
+}
+
+@function getComVarName($args...) {
+  @return getVarName('table', $args...)
+}
+
+@function tableVar($type: '') {
+  $tableVar: (
+    'font-size':('default':getVarName('font-size', 'default')),
+    'bd-size':('default':getVarName('border-size', 'small')),
+    'color':('default':getVarName('color', 'text')),
+    'bd-color':('default':getVarName('color', 'text', 'light', 8)),
+    'tr-bg-color':('default':getVarName('color', 'white')),
+    'fixed-tr-bg-color':('default':getVarName('color', 'white')),
+    'th-bg-color':('default':getVarName('color', 'text', 'light', 9)),
+    'fixed-th-bg-color':('default':getVarName('color', 'text', 'light', 9)),
+    'stripe-bg-color':('default':getVarName('color', 'text', 'light', 9)),
+    'hover-bg-color':('default':getVarName('color', 'text', 'light', 8)),
+    'sort-icon-active-color':('default':getVarName('color', 'primary')),
+    'filter-icon-color':('default':getVarName('color', 'text', 'dark', 5)),
+    'filter-icon-badge-color':('default':getVarName('color', 'primary')),
+    'filter-icon-hover-color':('default':getVarName('color', 'primary')),
+    'tree-icon-color':('default':getVarName('color', 'text', 'dark', 5)),
+    'tree-icon-expanded-color':('default':getVarName('color', 'primary')),
+  );
+@return $tableVar;
+}

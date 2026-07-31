@@ -6,20 +6,20 @@
       <button v-else-if="item === 'prev'" :class="[ns.e('btn-prev')]" @click="pageChange(currentPage - 1)">&lt;</button>
 
       <div v-else-if="item === 'pager'" :class="[ns.e('pager-wrapper')]">
-        <fl-scrollbar wheel="x">
+        <FlScrollBar wheel="x">
           <ul :class="[ns.e('pager')]">
             <li :class="[ns.e('pager-item'), ns.is('active', page === currentPage)]" v-for="(page, index) in pagerList"
               @click="pagerClick(page, index)">
               {{ page }}
             </li>
           </ul>
-        </fl-scrollbar>
+        </FlScrollBar>
       </div>
 
       <button v-else-if="item === 'next'" :class="[ns.e('btn-next')]" @click="pageChange(currentPage + 1)">&gt;</button>
 
       <div v-else-if="item === 'sizes'" :class="[ns.e('sizes')]">
-        <select v-model="currentPageSize" @change="handleSizeChange">
+        <select v-model="pageSize" @change="handleSizeChange">
           <option v-for="size in pageSizes" :key="size" :value="size">{{ size }} 条/页</option>
         </select>
       </div>
@@ -43,18 +43,11 @@ export default {
 <script setup>
 import { useNamespace } from '@fall-ui/hooks';
 import { usePagination } from './composables/use-pagination';
+import { FlScrollBar } from '@fall-ui/components'
 import { watch } from 'vue'
 const ns = useNamespace('pagination')
 
 const props = defineProps({
-  currentPage: { // 当前页
-    type: Number,
-    default: 1
-  },
-  pageSize: { // 每页数量
-    type: Number,
-    default: 10
-  },
   total: { // 总数据量
     type: Number,
     default: 0
@@ -76,18 +69,27 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:currentPage', 'update:pageSize', 'change'])
+const emit = defineEmits(['change'])
+
+const currentPage = defineModel('currentPage', {
+  type: Number,
+  default: 1
+})
+
+const pageSize = defineModel('pageSize', {
+  type: Number,
+  default: 10
+})
 
 const {
   pagerList,
-  currentPageSize,
   jumpPage,
   layoutList,
   pageChange,
   pagerClick,
   handleSizeChange,
   handleJumpBlur,
-} = usePagination(props, emit)
+} = usePagination(props, currentPage, pageSize, emit)
 
 watch(() => props.currentPage, nv => {
   jumpPage.value = nv

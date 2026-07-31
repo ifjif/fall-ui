@@ -1,5 +1,6 @@
 <template>
-  <div :class="[ns.b(), ns.m('type', type), ns.m('position', tabPosition), ns.is('only-header', onlyHeader)]">
+  <div :style="styles"
+    :class="[ns.b(), ns.m('type', type), ns.m('position', tabPosition), ns.is('only-header', onlyHeader)]">
     <!-- 头部导航 -->
     <div :class="[ns.e('header'), ns.is('add', type === 'card' && addable)]">
       <!-- 增加按钮, card且addable -->
@@ -8,10 +9,10 @@
       </span>
       <div :class="[ns.e('nav-wrapper')]">
         <!-- 活跃线 card | border-car不显示-->
-        <div v-if="!['card', 'border-car'].includes(type)" :class="[ns.e('active-bar')]" :style="barStyle">
+        <div v-if="!(['card', 'border-car'].includes(type))" :class="[ns.e('active-bar')]" :style="barStyle">
         </div>
         <!-- 标签列表 -->
-        <FlScrollBar wheel="x">
+        <FlScrollBar :wheel="wheel">
           <div :class="[ns.e('nav')]" ref="navRef">
             <div v-for="pane in panes" :class="[ns.e('nav-item'), ns.is('active', pane.name === activeName),
             ns.is('disabled', pane.disabled)
@@ -74,6 +75,9 @@ const props = defineProps({
   onlyHeader: {
     type: Boolean,
     default: false
+  },
+  styles: {
+    type: Object
   }
 })
 
@@ -84,12 +88,14 @@ const {
   activeName,
   panes,
   onlyHeader2,
+  wheel,
   registerPane,
   removePane,
   updateBar,
   toggleTab,
   handleAdd,
   handleRemove,
+  styles,
   barStyle
 } = useTabs(ns, props, emit)
 

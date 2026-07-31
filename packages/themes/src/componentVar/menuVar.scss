@@ -1,0 +1,25 @@
+@use '../common/componentVar.scss' as *;
+@use '../common/namespace.scss' as *;
+
+@mixin setComVar($var, $property: 'default') {
+  @include set-component-var('menu', $var, $property)
+}
+
+@function getComVarName($args...) {
+  @return getVarName('menu', $args...)
+}
+
+@function menuVar($type: '') {
+  $menuVar: (
+    'width':('default':getVarName('menu-width', 'default')),
+    'collapse-width':('default':getVarName('menu-width', 'collapse'))
+  );
+@return $menuVar;
+}
+
+@function currentMenuVar($type: '') {
+  $currentMenuVar: (
+    'current-width':('default':getVarName('menu-width', 'default')),
+  );
+@return $currentMenuVar;
+}

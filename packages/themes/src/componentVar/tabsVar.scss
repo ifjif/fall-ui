@@ -1,0 +1,31 @@
+@use '../common/componentVar.scss' as *;
+@use '../common/namespace.scss' as *;
+
+@mixin setComVar($var, $property: 'default') {
+  @include set-component-var('tabs', $var, $property)
+}
+
+@function getComVarName($args...) {
+  @return getVarName('tabs', $args...)
+}
+
+@function tabsVar($type: '') {
+  $tabsVar: (
+    'size':('default':getVarName('component-size', 'large')),
+    'bd-size':('default':getVarName('border-size', 'small')),
+    'bd-round':('default':getVarName('component-round', 'small-1')),
+    'font-size':('default':getVarName('font-size', 'default')),
+    'color':('default':getVarName('color', 'text', 'dark', 9)),
+    'bd-color':('default':getVarName('color', 'text', 'light', 8)),
+    'bg-color':('default':getVarName('color', 'white')),
+    'nav-bg-color':('default':getVarName('color', 'text', 'light', 9)),
+    'nav-active-bg-color':('default':getVarName('color', 'white')),
+    'hover-color':('default':getVarName('color', 'primary')),
+    'active-color':('default':getVarName('color', 'primary')),
+    'disabled-color':('default':getVarName('color', 'text', 'light', 5)),
+    'active-bar-bg-color':('default':getVarName('color', 'primary')),
+    'new-btn-color':('default':getVarName('color', 'text', 'light', 5)),
+    'new-btn-bg-color':('default':getVarName('color', 'text', 'light', 9)),
+  );
+@return $tabsVar;
+}

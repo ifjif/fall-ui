@@ -5,7 +5,6 @@
 </template>
 <script>
 import { useNamespace } from '@fall-ui/hooks'
-import { onMounted, provide, toRefs } from 'vue';
 const ns = useNamespace('form')
 
 export default {
@@ -14,6 +13,7 @@ export default {
 </script>
 <script setup>
 import { useNamespace } from '@fall-ui/hooks'
+import { provide, toRefs } from 'vue';
 import { FORM_KEY } from '../constant.js'
 const ns = useNamespace('form')
 

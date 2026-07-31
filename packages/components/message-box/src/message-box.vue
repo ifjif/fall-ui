@@ -37,7 +37,10 @@ const ns = useNamespace('messagebox')
 const props = defineProps({
   type: {
     type: String,
-    default: () => 'info'
+    default: () => 'info',
+    validator(v) {
+      return ['info', 'success', 'warning', 'error'].includes(v)
+    }
   },
   title: String,
   content: [String, Object],

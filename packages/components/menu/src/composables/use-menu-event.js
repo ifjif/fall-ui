@@ -1,8 +1,10 @@
-export function useMenuEvent(props, emit, openIndices, openIndicesUnique) {
+export function useMenuEvent(props, emit, openIndices, openIndicesUnique, topIndex) {
 
   // 选中菜单
-  const handleSelect = (index) => {
+  const handleSelect = (index, menu) => {
     emit('select', index)
+    // 设置顶部索引
+    topIndex.value = menu?.index
   }
 
   const findParent = (items, targetIndex) => {
@@ -49,9 +51,16 @@ export function useMenuEvent(props, emit, openIndices, openIndicesUnique) {
 
 
   // 根据activeIndex 递归找它的父亲
+  // 初始topIndex
   const updateIndecies = () => {
     const targetIndex = props.activeIndex
     const parents = findParent(props.data, targetIndex)
+
+    if (parents.length > 0) {
+      topIndex.value = parents[parents.length - 1]
+    } else {
+      topIndex.value = ''
+    }
 
     if (props.accordion) {
       openIndices.value = parents
@@ -60,6 +69,7 @@ export function useMenuEvent(props, emit, openIndices, openIndicesUnique) {
 
     openIndices.value.push(...parents)
     openIndicesUnique()
+
   }
 
   return {

@@ -2,22 +2,36 @@
 
 @function switchVar($type: '') {
   $switchVar: (
-    'bg-color':('default':#{getVarName('color', 'text', 'light-5')}),
-    'text-color':('default':#{getVarName('color', 'text')}),
-    'font-size':('default':#{getVarName('font-size', 'default')}),
-    'round':('default':#{getVarName('component-round', 'round')}),
-    'active-bg-color':('type':#{getVarName('color', $type)}),
-    'active-text-color':('type':#{getVarName('color', 'white')}),
-    'disabled-bg-color':('default':#{getVarName('color', 'text', 'light-9')}),
-    'disabled-text-color':('default':#{getVarName('color', 'text', 'light-5')}),
-    'circle-hover-bg-color':('default':#{getVarName('color', 'text', 'light-8')}),
-    'circle-bg-color':('default':#{getVarName('color', 'white')}),
-    'center-icon-color':('default':#{getVarName('color', 'text')}),
-    'loading-bg-color':('type':#{getVarName('color',$type,'light-5')}),
-    'size':('default':#{getVarName('switch-size','default')}),
-    'width':('default':#{getVarName('switch-width','default')}),
-    'padding':('default':#{getVarName('switch-padding', 'default')}),
+    'scale':('default':getVarName('component-scale', 'default')),
+    'bg-color':('default':getVarName('color', 'text', 'light-5')),
+    'text-color':('default':getVarName('color', 'text')),
+    'font-size':('default':getVarName('font-size', 'default')),
+    'round':('default':getVarName('component-round', 'round')),
+    'active-bg-color':('type':getVarName('color', $type)),
+    'active-text-color':('type':getVarName('color', 'white')),
+    'disabled-bg-color':('default':getVarName('color', 'text', 'light-9')),
+    'disabled-text-color':('default':getVarName('color', 'text', 'light-5')),
+    'circle-hover-bg-color':('default':getVarName('color', 'text', 'light-8')),
+    'circle-bg-color':('default':getVarName('color', 'white')),
+    'center-icon-color':('default':getVarName('color', 'text')),
+    'loading-bg-color':('type':getVarName('color', $type, 'light-5')),
+    'loading-text-color':('type':getVarName('color', 'white')),
+    'size':('default':getVarName('switch-size', 'default')),
+    'width':('default':getVarName('switch-width', 'default')),
+    'padding':('default':getVarName('switch-padding', 'default')),
   );
 
 @return $switchVar;
+}
+
+@function switchCurrentVar() {
+  $switchCurrentVar: (
+    'current-bg-color':('default':getVarName('switch', 'bg-color')),
+    'current-color':('default':getVarName('switch', 'text-color')),
+    'current-icon-color':('default':getVarName('switch', 'center-icon-color')),
+    'current-circle-bg-color':('default':getVarName('switch', 'circle-bg-color')),
+    'current-center-icon-color':('default':getVarName('switch', 'center-icon-color')),
+  );
+
+@return $switchCurrentVar;
 }

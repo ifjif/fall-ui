@@ -1,5 +1,10 @@
-export function useTreeNodeEvent(props, expanded, hasChildren) {
-
+export function useTreeNodeEvent(
+  props,
+  emit,
+  treeKey,
+  expanded,
+  hasChildren
+) {
   const handleClick = () => {
     if (hasChildren.value) {
       expanded.value = !expanded.value
@@ -17,52 +22,14 @@ export function useTreeNodeEvent(props, expanded, hasChildren) {
     props.node.checked = isChecked
     props.node.indeterminate = false
     // 向下改变子孩子
-    propagateDown(props.node, isChecked)
+    treeKey.propagateDown(props.node, isChecked)
 
     // 向上改变父亲
-    propagateUp(props.node.parent)
+    treeKey.propagateUp(props.node.parent)
+
+    emit('check-change')
   }
 
-  const propagateDown = (node, isChecked) => {
-    if (!node.children) return
-
-    node.children.forEach(child => {
-      child.checked = isChecked
-      child.indeterminate = false
-      propagateDown(child, isChecked)
-    })
-  }
-
-  const propagateUp = (node) => {
-    // 得到所有的节点
-    // 得到所有的选中节点
-    // 判断是否有 indeterminate 节点
-    if (!node) return
-    const indeterminate = node.children.some(child => child.indeterminate)
-
-    if (indeterminate) {
-      node.checked = false
-      node.indeterminate = true
-      return
-    }
-
-    const total = node.children.length
-    const checkedLength = node.children.filter(child => child.checked).length
-
-    if (checkedLength === 0) {
-      node.checked = false
-      node.indeterminate = false
-    } else if (total === checkedLength) {
-      node.checked = true
-      node.indeterminate = false
-    } else {
-      node.checked = false
-      node.indeterminate = true
-    }
-
-
-    propagateUp(node.parent)
-  }
 
   return {
     handleClick,

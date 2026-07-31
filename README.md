@@ -4,51 +4,57 @@
 
 # 拥有的组件
 
-button 按钮
-button-group 按钮组
-checkbox 多选框
-checkbox-group 多选框组
-checkbox-all 全选框
-container 容器
-main 容器中主体
-header 容器中头
-footer 容器中尾
-aside 容器侧边
-drawer 抽屉
-form 表单
-form-item 表单项
-icon 图标
-input 输入框
-mask 遮罩层
-message 消息提示
-messagebox 对话框
-modal 模态框
-radio 单选框
-radio-group 单选框组
-row 行布局
-col 行中列
-switch 切换按钮
-textarea 文本域
+- `fl-anchor/FlAnchor`
+- `fl-breadcrumb/FlBreadcrumb`
+- `fl-breadcrumb-item/FlBreadcrumbItem`
+- `fl-button/FlButton`
+- `fl-checkbox/FlCheckbox`
+- `fl-checkbox-group/FlCheckboxGroup`
+- `fl-checkbox-all/FlCheckboxAll`
+- `fl-date-picker/FlDatePicker`
+- `fl-date-picker-panel/FlDatePickerPanel`
+- `v-fl-tooltip(指令)`
+- `FlDrawer(函数调用)`
+- `fl-form/FlForm`
+- `fl-form-item/FlFormItem`
+- `fl-icon/FlIcon`
+- `fl-input/FlInput`
+- `fl-container/FlContainer`
+- `fl-header/FlHeader`
+- `fl-aside/FlAside`
+- `fl-main/FlMain`
+- `fl-footer/FlFooter`
+- `fl-loading/FlLoading`
+- `fl-mask/FlMask`
+- `fl-menu/FlMenu`
+- `FlMessage(函数调用)`
+- `FlMessageBox(函数调用)`
+- `fl-modal/FlModal`
+- `fl-pagination/FlPagination`
+- `fl-popconfirm/FlPopconfirm`
+- `fl-popover/FlPopover`
+- `fl-radio/FlRadio`
+- `fl-radio-group/FlRadioGroup`
+- `fl-row/FlRow`
+- `fl-col/FlCol`
+- `fl-scrollbar/FlScrollbar`
+- `fl-switch/FlSwitch`
+- `fl-table/FlTable`
+- `fl-tabs/FlTabs`
+- `fl-tab-pane/FlTabPane`
+- `fl-textarea/FlTextarea`
+- `fl-timeline/FlTimeline`
+- `fl-tree/FlTree`
 
 # 使用
 
-npm i fall-ui
+    npm i fall-ui
 
-import fallui from 'fall-ui'
+    import fallui from 'fall-ui'
+    //样式引入
+    import 'fall-ui/themes/index.css'
 
-app.use(fallui)
-样式引入
-import 'fall-ui/themes/index.css'
-
-message messagebox drawer 使用函数调用形式
-FlMessage() FlMessageBox() FlDrawer()
-
-其余
-fl-xxx
-
-# 各组件属性
-
-...
+    app.use(fallui)
 
 # 在线文档
 

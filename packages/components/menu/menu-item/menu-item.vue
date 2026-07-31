@@ -1,24 +1,51 @@
 <template>
-  <li ref="submenuRef" :class="[ns.b(), ns.m('mode', mode), ns.is('collapse', isCollapse)]">
-    <div @click="toggleMenu" :style="[indentStyle]" :class="[ns.e('header'), ns.is('active', isActive)]">
-      <span :class="[ns.e('icon'), ns.is('collapse', isCollapse)]">{{ menu.icon }}</span>
-      <span ref="titleRef" v-show="!isCollapse" :class="[ns.e('title')]">{{ menu.title }}</span>
+  <li ref="submenuRef" :style="styles" :class="[ns.b(), ns.m('mode', mode), ns.is('collapse', isCollapse)]">
+    <div @click="toggleMenu" :style="[indentStyle]" :class="[ns.e('header'), ns.is('active', isActive || childActive)]">
+      <span :class="[ns.e('icon'), ns.is('collapse', isCollapse)]">
+        <slot v-if="$slots.icon" name="icon" :item="menu" />
+        <template v-else>
+          {{ menu.icon }}
+        </template>
+      </span>
+      <span ref="titleRef" v-show="!isCollapse" :class="[ns.e('title')]">
+        <slot v-if="$slots.title" name="title" :item="menu" />
+        <template v-else>
+          {{ menu.title }}
+        </template>
+      </span>
       <span v-if="hasChildren" v-show="!isCollapse" :class="[ns.e('arrow'), ns.is('active', isOpen)]">▼</span>
     </div>
 
     <Teleport v-if="isCollapse" to="body">
-      <ul ref="ssubmenuRef" :style="[subMenuStyle]" v-if="hasChildren" v-show="isOpen"
-        :class="[subNs.b(), ns.e('submenu')]">
-        <MenuItem v-for="item in menu.children" :menu="item" :active-index="activeIndex" :openIndices="openIndices"
-          :indent="0" :mode="mode" @select="$emit('select', $event)" @toggle="$emit('toggle', $event)">
-        </MenuItem>
+      <ul ref="ssubmenuRef" :style="[subMenuStyle, styles]" v-if="hasChildren" v-show="isOpen" :class="[subNs.b()]">
+        <FlScrollBar maxHeight="240">
+          <MenuItem v-for="item in menu.children" :menu="item" :active-index="activeIndex" :openIndices="openIndices"
+            :styles="subStyles" :indent="0" :mode="mode" @select="selectChild($event, menu)"
+            @toggle="$emit('toggle', $event)">
+          <template v-if="$slots.icon" #icon="{ item }">
+            <slot name="icon" :item="item" />
+          </template>
+
+          <template v-if="$slots.title" #title="{ item }">
+            <slot name="title" :item="item" />
+          </template>
+          </MenuItem>
+        </FlScrollBar>
       </ul>
     </Teleport>
 
     <template v-else>
       <ul v-if="hasChildren" v-show="isOpen" :class="[ns.e('submenu')]">
-        <MenuItem v-for="item in menu.children" :menu="item" :active-index="activeIndex" :openIndices="openIndices"
-          :indent="indent + 1" :mode="mode" @select="$emit('select', $event)" @toggle="$emit('toggle', $event)">
+        <MenuItem :styles="subStyles" v-for="item in menu.children" :menu="item" :active-index="activeIndex"
+          :openIndices="openIndices" :indent="indent + 1" :mode="mode" @select="selectChild($event, menu)"
+          @toggle="$emit('toggle', $event)">
+        <template v-if="$slots.icon" #icon="{ item }">
+          <slot name="icon" :item="item" />
+        </template>
+
+        <template v-if="$slots.title" #title="{ item }">
+          <slot name="title" :item="item" />
+        </template>
         </MenuItem>
       </ul>
     </template>
@@ -26,6 +53,7 @@
 </template>
 <script>
 import { useNamespace } from '@fall-ui/hooks';
+import { FlScrollBar } from '@fall-ui/components'
 import MenuItem from './menu-item.vue'
 const ns = useNamespace('menu-item')
 
@@ -36,6 +64,7 @@ export default {
 <script setup>
 import { useMenuItem } from './composables/use-menu-item';
 import { useNamespace } from '@fall-ui/hooks';
+import { computed, onUnmounted } from 'vue'
 const ns = useNamespace('menu-item')
 const subNs = useNamespace('submenu')
 
@@ -49,6 +78,10 @@ const props = defineProps({
     default: 0
   },
   activeIndex: {
+    type: String,
+    default: ''
+  },
+  activeTopIndex: {
     type: String,
     default: ''
   },
@@ -66,10 +99,30 @@ const props = defineProps({
       return ['vertical', 'horizontal'].includes(m)
     },
     default: 'vertical'
+  },
+  styles: {
+    type: Object
   }
 })
 
 const emit = defineEmits(['toggle', 'select'])
+
+const childActive = computed(() => {
+  return props.activeTopIndex === props.menu.index && (props.isCollapse || props.mode === 'horizontal')
+})
+const selectChild = (e, menu) => {
+  emit('select', e, menu)
+}
+
+const subStyles = computed(() => {
+  const sub = { ...props.styles }
+  const ro = { ...sub['root'] }
+  if (ro) {
+    delete ro['bg_color']
+    sub['root'] = ro
+  }
+  return sub
+})
 
 const {
   submenuRef,
@@ -78,9 +131,22 @@ const {
   isOpen,
   isActive,
   toggleMenu,
+  styles,
   indentStyle,
   subMenuStyle,
+  updatePosition
 } = useMenuItem(props, emit)
 
+const scrollPositionUpdate = () => {
+  if (isOpen.value) {
+    updatePosition()
+  }
+}
+
+window.addEventListener('scroll', scrollPositionUpdate, { capture: true, passive: true })
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', scrollPositionUpdate)
+})
 
 </script>

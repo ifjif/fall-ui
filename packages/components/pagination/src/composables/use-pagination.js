@@ -2,21 +2,20 @@ import { usePaginationEvent } from "./use-pagination-event";
 import { usePaginationState } from "./use-pagination-state";
 import { usePaginationStyle } from "./use-pagination-style";
 
-export function usePagination(props, emit) {
+export function usePagination(props, currentPage, pageSize, emit) {
   const {
     pagerList,
     pageCount,
-    currentPageSize,
     jumpPage,
     layoutList,
-  } = usePaginationState(props)
+  } = usePaginationState(props, currentPage)
 
   const {
     pageChange,
     pagerClick,
     handleSizeChange,
     handleJumpBlur
-  } = usePaginationEvent(props, emit, pageCount, currentPageSize, jumpPage)
+  } = usePaginationEvent(props, emit, currentPage, pageSize, pageCount, jumpPage)
 
   const {
 
@@ -24,7 +23,6 @@ export function usePagination(props, emit) {
 
   return {
     pagerList,
-    currentPageSize,
     jumpPage,
     layoutList,
     pageChange,

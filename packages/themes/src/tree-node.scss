@@ -1,15 +1,20 @@
 @use './common/namespace.scss' as *;
+@use './componentVar/treeNodeVar.scss' as *;
 
 @include b(tree-node) {
+  @include setComVar(treeNodeVar());
+
   @include e(wrapper-content) {
     display: flex;
     align-items: center;
     padding: 4px 8px;
     border-radius: 4px;
     cursor: pointer;
+    background-color: var(#{getComVarName('bg-color')});
+    color: var(#{getComVarName('color')});
 
     &:hover {
-      background-color: #f5f7fa;
+      #{getComVarName('bg-color')}:var(#{getComVarName('hover-bg-color')});
     }
   }
 
@@ -18,12 +23,10 @@
     width: 16px;
     text-align: center;
     margin-right: 4px;
-    color: #606266;
     font-weight: bold;
   }
 
   @include e(label) {
     font-size: 14px;
-    color: #606266;
   }
 }

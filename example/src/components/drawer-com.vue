@@ -1,44 +1,52 @@
 <template>
-  <h2>抽屉</h2>
-  <div>
-    <h3>基础</h3>
-    <fl-button @click="open1">打开 left</fl-button>
-    <fl-button @click="open2">打开 right</fl-button>
-    <fl-button @click="open3">打开 top</fl-button>
-    <fl-button @click="open4">打开 bottom</fl-button>
-  </div>
-  <div>
-    <h3>自定义宽度和高度</h3>
-    <fl-button @click="open5">打开 left</fl-button>
-    <fl-button @click="open6">打开 right</fl-button>
-    <fl-button @click="open7">打开 top</fl-button>
-    <fl-button @click="open8">打开 bottom</fl-button>
-  </div>
-  <div>
-    <h3>固定屏幕</h3>
-    <fl-button @click="open9">打开 left</fl-button>
-    <fl-button @click="open10">打开 right</fl-button>
-    <fl-button @click="open11">打开 top</fl-button>
-    <fl-button @click="open12">打开 bottom</fl-button>
-  </div>
-  <div>
-    <h3>关闭、取消、确认事件</h3>
-    <fl-button @click="open13">打开</fl-button>
-  </div>
-  <div>
-    <h3>异步</h3>
-    <fl-button @click="open14">打开</fl-button>
-  </div>
-  <div>
-    <h3>遮罩层不关闭</h3>
-    <fl-button @click="open15">打开</fl-button>
-  </div>
-  <div>
-    <h3>内容虚拟节点</h3>
-    <fl-button @click="open16">打开</fl-button>
-  </div>
+  <ComponentLayout :anchors="anchors">
+    <h2>抽屉</h2>
+    <div>
+      <h3 id="fl-drawer-basic">基础</h3>
+      <fl-button @click="open1">打开 left</fl-button>
+      <fl-button @click="open2">打开 right</fl-button>
+      <fl-button @click="open3">打开 top</fl-button>
+      <fl-button @click="open4">打开 bottom</fl-button>
+    </div>
+    <div>
+      <h3 id="fl-drawer-width-height-self">自定义宽度和高度</h3>
+      <fl-button @click="open5">打开 left</fl-button>
+      <fl-button @click="open6">打开 right</fl-button>
+      <fl-button @click="open7">打开 top</fl-button>
+      <fl-button @click="open8">打开 bottom</fl-button>
+    </div>
+    <div>
+      <h3 id="fl-drawer-fixed-screen">固定屏幕</h3>
+      <fl-button @click="open9">打开 left</fl-button>
+      <fl-button @click="open10">打开 right</fl-button>
+      <fl-button @click="open11">打开 top</fl-button>
+      <fl-button @click="open12">打开 bottom</fl-button>
+    </div>
+    <div>
+      <h3 id="fl-drawer-some-events">关闭、取消、确认事件</h3>
+      <fl-button @click="open13">打开</fl-button>
+    </div>
+    <div>
+      <h3 id="fl-drawer-async">异步</h3>
+      <fl-button @click="open14">打开</fl-button>
+    </div>
+    <div>
+      <h3 id="fl-drawer-maskclose-false">遮罩层不关闭</h3>
+      <fl-button @click="open15">打开</fl-button>
+    </div>
+    <div>
+      <h3 id="fl-drawer-vnode">内容虚拟节点</h3>
+      <fl-button @click="open16">打开</fl-button>
+    </div>
+    <h3 id="fl-drawer-attrs">属性</h3>
+    <fl-table :data="data" :columns="columns"></fl-table>
+    <h3 id="fl-drawer-events">事件</h3>
+    <fl-table :data="eventData" :columns="eventColumns"></fl-table>
+  </ComponentLayout>
 </template>
 <script setup>
+import ComponentLayout from '@/layout/component-layout.vue';
+import { columns, eventColumns } from '@/assets/com-props';
 import { FlDrawer } from '@fall-ui/components';
 import { FlInput } from '@fall-ui/components';
 import { h } from 'vue';
@@ -140,4 +148,34 @@ const open15 = () => {
 const open16 = () => {
   FlDrawer({ title, fixedScreen: true, content: h(FlInput) })
 }
+
+const anchors = [
+  { title: '基础', href: 'fl-drawer-basic' },
+  { title: '自定义宽度和高度', href: 'fl-drawer-width-height-self' },
+  { title: '固定屏幕', href: 'fl-drawer-fixed-screen' },
+  { title: '关闭、取消、确认事件', href: 'fl-drawer-some-events' },
+  { title: '异步', href: 'fl-drawer-async' },
+  { title: '遮罩层不关闭', href: 'fl-drawer-maskclose-false' },
+  { title: '内容虚拟节点', href: 'fl-drawer-vnode' },
+  { title: '属性', href: 'fl-drawer-attrs' },
+  { title: '事件', href: 'fl-drawer-events' },
+]
+
+
+const data = [
+  { name: 'onClose', type: 'Function', default: '', value: '', desc: '' },
+  { name: 'placement', type: 'String', default: 'right', value: 'left, right, top, bottom', desc: '' },
+  { name: 'fixedScreen', type: 'Boolean', default: 'false', value: 'true, false', desc: '' },
+  { name: 'height', type: 'String, Number', default: '', value: '', desc: '' },
+  { name: 'width', type: 'String, Number', default: '', value: '', desc: '' },
+  { name: 'beforeChange', type: 'Function', default: '', value: '', desc: '' },
+  { name: 'maskClose', type: 'Boolean', default: 'true', value: '', desc: '' },
+  { name: 'content', type: 'String, Object', default: '', value: '', desc: '可为string或虚拟节点' },
+  { name: 'title', type: 'String', default: '', value: '', desc: '' },
+]
+
+const eventData = [
+  { name: 'cancel', params: '', desc: '取消事件' },
+  { name: 'ok', params: '', desc: '确认事件' }
+]
 </script>

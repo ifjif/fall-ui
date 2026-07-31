@@ -5,34 +5,44 @@
 
 @include b(switch) {
   @include set-component-var('switch', switchVar());
+  @include set-component-var('switch', switchCurrentVar());
+
   position: relative;
   display: inline-flex;
   align-items: center;
   box-sizing: border-box;
-  height: var(#{getVarName('switch', 'size')});
-  width: var(#{getVarName('switch', 'width')});
-  background-color: var(#{getVarName('switch', 'bg-color')});
-  border-radius: var(#{getVarName('switch', 'round')});
-  padding: var(#{getVarName('switch', 'padding')});
-  color:var(#{getVarName('switch', 'text-color')});
-  font-size: var(#{getVarName('switch', 'font-size')});
+  background-color: var(#{getVarName('switch','current','bg-color')});
+  color:var(#{getVarName('switch','current','color')});
   vertical-align: middle;
+  height: calc(var(#{getVarName('switch', 'size')}) * var(#{getVarName('switch', 'scale')}));
+  width: calc(var(#{getVarName('switch', 'width')}) * var(#{getVarName('switch', 'scale')}));
+  font-size: calc(var(#{getVarName('switch', 'font-size')}) * var(#{getVarName('switch', 'scale')}));
+  border-radius: calc(var(#{getVarName('switch', 'round')}) * var(#{getVarName('switch', 'scale')}));
+  padding: calc(var(#{getVarName('switch', 'padding')}) * var(#{getVarName('switch', 'scale')}));
 
   @include s((active)) {
-    #{getVarName('switch', 'bg-color')}:var(#{getVarName('switch', 'active-bg-color')});
-    #{getVarName('switch', 'text-color')}:var(#{getVarName('switch', 'active-text-color')});
+    #{getVarName('switch', 'current', 'bg-color')}:var(#{getVarName('switch', 'active-bg-color')});
+    #{getVarName('switch', 'current','color')}:var(#{getVarName('switch', 'active-text-color')});
+    //#{getVarName('switch', 'bg-color')}:var(#{getVarName('switch', 'active-bg-color')});
+    //#{getVarName('switch', 'text-color')}:var(#{getVarName('switch', 'active-text-color')});
   }
 
   @include s((disabled)) {
-    #{getVarName('switch', 'bg-color')}:var(#{getVarName('switch', 'disabled-bg-color')});
-    #{getVarName('switch', 'text-color')}:var(#{getVarName('switch', 'disabled-text-color')});
-    #{getVarName('switch', 'circle-hover-bg-color')}: var(#{getVarName('switch', 'circle-bg-color')});
+    #{getVarName('switch','current','bg-color')}:var(#{getVarName('switch', 'disabled-bg-color')});
+    #{getVarName('switch','current','color')}:var(#{getVarName('switch', 'disabled-text-color')});
+    //#{getVarName('switch', 'bg-color')}:var(#{getVarName('switch', 'disabled-bg-color')});
+    //#{getVarName('switch', 'text-color')}:var(#{getVarName('switch', 'disabled-text-color')});
+    //#{getVarName('switch', 'circle-bg-color')}: var(#{getVarName('switch', 'circle-hover-bg-color')});
+
+    #{getVarName('switch', 'current', 'circle-bg-color')}:var(#{getVarName('switch', 'circle-hover-bg-color')});
     cursor: var(#{getVarName('cursor', 'disabled')});
   }
 
   @include s((loading)) {
-    #{getVarName('switch', 'bg-color')}:var(#{getVarName('switch', 'loading-bg-color')});
-    #{getVarName('switch', 'text-color')}:var(#{getVarName('switch', 'active-text-color')});
+    #{getVarName('switch','current','bg-color')}:var(#{getVarName('switch', 'loading-bg-color')});
+    #{getVarName('switch','current','color')}:var(#{getVarName('switch', 'loading-text-color')});
+    //#{getVarName('switch', 'bg-color')}:var(#{getVarName('switch', 'loading-bg-color')});
+    //#{getVarName('switch', 'text-color')}:var(#{getVarName('switch', 'active-text-color')});
   }
 
   @include e(checkbox) {
@@ -45,19 +55,19 @@
     justify-content: center;
     position: absolute;
     border: none;
-    width: calc(var(#{getVarName('switch', 'size')}) - 8px);
-    height: calc(var(#{getVarName('switch', 'size')}) - 8px);
-    border-radius: var(#{getVarName('switch', 'round')});
-    background-color: var(#{getVarName('switch', 'circle-bg-color')});
-    color: var(#{getVarName('switch', 'center-icon-color')});
+    background-color: var(#{getVarName('switch','current', 'circle-bg-color')});
+    color: var(#{getVarName('switch','current','center-icon-color')});
+    width: calc((var(#{getVarName('switch', 'size')}) - 8px) * var(#{getVarName('switch', 'scale')}));
+    height: calc((var(#{getVarName('switch', 'size')}) - 8px) * var(#{getVarName('switch', 'scale')}));
+    border-radius: calc(var(#{getVarName('switch', 'round')}) * var(#{getVarName('switch', 'scale')}));
 
 
     &:hover {
-      background-color: var(#{getVarName('switch', 'circle-hover-bg-color')});
+      #{getVarName('switch', 'current', 'circle-bg-color')}:var(#{getVarName('switch', 'circle-hover-bg-color')});
     }
 
     @include s((checked)) {
-      right: var(#{getVarName('switch', 'padding')});
+      right: calc(var(#{getVarName('switch', 'padding')}) * var(#{getVarName('switch', 'scale')}));
     }
   }
 

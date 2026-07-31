@@ -50,36 +50,6 @@ const props = defineProps({
   styles: Object,
 })
 const emit = defineEmits(['click'])
-/*
- * 自定义样式
- * styles
- * {
- *  root:{
- *    bg_color:
- *    bd_color
- *    color
- *  },
- *  hover:{
- *    bg_color:
- *    bd_color
- *    color
- *  },
- *  disabled:{
- *    bg_color:
- *    bd_color
- *    color
- *  },
- *  active:{
- *    bg_color:
- *    bd_color
- *    color
- *  }
- * }
- *
- *
- *
- */
-
 const { _loading, controlSize, clickEvent, btStyle } = useButton(props, emit, parentSize)
 
 </script>

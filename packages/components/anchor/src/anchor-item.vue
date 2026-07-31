@@ -1,6 +1,6 @@
 <template>
-  <li class="anchor-item" :key="anchor.href">
-    <span :style="[paddingLeft]" :href="anchor.href" :class="[{ 'active-href': isActive }]"
+  <li :class="[ns.b()]" :key="anchor.href">
+    <span :style="[paddingLeft]" :href="anchor.href" :class="[ns.e('title'), ns.is('active-href', isActive)]"
       @click.prevent="$emit('click', anchor)">
       {{ anchor.title }}
     </span>
@@ -14,6 +14,8 @@
 <script setup>
 import AnchorItem from './anchor-item.vue'
 import { computed, inject } from 'vue'
+import { useNamespace } from '@fall-ui/hooks';
+const ns = useNamespace('anchor-item')
 
 const props = defineProps({
   anchor: { //{title, href:'#xx', children}
@@ -38,28 +40,3 @@ const paddingLeft = computed(() => ({
 }))
 
 </script>
-<style scoped>
-ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.anchor-item {
-  cursor: pointer;
-  color: #606266;
-
-  span {
-    transition: color 0.3s ease-in-out;
-  }
-
-  span:hover {
-    color: #409eff;
-  }
-
-}
-
-.active-href {
-  color: #409eff;
-}
-</style>

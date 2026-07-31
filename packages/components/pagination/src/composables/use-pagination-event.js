@@ -1,9 +1,9 @@
-export function usePaginationEvent(props, emit, pageCount, currentPageSize, jumpPage) {
+export function usePaginationEvent(props, emit, currentPage, pageSize, pageCount, jumpPage) {
 
   const pageChange = (page) => {
-    if (page < 1 || page > pageCount || page === props.currentPage) return
+    if (page < 1 || page > pageCount || page === currentPage.value) return
 
-    emit('update:currentPage', page)
+    currentPage.value = page
     emit('change', { page, pageSize: props.pageSize })
   }
 
@@ -14,9 +14,9 @@ export function usePaginationEvent(props, emit, pageCount, currentPageSize, jump
     if (page === '...') {
       const isStartEllipsis = (index - 1) === 0
       if (isStartEllipsis) {
-        pageChange(props.currentPage - 5)
+        pageChange(currentPage.value - 5)
       } else {
-        pageChange(props.currentPage + 5)
+        pageChange(currentPage.value + 5)
       }
       return
     }
@@ -25,18 +25,16 @@ export function usePaginationEvent(props, emit, pageCount, currentPageSize, jump
 
   // 页大小改变
   const handleSizeChange = () => {
-    emit('update:pageSize', currentPageSize.value)
-
     // 一般大小改变，跳转到第一页
-    emit('update:currentPage', 1)
+    currentPage.value = 1
 
-    emit('change', { page: 1, pageSize: currentPageSize.value })
+    emit('change', { page: 1, pageSize: pageSize.value })
   }
 
   // jump blur 处理
   const handleJumpBlur = () => {
     if (!jumpPage.value) {
-      jumpPage.value = props.currentPage
+      jumpPage.value = currentPage.value
       return
     }
 
@@ -45,10 +43,10 @@ export function usePaginationEvent(props, emit, pageCount, currentPageSize, jump
     if (page < 1) page = 1
     else if (page > pageCount.value) page = pageCount.value
 
-    if (page !== props.currentPage) {
+    if (page !== currentPage.value) {
       pageChange(page)
     } else {
-      jumpPage.value = props.currentPage
+      jumpPage.value = currentPage.value
     }
   }
 

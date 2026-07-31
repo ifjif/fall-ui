@@ -1,6 +1,9 @@
 @use './common/namespace.scss' as *;
+@use './componentVar/tabsVar.scss' as *;
 
 @include b(tabs) {
+  @include setComVar(tabsVar());
+
   display: flex;
   flex-direction: column;
 
@@ -15,14 +18,31 @@
   //==============================================type card
   @include m(type, card) {
 
+    @include e(nav, false) {
+      gap: 0;
+    }
+
+    @include e(nav-item, false) {
+      margin-right: 2px;
+      padding: 0 20px;
+      border: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
+      border-radius: var(#{getComVarName('bd-round')}) var(#{getComVarName('bd-round')}) 0 0;
+      background-color: var(#{getComVarName('nav-bg-color')});
+
+      @include s((active)) {
+        border-bottom: none;
+        #{getComVarName('nav-bg-color')}:var(#{getComVarName('nav-active-bg-color')});
+      }
+    }
+
     //==============================================type card bottom
     @include m-conn(position, bottom) {
 
       @include e(nav-item, false) {
-        border-radius: 0 0 4px 4px;
+        border-radius: 0 0 var(#{getComVarName('bd-round')}) var(#{getComVarName('bd-round')});
 
         @include s((active)) {
-          border-bottom: 1px solid #e4e7ed;
+          border-bottom: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
           border-top: none;
         }
       }
@@ -30,7 +50,7 @@
       @include e(new-btn, false) {
         bottom: 0;
         top: -1px;
-        border-radius: 0 0 4px 4px;
+        border-radius: 0 0 var(#{getComVarName('bd-round')}) var(#{getComVarName('bd-round')});
       }
     }
 
@@ -52,10 +72,10 @@
       @include e(nav-item, false) {
         margin-right: 0;
         margin-bottom: 2px;
-        border-radius: 4px 0 0 4px;
+        border-radius: var(#{getComVarName('bd-round')}) 0 0 var(#{getComVarName('bd-round')});
 
         @include s((active)) {
-          border-bottom: 1px solid #e4e7ed;
+          border-bottom: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
           border-right: none;
         }
       }
@@ -64,7 +84,7 @@
         width: 100%;
         bottom: 0;
         right: -1px;
-        border-radius: 4px 0 0 4px;
+        border-radius: var(#{getComVarName('bd-round')}) 0 0 var(#{getComVarName('bd-round')});
       }
 
     }
@@ -87,10 +107,10 @@
       @include e(nav-item, false) {
         margin-left: 0;
         margin-bottom: 2px;
-        border-radius: 0 4px 4px 0;
+        border-radius: 0 var(#{getComVarName('bd-round')}) var(#{getComVarName('bd-round')}) 0;
 
         @include s((active)) {
-          border-bottom: 1px solid #e4e7ed;
+          border-bottom: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
           border-left: none;
         }
       }
@@ -99,45 +119,49 @@
         width: 100%;
         bottom: 0;
         left: -1px;
-        border-radius: 0 4px 4px 0;
+        border-radius: 0 var(#{getComVarName('bd-round')}) var(#{getComVarName('bd-round')}) 0;
       }
 
     }
 
     //==============================================type card right end
-
-    @include e(nav, false) {
-      gap: 0;
-    }
-
-    @include e(nav-item, false) {
-      margin-right: 2px;
-      padding: 0 20px;
-      border: 1px solid #e4e7ed;
-      border-radius: 4px 4px 0 0;
-      background-color: #f5f7fa;
-
-      @include s((active)) {
-        border-bottom: none;
-        background-color: #fff;
-      }
-    }
   }
 
   //==============================================type card end
 
   //==============================================type border-card
   @include m(type, border-card) {
-    background: #fff;
-    border: 1px solid #dcdfe6;
-    border-radius: 4px;
+    background-color: var(#{getComVarName('bg-color')});
+    border-radius: var(#{getComVarName('bd-round')});
+    border: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
+
+    @include e(nav, false) {
+      gap: 0;
+    }
+
+    @include e(header, false) {
+      background-color: var(#{getComVarName('nav-bg-color')});
+    }
+
+    @include e(nav-item, false) {
+      padding: 0 20px;
+      border: var(#{getComVarName('bd-size')}) solid transparent;
+      margin: 0 -1px 0;
+
+      @include s((active)) {
+        background-color:var(#{getComVarName('nav-active-bg-color')});
+        border-top-color: var(#{getComVarName('bd-color')});
+        border-right-color: var(#{getComVarName('bd-color')});
+        border-left-color: var(#{getComVarName('bd-color')});
+      }
+    }
 
     //==============================================type border-card bottom
     @include m-conn(position, bottom) {
       @include e(nav-item, false) {
 
         @include s((active)) {
-          border-bottom-color: #dcdfe6;
+          border-bottom-color: var(#{getComVarName('bd-color')});
           border-top: none;
         }
       }
@@ -156,7 +180,7 @@
 
         @include s((active)) {
           border-right: none;
-          border-bottom: 1px solid #e4e7ed;
+          border-bottom: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
         }
       }
 
@@ -175,35 +199,13 @@
 
         @include s((active)) {
           border-left: none;
-          border-bottom: 1px solid #e4e7ed;
+          border-bottom: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
         }
       }
 
     }
 
     //==============================================type border-card right end
-
-
-    @include e(nav, false) {
-      gap: 0;
-    }
-
-    @include e(header, false) {
-      background-color: #f5f7fa;
-    }
-
-    @include e(nav-item, false) {
-      padding: 0 20px;
-      border: 1px solid transparent;
-      margin: 0 -1px 0;
-
-      @include s((active)) {
-        background-color: #fff;
-        border-top-color: #dcdfe6;
-        border-right-color: #dcdfe6;
-        border-left-color: #dcdfe6;
-      }
-    }
   }
 
   //==============================================type border-card end
@@ -213,7 +215,7 @@
     @include e(header, false) {
       order: 2;
       border-bottom: none;
-      border-top: 1px solid #e4e7ed;
+      border-top: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
       margin: 15px 0 0;
     }
 
@@ -236,7 +238,7 @@
 
     @include e(header, false) {
       border-bottom: none;
-      border-right: 1px solid #e4e7ed;
+      border-right: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
       margin: 0;
     }
 
@@ -262,7 +264,7 @@
     @include e(header, false) {
       order: 2;
       border-bottom: none;
-      border-left: 1px solid #e4e7ed;
+      border-left: 1px solid var(#{getComVarName('bd-color')});
       margin: 0;
     }
 
@@ -288,7 +290,7 @@
   @include e(header) {
     padding: 0;
     margin: 0 0 15px;
-    border-bottom: 1px solid #e4e7ed;
+    border-bottom: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
     position: relative;
   }
 
@@ -297,20 +299,20 @@
     z-index: 10;
     position: absolute;
     right: 0;
-    border: 1px solid #dcdfe6;
+    border: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
     height: 38px;
     width: 38px;
     line-height: 38px;
     text-align: center;
     font-size: 16px;
-    border-radius: 4px 4px 0 0;
+    border-radius: var(#{getComVarName('bd-round')}) var(#{getComVarName('bd-round')}) 0 0;
     cursor: pointer;
-    color: #909399;
-    background: #f5f7fa;
+    color: var(#{getComVarName('new-btn-color')});
+    background-color: var(#{getComVarName('new-btn-bg-color')});
     bottom: -1px;
 
     &:hover {
-      color: #409eff;
+      color: var(#{getComVarName('hover-color')});
     }
   }
 
@@ -329,37 +331,38 @@
     display: inline-flex;
     align-items: center;
     box-sizing: border-box;
-    color: #303133;
-    height: 40px;
-    line-height: 40px;
-    transition: all .3s;
+    font-size: var(#{getComVarName('font-size')});
+    color: var(#{getComVarName('color')});
+    height: var(#{getComVarName('size')});
+    line-height: var(#{getComVarName('size')});
     cursor: pointer;
+    //transition: all .3s;
 
     &:hover {
-      color: #409eff;
+      #{getComVarName('color')}:var(#{getComVarName('hover-color')});
     }
 
     @include s((active)) {
-      color: #409eff;
+      #{getComVarName('color')}:var(#{getComVarName('active-color')});
     }
 
     @include s((disabled)) {
-      color: #909399;
+      #{getComVarName('color')}:var(#{getComVarName('disabled-color')});
       cursor: not-allowed;
     }
   }
 
   @include e(close) {
     margin-left: 8px;
-    color: #909399;
+    color: var(#{getComVarName('disabled-color')});
   }
 
   @include e(active-bar) {
     position: absolute;
-    background-color: #409eff;
     z-index: 1;
     // 贝赛尔曲线 让动画更自然
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    background-color: var(#{getComVarName('active-bar-bg-color')});
   }
 
   @include e(content) {

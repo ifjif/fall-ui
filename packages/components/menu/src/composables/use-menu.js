@@ -5,7 +5,8 @@ import { useMenuUtils } from "./use-menu-utils"
 export function useMenu(props, emit) {
 
   const {
-    openIndices
+    openIndices,
+    topIndex
   } = useMenuState()
 
   const {
@@ -16,14 +17,18 @@ export function useMenu(props, emit) {
     handleToggle,
     handleSelect,
     updateIndecies
-  } = useMenuEvent(props, emit, openIndices, openIndicesUnique)
+  } = useMenuEvent(props, emit, openIndices, openIndicesUnique, topIndex)
 
-  const { } = useMenuStyle()
+  const {
+    styles
+  } = useMenuStyle(props)
 
   return {
     openIndices,
+    topIndex,
     handleToggle,
     handleSelect,
-    updateIndecies
+    updateIndecies,
+    styles
   }
 }

@@ -1,25 +1,16 @@
 @use './common/namespace.scss' as *;
+@use './componentVar/paginationVar.scss' as *;
+@use './common/var.scss' as *;
 
 @include b(pagination) {
-  --pagination-height: 32px;
-  --pagination-font-size: 14px;
-  --pagination-border-radius: 4px;
-  --pagination-gap: 8px;
-  --pagination-padding: 0 8px;
+  @include setComVar(paginationVar());
 
   width: 100%;
   display: flex;
   align-items: center;
-  gap: var(--pagination-gap);
-  font-size: var(--pagination-font-size);
-  color: #606266;
-
-  @include m(size, small) {
-    --pagination-height: 24px;
-    --pagination-font-size: 12px;
-    --pagination-gap: 4px;
-    --pagination-padding: 0 5px;
-  }
+  gap: var(#{getComVarName('gap')});
+  font-size: var(#{getComVarName('font-size')});
+  color: var(#{getComVarName('color')});
 
   @include e(total) {
     min-width: 60px;
@@ -29,19 +20,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
-    border: 1px solid #dcdfe6;
-    border-radius: var(--pagination-border-radius);
-    color: #606266;
-    min-width: var(--pagination-height);
-    height: var(--pagination-height);
     cursor: pointer;
     transition: all 0.3s;
+    background-color: var(#{getComVarName('btn-bg-color')});
+    border: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('btn-bd-color')});
+    border-radius: var(#{getComVarName('bd-round')});
+    color: var(#{getComVarName('btn-text-color')});
+    min-width: var(#{getComVarName('size')});
+    height: var(#{getComVarName('size')});
 
     &:hover {
-      color: #409eff;
-      background-color: #ecf5ff;
-      border-color: #c6e2ff;
+      #{getComVarName('btn-text-color')}:var(#{getComVarName('btn-hover-text-color')});
+      #{getComVarName('btn-bg-color')}:var(#{getComVarName('btn-hover-bg-color')});
+      #{getComVarName('btn-bd-color')}:var(#{getComVarName('btn-hover-bg-color')});
     }
   }
 
@@ -61,23 +52,23 @@
 
   @include e(pager-item) {
     box-sizing: border-box;
-    min-width: var(--pagination-height);
-    height: var(--pagination-height);
-    line-height: var(--pagination-height);
-    text-align: center;
-    color: #606266;
-    //border: 1px solid #e3e4ef;
-    border-radius: var(--pagination-border-radius);
     cursor: pointer;
-    padding: var(--pagination-padding);
+    text-align: center;
+    min-width: var(#{getComVarName('size')});
+    height: var(#{getComVarName('size')});
+    line-height: var(#{getComVarName('size')});
+    color: var(#{getComVarName('pager-color')});
+    background-color: var(#{getComVarName('pager-bg-color')});
+    border-radius: var(#{getComVarName('bd-round')});
+    //border: 1px solid #e3e4ef;
 
     &:hover {
-      color: #409eff;
+      #{getComVarName('pager-color')}:var(#{getComVarName('btn-hover-text-color')});
     }
 
     @include s((active)) {
-      background-color: #409eff;
-      color: #fff;
+      #{getComVarName('pager-bg-color')}:var(#{getComVarName('btn-hover-text-color')});
+      #{getComVarName('pager-color')}:var(#{getVarName('color', 'white')});
     }
   }
 
@@ -87,18 +78,17 @@
     select,
     input {
       outline: none;
-      height: var(--pagination-height);
-      line-height: var(--pagination-height);
-      padding: var(--pagination-padding);
-      border: 1px solid #dcdfe6;
-      color: #606266;
-      border-radius: var(--pagination-border-radius);
-      font-size: var(--pagination-font-size);
       transition: border-color 0.3s;
+      height: var(#{getComVarName('size')});
+      line-height: var(#{getComVarName('size')});
+      color: var(#{getComVarName('color')});
+      border-radius: var(#{getComVarName('bd-round')});
+      font-size: var(#{getComVarName('font-size')});
+      border: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('btn-bd-color')});
+      background-color: var(#{getComVarName('btn-bg-color')});
 
       &:focus {
-        border-color: #409eff;
-
+        border-color: var(#{getComVarName('btn-hover-text-color')});
       }
     }
   }
@@ -110,5 +100,14 @@
       width: 50px;
       text-align: center;
     }
+  }
+}
+
+
+@each $size in $common-size {
+  @include m('size', $size) {
+    #{getComVarName('size')}:var(#{getVarName('component-size', $size)});
+    #{getComVarName('font-size')}:var(#{getVarName('font-size', $size)});
+    #{getComVarName('gap')}:var(#{getVarName('pagination-gap', $size)});
   }
 }

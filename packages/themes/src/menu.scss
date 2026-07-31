@@ -1,6 +1,10 @@
 @use './common/namespace.scss' as *;
+@use './componentVar/menuVar.scss' as *;
 
 @include b(menu) {
+  @include setComVar(menuVar());
+  @include setComVar(currentMenuVar());
+
 
   ul {
     margin: 0;
@@ -9,11 +13,11 @@
   }
 
   @include m(mode, vertical) {
-    width: 240px;
+    width: var(#{getComVarName('current','width')});
   }
 
   @include s((collapse)) {
-    width: 64px;
+    #{getComVarName('current','width')}:var(#{getComVarName('collapse-width')});
   }
 
   @include m(mode, horizontal) {

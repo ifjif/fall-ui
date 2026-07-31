@@ -1,0 +1,73 @@
+@use './common/namespace.scss' as *;
+
+@include b(date-picker) {
+  position: relative;
+  display: inline-block;
+  width: 240px;
+  font-size: 14px;
+  color: #606266;
+  box-sizing: border-box;
+
+
+  @include e(input-wrapper) {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    line-height: 32px;
+    border: 1px solid #dcdfe6;
+    padding: 0 10px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: border-color 0.2s;
+    border-radius: 4px;
+  }
+
+  @include e(input-inner) {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    height: 100%;
+    flex: 1;
+    color: #606266;
+    font-size: 14px;
+    padding: 0;
+    margin: 0 5px;
+  }
+
+  @include e-and((input-prefix-icon, input-suffix-icon)) {
+    display: flex;
+    align-items: center;
+    color: #c0c4cc;
+    cursor: pointer;
+  }
+
+  @include e(panel-body) {
+    display: flex;
+  }
+
+  @include e(panel-sidebar) {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-right: 1px solid #e4e7ed;
+    width: 80px;
+  }
+
+  @include e(sidebar-button) {
+    background: none;
+    border: none;
+    color: #606266;
+    text-align: left;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #f5f7fa;
+      color: #409eff;
+    }
+  }
+
+}

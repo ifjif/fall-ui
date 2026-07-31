@@ -1,9 +1,7 @@
 import { computed, ref } from 'vue'
-export function usePaginationState(props) {
-  // 当前pageSize
-  const currentPageSize = ref(props.pageSize)
+export function usePaginationState(props, currentPage) {
   // 跳转页
-  const jumpPage = ref(props.currentPage)
+  const jumpPage = ref(currentPage.value)
   // 总页数
   const pageCount = computed(() => Math.max(1, Math.ceil(props.total / props.pageSize)))
   // 页码数量
@@ -14,7 +12,7 @@ export function usePaginationState(props) {
   // 如是 3开始, 1和3之间有省略号 应为 > 2 了
   // 如后为 10，显示的为8，8和10之间要有省略号,因为 小于 10 - 1
   const pagerList = computed(() => {
-    const currentPage = props.currentPage
+    const curPage = currentPage.value
     const total = pageCount.value
     const list = []
 
@@ -23,7 +21,7 @@ export function usePaginationState(props) {
       for (let i = 1; i <= total; i++) list.push(i)
     } else {
       // 得到 页表头
-      let start = Math.max(1, currentPage - 2)
+      let start = Math.max(1, curPage - 2)
       // 得到 页表位尾
       let end = Math.min(total, start + pagerCount - 1)
 
@@ -65,7 +63,6 @@ export function usePaginationState(props) {
   return {
     pagerList,
     pageCount,
-    currentPageSize,
     jumpPage,
     layoutList,
   }

@@ -1,25 +1,27 @@
-@use "./common/namespace.scss" as *;
+@use './common/namespace.scss' as *;
+@use './componentVar/rawPopoverVar.scss' as *;
 
 @include b(raw-popover) {
-  contain: paint;
+  @include setComVar(rawPopoverVar());
+
   position: absolute;
   z-index: 2000;
   padding: 12px;
-  background-color: #fff;
-  border: 1px solid #ebeef5;
-  border-radius: 4px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  font-size: 14px;
   line-height: 1.5;
-  color: #606266;
+  border: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
+  box-shadow: 0 2px 12px 0 var(#{getComVarName('bs-color')});
+  border-radius: var(#{getComVarName('round-size')});
+  font-size: var(#{getComVarName('font-size')});
+  background-color: var(#{getComVarName('bg-color')});
+  color: var(#{getComVarName('color')});
 
   @include e(title) {
     margin: 0;
-    font-size: 16px;
     line-height: 1.5;
-    color: #303133;
     font-weight: 600;
     margin-bottom: 8px;
+    font-size: var(#{getComVarName('title-font-size')});
+    color: var(#{getComVarName('title-color')});
   }
 
   @include e(content) {
@@ -40,7 +42,7 @@
       bottom: -12px;
       left: 50%;
       transform: translateX(-50%);
-      border-top-color: #fff;
+      border-top-color: var(#{getComVarName('bg-color')});
     }
   }
 
@@ -48,7 +50,7 @@
     @include e(arrow, false) {
       bottom: -12px;
       transform: translateX(-50%);
-      border-top-color: #fff;
+      border-top-color: var(#{getComVarName('bg-color')});
       left: var(--arrow-x); // tooltip所在的元素中的 对象设置 xx.style.setProperty('--arrow-x', xx)
     }
   }
@@ -57,7 +59,7 @@
     @include e(arrow, false) {
       bottom: -12px;
       transform: translateX(-50%);
-      border-top-color: #fff;
+      border-top-color: var(#{getComVarName('bg-color')});
       left: var(--arrow-x);
     }
   }
@@ -67,7 +69,7 @@
       top: -12px;
       left: 50%;
       transform: translateX(-50%);
-      border-bottom-color: #fff;
+      border-bottom-color: var(#{getComVarName('bg-color')});
     }
   }
 
@@ -75,7 +77,7 @@
     @include e(arrow, false) {
       top: -12px;
       transform: translateX(-50%);
-      border-bottom-color: #fff;
+      border-bottom-color: var(#{getComVarName('bg-color')});
       left: var(--arrow-x);
     }
   }
@@ -84,7 +86,7 @@
     @include e(arrow, false) {
       top: -12px;
       transform: translateX(-50%);
-      border-bottom-color: #fff;
+      border-bottom-color: var(#{getComVarName('bg-color')});
       left: var(--arrow-x);
     }
   }
@@ -94,7 +96,7 @@
       right: -12px;
       top: 50%;
       transform: translateY(-50%);
-      border-left-color: #fff;
+      border-left-color: var(#{getComVarName('bg-color')});
     }
   }
 
@@ -102,7 +104,7 @@
     @include e(arrow, false) {
       right: -12px;
       transform: translateY(-50%);
-      border-left-color: #fff;
+      border-left-color: var(#{getComVarName('bg-color')});
       top: var(--arrow-y);
     }
   }
@@ -111,7 +113,7 @@
     @include e(arrow, false) {
       right: -12px;
       transform: translateY(-50%);
-      border-left-color: #fff;
+      border-left-color: var(#{getComVarName('bg-color')});
       top: var(--arrow-y);
     }
   }
@@ -121,7 +123,7 @@
       left: -12px;
       top: 50%;
       transform: translateY(-50%);
-      border-right-color: #fff;
+      border-right-color: var(#{getComVarName('bg-color')});
     }
   }
 
@@ -129,7 +131,7 @@
     @include e(arrow, false) {
       left: -12px;
       transform: translateY(-50%);
-      border-right-color: #fff;
+      border-right-color: var(#{getComVarName('bg-color')});
       top: var(--arrow-y);
     }
   }
@@ -138,7 +140,7 @@
     @include e(arrow, false) {
       left: -12px;
       transform: translateY(-50%);
-      border-right-color: #fff;
+      border-right-color: var(#{getComVarName('bg-color')});
       top: var(--arrow-y);
     }
   }
@@ -149,28 +151,32 @@
     gap: 8px;
     margin-top: 12px;
     padding-top: 12px;
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid var(#{getComVarName('footer-bd-top-color')});
 
     button {
-      padding: 4px 10px;
-      border: 1px solid #d9d9d9;
-      background: white;
-      border-radius: 4px;
-      font-size: 12px;
       cursor: pointer;
+      padding: 4px 10px;
+      border: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('btn-bd-color')});
+      background: var(#{getComVarName('btn-bg-color')});
+      border-radius: var(#{getComVarName('round-size')});
+      font-size: var(#{getComVarName('btn-font-size')});
+      color: var(#{getComVarName('btn-text-color')});
     }
 
+
     button:hover {
-      background: #f5f5f5;
+      background-color: var(#{getComVarName('btn-hover-bg-color')});
     }
 
     @include e(confirm-btn, false) {
-      background-color: #1890ff;
-      color: white;
-      border-color: #1890ff;
+      background-color: var(#{getComVarName('confirm-btn-bg-color')});
+      border-color: var(#{getComVarName('confirm-btn-bg-color')});
+      color: var(#{getComVarName('confirm-btn-text-color')});
 
       &:hover {
-        background: #4096ff;
+        background: var(#{getComVarName('confirm-btn-hover-bg-color')});
+        border-color: var(#{getComVarName('confirm-btn-hover-bg-color')});
+        color: var(#{getComVarName('confirm-btn-text-color')});
       }
     }
   }

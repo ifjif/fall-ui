@@ -11,21 +11,32 @@ $basic-colors: (
   'black':black,
   'transparent':transparent) !default;
 
+/*
+   *'dark':color.mix(#3069ff, #000, 50%)
+   *'dark':color.mix(#14cd70, #000, 50%)
+   *'dark':color.mix(#ffa81a, #000, 50%)
+   *'dark':color.mix(#ff4a5b, #000, 50%)
+   *'dark':color.mix(#606266, #000, 50%)
+   */
 $theme-colors: (
   'primary':('base':#3069ff),
   'success':('base':#14cd70),
   'warning':('base':#ffa81a),
   'error':('base': #ff4a5b),
-  'text':('base': #212226),
+  'text':('base': #606266),
   ) !default;
 
-@mixin set-level-color($type, $number, $mixColor , $mode: 'light') {
-  $theme-colors: map.deep-merge((#{$type}:('#{$mode}-#{$number}': color.mix($mixColor, map.get($theme-colors, $type, 'base'), $number * 10%))), $theme-colors) !global
+@mixin set-level-color($type, $number, $mixColor , $rawNumber, $mode: 'light') {
+  $theme-colors: map.deep-merge((#{$type}:('#{$mode}-#{$rawNumber}': color.mix($mixColor, map.get($theme-colors, $type, 'base'), $number * 10%))), $theme-colors) !global
 }
 
 @each $type in $mixin-types {
   @for $i from 1 through 9 {
-    @include set-level-color($type, $i, $white)
+    @include set-level-color($type, $i, $white, $i)
+  }
+
+  @for $i from 1 through 9 {
+    @include set-level-color($type, ($i + 1) *0.5, #000, $i, 'dark')
   }
 }
 
@@ -50,7 +61,8 @@ $button-horizontal-padding: map.deep-merge(('small':10px,
 $component-round: (
   ) !default;
 
-$component-round: map.deep-merge(('small': 10px,
+$component-round: map.deep-merge(('small-1':4px,
+      'small': 10px,
       'default':12px,
       'large':14px,
       'round':100px), $component-round
@@ -126,6 +138,7 @@ $switch-padding: (
 $switch-padding: map.deep-merge(('default':4px,
     ), $switch-padding
 );
+
 $message-shadow-degree: (
   ) !default;
 $message-shadow-degree: map.deep-merge(('default':10px,
@@ -142,6 +155,22 @@ $message-padding-horizontal-right: map.deep-merge(('default':10px,
     ), $message-padding-horizontal-right
 );
 
+$pagination-gap: (
+  ) !default;
+
+$pagination-gap: map.deep-merge(('default':8px,
+      'small':4px,
+    ),
+    $pagination-gap
+);
+$menu-width: (
+  ) !default;
+
+$menu-width: map.deep-merge(('default':240px,
+      'collapse':64px,
+    ),
+    $menu-width
+);
 
 $global-var: (
   ) !default;
@@ -164,5 +193,7 @@ $global-var: map.deep-merge(('component-scale':$component-scale,
       'message-shadow-degree':$message-shadow-degree,
       'message-padding-horizontal-left':$message-padding-horizontal-left,
       'message-padding-horizontal-right':$message-padding-horizontal-right,
+      'pagination-gap':$pagination-gap,
+      'menu-width':$menu-width,
     ), $global-var
 );

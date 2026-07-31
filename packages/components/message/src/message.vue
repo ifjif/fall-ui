@@ -12,15 +12,20 @@
 <script setup>
 import { useNamespace } from '@fall-ui/hooks';
 import { FlIcon as Icon } from '@fall-ui/components';
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 import { useMessage } from './composables/use-message'
 const ns = useNamespace('message')
 
 const props = defineProps({
   type: String,
   content: String,
-  id: String,
-  size: String,
+  //id: String,
+  size: {
+    type: String,
+    validator(v) {
+      return !v || ['small', 'large'].includes(v)
+    }
+  },
   offset: {
     type: Number,
     default: () => 16
@@ -53,6 +58,8 @@ defineExpose({
   bottomOffset
 })
 
+let closeObserver = null
+
 onMounted(() => {
   nextZIndex()
   show.value = true
@@ -61,6 +68,16 @@ onMounted(() => {
     height.value = entries[0].contentRect.height
   })
   resizeObserver.observe(messageRef.value)
+
+  closeObserver = () => {
+    resizeObserver.disconnect()
+  }
+})
+
+onUnmounted(() => {
+  if (closeObserver) {
+    closeObserver()
+  }
 })
 
 </script>

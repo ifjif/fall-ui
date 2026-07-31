@@ -1,13 +1,12 @@
 <template>
-  <div class="app-container">
-    <h2>📅 Timeline 组件</h2>
-
+  <ComponentLayout :anchors="anchors">
+    <h2>Timeline</h2>
     <!-- 基础用法 -->
     <div class="demo-block">
-      <h3>1. 基础垂直用法 (带自定义插槽)</h3>
-      <fl-timeline :items="activities">
+      <h3 id="fl-timeline-vertical">垂直用法</h3>
+      <fl-timeline :data="activities">
         <!-- 自定义节点：使用图标 -->
-        <template #dot="{ item, index }">
+        <template #dot>
           <fl-icon color="#fff">
             <component :is="FlCheck"></component>
           </fl-icon>
@@ -26,10 +25,10 @@
 
     <!-- 基础用法 -->
     <div class="demo-block">
-      <h3>1. alternate用法 (带自定义插槽)</h3>
-      <fl-timeline :hollow="true" direction="alternate" :items="activities">
+      <h3 id="fl-timeline-alternate">alternate用法</h3>
+      <fl-timeline :hollow="true" direction="alternate" :data="activities">
         <!-- 自定义节点：使用图标 -->
-        <template #dot="{ item, index }">
+        <template #dot="{ item }">
           <component :is="item.icon" />
         </template>
 
@@ -44,10 +43,10 @@
       </fl-timeline>
     </div>
     <div class="demo-block">
-      <h3>1. alternate-reverse用法 (带自定义插槽)</h3>
-      <fl-timeline direction="alternate-reverse" :items="activities">
+      <h3 id="fl-timeline-alternate-reverse">alternate-reverse用法</h3>
+      <fl-timeline direction="alternate-reverse" :data="activities">
         <!-- 自定义节点：使用图标 -->
-        <template #dot="{ item, index }">
+        <template #dot="{ item }">
           <component :is="item.icon" />
         </template>
 
@@ -61,13 +60,12 @@
         </template>
       </fl-timeline>
     </div>
-
 
     <!-- 横向用法 -->
     <div class="demo-block">
-      <h3>2. 横向布局 (Horizontal)</h3>
+      <h3 id="fl-timeline-horizontal">横向布局</h3>
       <fl-scrollbar>
-        <fl-timeline direction="horizontal" :items="activities" color="#409eff">
+        <fl-timeline direction="horizontal" :data="activities" color="#409eff">
           <template #content="{ item }">
             <div class="simple-content">
               <strong>{{ item.title }}</strong>
@@ -78,18 +76,24 @@
         </fl-timeline>
       </fl-scrollbar>
     </div>
-  </div>
+    <h3 id="fl-timeline-attrs">属性</h3>
+    <fl-table :data="data" :columns="columns"></fl-table>
+    <h3 id="fl-timeline-slots">插槽</h3>
+    <fl-table :data="slotData" :columns="slotColumns"></fl-table>
+  </ComponentLayout>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { FlCheck } from '@fall-ui/icons';
+import ComponentLayout from '@/layout/component-layout.vue';
+import { columns, slotColumns } from '@/assets/com-props';
 
 const activities = ref([
   {
     title: '项目启动',
     description: '完成项目立项书',
-    timestamp: '2023-10-01',
+    label: '2023-10-01',
     color: '#0bbd87',
     icon: '图标1',
     status: '已完成'
@@ -97,7 +101,7 @@ const activities = ref([
   {
     title: '需求分析',
     description: '确定核心功能点',
-    timestamp: '2023-10-05',
+    label: '2023-10-05',
     color: '#409eff',
     icon: '图标2',
     status: '进行中'
@@ -105,7 +109,7 @@ const activities = ref([
   {
     title: '开发阶段',
     description: '前端与后端联调',
-    timestamp: '2023-10-15',
+    label: '2023-10-15',
     color: '#f56c6c',
     icon: '图标3',
     status: '待开始'
@@ -113,21 +117,39 @@ const activities = ref([
   {
     title: '测试验收',
     description: '全链路测试',
-    timestamp: '2023-10-25',
+    label: '2023-10-25',
     color: '#909399',
     status: '待开始'
   }
 ]);
+
+const anchors = [
+  { title: '垂直用法', href: '#fl-timeline-vertical' },
+  { title: 'alternate用法', href: '#fl-timeline-alternate' },
+  { title: 'alternate-reverse用法', href: '#fl-timeline-alternate-reverse' },
+  { title: '横向布局', href: '#fl-timeline-horizontal' },
+  { title: '属性', href: '#fl-timeline-attrs' },
+  { title: '插槽', href: '#fl-timeline-slots' },
+]
+
+const data_ = { title: '', description: '', label: '', color: '', icon: '' }
+
+const data = [
+  { name: 'data', type: 'Array', default: '[]', value: JSON.stringify(data_, null, 2), desc: '' },
+  { name: 'direction', type: 'String', default: 'vertical', value: 'vertical, horizontal, alternate, alternate-reverse', desc: '' },
+  { name: 'hollow', type: 'Boolean', default: 'false', value: 'true, false', desc: '是否空心节点' },
+]
+
+const slotData = [
+  { name: 'label', param: '{item, index}', desc: 'item为data中的数据, 插槽不存在，默认label值' },
+  {
+    name: 'content', param: '{item, index}', desc:
+      'item为data中的数据,插槽不存在，默认title+description值'
+  },
+]
 </script>
 
 <style>
-.app-container {
-  padding: 40px;
-  max-width: 800px;
-  margin: 0 auto;
-  font-family: sans-serif;
-}
-
 .demo-block {
   margin-bottom: 50px;
   padding: 20px;

@@ -6,6 +6,12 @@ export function useTableEvent(
   sortStates,
   filterValues,
   debounceTimers,
+  expandedKeys,
+  updateFlatData,
+  getRowKey,
+  selectionMap,
+  updateSelectionModel,
+  pageSelection,
 ) {
 
 
@@ -14,10 +20,11 @@ export function useTableEvent(
     event.preventDefault()
     const startX = event.pageX
     const startWidth = parseInt(col.width) || 120
+    const minWidth = parseInt(col.minWidth) || 80
 
     const doDrag = (moveEvent) => {
       const newWidth = startWidth + (moveEvent.pageX - startX)
-      if (newWidth > 60) {
+      if (newWidth > minWidth) {
         col.width = newWidth + 'px'
         clearCacheWidths()
       }
@@ -110,12 +117,52 @@ export function useTableEvent(
     emit('page-change', { page, pageSize })
   }
 
+  // 切换展开
+  const toggleExpand = (row) => {
+    const key = getRowKey(row)
+    if (expandedKeys.value.has(key)) {
+      expandedKeys.value.delete(key)
+    } else {
+      expandedKeys.value.add(key)
+    }
+
+    updateFlatData()
+  }
+
+  // 选中 切换
+  const toggleRowSelection = (e, row) => {
+    const checked = e.target.checked
+    const key = getRowKey(row)
+    if (checked) {
+      selectionMap.value.data.set(key, row)
+    } else {
+      selectionMap.value.data.delete(key)
+    }
+
+    selectionMap.value.change = true
+    updateSelectionModel(Array.from(selectionMap.value.data.values()))
+  }
+
+  // 全部 选中 切换
+  const toggleAllSelection = (e) => {
+    const checked = e.target.checked
+    if (checked) {
+      pageSelection()
+    } else {
+      selectionMap.value.data = new Map()
+      selectionMap.value.change = false
+    }
+  }
+
   return {
     startResize,
     handleResize,
     triggerSort,
     handleFilterSelect,
     handleFilterInput,
-    handlePageChange
+    handlePageChange,
+    toggleExpand,
+    toggleRowSelection,
+    toggleAllSelection
   }
 }

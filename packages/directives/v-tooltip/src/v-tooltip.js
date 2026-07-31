@@ -49,6 +49,7 @@ const vFlToolTip = {
     const renderPopover = (options) => {
       // 创建一个隐藏的容器，用于挂载Popover实例
       const container = document.createElement('div')
+      //container.style.position = 'absolute'
 
       if (toBody) {
         document.body.appendChild(container)
@@ -392,7 +393,7 @@ const vFlToolTip = {
 
             // _popoverEl放在el中的
             // 第一步就拦截了
-            // 挂载到body需要判断
+            // 但挂载到body需要判断
             if (el._popoverEl.contains(e.target)) {
               return
             }

@@ -31,7 +31,13 @@ const props = defineProps({
   },
   padding: { type: Number, default: () => 12 },
   showArrow: { type: Boolean, default: () => true },
-  trigger: { type: String, default: () => 'click' }, // hover | click
+  trigger: {
+    type: String,
+    default: () => 'click',
+    validator(v) {
+      return ['click', 'hover'].includes(v)
+    }
+  },
   toBody: { type: Boolean, default: true },
   placement: {
     type: String,

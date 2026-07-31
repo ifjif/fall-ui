@@ -14,6 +14,11 @@ export default {
 import { useNamespace } from '@fall-ui/hooks'
 const ns = useNamespace('button-group')
 const props = defineProps({
-  size: String
+  size: {
+    type: String,
+    validator(v) {
+      return !v || ['small', 'large'].includes(v)
+    }
+  },
 })
 </script>

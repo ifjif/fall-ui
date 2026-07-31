@@ -38,7 +38,10 @@ const props = defineProps({
   onClose: Function,
   placement: {
     type: String,
-    default: () => 'right'
+    default: () => 'right',
+    validator(v) {
+      return ['left', 'right', 'top', 'bottom'].includes(v)
+    }
   },
   fixedScreen: Boolean,
   height: [String, Number],

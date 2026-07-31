@@ -1,0 +1,29 @@
+@use '../common/componentVar.scss' as *;
+@use '../common/namespace.scss' as *;
+
+@mixin setComVar($var, $property: 'default') {
+  @include set-component-var('pagination', $var, $property)
+}
+
+@function getComVarName($args...) {
+  @return getVarName('pagination', $args...)
+}
+
+@function paginationVar($type: '') {
+  $paginationVar: (
+    'gap':('default':getVarName('pagination-gap', 'default')),
+    'size':('default':getVarName('component-size', 'default')),
+    'font-size':('default':getVarName('font-size', 'default')),
+    'bd-size':('default':getVarName('border-size', 'small')),
+    'color':('default':getVarName('color', 'text')),
+    'bd-round':('default':getVarName('component-round', 'small-1')),
+    'btn-text-color':('default':getVarName('color', 'text')),
+    'btn-bg-color':('default':getVarName('color', 'white')),
+    'btn-bd-color':('default':getVarName('color', 'text', 'light', 8)),
+    'btn-hover-bg-color':('default':getVarName('color', 'primary', 'light', 8)),
+    'btn-hover-text-color':('default':getVarName('color', 'primary')),
+    'pager-color':('default':getVarName('color', 'text')),
+    'pager-bg-color':('default':getVarName('color', 'transparent')),
+  );
+@return $paginationVar;
+}

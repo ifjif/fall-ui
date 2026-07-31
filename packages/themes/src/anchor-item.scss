@@ -1,0 +1,28 @@
+@use './common/namespace.scss' as *;
+
+@include b(anchor-item) {
+  cursor: pointer;
+  color: #606266;
+
+  @include e(title) {
+    transition: color 0.3s ease-in-out;
+
+    @include s((active-href)) {
+      color: #409eff;
+    }
+
+    &:hover {
+      color: #409eff;
+    }
+  }
+
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+
+
+}

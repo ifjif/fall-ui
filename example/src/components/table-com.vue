@@ -1,41 +1,85 @@
 <template>
-  <div style="height:100%;">
-    <!-- 注意：跨页全选需要完整数据或知道总数 -->
-    <fl-table :data="fullData" :columns="visibleColumns" v-model:selection="selectedRows" :loading="loading"
-      :pagination="pagination" border stripe row-key="id" enableResize :remote-sort="false" :remote-filter="false"
-      @page-change="handlePageChange" @sort-change="handleSortChange" @filter-change="handleFilterChange">
-      <template #operation="{ row }">
-        <button @click="edit(row)">编辑</button>
-      </template>
+  <ComponentLayout :anchors="anchors">
+    <h2>table</h2>
+    <h3 id="fl-table-basic">基础</h3>
+    <div style="height:500px;">
+      <!-- 注意：跨页全选需要完整数据或知道总数 -->
+      <fl-table :data="fullData" :columns="visibleColumns" v-model:selection="selectedRows" :loading="loading"
+        :pagination="pagination" border stripe row-key="id" enableResize :remote-sort="true" :remote-filter="true"
+        @page-change="handlePageChange" @sort-change="handleSortChange" @filter-change="handleFilterChange">
+        <template #operation="{ row }">
+          <fl-button type="primary" size="small" @click="edit(row)">编辑</fl-button>
+        </template>
 
-      <template #toolbar>
-        <button type="primary" @click="exportExcel">导出 Excel</button>
-        <input type="checkbox" v-model="selectAllAcrossPages" @change="handleSelectAllAcross">
-        跨页全选（共 {{ pagination.total }} 条）
-        </input>
-        <button @click="showColumnPanel = true">列设置</button>
+        <template #toolbar>
+          <button type="primary" @click="exportExcel">导出 Excel</button>
+          <!--
+          <input type="checkbox" v-model="selectAllAcrossPages" @change="handleSelectAllAcross">
+          跨页全选（共 {{ pagination.total }} 条）
+          </input>
+-->
+          <button @click="showColumnPanel = true">列设置</button>
+        </template>
+      </fl-table>
+    </div>
+
+    <!-- 列配置 面板 -->
+    <fl-modal fixedScreen @ok="applyColumnSettings" @cancel="showColumnPanel = false" v-model="showColumnPanel"
+      title="这是标题">
+      <template #content>
+        <fl-scrollbar>
+          <div class="column-list">
+            <div v-for="(element, index) in columnSettings" :key="index" class="column-item">
+              <input type="checkbox" v-model="element.visible" />
+              <span>{{ element.label }}</span>
+              <span class="drag-handle">::</span>
+            </div>
+          </div>
+        </fl-scrollbar>
+      </template>
+    </fl-modal>
+
+    <h3 id="fl-table-self">自定义</h3>
+    <div style="height:500px;">
+      <!-- 注意：跨页全选需要完整数据或知道总数 -->
+      <fl-table :styles="styles" :data="fullData" :columns="visibleColumns" v-model:selection="selectedRows"
+        :loading="loading" :pagination="pagination" border stripe row-key="id" enableResize :remote-sort="false"
+        :remote-filter="false" @page-change="handlePageChange" @sort-change="handleSortChange"
+        @filter-change="handleFilterChange">
+        <template #toolbar>
+          <button type="primary" @click="exportExcel">导出 Excel</button>
+          <!--
+          <input type="checkbox" v-model="selectAllAcrossPages" @change="handleSelectAllAcross">
+          跨页全选（共 {{ pagination.total }} 条）
+          </input>
+          -->
+          <button @click="showColumnPanel = true">列设置</button>
+        </template>
+
+        <template #operation="{ row }">
+          <button @click="edit(row)">编辑</button>
+        </template>
+      </fl-table>
+    </div>
+
+    <h3 id="fl-table-attrs">属性</h3>
+    <fl-table :data="data" :columns="columns_">
+      <template #value="{ row }">
+        <pre>{{ row.value }}</pre>
       </template>
     </fl-table>
-  </div>
+    <h3 id="fl-table-models">model</h3>
+    <fl-table :data="modelData" :columns="columns_"></fl-table>
+    <h3 id="fl-table-slots">插槽</h3>
+    <fl-table :data="slotData" :columns="slotColumns"></fl-table>
+    <h3 id="fl-table-events">事件</h3>
+    <fl-table :data="eventData" :columns="eventColumns"></fl-table>
 
-  <!-- 列配置 面板 -->
-  <fl-modal v-model="showColumnPanel" title="这是标题">
-    <template #content>
-      <div class="column-list">
-        <div v-for="(element, index) in columnSettings" :key="index" class="column-item">
-          <input type="checkbox" v-model="element.visible" />
-          <span>{{ element.label }}</span>
-          <span class="drag-handle">::</span>
-        </div>
-      </div>
-
-      <button @click="showColumnPanel = false">取消</button>
-      <button @click="applyColumnSettings">确定</button>
-    </template>
-  </fl-modal>
-
+  </ComponentLayout>
 </template>
 <script setup>
+import ComponentLayout from '@/layout/component-layout.vue'
+import { columns as columns_, slotColumns, eventColumns } from '@/assets/com-props'
 import { ref, reactive } from 'vue'
 
 const loading = ref(false)
@@ -59,7 +103,7 @@ const handleSelectAllAcross = (e) => {
   }
 }
 
-const selectedRows = ref([])
+const selectedRows = ref([{ id: 1 }])
 
 const handlePageChange = ({ page, pageSize }) => {
   console.log(page, pageSize)
@@ -111,15 +155,15 @@ const currentData = ref([])
 
 const handleSortChange = (sortList) => {
   console.log('多列排序：', sortList)
-  page.value = 1
-  fetchData()
+  //page.value = 1
+  //fetchData()
 }
 
 const handleFilterChange = (filters) => {
   filterState.value = filters
-  page.value = 1
+  //page.value = 1
   console.log(filters)
-  fetchData()
+  //fetchData()
 }
 // 如果前端有全量数据，否则需要后端配合
 const fullData = ref([
@@ -160,7 +204,7 @@ const columns = ref([
   { type: 'selection', width: '55px', fixed: 'left' },
   { prop: 'id', label: 'ID', width: '80px', sortable: true, fixed: 'left' },
   {
-    width: '20%',
+    width: '100px',
     align: 'left',
     label: '姓名',
     prop: 'name',
@@ -226,7 +270,7 @@ setTimeout(() => {
     { type: 'selection', width: '55px', fixed: 'left', resizable: true },
     { prop: 'id', label: 'ID', width: '80px', sortable: true, fixed: 'left', resizable: true },
     {
-      width: '20%',
+      width: '100px',
       align: 'left',
       label: '姓名',
       prop: 'name',
@@ -268,11 +312,11 @@ setTimeout(() => {
       resizable: true
     },
     {
-      width: '120px',
+      width: '160px',
       align: 'left',
       label: '邮箱',
       prop: 'email',
-      //minWidth: '120px', 设置后，无法进行 拖拽大小了
+      minWidth: '120px',
       resizable: true
     },
     {
@@ -311,6 +355,142 @@ const applyColumnSettings = () => {
   )
   showColumnPanel.value = false
 }
+/*
+#FF5733 (鲜亮的珊瑚红)
+#33FF57 (清新的薄荷绿)
+#3357FF (深邃的皇家蓝)
+#F0E68C (柔和的卡其色)
+#8A2BE2 (优雅的蓝紫色)
+#FF69B4 (活泼的热粉色)
+#00CED1 (清透的暗绿松石色)
+#FF8C00 (浓郁的暗橙色)
+#7FFF00 (明艳的黄绿色)
+#4B0082 (神秘的靛青色)
+#DC143C (热烈的猩红色)
+#00FA9A (透亮的中春绿色)
+#BA55D3 (温柔的中兰花紫)
+#2F4F4F (沉稳的暗灰色)
+*/
+
+const styles = {
+  root: {
+    color: '#FF5733',
+    bd_color: '#33FF57',
+    th_bg_color: '#3357FF',
+    tr_bg_color: '#F0E68C',
+    filter_icon_color: '#8A2BE2',
+    filter_icon_badge_color: '#FF69B4',
+    tree_icon_color: '#00CED1'
+  },
+  fixed: {
+    th_bg_color: '#7FFF00',
+    tr_bg_color: '#FF8C00',
+  },
+  active: {
+    sort_icon_color: '#4B0082',
+    tree_icon_color: '#DC143C',
+  },
+  hover: {
+    bg_color: '#00FA9A',
+    filter_icon_color: '#BA55D3',
+  },
+  stripe: {
+    bg_color: '#2F4F4F'
+  }
+}
+const styles_ = {
+  root: {
+    color: '',
+    bd_color: '',
+    th_bg_color: '',
+    tr_bg_color: '',
+    filter_icon_color: '',
+    filter_icon_badge_color: '',
+    tree_icon_color: ''
+  },
+  fixed: {
+    th_bg_color: '',
+    tr_bg_color: '',
+  },
+  active: {
+    sort_icon_color: '',
+    tree_icon_color: '',
+  },
+  hover: {
+    bg_color: '',
+    filter_icon_color: '',
+  },
+  stripe: {
+    bg_color: ''
+  }
+}
+
+const anchors = [
+  { title: '基础', href: '#fl-table-basic' },
+  { title: '自定义', href: '#fl-table-self' },
+  { title: '属性', href: '#fl-table-attrs' },
+  { title: 'model', href: '#fl-table-models' },
+  { title: '插槽', href: '#fl-table-slots' },
+  { title: '事件', href: '#fl-table-events' },
+]
+
+const columns__ = {
+  type: 'selection',
+  prop: '',
+  label: '',
+  width: '',
+  minWidth: '',
+  fixed: 'left/right',
+  align: 'left/right/center',
+  sortable: 'true/false',
+  resizable: 'true/false',
+  filterable: 'true/false',
+  filterOptions: [
+    { value: '', label: '' },
+  ]
+}
+
+
+const data = [
+  { name: 'data', type: 'Array', default: '[]', value: '', desc: 'columns中prop对应的值就是它的key' },
+  { name: 'columns', type: 'Array', default: '[]', value: JSON.stringify(columns__, null, 2), desc: '列配置,type,prop二选一' },
+  { name: 'loading', type: 'Boolean', default: 'false', value: 'true, false', desc: '带加载屏障' },
+  { name: 'border', type: 'Boolean', default: 'false', value: 'true, false', desc: '带边框' },
+  { name: 'stripe', type: 'Boolean', default: 'false', value: 'true, false', desc: '带条纹' },
+  { name: 'rowKey', type: 'String', default: 'id', value: '', desc: 'key属性名' },
+  { name: 'enableResize', type: 'Boolean', default: 'false', value: 'true, false', desc: '列可改变大小' },
+  {
+    name: 'remoteSort', type: 'Boolean', default: 'false', value: 'true, false', desc:
+      '排序为远程排序，true会触发sort-change事件'
+  },
+  {
+    name: 'remoteFilter', type: 'Boolean', default: 'false', value: 'true, false', desc:
+      '过滤为远程过滤,true会触发filter-change'
+  },
+  { name: 'pagination', type: 'Object', default: 'null', value: '{currentPage, pageSize, total}', desc: '' },
+  { name: 'treeProps', type: 'Object', default: '{ children: "children" }', value: '{children:}', desc: '孩子属性' },
+  { name: 'indentSize', type: 'Number', default: '8', value: '', desc: '属性缩进' },
+  { name: 'expandAll', type: 'Boolean', default: 'false', value: 'true, false', desc: '整页展开' },
+  { name: 'styles', type: 'Object', default: '', value: JSON.stringify(styles_, null, 2), desc: '自定义样式' },
+]
+
+const modelData = [
+  { name: 'selection', type: 'Array', default: '[]', value: '', desc: '选中的行, 数据是data中的' },
+]
+
+const slotData = [
+  { name: 'toolbar', param: '', desc: '表格上方的工具栏' },
+  { name: '', param: '{row, $index}', desc: 'columns中prop对应的值就是它的 slot name' },
+]
+
+const eventData = [
+  {
+    name: 'sort-change', params: '([{prop:"", order:"ascending | descending"},...])', desc:
+      '排序事件'
+  },
+  { name: 'filter-change', params: '({prop:value, ...})', desc: '过滤事件' },
+  { name: 'page-change', params: '({ page, pageSize })', desc: '页改变事件' }
+]
 
 </script>
 
@@ -333,8 +513,7 @@ const applyColumnSettings = () => {
 
 .column-list {
   min-width: 400px;
-  max-height: 400px;
-  overflow-y: auto;
+  min-height: 400px;
 }
 
 .column-item {

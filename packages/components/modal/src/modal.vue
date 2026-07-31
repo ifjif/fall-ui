@@ -85,6 +85,5 @@ const { widthStyle, zIndexStyle, nextZIndex, cancelEvent, confirmEvent } = useMo
 
 onMounted(() => {
   nextZIndex()
-  console.log(zIndexStyle.value)
 })
 </script>

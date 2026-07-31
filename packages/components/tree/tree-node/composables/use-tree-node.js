@@ -1,8 +1,13 @@
 import { useTreeNodeState } from "./use-tree-node-state";
 import { useTreeNodeEvent } from "./use-tree-node-event";
 import { useTreeNodeStyle } from "./use-tree-node-style";
+import { useTreeNodeGroup } from "./use-tree-node-group";
 
-export function useTreeNode(props) {
+export function useTreeNode(props, emit) {
+
+  const {
+    treeKey
+  } = useTreeNodeGroup()
 
   const {
     hasChildren,
@@ -16,7 +21,7 @@ export function useTreeNode(props) {
   const {
     handleClick,
     handleCheckChange
-  } = useTreeNodeEvent(props, expanded, hasChildren)
+  } = useTreeNodeEvent(props, emit, treeKey, expanded, hasChildren)
 
   return {
     hasChildren,

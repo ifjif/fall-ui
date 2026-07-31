@@ -57,7 +57,7 @@ const props = defineProps({
   }
 })
 
-const modelValue = defineModel()
+const modelValue = defineModel({ type: String, default: '' })
 
 const emit = defineEmits(['input', 'focus', 'blur', 'mouseenter', 'mouseleave', 'change', 'keyup', 'keydown'])
 
