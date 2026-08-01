@@ -50,9 +50,14 @@
 
     npm i fall-ui
 
-    import fallui from 'fall-ui'
+    //组件导入
+    import FallUI from 'fall-ui'
+    //icon导入
+    import FallIcon from 'fall-ui/es/icons'
     //样式引入
-    import 'fall-ui/themes/index.css'
+    import "fall-ui/themes/index.css"
+    //单个导入
+    import {FlButton} from 'fall-ui'
 
     app.use(fallui)
 

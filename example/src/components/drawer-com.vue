@@ -47,8 +47,8 @@
 <script setup>
 import ComponentLayout from '@/layout/component-layout.vue';
 import { columns, eventColumns } from '@/assets/com-props';
-import { FlDrawer } from '@fall-ui/components';
-import { FlInput } from '@fall-ui/components';
+import { FlDrawer } from 'fall-ui';
+import { FlInput } from 'fall-ui';
 import { h } from 'vue';
 const title = '这是头部'
 const content = `

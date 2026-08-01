@@ -353,11 +353,21 @@ const vFlToolTip = {
       // 6.绑定事件监听器
       const trigger = options.trigger || 'hover' // hover | click
       const prevTrigger = prevOptions?.trigger
+      // 必须存在
       if (trigger !== prevTrigger && el._popoverCleanupEvents) {
         el._popoverCleanupEvents()
       }
 
-      if (trigger !== prevTrigger) {
+      if (trigger === prevTrigger) {
+        // 相等,对于hover,只需要对popover重新设置
+        if (trigger === 'hover') {
+          // 监听 popover 本身
+          el._popoverEl?.addEventListener('mouseenter', popoverMouseenter)
+          el._popoverEl?.addEventListener('mouseleave', hide)
+        }
+
+      } else if (trigger !== prevTrigger) {
+        // 不相等，重新设置
         if (trigger === 'hover') {
           el.addEventListener('mouseenter', show)
           el.addEventListener('mouseleave', hide)
@@ -403,7 +413,6 @@ const vFlToolTip = {
 
           const outsideScrollHanlder = (e) => {
             if (toBody && el._popoverEl) {
-              console.log('滚动')
               updatePosition()
             }
           }

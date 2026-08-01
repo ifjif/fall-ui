@@ -1,8 +1,28 @@
 <template>
   <fl-container style="width:100vw;height:100vh;">
     <fl-header>
-      <div style="display:flex;align-items:center;background-color: skyblue;height:64px;">
+      <div
+        style="display:flex;justify-content: space-between;align-items:center;background-color: skyblue;height:64px;">
         <h2 style="margin:0;">🍁Fall-UI🍁</h2>
+        <fl-popover trigger="hover" class="avatar1" placement="bottom-end" :show-arrow="false">
+          <template #reference>
+            <img style="width:50px;height:50px;border-radius: 50%;" src="../assets/avatar1.png" />
+          </template>
+          <div>
+            <p>
+              <strong>github:</strong>
+              <a target="_blank" href="https://github.com/ifjif/fall-ui">https://github.com/ifjif/fall-ui</a>
+            </p>
+            <p>
+              <strong>gitee:</strong>
+              <a target="_blank" href="https://gitee.com/zcfong">https://gitee.com/zcfong</a>
+            </p>
+            <p>
+              <strong>邮箱:</strong>
+              <span>ch.en.g@qq.com</span>
+            </p>
+          </div>
+        </fl-popover>
       </div>
     </fl-header>
     <fl-container>
@@ -22,7 +42,7 @@
               <fl-breadcrumb-item to="/">首页</fl-breadcrumb-item>
               <template v-for="item in crumbs" :key="item.path">
                 <fl-breadcrumb-item :to="item.path">{{ item.name
-                }}</fl-breadcrumb-item>
+                  }}</fl-breadcrumb-item>
               </template>
             </fl-breadcrumb>
           </div>
@@ -93,3 +113,9 @@ watch(() => route.path, (path) => {
   addTab(route.name, path)
 }, { immediate: true })
 </script>
+
+<style scoped>
+.avatar1 {
+  margin-right: 20px;
+}
+</style>
