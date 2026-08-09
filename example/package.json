@@ -14,7 +14,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "fall-ui": "^0.1.0",
+    "fall-ui": "^0.1.1",
     "vue": "^3.5.18",
     "vue-router": "^5.0.4"
   },

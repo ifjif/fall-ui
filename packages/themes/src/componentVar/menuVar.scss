@@ -19,7 +19,7 @@
 
 @function currentMenuVar($type: '') {
   $currentMenuVar: (
-    'current-width':('default':getVarName('menu-width', 'default')),
+    'current-width':('default':getVarName('menu-width')),
   );
 @return $currentMenuVar;
 }

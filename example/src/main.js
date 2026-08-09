@@ -12,7 +12,7 @@ import "../../fall-ui/themes/index.css";
 
 /*
 import FallUI from 'fall-ui'
-import FallUIcon from 'fall-ui/es/icons'
+import FallUIcon from 'fall-ui/icons'
 import "fall-ui/themes/index.css"
 */
 

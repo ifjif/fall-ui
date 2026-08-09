@@ -61,7 +61,7 @@
     <button style="width:64px;font-size:12px;" @click="toggleCollapse">
       {{ isCollapse ? '展开' : '折叠' }}
     </button>
-    <fl-menu :styles="styles" :active-index="currentPath" @select="handleSelect" :is-collapse="isCollapse"
+    <fl-menu :width="300" :styles="styles" :active-index="currentPath" @select="handleSelect" :is-collapse="isCollapse"
       :data="menuData" :accordion="true"></fl-menu>
 
     <h3 id="fl-menu-attrs">属性</h3>

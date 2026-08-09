@@ -53,14 +53,15 @@
     //组件导入
     import FallUI from 'fall-ui'
     //icon导入
-    import FallIcon from 'fall-ui/es/icons'
+    import FallIcon from 'fall-ui/icons'
     //样式引入
     import "fall-ui/themes/index.css"
     //单个导入
     import {FlButton} from 'fall-ui'
 
-    app.use(fallui)
+    app.use(FallUI)
 
 # 在线文档
 
+待部署
 <http://fall-ui.top>
