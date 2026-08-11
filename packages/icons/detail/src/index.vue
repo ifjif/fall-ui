@@ -1,0 +1,21 @@
+<template>
+  <svg t="1786341582694" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    p-id="13536" width="200" height="200">
+    <path
+      d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32z m-40 728H184V184h656v656z"
+      p-id="13537"></path>
+    <path
+      d="M492 400h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H492c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8zM492 544h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H492c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8zM492 688h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H492c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
+      p-id="13538"></path>
+    <path d="M380 368m-40 0a40 40 0 1 0 80 0 40 40 0 1 0-80 0Z" p-id="13539"></path>
+    <path d="M380 512m-40 0a40 40 0 1 0 80 0 40 40 0 1 0-80 0Z" p-id="13540"></path>
+    <path d="M380 656m-40 0a40 40 0 1 0 80 0 40 40 0 1 0-80 0Z" p-id="13541"></path>
+  </svg>
+</template>
+<script>
+import { genericIconName } from '@fall-ui/hooks'
+
+export default {
+  name: genericIconName('Detail')
+}
+</script>

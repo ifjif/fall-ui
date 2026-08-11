@@ -1,0 +1,17 @@
+<template>
+  <svg t="1786367121696" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    p-id="35226" width="200" height="200">
+    <path
+      d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-792 72h752v120H136V232z m752 560H136V440h752v352z"
+      p-id="35227"></path>
+    <path d="M651 728h165c4.4 0 8-3.6 8-8v-72c0-4.4-3.6-8-8-8H651c-4.4 0-8 3.6-8 8v72c0 4.4 3.6 8 8 8z" p-id="35228">
+    </path>
+  </svg>
+</template>
+<script>
+import { genericIconName } from '@fall-ui/hooks'
+
+export default {
+  name: genericIconName('CreditCard')
+}
+</script>

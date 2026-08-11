@@ -29,3 +29,5 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+icons.vue.txt
