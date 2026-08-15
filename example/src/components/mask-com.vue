@@ -32,7 +32,7 @@
 <script setup>
 import { columns, eventColumns } from '@/assets/com-props';
 import ComponentLayout from '@/layout/component-layout.vue'
-import { FlMessage } from '@fall-ui/components';
+import { FlMessage } from 'fall-ui';
 import { ref } from 'vue'
 const show = ref(false)
 const show2 = ref(false)

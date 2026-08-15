@@ -32,7 +32,7 @@
 </template>
 <script setup>
 import ComponentLayout from '@/layout/component-layout.vue';
-import { FlMessage } from '@fall-ui/components';
+import { FlMessage } from 'fall-ui';
 import { columns, exposeColumns } from '@/assets/com-props';
 //import { FlMessage } from '../../../fall-ui/es/index.mjs';
 //import { getCurrentInstance } from 'vue';

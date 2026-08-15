@@ -1,5 +1,5 @@
 export * from "./components/index";
-export * from "./icons/index";
+//export * from "./icons/index";
 
 import components from "./components.js";
 import directives from "./directives.js";

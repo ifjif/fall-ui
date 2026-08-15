@@ -44,7 +44,7 @@
 <script setup>
 import ComponentLayout from '@/layout/component-layout.vue';
 import { columns, eventColumns, exposeColumns } from '@/assets/com-props';
-import { FlMessageBox } from '@fall-ui/components';
+import { FlMessageBox } from 'fall-ui';
 import { h } from 'vue'
 const open1 = () => {
   FlMessageBox({ title: '标题', content: '这是内容这是内容这是内容' })

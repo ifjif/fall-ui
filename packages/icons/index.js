@@ -329,5 +329,3 @@ export * from './message-fill'
 export * from './comment'
 export * from './mail-fill'
 export * from './image-fill'
-// 组件类型 和 图标的 mapping
-export * from "./mappings";

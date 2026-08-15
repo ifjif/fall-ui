@@ -3,8 +3,7 @@ import {
   FlIcon as Icon,
   FlMask as Mask,
 } from "@fall-ui/components";
-import { typeIcons } from "@fall-ui/icons";
-import { themes, types } from "@fall-ui/utils";
+import { themes, types, typeIcons } from "@fall-ui/utils";
 import { computed, isVNode } from "vue";
 import { useStyle, useZIndex } from "@fall-ui/hooks";
 export function useMessageBoxState(props) {

@@ -57,7 +57,7 @@
     //样式引入
     import "fall-ui/themes/index.css"
     //单个导入
-    import {FlButton} from 'fall-ui'
+    import {FlButton} from 'fall-ui/icons'
 
     app.use(FallUI)
 
