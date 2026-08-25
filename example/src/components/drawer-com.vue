@@ -1,5 +1,6 @@
 <template>
   <ComponentLayout :anchors="anchors">
+    <fl-button @click="opentest">打开test</fl-button>
     <h2>抽屉</h2>
     <div>
       <h3 id="fl-drawer-basic">基础</h3>
@@ -76,6 +77,9 @@ const content = `
             内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
   `
 
+const opentest = () => {
+  FlDrawer({ title: '测试', content: 'abc' })
+}
 const open1 = () => {
   FlDrawer({ title, placement: 'left', content })
 }

@@ -1,0 +1,1 @@
+1. FlDraw在fixedScreen下 其内容可以直接为FlScrollBar

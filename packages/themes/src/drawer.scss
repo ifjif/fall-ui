@@ -47,6 +47,8 @@
     min-height: 0;
 
     @include e(render-content) {
+      width: 100%;
+
       @include s((fixedScreen)) {
         overflow: auto;
       }
