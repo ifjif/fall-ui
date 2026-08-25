@@ -1,5 +1,26 @@
 <template>
   <ComponentLayout :anchors="anchors">
+    <h2>test</h2>
+    <div style="height:200px;">
+      <fl-tabs style="height:100%;">
+        <fl-tab-pane style="height:100%;">
+          <fl-scrollbar>
+            <p>
+              jfdlsjflsfjsdfsdfsdfsdfsfdsfs
+            </p>
+            <p>
+              jfdlsjflsfjsdfsdfsdfsdfsfdsfs
+            </p>
+            <p>
+              jfdlsjflsfjsdfsdfsdfsdfsfdsfs
+            </p>
+            <p>
+              jfdlsjflsfjsdfsdfsdfsdfsfdsfs
+            </p>
+          </fl-scrollbar>
+        </fl-tab-pane>
+      </fl-tabs>
+    </div>
     <h2>tabs</h2>
     <div>
       <h3 id="fl-tabs-basic-top">基础下划线模式top（带关闭）</h3>
