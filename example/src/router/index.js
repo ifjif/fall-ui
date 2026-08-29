@@ -69,7 +69,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/fall-ui-demo/'),
   routes
 })
 

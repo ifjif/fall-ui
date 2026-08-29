@@ -2,6 +2,14 @@
 
 使用vue3.js
 
+# 在线文档
+
+<https://ifjif.github.io/fall-ui-demo>
+
+# github
+
+<https://github.com/ifjif/fall-ui>
+
 # 拥有的组件
 
 - `fl-anchor/FlAnchor`
@@ -64,8 +72,3 @@
 # 图标来源
 
 <https://www.iconfont.cn/collections/detail?cid=9402>
-
-# 在线文档
-
-待部署
-<http://fall-ui.top>
