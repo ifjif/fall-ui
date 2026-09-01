@@ -7,9 +7,9 @@ export function useMenuItemState(props) {
   // 有孩子
   const hasChildren = computed(() => props.menu.children && props.menu.children.length > 0)
   // 是否展开
-  const isOpen = computed(() => props.openIndices.includes(props.menu.index))
+  const isOpen = computed(() => props.openIndices.includes(props.menu[props.keyProp]))
   // 是否激活
-  const isActive = computed(() => props.activeIndex === props.menu.index)
+  const isActive = computed(() => props.activeIndex === props.menu[props.keyProp])
 
   return {
     submenuRef,

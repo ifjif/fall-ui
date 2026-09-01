@@ -20,9 +20,9 @@
     <Teleport v-if="isCollapse" to="body">
       <ul ref="ssubmenuRef" :style="[subMenuStyle, styles]" v-if="hasChildren" v-show="isOpen" :class="[subNs.b()]">
         <FlScrollBar maxHeight="240">
-          <MenuItem v-for="item in menu.children" :menu="item" :active-index="activeIndex" :openIndices="openIndices"
-            :styles="subStyles" :keyProp="keyProp" :headerPosition="headerPosition" :indent="0" :mode="mode"
-            @select="selectChild($event)" @toggle="$emit('toggle', $event)">
+          <MenuItem v-for="item in menu.children" :key="item[keyProp]" :menu="item" :active-index="activeIndex"
+            :openIndices="openIndices" :styles="subStyles" :keyProp="keyProp" :headerPosition="headerPosition"
+            :indent="0" :mode="mode" @select="selectChild($event)" @toggle="$emit('toggle', $event)">
           <template v-if="$slots.icon" #icon="{ item }">
             <slot name="icon" :item="item" />
           </template>
@@ -37,9 +37,9 @@
 
     <template v-else>
       <ul v-if="hasChildren" v-show="isOpen" :class="[ns.e('submenu')]">
-        <MenuItem :styles="subStyles" v-for="item in menu.children" :menu="item" :active-index="activeIndex"
-          :openIndices="openIndices" :keyProp="keyProp" :headerPosition="headerPosition" :indent="indent + 1"
-          :mode="mode" @select="selectChild($event)" @toggle="$emit('toggle', $event)">
+        <MenuItem :styles="subStyles" v-for="item in menu.children" :key="item[keyProp]" :menu="item"
+          :active-index="activeIndex" :openIndices="openIndices" :keyProp="keyProp" :headerPosition="headerPosition"
+          :indent="indent + 1" :mode="mode" @select="selectChild($event)" @toggle="$emit('toggle', $event)">
         <template v-if="$slots.icon" #icon="{ item }">
           <slot name="icon" :item="item" />
         </template>

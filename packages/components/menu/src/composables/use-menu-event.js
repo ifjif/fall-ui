@@ -2,7 +2,6 @@ export function useMenuEvent(props, emit, openIndices, openIndicesUnique, topInd
 
   // 选中菜单
   const handleSelect = ({ index, item }) => {
-    console.log(index, item)
     emit('select', index, item)
     // 设置顶部索引
     topIndex.value = item?.[props.keyProp]

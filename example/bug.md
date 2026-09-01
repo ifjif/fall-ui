@@ -1,13 +1,4 @@
-1. fl-menu中的icon，如果template数据宽度超过了，原宽度不会变
-    导致 title所在容器每次都要padding-left:xx，才能不重叠
-
-2. fl-menu-icon 需可以配置是否垂直居中
-
-3. fl-menu 可以指定活跃 prop 名
-
-4. fl-modal 的文档中没有写model信息
-
-5. fl-table 在不同浏览器对：border-collapse:collapse;渲染的不同
+2. fl-table 在不同浏览器对：border-collapse:collapse;渲染的不同
     **问题：**
 
         对于chorme，每个tr的td会正常显示border-bottom
@@ -24,4 +15,4 @@
         border-collapse:separate; //设置为分离模式，这样每个 td 的 border-bottom 都会独立渲染
         border-spacing:0; //默认的边框间距是 2px，你需要手动改回 0
 
-6. fl-form-item的 label也可以配置是否垂直居中
+3. fl-form-item的 label也可以配置是否垂直居中

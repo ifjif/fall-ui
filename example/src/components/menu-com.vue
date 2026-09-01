@@ -1,7 +1,7 @@
 <template>
   <ComponentLayout :anchors="anchors">
     <h2>测试</h2>
-    <fl-menu keyProp="id" :data="testData" headerPosition="top">
+    <fl-menu :activeIndex="testActive" @select="handleTestSelect" keyProp="id" :data="testData" headerPosition="top">
       <template #icon>
         <div style="width:50px;height:50px;border-radius: 50%;background-color: red;">
           on
@@ -99,11 +99,21 @@ import { useRouter, useRoute } from 'vue-router'
 import { columns, slotColumns, eventColumns } from '@/assets/com-props'
 import ComponentLayout from '@/layout/component-layout.vue'
 
+const testActive = ref('1')
 const testData = [{
-  id: 'abc',
+  id: '1',
   title: 'xxx',
   icon: 'xxx'
-}]
+},
+{
+  id: '2',
+  title: 'xxxx',
+  icon: 'xx'
+}
+]
+const handleTestSelect = (index, item) => {
+  testActive.value = index
+}
 
 const router = useRouter()
 const route = useRoute()
@@ -194,7 +204,7 @@ const slotData = [
 ]
 
 const eventData = [
-  { name: 'select', params: '({index,item})', desc: '触发选中事件,index:选中的key,item:选择的项' }
+  { name: 'select', params: '(index,item)', desc: '触发选中事件,index:选中的key,item:选择的项' }
 ]
 
 </script>
