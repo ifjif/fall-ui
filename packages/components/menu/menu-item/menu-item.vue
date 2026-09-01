@@ -1,6 +1,7 @@
 <template>
   <li ref="submenuRef" :style="styles" :class="[ns.b(), ns.m('mode', mode), ns.is('collapse', isCollapse)]">
-    <div @click="toggleMenu" :style="[indentStyle]" :class="[ns.e('header'), ns.is('active', isActive || childActive)]">
+    <div @click="toggleMenu" :style="[indentStyle]" :class="[ns.e('header'),
+    ns.m('header-position', headerPosition), ns.is('active', isActive || childActive)]">
       <span :class="[ns.e('icon'), ns.is('collapse', isCollapse)]">
         <slot v-if="$slots.icon" name="icon" :item="menu" />
         <template v-else>
@@ -20,8 +21,8 @@
       <ul ref="ssubmenuRef" :style="[subMenuStyle, styles]" v-if="hasChildren" v-show="isOpen" :class="[subNs.b()]">
         <FlScrollBar maxHeight="240">
           <MenuItem v-for="item in menu.children" :menu="item" :active-index="activeIndex" :openIndices="openIndices"
-            :styles="subStyles" :indent="0" :mode="mode" @select="selectChild($event, menu)"
-            @toggle="$emit('toggle', $event)">
+            :styles="subStyles" :keyProp="keyProp" :headerPosition="headerPosition" :indent="0" :mode="mode"
+            @select="selectChild($event)" @toggle="$emit('toggle', $event)">
           <template v-if="$slots.icon" #icon="{ item }">
             <slot name="icon" :item="item" />
           </template>
@@ -37,8 +38,8 @@
     <template v-else>
       <ul v-if="hasChildren" v-show="isOpen" :class="[ns.e('submenu')]">
         <MenuItem :styles="subStyles" v-for="item in menu.children" :menu="item" :active-index="activeIndex"
-          :openIndices="openIndices" :indent="indent + 1" :mode="mode" @select="selectChild($event, menu)"
-          @toggle="$emit('toggle', $event)">
+          :openIndices="openIndices" :keyProp="keyProp" :headerPosition="headerPosition" :indent="indent + 1"
+          :mode="mode" @select="selectChild($event)" @toggle="$emit('toggle', $event)">
         <template v-if="$slots.icon" #icon="{ item }">
           <slot name="icon" :item="item" />
         </template>
@@ -102,16 +103,27 @@ const props = defineProps({
   },
   styles: {
     type: Object
+  },
+  headerPosition: {
+    type: String,
+    validator(v) {
+      return ['top', 'center', 'end'].includes(v)
+    },
+    default: 'center'
+  },
+  keyProp: {
+    type: String,
+    default: 'index'
   }
 })
 
 const emit = defineEmits(['toggle', 'select'])
 
 const childActive = computed(() => {
-  return props.activeTopIndex === props.menu.index && (props.isCollapse || props.mode === 'horizontal')
+  return props.activeTopIndex === props.menu[props.keyProp] && (props.isCollapse || props.mode === 'horizontal')
 })
-const selectChild = (e, menu) => {
-  emit('select', e, menu)
+const selectChild = (e) => {
+  emit('select', e)
 }
 
 const subStyles = computed(() => {

@@ -1,10 +1,11 @@
 export function useMenuEvent(props, emit, openIndices, openIndicesUnique, topIndex) {
 
   // 选中菜单
-  const handleSelect = (index, menu) => {
-    emit('select', index)
+  const handleSelect = ({ index, item }) => {
+    console.log(index, item)
+    emit('select', index, item)
     // 设置顶部索引
-    topIndex.value = menu?.index
+    topIndex.value = item?.[props.keyProp]
   }
 
   const findParent = (items, targetIndex) => {
@@ -12,13 +13,13 @@ export function useMenuEvent(props, emit, openIndices, openIndicesUnique, topInd
 
     const doFind = (items) => {
       for (let item of items) {
-        if (item.index === targetIndex) {
+        if (item[props.keyProp] === targetIndex) {
           return true
         }
 
         if (item.children && item.children.length > 0) {
           if (doFind(item.children)) {
-            parents.push(item.index)
+            parents.push(item[props.keyProp])
             return true
           }
         }

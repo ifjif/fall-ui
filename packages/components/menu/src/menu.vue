@@ -2,8 +2,8 @@
   <nav :style="styles" :class="[ns.b(), ns.m('mode', mode), ns.is('collapse', isCollapse)]">
     <ul :class="[ns.e('menu-list')]">
       <FlMenuItem v-for="item in data" :key="item.index" :menu="item" :openIndices="openIndices" :styles="props.styles"
-        :active-index="activeIndex" :active-Top-index="topIndex" :mode="mode" :isCollapse="isCollapse" :indent="0"
-        @select="handleSelect" @toggle="handleToggle">
+        :active-index="activeIndex" :keyProp="keyProp" :headerPosition="headerPosition" :active-Top-index="topIndex"
+        :mode="mode" :isCollapse="isCollapse" :indent="0" @select="handleSelect" @toggle="handleToggle">
         <template v-if="$slots.icon" #icon="{ item }">
           <slot name='icon' :item="item" />
         </template>
@@ -64,6 +64,17 @@ const props = defineProps({
   },
   styles: {
     type: Object
+  },
+  headerPosition: {
+    type: String,
+    validator(v) {
+      return ['top', 'center', 'end'].includes(v)
+    },
+    default: 'center'
+  },
+  keyProp: {
+    type: String,
+    default: 'index'
   }
 })
 

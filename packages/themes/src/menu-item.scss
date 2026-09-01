@@ -63,7 +63,6 @@
   @include e(header) {
     display: flex;
     padding: 10px 0;
-    align-items: center;
     transition: background-color 0.3s;
     cursor: pointer;
     color: var(#{getComVarName('color')});
@@ -79,11 +78,23 @@
       #{getComVarName('bg-color')}:var(#{getComVarName('active-bg-color')});
       border-right: 2px solid var(#{getComVarName('active-bar-color')});
     }
+
+    @include m(header-position, top) {
+      align-items: start;
+    }
+
+    @include m(header-position, center) {
+      align-items: center;
+    }
+
+    @include m(header-position, end) {
+      align-items: end;
+    }
   }
 
   @include e(icon) {
     margin-left: 15px;
-    width: 24px;
+    min-width: 24px;
     text-align: center;
 
     @include s((collapse)) {

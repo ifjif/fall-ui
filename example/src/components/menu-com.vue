@@ -1,5 +1,20 @@
 <template>
   <ComponentLayout :anchors="anchors">
+    <h2>测试</h2>
+    <fl-menu keyProp="id" :data="testData" headerPosition="top">
+      <template #icon>
+        <div style="width:50px;height:50px;border-radius: 50%;background-color: red;">
+          on
+        </div>
+      </template>
+      <template #title>
+        <p style="margin:0;">这是title</p>
+        <p>这是title</p>
+        <p>这是title</p>
+        <p>这是title</p>
+        <p>这是title</p>
+      </template>
+    </fl-menu>
     <h2>menu</h2>
     <h3 id="fl-menu-basic">基础</h3>
     <div style="height: 500px;display: flex;flex-direction: column;margin-bottom: 50px;">
@@ -84,6 +99,12 @@ import { useRouter, useRoute } from 'vue-router'
 import { columns, slotColumns, eventColumns } from '@/assets/com-props'
 import ComponentLayout from '@/layout/component-layout.vue'
 
+const testData = [{
+  id: 'abc',
+  title: 'xxx',
+  icon: 'xxx'
+}]
+
 const router = useRouter()
 const route = useRoute()
 
@@ -160,6 +181,11 @@ const data = [
   { name: 'width', type: 'Number, String', default: '240', value: '', desc: '宽度' },
   { name: 'collapseWidth', type: 'Number, String', default: '48', value: '', desc: '折叠宽度' },
   { name: 'styles', type: 'Object', default: '', value: JSON.stringify(styles_, null, 2), desc: '自定义颜色' },
+  {
+    name: 'headerPosition', type: 'String', default: 'center', value: 'top,center,end',
+    desc: '指定icon中的位置'
+  },
+  { name: 'keyProp', type: 'String', default: 'index', value: '', desc: '指定选中的key名' }
 ]
 
 const slotData = [
@@ -168,7 +194,7 @@ const slotData = [
 ]
 
 const eventData = [
-  { name: 'select', params: '(index)', desc: '触发选中事件' }
+  { name: 'select', params: '({index,item})', desc: '触发选中事件,index:选中的key,item:选择的项' }
 ]
 
 </script>

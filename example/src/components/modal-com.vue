@@ -143,6 +143,8 @@
 
     <h3 id="fl-modal-attrs">属性</h3>
     <fl-table :data="data" :columns="columns"></fl-table>
+    <h3 id="fl-modal-models">model</h3>
+    <fl-table :data="modelData" :columns="columns"></fl-table>
     <h3 id="fl-modal-slots">插槽</h3>
     <fl-table :data="slotData" :columns="slotColumns"></fl-table>
     <h3 id="fl-modal-event">事件</h3>
@@ -196,6 +198,7 @@ const anchors = [
   { title: '自定义宽度', href: 'fl-modal-close-width-self' },
   { title: '屏幕固定', href: 'fl-modal-fixed-screen' },
   { title: '属性', href: 'fl-modal-attrs' },
+  { title: 'model', href: 'fl-modal-models' },
   { title: '插槽', href: 'fl-modal-slots' },
   { title: '事件', href: 'fl-modal-event' }
 ]
@@ -212,6 +215,10 @@ const data = [
   { name: 'beforeChange', type: 'Function', default: '', value: '', desc: '' },
   { name: 'width', type: 'Number, String', default: '', value: '', desc: '' },
   { name: 'fixedScreen', type: 'Boolean', default: 'false', value: 'true,false', desc: '' },
+]
+
+const modelData = [
+  { name: '', type: 'Boolean', default: '', value: 'true,false', desc: 'modal框展示或隐藏' },
 ]
 
 const slotData = [

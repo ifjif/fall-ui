@@ -2,9 +2,9 @@ export function useMenuItemEvent(props, emit, hasChildren) {
 
   const toggleMenu = () => {
     if (hasChildren.value) {
-      emit('toggle', props.menu.index)
+      emit('toggle', props.menu[props.keyProp])
     } else {
-      emit('select', props.menu.index)
+      emit('select', { index: props.menu[props.keyProp], item: props.menu })
     }
   }
 
