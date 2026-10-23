@@ -1,3 +1,9 @@
+## 0.2.11 - 2026-10-23
+
+### 修复(Fixed)
+
+- fl-textarea 中wrapper中设置min-width:0,让fl-scrollbar生效
+
 ## 0.2.10 - 2026-10-23
 
 ### 修复(Fixed)

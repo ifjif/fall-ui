@@ -21,6 +21,7 @@
     background-color: var(#{getVarName('input', 'bg-color')});
     flex: 1;
     gap: var(#{getVarName('input', 'horizontal-padding')}) 0;
+    min-width: 0;
 
     &:hover {
       #{getVarName('input', 'border-color')}: var(#{getVarName('input', 'hover-border-color')});

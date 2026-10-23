@@ -16,6 +16,21 @@
         <fl-button type="primary">发送</fl-button>
       </template>
     </fl-textarea>
+    <fl-textarea>
+      <template #prefix>
+        <fl-scrollbar wheel="x">
+          <p>
+            dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+          </p>
+        </fl-scrollbar>
+      </template>
+    </fl-textarea>
     <h3 id="fl-textarea-attrs">属性</h3>
     <fl-table :data="data" :columns="columns"></fl-table>
     <h3 id="fl-textarea-models">model</h3>
