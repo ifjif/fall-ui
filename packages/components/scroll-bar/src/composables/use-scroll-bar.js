@@ -52,7 +52,8 @@ export function useScrollBar(props, emit) {
     onWheel,
     onTouchStart,
     onTouchMove,
-    onTouchEnd
+    onTouchEnd,
+    onDragEnd
   } = useScrollBarEvent(
     props,
     emit,
@@ -110,7 +111,8 @@ export function useScrollBar(props, emit) {
     onWheel,
     onTouchStart,
     onTouchMove,
-    onTouchEnd
+    onTouchEnd,
+    onDragEnd
   }
 }
 

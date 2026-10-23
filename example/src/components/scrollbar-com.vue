@@ -6,6 +6,13 @@
       @right="rightEvent" height="400" width="400">
       {{ content }}
     </fl-scrollbar>
+
+    <fl-scrollbar ref="barref2" @resize="handleResize" style="background-color: green;" @top="topEvent2"
+      @bottom="bottomEvent" @left="leftEvent" @right="rightEvent" height="400" width="400">
+      <p v-for="item in content2">
+        {{ item }}
+      </p>
+    </fl-scrollbar>
     <h3 id="fl-scrollbar-attrs">属性</h3>
     <fl-table :data="data" :columns="columns"></fl-table>
     <h3 id="fl-scrollbar-slots">插槽</h3>
@@ -24,6 +31,54 @@ const content = ref(`
     fjdlsfjlsdjfsdlkfjdslfjsdlfjsdlkfjsdlfjsldfjsdlkfjsdklfjsdlfjsdlfjs
     fjdlsfjlsdjfsdlkfjdslfjsdlfjsdlkfjsdlfjsldfjsdlkfjsdklfjsdlfjsdlfjs
 `)
+const content2 = ref([
+  'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+  'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+  'ccccccccccccccccccccccccccccccccc',
+  'ddddddddddddddddddddddddddddddddd',
+  'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+  'fffffffffffffffffffffffffffffffff',
+  'ggggggggggggggggggggggggggggggggg',
+  'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh',
+  'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii',
+  'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj',
+  'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
+  'lllllllllllllllllllllllllllllllll',
+])
+const a = [
+  'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+  'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+  'ccccccccccccccccccccccccccccccccc',
+  'ddddddddddddddddddddddddddddddddd',
+  'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+  'fffffffffffffffffffffffffffffffff',
+  'ggggggggggggggggggggggggggggggggg',
+  'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh',
+  'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii',
+  'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj',
+  'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
+  'lllllllllllllllllllllllllllllllll',
+]
+
+const barref2 = ref(null)
+let top = false
+
+const topEvent2 = () => {
+  top = true
+  content2.value.unshift(...a)
+}
+
+let initialHeight = 0
+const handleResize = ({ clientWidth, clientHeight, scrollWidth, scrollHeight }) => {
+  if (scrollHeight > clientHeight) {
+    if (!top) {
+      barref2.value.scrollToBottom()
+    } else {
+      barref2.value.scrollTopInc(scrollHeight - initialHeight)
+    }
+  }
+  initialHeight = scrollHeight
+}
 setTimeout(() => {
   content.value = `
     fjdlsfjlsdjfsdlkfjdslfjsdlfjsdlkfjsdlfjsldfjsdlkfjsdklfjsdlfjsdlfjsfjdlsfjlsdjfsdlkfjdslfjsdlfjsdlkfjsdlfjsldfjsdlkfjsdklfjsdlfjsdlfjs

@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-//todo 滚动栏颜色、宽度、高度、border-radius 自定义 鼠标滑轮滚动的方向(vertical / horizontal)
+//todo 滚动栏颜色、宽度、高度、border-radius 自定义 
 import { useNamespace } from '@fall-ui/hooks';
 const ns = useNamespace('scrollbar')
 export default {
@@ -95,12 +95,15 @@ const {
   onWheel,
   onTouchStart,
   onTouchMove,
-  onTouchEnd
+  onTouchEnd,
+  onDragEnd
 } = useScrollBar(props, emit)
 
 const resizeChange = ref(false)
 
+// 自动滚动时，取消拖动滚动
 const scrollToTop = () => {
+  onDragEnd()
   nextTick(() => {
     containerRef.value.scrollTop = 0
     topPosition.value = true
@@ -108,6 +111,7 @@ const scrollToTop = () => {
   })
 }
 const scrollTopInc = (x) => {
+  onDragEnd()
   nextTick(() => {
     let newTop = containerRef.value.scrollTop + x
     if (newTop <= 0) {
@@ -128,6 +132,7 @@ const scrollTopInc = (x) => {
  * false 未发生改变，滚动到当前底部
  */
 const scrollToBottom = (changed = false) => {
+  onDragEnd()
   nextTick(() => {
     if (changed && !resizeChange.value) scrollToBottomForChange = scrollToBottom
     containerRef.value.scrollTop = maxScrollTop.value
@@ -138,6 +143,7 @@ const scrollToBottom = (changed = false) => {
 let scrollToBottomForChange = null
 
 const scrollToLeft = () => {
+  onDragEnd()
   nextTick(() => {
     containerRef.value.scrollLeft = 0
     leftPosition.value = true
@@ -146,6 +152,7 @@ const scrollToLeft = () => {
 }
 
 const scrollLeftInc = (x) => {
+  onDragEnd()
   nextTick(() => {
     let newLeft = containerRef.value.scrollLeft + x
     if (newLeft <= 0) {
@@ -162,6 +169,7 @@ const scrollLeftInc = (x) => {
 }
 
 const scrollToRight = (changed) => {
+  onDragEnd()
   nextTick(() => {
     if (changed && !resizeChange.value) scrollToRightForChange = scrollToRight
     containerRef.value.scrollLeft = maxScrollLeft.value
