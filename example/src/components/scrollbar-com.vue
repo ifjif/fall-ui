@@ -13,6 +13,13 @@
         {{ item }}
       </p>
     </fl-scrollbar>
+
+    <fl-scrollbar ref="barref2" @resize="handleResize" style="background-color: red;" @top="topEvent2"
+      @bottom="bottomEvent" @left="leftEvent" @right="rightEvent" :height="height3" width="400">
+      <p v-for="item in content2">
+        {{ item }}
+      </p>
+    </fl-scrollbar>
     <h3 id="fl-scrollbar-attrs">属性</h3>
     <fl-table :data="data" :columns="columns"></fl-table>
     <h3 id="fl-scrollbar-slots">插槽</h3>
@@ -67,6 +74,10 @@ const topEvent2 = () => {
   top = true
   content2.value.unshift(...a)
 }
+const height3 = ref(400)
+setTimeout(() => {
+  height3.value = 420
+}, 3000)
 
 let initialHeight = 0
 const handleResize = ({ clientWidth, clientHeight, scrollWidth, scrollHeight }) => {

@@ -2,12 +2,10 @@
   <div @mouseenter="showScrollBar = true" @mouseleave="showScrollBar = false" ref="containerRef" :class="[ns.b()]"
     @scroll.passive="onScroll" @wheel="onWheel" :style="[width, height, maxHeight, maxWidth]" @touchstart="onTouchStart"
     @touchmove.passive="onTouchMove" @touchend="onTouchEnd">
-    <div ref="contentRef">
-      <!-- 判断水平方向是否会滚动 -->
-      <div :style="['display: inline-block;', x ? 'width:max-content;' : 'width:100%;']" ref="innerContentRef">
-        <!-- slot为宽高跟随内容增长 -->
-        <slot />
-      </div>
+    <!-- 判断水平方向是否会滚动 -->
+    <div :style="['display: inline-block;', x ? 'width:max-content;' : 'width:100%;']" ref="innerContentRef">
+      <!-- slot为宽高跟随内容增长 -->
+      <slot />
     </div>
 
     <div @mousedown="scrollDown" v-if="existScrollBar" v-show="showScrollBar || dragging" :class="[ns.e('thumb')]"
@@ -65,7 +63,6 @@ const emit = defineEmits(['top', 'bottom', 'left', 'right', 'resize', 'scroll'])
 
 const {
   containerRef,
-  contentRef,
   innerContentRef,
   existScrollBar,
   showScrollBar,
@@ -205,13 +202,13 @@ const handleResize = (entries) => {
     const innerContainer = innerContentRef.value
     if (!container || !innerContainer) return
 
-    const height = entries[0].contentRect.height
+    //const height = entries[0].contentRect.height
     const clientHeight = container.clientHeight
     const clientWidth = container.clientWidth
     const scrollHeight = innerContainer.clientHeight
     const scrollWidth = innerContainer.clientWidth
 
-    existScrollBar.value = height > clientHeight
+    existScrollBar.value = scrollHeight > clientHeight
     existHorizontalScrollBar.value = scrollWidth > clientWidth
 
     if (existScrollBar.value) {
@@ -283,11 +280,12 @@ const handleResize = (entries) => {
       *       clientHeight 来 充当 scrollHeight
       */
     emit('resize', { clientWidth, clientHeight, scrollWidth, scrollHeight })
+
   })
 }
 onMounted(() => {
   resizeObserver = new ResizeObserver(handleResize)
-  resizeObserver.observe(contentRef.value)
+  resizeObserver.observe(containerRef.value)
   resizeObserver.observe(innerContentRef.value)
 })
 

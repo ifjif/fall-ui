@@ -1,3 +1,9 @@
+## 0.2.12 - 2026-10-24
+
+### 修复(Fixed)
+
+- fl-scrollbar中 vertical-bar不随父容器变化，去掉inner_content的父content,让其直接在scrollContainer中
+
 ## 0.2.11 - 2026-10-23
 
 ### 修复(Fixed)

@@ -1,7 +1,6 @@
 import { ref, computed } from 'vue'
 export function useScrollBarState() {
   const containerRef = ref(null)
-  const contentRef = ref(null)
   const innerContentRef = ref(null)
 
   const existScrollBar = ref(false)
@@ -76,7 +75,6 @@ export function useScrollBarState() {
   const rightPostion = ref(false)
   return {
     containerRef,
-    contentRef,
     innerContentRef,
     existScrollBar,
     showScrollBar,

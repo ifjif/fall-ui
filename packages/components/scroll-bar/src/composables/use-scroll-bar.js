@@ -4,7 +4,6 @@ import { useScrollBarStyle } from "./use-scroll-bar-style";
 export function useScrollBar(props, emit) {
   const {
     containerRef,
-    contentRef,
     innerContentRef,
     existScrollBar,
     showScrollBar,
@@ -81,7 +80,6 @@ export function useScrollBar(props, emit) {
 
   return {
     containerRef,
-    contentRef,
     innerContentRef,
     existScrollBar,
     showScrollBar,
