@@ -1,3 +1,18 @@
+## 0.2.13 - 2026-10-26
+
+### 修复(Fixed)
+
+- fl-scrollbar
+  thumbHeightRatio 到达最大0.1
+  thumbWidthRate 到达最大0.1
+  由于computed不会监听 domRef.value.ClientHeight/domRef.value.ClientHeight
+  而内部的thumbHeightRatio和thumbWidthRate又一直是0.1
+  导致 thumbHeight和thumbWidth的computed不触发
+  从而让虚拟滚动栏的位置信息不准确
+
+  解决：
+  让thumbHeightRatio和thumbWidthRate在0.1和0.101之间切换
+
 ## 0.2.12 - 2026-10-24
 
 ### 修复(Fixed)

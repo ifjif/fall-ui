@@ -3,7 +3,7 @@
     <h2>滚动栏</h2>
     <h3 id="fl-scrollbar-basic">基础</h3>
     <fl-scrollbar style="background-color: yellow;" @top="topEvent" @bottom="bottomEvent" @left="leftEvent"
-      @right="rightEvent" height="400" width="400">
+      @right="rightEvent" height="400" :width="width1">
       {{ content }}
     </fl-scrollbar>
 
@@ -14,10 +14,12 @@
       </p>
     </fl-scrollbar>
 
-    <fl-scrollbar ref="barref2" @resize="handleResize" style="background-color: red;" @top="topEvent2"
+    <fl-scrollbar ref="barref3" @resize="handleResize" style="background-color: red;" @top="topEvent"
       @bottom="bottomEvent" @left="leftEvent" @right="rightEvent" :height="height3" width="400">
+      <p v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :key="i">
       <p v-for="item in content2">
         {{ item }}
+      </p>
       </p>
     </fl-scrollbar>
     <h3 id="fl-scrollbar-attrs">属性</h3>
@@ -67,7 +69,17 @@ const a = [
   'lllllllllllllllllllllllllllllllll',
 ]
 
+const width1 = ref(400)
+setTimeout(() => {
+  width1.value = 320
+}, 10000)
+
+setTimeout(() => {
+  width1.value = 400
+}, 15000)
+
 const barref2 = ref(null)
+const barref3 = ref(null)
 let top = false
 
 const topEvent2 = () => {
@@ -76,8 +88,11 @@ const topEvent2 = () => {
 }
 const height3 = ref(400)
 setTimeout(() => {
-  height3.value = 420
-}, 3000)
+  height3.value = 320
+}, 5000)
+setTimeout(() => {
+  height3.value = 400
+}, 10000)
 
 let initialHeight = 0
 const handleResize = ({ clientWidth, clientHeight, scrollWidth, scrollHeight }) => {

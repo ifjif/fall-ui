@@ -214,15 +214,15 @@ const handleResize = (entries) => {
     if (existScrollBar.value) {
       maxScrollTop.value = scrollHeight - clientHeight
       // 判断 当前 scrollTop是否合法
-      if (containerRef.scrollTop > maxScrollTop.value) {
-        containerRef.scrollTop = maxScrollTop.value
+      if (container.scrollTop > maxScrollTop.value) {
+        container.scrollTop = maxScrollTop.value
       }
 
       // 更改状态
-      if (containerRef.scrollTop === 0) {
+      if (container.scrollTop === 0) {
         topPosition.value = true
         endPosition.value = false
-      } else if (containerRef.scrollTop === maxScrollTop.value) {
+      } else if (container.scrollTop === maxScrollTop.value) {
         topPosition.value = false
         endPosition.value = true
       } else {
@@ -238,15 +238,15 @@ const handleResize = (entries) => {
     if (existHorizontalScrollBar.value) {
       maxScrollLeft.value = scrollWidth - clientWidth
       // 判断 当前 scrollLeft是否合法
-      if (containerRef.scrollLeft > maxScrollLeft.value) {
-        containerRef.scrollLeft = maxScrollLeft.value
+      if (container.scrollLeft > maxScrollLeft.value) {
+        container.scrollLeft = maxScrollLeft.value
       }
 
       // 更改状态
-      if (containerRef.scrollLeft === 0) {
+      if (container.scrollLeft === 0) {
         leftPosition.value = true
         rightPostion.value = false
-      } else if (containerRef.scrollLeft === maxScrollLeft.value) {
+      } else if (container.scrollLeft === maxScrollLeft.value) {
         leftPosition.value = false
         rightPostion.value = true
       } else {
@@ -259,8 +259,22 @@ const handleResize = (entries) => {
       maxScrollLeft.value = 0
     }
 
-    thumbHeightRatio.value = Math.max(clientHeight / scrollHeight, 0.1) //最小10%
-    thumbWidthRate.value = Math.max(clientWidth / scrollWidth, 0.1) // 最小10%
+    const hr = Math.max(clientHeight / scrollHeight, 0.1) //最小10%-11%
+    const wr = Math.max(clientWidth / scrollWidth, 0.1) // 最小10%-11%
+    // 让
+    //  thumbHeight
+    //  thumbWidth
+    // 的computed发生变化
+    //
+    // 由于computed不会监听 domRef.value.ClientHeight/domRef.value.ClientHeight
+    // 如果thumbHeightRatio 总是0.1时，那么computed不会进行计算
+    // 导致 变化后 thumb的相关信息不改变
+    thumbHeightRatio.value = thumbHeightRatio.value === hr
+      ? 0.101
+      : hr
+    thumbWidthRate.value = thumbWidthRate.value === wr
+      ? 0.101
+      : wr
 
     scrollToBottomForChange && scrollToBottomForChange(false)
     scrollToRightForChange && scrollToRightForChange(false)
