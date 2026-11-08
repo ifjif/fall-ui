@@ -41,6 +41,7 @@ import {
   FlTimeline,
   FlDatePicker,
   FlDatePickerPanel,
+  FlVirtualList
 } from "@fall-ui/components";
 
 export default [
@@ -86,4 +87,5 @@ export default [
   FlTimeline,
   FlDatePicker,
   FlDatePickerPanel,
+  FlVirtualList,
 ];

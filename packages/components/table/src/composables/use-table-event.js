@@ -2,7 +2,6 @@ export function useTableEvent(
   props,
   emit,
   clearCacheWidths,
-  placeholderWidth,
   sortStates,
   filterValues,
   debounceTimers,
@@ -12,11 +11,15 @@ export function useTableEvent(
   selectionMap,
   updateSelectionModel,
   pageSelection,
+  innerHeight,
+  innerWidth,
+  canSync,
 ) {
 
 
   // 列宽 调整
   const startResize = (event, col) => {
+    canSync.value = false
     event.preventDefault()
     const startX = event.pageX
     const startWidth = parseInt(col.width) || 120
@@ -31,6 +34,7 @@ export function useTableEvent(
     }
 
     const stopDrag = () => {
+      canSync.value = true
       document.removeEventListener('mousemove', doDrag)
       document.removeEventListener('mouseup', stopDrag)
     }
@@ -40,11 +44,8 @@ export function useTableEvent(
   }
 
   const handleResize = ({ clientWidth, clientHeight, scrollWidth, scrollHeight }) => {
-    if (scrollWidth < clientWidth) {
-      placeholderWidth.value = clientWidth - scrollWidth
-    } else {
-      placeholderWidth.value = 2
-    }
+    innerHeight.value = clientHeight
+    innerWidth.value = clientWidth
   }
 
   // 排序 (本地或远程)

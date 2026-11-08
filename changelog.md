@@ -1,3 +1,30 @@
+## 0.3.0 - 2026-11-08
+
+### 修复(Fixed)
+
+- fl-scrollbar
+  往下拖拽时超出maxScrollTop问题
+  往右拖拽时超出maxScrollLeft问题
+  先前的thumbHeightRatio和thumbWidthRate新的相等时成为0.101问题,预期的是先前的是0.1并且新计算的也是0.1这时才成为0.101
+
+- fl-table
+  border-collapse:collapse在不同浏览器行为不同
+
+### 增加(Added)
+
+- fl-scrollbar
+  showX 属性，是否展示水平滚动条
+  scrollTop和scrollLeft 方法，滚动到指定位置
+- fl-table
+  filterActions和sortActions属性，自定义字段本地的过滤和排序
+- fl-virtual-list
+  新增虚拟列表组件
+
+### 修改(alter)
+
+- fl-table
+  header和body 分离，采用两个table
+
 ## 0.2.13 - 2026-10-26
 
 ### 修复(Fixed)

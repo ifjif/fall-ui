@@ -6,7 +6,7 @@
       <fl-loading :loading="loading"></fl-loading>
     </div>
     <h3 id="fl-loading-attrs">属性</h3>
-    <fl-table :data="data" :columns="columns"></fl-table>
+    <fl-table style="height:200px;" :data="data" :columns="columns"></fl-table>
   </ComponentLayout>
 
 </template>

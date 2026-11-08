@@ -85,15 +85,15 @@
     </div>
 
     <h3 id="fl-input-attrs">属性</h3>
-    <fl-table :data="data" :columns="columns"></fl-table>
+    <fl-table style="height:500px;" :data="data" :columns="columns"></fl-table>
     <h3 id="fl-input-models">model</h3>
-    <fl-table :data="modelData" :columns="columns"></fl-table>
+    <fl-table style="height:200px;" :data="modelData" :columns="columns"></fl-table>
     <h3 id="fl-input-slots">插槽</h3>
-    <fl-table :data="slotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:200px;" :data="slotData" :columns="slotColumns"></fl-table>
     <h3 id="fl-input-events">事件</h3>
-    <fl-table :data="eventData" :columns="eventColumns"></fl-table>
+    <fl-table style="height:200px;" :data="eventData" :columns="eventColumns"></fl-table>
     <h3 id="fl-input-expose">暴露</h3>
-    <fl-table :data="exposeData" :columns="exposeColumns"></fl-table>
+    <fl-table style="height:200px;" :data="exposeData" :columns="exposeColumns"></fl-table>
   </ComponentLayout>
 </template>
 

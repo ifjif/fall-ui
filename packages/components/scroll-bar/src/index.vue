@@ -11,7 +11,7 @@
     <div @mousedown="scrollDown" v-if="existScrollBar" v-show="showScrollBar || dragging" :class="[ns.e('thumb')]"
       :style="[thumbTopStyle, thumbRightStyle, thumbHeightStyle]">
     </div>
-    <div v-if="existHorizontalScrollBar" v-show="showScrollBar || dragging" @mousedown="scrollRight"
+    <div v-if="showX && existHorizontalScrollBar" v-show="showScrollBar || dragging" @mousedown="scrollRight"
       :class="[ns.e('thumbb')]" :style="[thumbLeftStyle, thumbBottomStyle, thumbWidthStyle]">
     </div>
   </div>
@@ -57,6 +57,10 @@ const props = defineProps({
   x: { // 是否有水平滚动
     type: Boolean,
     default: true
+  },
+  showX: {
+    type: Boolean,
+    default: true,
   }
 })
 const emit = defineEmits(['top', 'bottom', 'left', 'right', 'resize', 'scroll'])
@@ -93,7 +97,8 @@ const {
   onTouchStart,
   onTouchMove,
   onTouchEnd,
-  onDragEnd
+  onDragEnd,
+  updateThumbRate
 } = useScrollBar(props, emit)
 
 const resizeChange = ref(false)
@@ -107,10 +112,9 @@ const scrollToTop = () => {
     endPosition.value = false
   })
 }
-const scrollTopInc = (x) => {
+const scrollTop = (newTop) => {
   onDragEnd()
   nextTick(() => {
-    let newTop = containerRef.value.scrollTop + x
     if (newTop <= 0) {
       newTop = 0
       topPosition.value = true
@@ -122,6 +126,10 @@ const scrollTopInc = (x) => {
     }
     containerRef.value.scrollTop = newTop
   })
+}
+const scrollTopInc = (x) => {
+  let newTop = containerRef.value.scrollTop + x
+  scrollTop(newTop)
 }
 /*
  * changed 表示 是否是容器大小改变完成后 再进行 滚动到底部
@@ -148,10 +156,9 @@ const scrollToLeft = () => {
   })
 }
 
-const scrollLeftInc = (x) => {
+const scrollLeft = (newLeft) => {
   onDragEnd()
   nextTick(() => {
-    let newLeft = containerRef.value.scrollLeft + x
     if (newLeft <= 0) {
       newLeft = 0
       leftPosition.value = true
@@ -163,6 +170,11 @@ const scrollLeftInc = (x) => {
     }
     containerRef.value.scrollLeft = newLeft
   })
+}
+
+const scrollLeftInc = (x) => {
+  let newLeft = containerRef.value.scrollLeft + x
+  scrollLeft(newLeft)
 }
 
 const scrollToRight = (changed) => {
@@ -182,9 +194,11 @@ const getScrollContainer = () => {
 }
 
 defineExpose({
+  scrollTop,
   scrollToTop,
   scrollTopInc,
   scrollToBottom,
+  scrollLeft,
   scrollToLeft,
   scrollLeftInc,
   scrollToRight,
@@ -269,10 +283,10 @@ const handleResize = (entries) => {
     // 由于computed不会监听 domRef.value.ClientHeight/domRef.value.ClientHeight
     // 如果thumbHeightRatio 总是0.1时，那么computed不会进行计算
     // 导致 变化后 thumb的相关信息不改变
-    thumbHeightRatio.value = thumbHeightRatio.value === hr
+    thumbHeightRatio.value = thumbHeightRatio.value === 0.1 && hr === 0.1
       ? 0.101
       : hr
-    thumbWidthRate.value = thumbWidthRate.value === wr
+    thumbWidthRate.value = thumbWidthRate.value === 0.1 && wr === 0.1
       ? 0.101
       : wr
 
@@ -282,17 +296,9 @@ const handleResize = (entries) => {
     scrollToBottomForChange = null
     scrollToRightForChange = null
 
-    // 触发滚动，重新计算 thumb top rate
-    scrollTopInc(-1)
-    // 触发滚动，从新计算 thumb left rate
-    scrollLeftInc(-1)
-    /*
-      * 注意 表格中的 absolute td 会 增加 scrollWidth
-      * 而clientWidth 不会有 absolute td的 width
-      * 随内容增长的容器 请使用 
-      *       clientWidth 来 充当 scrollWidth
-      *       clientHeight 来 充当 scrollHeight
-      */
+    //校准thumb top rate 和thumb left rate
+    updateThumbRate()
+
     emit('resize', { clientWidth, clientHeight, scrollWidth, scrollHeight })
 
   })

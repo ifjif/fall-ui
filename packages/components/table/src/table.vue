@@ -1,5 +1,7 @@
 <template>
-  <div :style="styles" :class="[ns.b(), ns.is('border', border), ns.is('stripe', stripe)]">
+  <!-- 表格 -->
+  <div :style="styles" :class="[ns.b('table')]">
+
     <!-- 加载 遮罩 -->
     <FlLoading :loading="loading" />
 
@@ -8,113 +10,142 @@
       <slot name="toolbar" />
     </div>
 
-    <!-- 表格 -->
+
     <div :class="[ns.e('wrapper')]">
-      <FlScrollBar @resize="handleResize">
-        <table :class="[ns.e('inner')]">
-          <thead :class="[ns.e('thead')]">
-            <tr :class="[ns.e('tr')]">
-              <th v-for="col in visibleColumns" :key="col.prop || col.type" :style="[getHeaderCellStyle(col)]">
-                <!-- 原内容 -->
-                <div :class="[ns.e('cell')]">
-                  <template v-if="col.type === 'selection'">
-                    <input type="checkbox" :checked="allSelected" :indeterminate="partialSelected"
-                      @change="toggleAllSelection($event)" />
-                  </template>
-                  <template v-else>
-                    {{ col.label }}
-                  </template>
+      <FlScrollBar :x="false" @resize="handleResize">
+        <div :class="[ns.e('inner-wrapper')]" :style="{ width: `${innerWidth}px`, height: `${innerHeight}px` }">
+          <!-- 表头 -->
+          <div :style="{ height: `${headerHeight}px` }">
+            <FlScrollBar @resize="handleHeaderResize" :showX="false" ref="headerScrollbarRef">
+              <table ref="tableHeaderRef" :class="[ns.e('table-header')]" :style="{ height: `${headerHeight}px` }">
+                <thead>
+                  <tr :class="[ns.e('header-tr')]">
+                    <th :class="[ns.e('header-td')]" style="" v-for="(col, colIdx) in visibleColumns"
+                      :key="col.prop || col.type" :style="[getHeaderCellStyle(col),
+                      !border || colIdx === 0 ? { 'border-left': '0' } : {}
+                      ]">
+                      <!-- 原内容 -->
+                      <div :class="[ns.e('cell')]">
+                        <template v-if="col.type === 'selection'">
+                          <input type="checkbox" :checked="allSelected" :indeterminate="partialSelected"
+                            @change="toggleAllSelection($event)" />
+                        </template>
+                        <template v-else>
+                          {{ col.label }}
+                        </template>
 
-                  <!-- 排序图标 有sortable 或 remote-sort+sortable -->
-                  <span v-if="col.sortable || (remoteSort && col.sortable)" :class="[ns.e('sort-icon')]"
-                    @click.stop="triggerSort(col.prop)">
-                    <span :class="[ns.is('active', getSortOrder(col.prop) === 'ascending')]">↑</span>
-                    <span :class="[ns.is('active', getSortOrder(col.prop) === 'descending')]">↓</span>
-                  </span>
-                </div>
+                        <!-- 排序图标 有sortable 或 remote-sort+sortable -->
+                        <span v-if="col.sortable || (remoteSort && col.sortable)" :class="[ns.e('sort-icon')]"
+                          @click.stop="triggerSort(col.prop)">
+                          <span :class="[ns.is('active', getSortOrder(col.prop) === 'ascending')]">↑</span>
+                          <span :class="[ns.is('active', getSortOrder(col.prop) === 'descending')]">↓</span>
+                        </span>
+                      </div>
 
-                <!-- 拖拽手柄 -->
-                <div v-if="enableResize && col.resizable === true" :class="[ns.e('resize-handle')]"
-                  @mousedown="startResize($event, col)">
-                </div>
+                      <!-- 拖拽手柄 -->
+                      <div v-if="enableResize && col.resizable === true" :class="[ns.e('resize-handle')]"
+                        @mousedown="startResize($event, col)">
+                      </div>
 
-                <!-- 筛选浮层 -->
-                <FlPopover :showArrow="false" placement="bottom" :class="[ns.e('filter-trigger')]"
-                  v-if="col.filterable || (remoteFilter && col.filterable)">
-                  <template #reference>
-                    <span :class="[ns.e('filter-icon')]">▼</span>
-                    <span v-if="filterValues[col.prop]" :class="[ns.e('filter-badge')]">●</span>
-                  </template>
+                      <!-- 筛选浮层 -->
+                      <FlPopover :padding="0" :showArrow="false" placement="bottom" :class="[ns.e('filter-trigger')]"
+                        v-if="col.filterable || (remoteFilter && col.filterable)">
+                        <template #reference>
+                          <span :class="[ns.e('filter-icon')]">▼</span>
+                          <span v-if="filterValues[col.prop]" :class="[ns.e('filter-badge')]">●</span>
+                        </template>
 
-                  <!-- 输入筛选 -->
-                  <div v-if="!col.filterOptions" :class="[ns.e('filter-input-wrapper')]">
-                    <input @input="handleFilterInput(col.prop, $event.target.value)" :class="[ns.e('filter-input')]"
-                      v-model="filterValues[col.prop]" :placeholder="`筛选${col.label}`" />
-                  </div>
-                  <!-- 下拉筛选 -->
-                  <ul v-else :class="[ns.e('filter-options')]">
-                    <li :class="[ns.e('filter-option'), ns.is('active', !filterValues[col.prop])]"
-                      @click="handleFilterSelect(col.prop, '')">全部</li>
-                    <li :class="[ns.e('filter-option'), ns.is('active', filterValues[col.prop] === opt.value)]"
-                      v-for="opt in col.filterOptions" :key="opt.value"
-                      @click="handleFilterSelect(col.prop, opt.value)">
-                      <span>{{ opt.label }}</span>
-                    </li>
-                  </ul>
-                </FlPopover>
-              </th>
+                        <!-- 输入筛选 -->
+                        <div v-if="!col.filterOptions" :class="[ns.e('filter-input-wrapper')]">
+                          <input @input="handleFilterInput(col.prop, $event.target.value)"
+                            :class="[ns.e('filter-input')]" v-model="filterValues[col.prop]"
+                            :placeholder="`筛选${col.label}`" />
+                        </div>
+                        <!-- 下拉筛选 -->
+                        <ul v-else :class="[ns.e('filter-options')]">
+                          <li :class="[ns.e('filter-option'), ns.is('active', !filterValues[col.prop])]"
+                            @click="handleFilterSelect(col.prop, '')">全部</li>
+                          <li :class="[ns.e('filter-option'), ns.is('active', filterValues[col.prop] === opt.value)]"
+                            v-for="opt in col.filterOptions" :key="opt.value"
+                            @click="handleFilterSelect(col.prop, opt.value)">
+                            <span>{{ opt.label }}</span>
+                          </li>
+                        </ul>
+                      </FlPopover>
+                    </th>
 
-              <!-- 占位 -->
-              <th :class="[ns.e('placeholder-th'), ns.is('placeholder-non-border', !props.border)]"
-                :style="{ right: `${placeholderRight}px`, width: `${placeholderWidth}px` }">
-              </th>
-            </tr>
-          </thead>
+                    <!-- 占位 fl-scrollbar 带有relative.定位到它直接孩子 -->
+                    <th v-if="placeholderWidth" :class="[ns.e('header-td')]"
+                      :style="{ position: 'absolute', height: '100%', width: `${placeholderWidth}px` }">
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </FlScrollBar>
+          </div>
 
-          <tbody>
-            <tr v-for="(row, index) in flatData" :class="[ns.e('tr')]" :key="getRowKey(row)">
-              <td v-for="col in visibleColumns" :style="[getCellStyle(col, row.__level)]">
-                <div :class="[ns.e('cell')]">
-                  <!-- 树形控件 -->
-                  <template v-if="col === visibleColumns[0] && isTreeData">
-                    <span :class="[ns.e('tree-toggle'),
-                    ns.is('tree-toggle-expanded', expandedKeys.has(row[props.rowKey]))
-                    ]" v-if="!row.__isLeaf" @click.stop="toggleExpand(row)">
-                      ▶
-                    </span>
+          <!-- 表体 -->
+          <div :class="ns.e('body-wrapper')">
+            <FlScrollBar @resize="handleBodyResize" ref="bodyScrollbarRef" @scroll="bodyScroll">
+              <table ref="tableBodyRef" :class="ns.e('table-body')">
+                <tbody>
+                  <tr :class="[ns.e('body-tr'), ns.is('body-tr-stripe', stripe)]" v-for="(row, index) in flatData"
+                    :key="getRowKey(row)">
+                    <td :class="[ns.e('body-td')]" v-for="(col, colIdx) in visibleColumns" :style="[getCellStyle(col, row.__level),
+                    index === 0 ? { 'border-top': '0' } : {},
+                    !border || colIdx === 0 ? { 'border-left': '0' } : {}
+                    ]">
+                      <div :class="[ns.e('cell')]">
+                        <!-- 树形控件 -->
+                        <template v-if="col === visibleColumns[0] && isTreeData">
+                          <span :class="[ns.e('tree-toggle'),
+                          ns.is('tree-toggle-expanded', expandedKeys.has(row[props.rowKey]))
+                          ]" v-if="!row.__isLeaf" @click.stop="toggleExpand(row)">
+                            ▶
+                          </span>
 
-                    <!-- 无叶子节点，保持占位空间 -->
-                    <span v-else :class="[ns.e('tree-toggle')]"></span>
+                          <!-- 无叶子节点，保持占位空间 -->
+                          <span v-else :class="[ns.e('tree-toggle')]"></span>
 
-                    <!--缩进占位 -->
-                    <span v-if="col === visibleColumns[0]" :class="[ns.e('tree-indent')]"
-                      :style="{ width: `${row.__level * props.indentSize}px` }"></span>
-                  </template>
+                          <!--缩进占位 -->
+                          <span v-if="col === visibleColumns[0]" :class="[ns.e('tree-indent')]"
+                            :style="{ width: `${row.__level * props.indentSize}px` }"></span>
+                        </template>
 
-                  <template v-if="col.type === 'selection'">
-                    <input type="checkbox" :checked="selectionMap.data.has(getRowKey(row))"
-                      @change="toggleRowSelection($event, row)" />
-                  </template>
-                  <!-- 有对应插槽，显示它，否则只显示文本, 并专递 row $index 变量 
+                        <template v-if="col.type === 'selection'">
+                          <input type="checkbox" :checked="selectionMap.data.has(getRowKey(row))"
+                            @change="toggleRowSelection($event, row)" />
+                        </template>
+                        <!-- 有对应插槽，显示它，否则只显示文本, 并专递 row $index 变量 
                   父中  <template #[prop] = "{row, $index}"
                   -->
-                  <slot v-else-if="$slots[col.prop]" :name="col.prop" :row="row" :$index="index"></slot>
-                  <template v-else>
-                    {{ row[col.prop] }}
-                  </template>
-                </div>
-              </td>
+                        <slot v-else-if="$slots[col.prop]" :name="col.prop" :row="row" :$index="index">
+                        </slot>
+                        <template v-else>
+                          {{ row[col.prop] }}
+                        </template>
 
-              <!-- 占位 -->
-              <td :class="[ns.e('placeholder-td'), ns.is('placeholder-non-border', !props.border),
-              ns.is('last-placeholder', index === (flatData.length - 1))
-              ]" :style="{ right: `${placeholderRight}px`, width: `${placeholderWidth}px` }">
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                      </div>
+                    </td>
+
+                    <!-- 占位 fl-scrollbar 带有relative.定位到它直接孩子 -->
+                    <td v-if="placeholderWidth" :class="[ns.e('body-td')]" :style="[
+                      index === 0 ? { 'border-top': '0' } : {},
+                      {
+                        height: '100%', position: 'absolute', width: `${placeholderWidth}px`
+                      }
+                    ]">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </FlScrollBar>
+          </div>
+
+        </div>
       </FlScrollBar>
     </div>
+
 
     <div v-if="props.pagination" :class="[ns.e('pagination')]">
       <!-- 分页器 -->
@@ -122,7 +153,6 @@
         @change="handlePageChange">
       </FlPagination>
     </div>
-
   </div>
 </template>
 <script>
@@ -137,7 +167,7 @@ export default {
 <script setup>
 import { useNamespace } from '@fall-ui/hooks';
 import { useTable } from './composables/use-table';
-import { watch } from 'vue'
+import { watch, ref } from 'vue'
 const ns = useNamespace('table')
 
 const props = defineProps({
@@ -176,6 +206,14 @@ const props = defineProps({
   },
   styles: {
     type: Object
+  },
+  sortActions: {      // {prop: (a,b)=>-1|0|1}
+    type: Object,
+    default: () => { }
+  },
+  filterActions: {    // {prop:(value,filterValue)=>true|false}
+    type: Object,
+    default: () => { }
   }
 })
 
@@ -191,7 +229,6 @@ const {
   selectionMap,
   visibleColumns,
   placeholderWidth,
-  placeholderRight,
   paginatedData,
   innerCurrentPage,
   innerPageSize,
@@ -218,7 +255,10 @@ const {
   getColByProp,
   getRowKey,
   flattenTree,
-  collectExpandableKeys
+  collectExpandableKeys,
+  innerHeight,
+  innerWidth,
+  canSync,
 } = useTable(props, emit, selection)
 
 // 重置缓存
@@ -247,4 +287,65 @@ watch(() => selection.value, (data) => {
   })
 }, { immediate: true })
 
+const headerScrollbarRef = ref(null)
+const bodyScrollbarRef = ref(null)
+
+const bodyScroll = ({ top, left }) => {
+  headerScrollbarRef.value.scrollLeft(left)
+}
+
+const headerHeight = ref(50)
+const handleHeaderResize = ({ clientWidth, clientHeight, scrollWidth, scrollHeight }) => {
+  if (scrollWidth < clientWidth) {
+    placeholderWidth.value = clientWidth - scrollWidth
+  } else {
+    placeholderWidth.value = 0
+  }
+  if (canSync.value) syncTableColumns()
+
+}
+
+const handleBodyResize = () => {
+  if (canSync.value) syncTableColumns()
+}
+
+const tableHeaderRef = ref(null)
+const tableBodyRef = ref(null)
+
+let rafId
+function syncTableColumns() {
+  if (!tableHeaderRef.value || !tableBodyRef.value) return
+
+  if (!canSync.value) return
+  if (rafId) cancelAnimationFrame(rafId)
+  rafId = requestAnimationFrame(() => {
+    rafId = null
+
+    const headerCols = tableHeaderRef.value.querySelectorAll("thead th")
+    const bodyCols = tableBodyRef.value.querySelectorAll("tbody tr:first-child td")
+
+    const count = Math.min(headerCols.length, bodyCols.length)
+
+    const newWidths = []
+    let update = false
+    for (let i = 0; i < count; i++) {
+      let w = headerCols[i].offsetWidth
+      if (headerCols[i].offsetWidth !== bodyCols[i].offsetWidth) {
+        w = Math.max(
+          headerCols[i].offsetWidth,
+          bodyCols[i].offsetWidth,
+        )
+        update = true
+      }
+      newWidths.push(w)
+    }
+
+    if (!update) return
+
+    clearCacheWidths()
+    props.columns.forEach((v, i) => {
+      v.width = newWidths[i] + 'px'
+    })
+  })
+}
 </script>

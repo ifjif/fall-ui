@@ -172,6 +172,17 @@ $menu-width: map.deep-merge(('default':240px,
     $menu-width
 );
 
+$table: (
+  ) !default;
+
+$table: map.deep-merge(('bd-color-default': #ebeef5,
+      'header-tr-bg-color-default': #ffffff,
+      'body-tr-bg-color-default': #ffffff,
+      'body-tr-hover-bg-color-default': #f5f7fa,
+      'body-tr-stripe-bg-color-default': #f6f6f6,
+    ), $table
+);
+
 $global-var: (
   ) !default;
 
@@ -195,5 +206,6 @@ $global-var: map.deep-merge(('component-scale':$component-scale,
       'message-padding-horizontal-right':$message-padding-horizontal-right,
       'pagination-gap':$pagination-gap,
       'menu-width':$menu-width,
+      'table':$table,
     ), $global-var
 );

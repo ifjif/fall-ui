@@ -23,13 +23,13 @@
       </p>
     </fl-scrollbar>
     <h3 id="fl-scrollbar-attrs">属性</h3>
-    <fl-table :data="data" :columns="columns"></fl-table>
+    <fl-table style="height:500px;" :data="data" :columns="columns"></fl-table>
     <h3 id="fl-scrollbar-slots">插槽</h3>
-    <fl-table :data="slotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:200px;" :data="slotData" :columns="slotColumns"></fl-table>
     <h3 id="fl-scrollbar-events">事件</h3>
-    <fl-table :data="eventData" :columns="eventColumns"></fl-table>
+    <fl-table style="height:300px;" :data="eventData" :columns="eventColumns"></fl-table>
     <h3 id="fl-scrollbar-expose">暴露</h3>
-    <fl-table :data="exposeData" :columns="exposeColumns"></fl-table>
+    <fl-table style="height:500px;" :data="exposeData" :columns="exposeColumns"></fl-table>
   </ComponentLayout>
 </template>
 <script setup>
@@ -162,12 +162,13 @@ const anchors = [
 ]
 
 const data = [
-  { name: 'width', type: 'Number, String', default: '0', value: '', desc: '' },
-  { name: 'height', type: 'Number, String', default: '0', value: '', desc: '' },
-  { name: 'maxHeight', type: 'Number, String', default: '0', value: '', desc: '' },
-  { name: 'maxWidth', type: 'Number, String', default: '0', value: '', desc: '' },
-  { name: 'wheel', type: 'String', default: 'y', value: 'x, y', desc: '' },
-  { name: 'x', type: 'Boolean', default: 'true', value: 'true, false', desc: '' },
+  { name: 'width', type: 'Number, String', default: '0', value: '', desc: '滚动容器client宽' },
+  { name: 'height', type: 'Number, String', default: '0', value: '', desc: '滚动容器client高' },
+  { name: 'maxHeight', type: 'Number, String', default: '0', value: '', desc: '滚动容器client最大高' },
+  { name: 'maxWidth', type: 'Number, String', default: '0', value: '', desc: '滚动容器client最大宽' },
+  { name: 'wheel', type: 'String', default: 'y', value: 'x, y', desc: '滑轮滚动方向' },
+  { name: 'x', type: 'Boolean', default: 'true', value: 'true, false', desc: '是否水平滚动' },
+  { name: 'showX', type: 'Boolean', default: 'true', value: 'true, false', desc: '是否展示水平滚动条' },
 ]
 
 const slotData = [
@@ -175,10 +176,10 @@ const slotData = [
 ]
 
 const eventData = [
-  { name: 'top', params: '', desc: '向上滚动事件' },
-  { name: 'bottom', params: '', desc: '向下滚动事件' },
-  { name: 'left', params: '', desc: '向左滚动事件' },
-  { name: 'right', params: '', desc: '向右滚动事件' },
+  { name: 'top', params: '', desc: '滚动到顶部事件' },
+  { name: 'bottom', params: '', desc: '滚动到底部事件' },
+  { name: 'left', params: '', desc: '滚动到最左边事件' },
+  { name: 'right', params: '', desc: '滚动到最右边事件' },
   {
     name: 'resize', params: '{ clientWidth, clientHeight, scrollWidth, scrollHeight }', desc:
       '滚动容器宽高改变触发，内部内容容器宽高改变触发'
@@ -188,12 +189,14 @@ const eventData = [
 ]
 
 const exposeData = [
-  { name: 'scrollToTop', type: '函数', desc: '滚动到顶部' },
+  { name: 'scrollTop', type: '函数:(newScroll)', desc: '垂直滚动到指定位置' },
+  { name: 'scrollToTop', type: '函数', desc: '滚动到最顶部' },
   { name: 'scrollTopInc', type: '函数:(inc)', desc: '向上滚动增加值,接受一个数字' },
-  { name: 'scrollToBottom', type: '函数', desc: '滚动到底部' },
-  { name: 'scrollToLeft', type: '函数', desc: '滚动到左边' },
+  { name: 'scrollToBottom', type: '函数', desc: '滚动到最底部' },
+  { name: 'scrollLeft', type: '函数:(newScroll)', desc: '水平滚动到指定位置' },
+  { name: 'scrollToLeft', type: '函数', desc: '滚动到最左边' },
   { name: 'scrollLeftInc', type: '函数:(inc)', desc: '向左滚动增加值,接受一个数字' },
-  { name: 'scrollToRight', type: '函数', desc: '滚动到右边' },
+  { name: 'scrollToRight', type: '函数', desc: '滚动到最右边' },
   { name: 'getScrollContainer', type: '函数', desc: '得到内部滚动容器' },
 ]
 </script>

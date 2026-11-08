@@ -33,11 +33,11 @@
       <fl-button type="error" @click="open10">error</fl-button>
     </div>
     <h3 id="fl-message-box-attrs">属性</h3>
-    <fl-table :data="data" :columns="columns"></fl-table>
+    <fl-table style="height:500px;" :data="data" :columns="columns"></fl-table>
     <h3 id="fl-message-box-events">事件</h3>
-    <fl-table :data="eventData" :columns="eventColumns"></fl-table>
+    <fl-table style="height:200px;" :data="eventData" :columns="eventColumns"></fl-table>
     <h3 id="fl-message-box-expose">暴露</h3>
-    <fl-table :data="exposeData" :columns="exposeColumns"></fl-table>
+    <fl-table style="height:200px;" :data="exposeData" :columns="exposeColumns"></fl-table>
   </ComponentLayout>
 </template>
 

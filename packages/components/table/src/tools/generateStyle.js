@@ -7,8 +7,8 @@ import { useNamespace } from "@fall-ui/hooks";
     root: {
       color: '',
       bd_color: '',
-      th_bg_color: '',
-      tr_bg_color: '',
+      header_tr_bg_color: '',
+      body_tr_bg_color: '',
       filter_icon_color:'',
       filter_icon_badge_color:'',
       tree_icon_color:''
@@ -22,11 +22,11 @@ import { useNamespace } from "@fall-ui/hooks";
       tree_icon_color:''
     },
     hover: {
-      bg_color:'',
+      body_tr_bg_color:'',
       filter_icon_color:''
     },
     stripe:{
-       bg_color:''
+       body_tr_bg_color:''
     }
   }
  *
@@ -43,8 +43,8 @@ export function generateStyle(styles) {
       case 'root': {
         result[`${com}-color`] = v['color']
         result[`${com}-bd-color`] = v['bd_color']
-        result[`${com}-th-bg-color`] = v['th_bg_color']
-        result[`${com}-tr-bg-color`] = v['tr_bg_color']
+        result[`${com}-header-tr-bg-color`] = v['header_tr_bg_color']
+        result[`${com}-body-tr-bg-color`] = v['body_tr_bg_color']
         result[`${com}-filter-icon-color`] = v['filter_icon_color']
         result[`${com}-filter-icon-badge-color`] = v['filter_icon_badge_color']
         result[`${com}-tree-icon-color`] = v['tree_icon_color']
@@ -56,7 +56,7 @@ export function generateStyle(styles) {
         break
       }
       case 'hover': {
-        result[`${com}-hover-bg-color`] = v['bg_color']
+        result[`${com}-body-tr-hover-bg-color`] = v['body_tr_bg_color']
         result[`${com}-filter-icon-hover-color`] = v['filter_icon_color']
         break
       }
@@ -66,7 +66,7 @@ export function generateStyle(styles) {
         break
       }
       case 'stripe': {
-        result[`${com}-stripe-bg-color`] = v['bg_color']
+        result[`${com}-body-tr-stripe-bg-color`] = v['body_tr_bg_color']
       }
     }
   })

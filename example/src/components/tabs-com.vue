@@ -172,27 +172,27 @@
     </fl-tabs>
 
     <h3 id="fl-tabs-attrs">tabs属性</h3>
-    <fl-table :data="data" :columns="columns">
+    <fl-table style="height:500px;" :data="data" :columns="columns">
       <template #value="{ row }">
         <pre>{{ row.value }}</pre>
       </template>
     </fl-table>
 
     <h3 id="fl-tabs-models">tabs model</h3>
-    <fl-table :data="modelData" :columns="columns">
+    <fl-table style="height:200px;" :data="modelData" :columns="columns">
     </fl-table>
 
     <h3 id="fl-tabs-slots">tabs插槽</h3>
-    <fl-table :data="slotData" :columns="slotColumns">
+    <fl-table style="height:200px;" :data="slotData" :columns="slotColumns">
     </fl-table>
 
     <h3 id="fl-tabs-events">tabs事件</h3>
-    <fl-table :data="eventData" :columns="eventColumns"></fl-table>
+    <fl-table style="height:200px;" :data="eventData" :columns="eventColumns"></fl-table>
 
     <h3 id="fl-tab-pane-attrs">tab-pane属性</h3>
-    <fl-table :data="paneData" :columns="columns"></fl-table>
+    <fl-table style="height:200px;" :data="paneData" :columns="columns"></fl-table>
     <h3 id="fl-tab-pane-slots">tab-pane插槽</h3>
-    <fl-table :data="paneSlotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:200px;" :data="paneSlotData" :columns="slotColumns"></fl-table>
 
     <!--内外宽高, border一致, 如想要内border覆盖外border, 内margin-top:-1, margin-left:-1 即可 -->
     <div style="width:20px;height:20px;border:1px solid red;">

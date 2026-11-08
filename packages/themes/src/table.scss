@@ -6,23 +6,14 @@
 
   position: relative;
   display: flex;
-  height: 100%;
   width: 100%;
+  height: 100%;
   flex-direction: column;
+  box-sizing: border-box;
+  border: 1px solid var(#{getComVarName('bd-color')});
+  color: var(#{getComVarName('color')});
 
-  @include s((border)) {
 
-    th,
-    td {
-      border:var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
-    }
-  }
-
-  @include s((stripe)) {
-    tr:nth-child(even) {
-      background-color: var(#{getComVarName('stripe-bg-color')});
-    }
-  }
 
   @include e(toolbar) {
     display: flex;
@@ -32,212 +23,199 @@
     margin-bottom: 12px;
   }
 
-  @include e(wrapper) {
+  @include e('wrapper') {
     flex: 1;
-    overflow: auto;
+    min-height: 0;
   }
 
-  @include e(thead) {
-    position: sticky;
-    top: 0;
-    z-index: 20;
+  @include e('inner-wrapper') {
+    display: 'flex';
+    flex-direction: 'column'
   }
 
-  @include e(inner) {
-    width: max-content;
-    min-width: 100%;
-    height: max-content;
-    min-height: 100%;
-    border-collapse: collapse;
-    table-layout: auto;
+  @include e('table-header') {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  @include e('body-wrapper') {
+    flex: 1;
+    min-height: 0;
+  }
+
+  @include e('table-body') {
+    border-spacing: 0;
+    border-collapse: separate;
+  }
+
+  @include e('header-tr') {
+    background-color: var(#{getComVarName('header-tr-bg-color')});
+  }
+
+  @include e('header-td') {
     box-sizing: border-box;
-    color: var(#{getComVarName('color')});
-    font-size: var(#{getComVarName('font-size')});
+    padding: 8px;
+    border-bottom: 1px solid var(#{getComVarName('bd-color')});
+    border-left: 1px solid var(#{getComVarName('bd-color')});
   }
 
-  tbody {
-    @include e(tr, false) {
+  @include e('body-tr') {
+    background-color: var(#{getComVarName('body-tr-bg-color')});
 
-      &:hover {
-        background-color: var(#{getComVarName('hover-bg-color')});
+    &:hover {
+      #{getComVarName(body-tr-bg-color)}: var(#{getComVarName('body-tr-hover-bg-color')});
+      #{getComVarName(body-tr-stripe-bg-color)} : var(#{getComVarName('body-tr-hover-bg-color')});
+    }
+
+    @include s((body-tr-stripe)) {
+      &:nth-child(even) {
+        background-color: var(#{getComVarName('body-tr-stripe-bg-color')});
       }
     }
   }
 
-  @include e(tr) {
-    position: relative;
-    background-color: var(#{getComVarName('tr-bg-color')});
-
-    th {
-      position: relative;
-      background-color: var(#{getComVarName('th-bg-color')});
-      text-align: left;
-      font-width: bold;
-    }
-
-    th,
-    td {
-      padding: 12px 8px;
-      border-bottom: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')});
-      vertical-align: middle;
-    }
-
-    @include e-and((placeholder-th, placeholder-td), false) {
-      background-color: inherit;
-      position: absolute;
-      padding: 0;
-      height: calc(100% - 1px);
-      min-width: 2px;
-      z-index: 2;
-      top: -0.5px;
-      border-bottom: none !important;
-
-      @include s((last-placeholder)) {
-        border-bottom: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')}) !important;
-      }
-
-      @include s((placeholder-non-border)) {
-        border-bottom: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')}) !important;
-        border-top: var(#{getComVarName('bd-size')}) solid var(#{getComVarName('bd-color')}) !important;
-      }
-    }
-
-    @include e(placeholder-th, false) {
-      z-index: 20;
-      background-color: var(#{getComVarName('th-bg-color')});
-    }
-
+  @include e('body-td') {
+    padding: 8px;
+    box-sizing: border-box;
+    border-top: 1px solid var(#{getComVarName('bd-color')});
+    border-left: 1px solid var(#{getComVarName('bd-color')});
   }
 
-  @include e(cell) {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
+}
+
+/* 表头，表体中 th,td的 cell样式 */
+@include e(cell) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+/* 拖拽手柄样式 */
+
+@include e(resize-handle) {
+  position: absolute;
+  cursor: col-resize;
+  width: 8px;
+  height: 100%;
+  right: -4px;
+  top: 0;
+  z-index: 10;
+}
+
+
+/* 树形控件样式 */
+@include e(tree-toggle) {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  margin-right: 4px;
+  color: var(#{getComVarName('tree-icon-color')});
+
+  @include s((tree-toggle-expanded)) {
+    color: var(#{getComVarName('tree-icon-expanded-color')});
+    transform: rotate(90deg);
+
   }
+}
 
-  @include e(sort-icon) {
+@include e(tree-indent) {
+  display: inline-block;
+  height: 1px;
+}
 
-    span {
-      cursor: pointer;
-      margin-left: 4px;
-      opacity: 0.5;
+/* 排序图标 */
+@include e(sort-icon) {
 
-      @include s((active)) {
-        opacity: 1;
-        color:var(#{getComVarName('sort-icon-active-color')});
-      }
-    }
-
-  }
-
-  @include e(resize-handle) {
-    position: absolute;
-    cursor: col-resize;
-    width: 8px;
-    height: 100%;
-    right: -4px;
-    top: 0;
-    z-index: 10;
-  }
-
-  @include e(filter-trigger) {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
+  span {
     cursor: pointer;
-    font-size: 12px;
-    color: var(#{getComVarName('filter-icon-color')});
     margin-left: 4px;
+    opacity: 0.5;
 
-    @include e(filter-icon) {
-      transition: transform 0.2s;
-
-      &:hover {
-        color: var(#{getComVarName('filter-icon-hover-color')});
-      }
-    }
-
-    @include e(filter-badge) {
-      position: absolute;
-      top: -4px;
-      right: -4px;
-      width: 6px;
-      height: 6px;
-      color: var(#{getComVarName('filter-icon-badge-color')});
-      border-radius: 50%;
-      z-index: 1;
-    }
-
-    @include e(filter-input-wrapper) {
-      display: flex;
-      gap: 6px;
-
-    }
-
-    @include e(filter-input) {
-      flex: 1;
-      border-radius: 4px;
-      padding: 6px 10px;
-      border: 1px solid #d9d9d9;
-      font-size: 12px;
-      outline: none;
-
-      &:focus {
-        border-color: #1890ff;
-      }
-    }
-
-    @include e(filter-options) {
-      max-height: 200px;
-      overflow-y: auto;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    @include e(filter-option) {
-      padding: 8px 12px;
-      cursor: pointer;
-
-      &:hover {
-        background: #f5f5f5;
-      }
-
-      @include s((active)) {
-        background-color: #e6f7ff;
-        color: #1890ff;
-      }
+    @include s((active)) {
+      opacity: 1;
+      color:var(#{getComVarName('sort-icon-active-color')});
     }
   }
 
+}
 
-  /* 树形控件样式 */
-  @include e(tree-toggle) {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
-    text-align: center;
+/* 过滤组件样式 */
+@include e(filter-trigger) {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(#{getComVarName('filter-icon-color')});
+  margin-left: 4px;
+
+  @include e(filter-icon) {
+    transition: transform 0.2s;
+
+    &:hover {
+      color: var(#{getComVarName('filter-icon-hover-color')});
+    }
+  }
+
+  @include e(filter-badge) {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 6px;
+    height: 6px;
+    color: var(#{getComVarName('filter-icon-badge-color')});
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  @include e(filter-input-wrapper) {
+    display: flex;
+    gap: 6px;
+
+  }
+
+  @include e(filter-input) {
+    flex: 1;
+    border-radius: 4px;
+    padding: 6px 10px;
+    border: 1px solid #d9d9d9;
+    font-size: 12px;
+    outline: none;
+
+    &:focus {
+      border-color: #1890ff;
+    }
+  }
+
+  @include e(filter-options) {
+    max-height: 200px;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @include e(filter-option) {
+    padding: 8px 12px;
     cursor: pointer;
-    user-select: none;
-    margin-right: 4px;
-    color: var(#{getComVarName('tree-icon-color')});
 
-    @include s((tree-toggle-expanded)) {
-      color: var(#{getComVarName('tree-icon-expanded-color')});
-      transform: rotate(90deg);
+    &:hover {
+      background: #f5f5f5;
+    }
 
+    @include s((active)) {
+      background-color: #e6f7ff;
+      color: #1890ff;
     }
   }
+}
 
-  @include e(tree-indent) {
-    display: inline-block;
-    height: 1px;
-  }
-
-  @include e(pagination) {
-    margin: 10px 0;
-  }
-
+/* 分页器 */
+@include e(pagination) {
+  margin: 10px 0;
 }

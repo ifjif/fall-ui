@@ -228,17 +228,17 @@
     </div>
 
     <h3 id="button-props-attrs">button属性</h3>
-    <fl-table row-key="prop" stripe :data="data" :columns="columns">
+    <fl-table style="height:500px;" row-key="prop" stripe :data="data" :columns="columns">
       <template #value="{ row }">
         <pre>{{ row.value }}</pre>
       </template>
     </fl-table>
     <h3 id="button-props-slots">button插槽</h3>
-    <fl-table :data="slotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:200px;" :data="slotData" :columns="slotColumns"></fl-table>
     <h3 id="button-group-props-attrs">button-group属性</h3>
-    <fl-table :data="groupData" :columns="columns"></fl-table>
+    <fl-table style="height:200px;" :data="groupData" :columns="columns"></fl-table>
     <h3 id="button-group-props-slots">button-group插槽</h3>
-    <fl-table :data="groupSlotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:200px;" :data="groupSlotData" :columns="slotColumns"></fl-table>
   </ComponentLayout>
 
 </template>

@@ -30,15 +30,20 @@ export function useScrollBarEvent(
   //是否是垂直滚动
   let verticalScroll = false
 
+  const updateThumbRate = () => {
+    // 不存在 滚动条时，maxScrollTop为 0
+    thumbTopRate.value = maxScrollTop.value === 0 ? 0 : scrollTop.value / maxScrollTop.value
+    // 不存在 滚动条时，maxScrollLeft为 0
+    thumbLeftRate.value = maxScrollLeft.value === 0 ? 0 : scrollLeft.value / maxScrollLeft.value
+  }
+
   const onScroll = (e) => {
     const el = e.target
     scrollTop.value = el.scrollTop
-
-    // 不存在 滚动条时，maxScrollTop为 0
-    thumbTopRate.value = maxScrollTop.value === 0 ? 0 : el.scrollTop / maxScrollTop.value
     scrollLeft.value = el.scrollLeft
-    // 不存在 滚动条时，maxScrollLeft为 0
-    thumbLeftRate.value = maxScrollLeft.value === 0 ? 0 : el.scrollLeft / maxScrollLeft.value
+
+    updateThumbRate()
+
     emit('scroll', { top: scrollTop.value, left: scrollLeft.value })
     //console.log(able, el.scrollTop, el.clientHeight, el.scrollHeight)
     if (verticalScroll) { // 垂直方向的判断
@@ -112,7 +117,7 @@ export function useScrollBarEvent(
     //console.log(currentScrollTop, maxScrollTop.value)
     const offset = e.clientY - startY.value + trackOffset.value
     //占总轨道的比例
-    const offsetRate = offset / trackHeight.value
+    const offsetRate = Math.min(1, offset / trackHeight.value)
     containerRef.value.scrollTop = maxScrollTop.value * offsetRate
   }
   //结束拖拽
@@ -162,7 +167,7 @@ export function useScrollBarEvent(
     }
     const offset = e.clientX - startX.value + trackHorizontalOffset.value
     //占总轨道的比例
-    const offsetRate = offset / trackWidth.value
+    const offsetRate = Math.min(1, offset / trackWidth.value)
     containerRef.value.scrollLeft = maxScrollLeft.value * offsetRate
   }
 
@@ -299,6 +304,7 @@ export function useScrollBarEvent(
     onWheel,
     onTouchStart,
     onTouchMove,
-    onTouchEnd
+    onTouchEnd,
+    updateThumbRate,
   }
 }

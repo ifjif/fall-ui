@@ -11,10 +11,10 @@ export function useTable(props, emit, selection) {
   } = useTableGlobal(props)
 
   const {
+    canSync,
     selectionMap,
     visibleColumns,
     placeholderWidth,
-    placeholderRight,
     sortStates,
     paginatedData,
     innerCurrentPage,
@@ -26,6 +26,8 @@ export function useTable(props, emit, selection) {
     flatData,
     allSelected,
     partialSelected,
+    innerHeight,
+    innerWidth,
   } = useTableState(props, getRowKeys)
 
   const {
@@ -59,7 +61,6 @@ export function useTable(props, emit, selection) {
     props,
     emit,
     clearCacheWidths,
-    placeholderWidth,
     sortStates,
     filterValues,
     debounceTimers,
@@ -68,14 +69,16 @@ export function useTable(props, emit, selection) {
     getRowKey,
     selectionMap,
     updateSelectionModel,
-    pageSelection
+    pageSelection,
+    innerHeight,
+    innerWidth,
+    canSync,
   )
 
   return {
     selectionMap,
     visibleColumns,
     placeholderWidth,
-    placeholderRight,
     paginatedData,
     innerCurrentPage,
     innerPageSize,
@@ -103,5 +106,8 @@ export function useTable(props, emit, selection) {
     getRowKey,
     flattenTree,
     collectExpandableKeys,
+    innerHeight,
+    innerWidth,
+    canSync,
   }
 }

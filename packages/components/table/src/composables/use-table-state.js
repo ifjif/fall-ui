@@ -1,5 +1,8 @@
 import { computed, ref } from 'vue'
 export function useTableState(props, getRowKeys) {
+  let canSync = ref(true)
+  const innerHeight = ref(0)
+  const innerWidth = ref(0)
   const selectionMap = ref({
     data: new Map(),
     change: false,
@@ -8,11 +11,7 @@ export function useTableState(props, getRowKeys) {
     return props.columns
   })
 
-  const placeholderWidth = ref(2)
-  const placeholderRight = computed(() => {
-    const change = props.border ? 1 : 0
-    return -(placeholderWidth.value + change)
-  })
+  const placeholderWidth = ref(0)
 
   // 筛选状态
   const filterValues = ref({}) // {prop:value, ...}
@@ -30,6 +29,13 @@ export function useTableState(props, getRowKeys) {
         // 获取 要 predicate的 值
         const itemValue = item[key]
 
+        // 得到过滤行为
+        const filterAction = props.filterActions[key]
+        if (!filterAction) return false
+
+        return filterAction(itemValue, filterValue)
+
+        /*
         // 1.如果数据不存在 返回false
         if (item === undefined || item === null) return false
 
@@ -51,6 +57,7 @@ export function useTableState(props, getRowKeys) {
 
         //其余返回 false
         return false
+      */
       })
     })
   })
@@ -74,12 +81,18 @@ export function useTableState(props, getRowKeys) {
 
         let result = 0
 
+        const sortAction = props.sortActions[prop]
+        if (sortAction) {
+          result = sortAction(aVal, bVal)
+        }
+        /*
         if (typeof aVal === 'number' || typeof bVal === 'number') {
           result = aVal - bVal
         } else {
           // 字符串，按符合语言习惯的 比较法
           result = String(aVal).localeCompare(String(bVal))
         }
+        */
 
         // 不相等，根据升降序 返回结果
         if (result !== 0) {
@@ -132,10 +145,10 @@ export function useTableState(props, getRowKeys) {
 
 
   return {
+    canSync,
     selectionMap,
     visibleColumns,
     placeholderWidth,
-    placeholderRight,
     sortStates,
     paginatedData,
     innerCurrentPage,
@@ -147,5 +160,7 @@ export function useTableState(props, getRowKeys) {
     flatData,
     allSelected,
     partialSelected,
+    innerHeight,
+    innerWidth,
   }
 }

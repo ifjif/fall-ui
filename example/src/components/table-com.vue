@@ -39,13 +39,36 @@
       </template>
     </fl-modal>
 
+    <h3 id="fl-table-basic2">非border stripe 本地排序过滤</h3>
+    <div style="height:500px;">
+      <!-- 注意：跨页全选需要完整数据或知道总数 -->
+      <fl-table :data="fullData" :columns="visibleColumns2" v-model:selection="selectedRows" :loading="loading"
+        :pagination="pagination" row-key="id" enableResize :remote-sort="false" :remote-filter="false"
+        @page-change="handlePageChange" @sort-change="handleSortChange" @filter-change="handleFilterChange"
+        :filter-actions="filterActions" :sort-actions="sortActions">
+        <template #operation="{ row }">
+          <fl-button type="primary" size="small" @click="edit(row)">编辑</fl-button>
+        </template>
+
+        <template #toolbar>
+          <button type="primary" @click="exportExcel">导出 Excel</button>
+          <!--
+          <input type="checkbox" v-model="selectAllAcrossPages" @change="handleSelectAllAcross">
+          跨页全选（共 {{ pagination.total }} 条）
+          </input>
+-->
+          <button @click="showColumnPanel = true">列设置</button>
+        </template>
+      </fl-table>
+    </div>
+
     <h3 id="fl-table-self">自定义</h3>
     <div style="height:500px;">
       <!-- 注意：跨页全选需要完整数据或知道总数 -->
-      <fl-table :styles="styles" :data="fullData" :columns="visibleColumns" v-model:selection="selectedRows"
+      <fl-table :styles="styles" :data="fullData" :columns="visibleColumns3" v-model:selection="selectedRows"
         :loading="loading" :pagination="pagination" border stripe row-key="id" enableResize :remote-sort="false"
         :remote-filter="false" @page-change="handlePageChange" @sort-change="handleSortChange"
-        @filter-change="handleFilterChange">
+        :filter-actions=filterActions :sort-actions=sortActions @filter-change="handleFilterChange">
         <template #toolbar>
           <button type="primary" @click="exportExcel">导出 Excel</button>
           <!--
@@ -63,17 +86,17 @@
     </div>
 
     <h3 id="fl-table-attrs">属性</h3>
-    <fl-table :data="data" :columns="columns_">
+    <fl-table style="height:500px;" :data="data" :columns="columns_">
       <template #value="{ row }">
         <pre>{{ row.value }}</pre>
       </template>
     </fl-table>
     <h3 id="fl-table-models">model</h3>
-    <fl-table :data="modelData" :columns="columns_"></fl-table>
+    <fl-table style="height:200px;" :data="modelData" :columns="columns_"></fl-table>
     <h3 id="fl-table-slots">插槽</h3>
-    <fl-table :data="slotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:200px;" :data="slotData" :columns="slotColumns"></fl-table>
     <h3 id="fl-table-events">事件</h3>
-    <fl-table :data="eventData" :columns="eventColumns"></fl-table>
+    <fl-table style="height:200px;" :data="eventData" :columns="eventColumns"></fl-table>
 
   </ComponentLayout>
 </template>
@@ -85,7 +108,7 @@ import { ref, reactive } from 'vue'
 const loading = ref(false)
 const pagination = reactive({
   currentPage: 1,
-  pageSize: 10,
+  pageSize: 15,
   total: 20
 })
 const selectAllAcrossPages = ref(false)
@@ -104,6 +127,24 @@ const handleSelectAllAcross = (e) => {
 }
 
 const selectedRows = ref([{ id: 1 }])
+
+const sortActions = {
+  id: (a, b) => {
+    return a - b
+  },
+  age: (a, b) => {
+    return a - b
+  }
+}
+
+const filterActions = {
+  name: (value, filterValue) => {
+    return String(value).includes(filterValue)
+  },
+  status: (value, filterValue) => {
+    return value === filterValue
+  }
+}
 
 const handlePageChange = ({ page, pageSize }) => {
   console.log(page, pageSize)
@@ -199,8 +240,7 @@ const fullData = ref([
   { id: 15, name: '张三', status: 'inactive', age: 12, gener: '男', city: '深圳', email: 'xxxx', birthday: '2023', phone: '1111111111', },
 ])
 
-// 原始列
-const columns = ref([
+const colInfo = [
   { type: 'selection', width: '55px', fixed: 'left' },
   { prop: 'id', label: 'ID', width: '80px', sortable: true, fixed: 'left' },
   {
@@ -229,13 +269,13 @@ const columns = ref([
     ]
   },
   {
-    width: '20%',
+    width: '80px',
     align: 'left',
     label: '性别',
     prop: 'gener'
   },
   {
-    width: '20%',
+    width: '80px',
     align: 'left',
     label: '地区',
     prop: 'city'
@@ -254,7 +294,7 @@ const columns = ref([
     prop: 'birthday'
   },
   {
-    width: '100px',
+    width: '120px',
     align: 'left',
     label: '电话号码',
     prop: 'phone',
@@ -263,7 +303,10 @@ const columns = ref([
     prop: 'operation', label: '操作', width: '100px',
     fixed: 'right',
   }
-])
+]
+
+// 原始列
+const columns = ref(colInfo)
 
 setTimeout(() => {
   columns.value = [
@@ -298,14 +341,14 @@ setTimeout(() => {
       ]
     },
     {
-      width: '20%',
+      width: '100px',
       align: 'left',
       label: '性别',
       prop: 'gener',
       resizable: true
     },
     {
-      width: '20%',
+      width: '100px',
       align: 'left',
       label: '地区',
       prop: 'city',
@@ -341,8 +384,14 @@ setTimeout(() => {
   ]
 }, 2000)
 
+const columns2 = ref(structuredClone(colInfo))
+const columns3 = ref(structuredClone(colInfo))
+
+
 // 当前可见列
 const visibleColumns = ref(columns.value.filter(col => col.prop !== 'email'))
+const visibleColumns2 = ref(columns2.value.filter(col => col.prop !== 'email'))
+const visibleColumns3 = ref(columns3.value.filter(col => col.prop !== 'email'))
 // 列设置面板数据
 const columnSettings = ref(columns.value.map(col => ({
   prop: col.prop,
@@ -376,8 +425,8 @@ const styles = {
   root: {
     color: '#FF5733',
     bd_color: '#33FF57',
-    th_bg_color: '#3357FF',
-    tr_bg_color: '#F0E68C',
+    header_tr_bg_color: '#3357FF',
+    body_tr_bg_color: '#F0E68C',
     filter_icon_color: '#8A2BE2',
     filter_icon_badge_color: '#FF69B4',
     tree_icon_color: '#00CED1'
@@ -391,19 +440,19 @@ const styles = {
     tree_icon_color: '#DC143C',
   },
   hover: {
-    bg_color: '#00FA9A',
+    body_tr_bg_color: '#00FA9A',
     filter_icon_color: '#BA55D3',
   },
   stripe: {
-    bg_color: '#2F4F4F'
+    body_tr_bg_color: '#2F4F4F'
   }
 }
 const styles_ = {
   root: {
     color: '',
     bd_color: '',
-    th_bg_color: '',
-    tr_bg_color: '',
+    header_tr_bg_color: '',
+    body_tr_bg_color: '',
     filter_icon_color: '',
     filter_icon_badge_color: '',
     tree_icon_color: ''
@@ -417,16 +466,17 @@ const styles_ = {
     tree_icon_color: '',
   },
   hover: {
-    bg_color: '',
+    body_tr_bg_color: '',
     filter_icon_color: '',
   },
   stripe: {
-    bg_color: ''
+    body_tr_bg_color: ''
   }
 }
 
 const anchors = [
   { title: '基础', href: '#fl-table-basic' },
+  { title: '非border stripe 本地排序过滤', href: '#fl-table-basic2' },
   { title: '自定义', href: '#fl-table-self' },
   { title: '属性', href: '#fl-table-attrs' },
   { title: 'model', href: '#fl-table-models' },
@@ -472,6 +522,8 @@ const data = [
   { name: 'indentSize', type: 'Number', default: '8', value: '', desc: '属性缩进' },
   { name: 'expandAll', type: 'Boolean', default: 'false', value: 'true, false', desc: '整页展开' },
   { name: 'styles', type: 'Object', default: '', value: JSON.stringify(styles_, null, 2), desc: '自定义样式' },
+  { name: 'sortActions', type: 'Object', default: '{}', value: `{propName:(a,b)=>Number}`, desc: '自定义本地字段排序,-1表示小于,0等于,1大于' },
+  { name: 'filterActions', type: 'Object', default: '{}', value: `{propName:(colValue,filterValue) bool}`, desc: '自定义本地字段过滤,true存在，false不存在' },
 ]
 
 const modelData = [

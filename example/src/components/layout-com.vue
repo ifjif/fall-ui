@@ -101,29 +101,29 @@
     </div>
 
     <h3 id="fl-layout-container-attrs">container属性</h3>
-    <fl-table :data="containerData" :columns="columns"></fl-table>
+    <fl-table style="height:200px;" :data="containerData" :columns="columns"></fl-table>
     <h3 id="fl-layout-container-slots">container插槽</h3>
-    <fl-table :data="containerSlotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:200px;" :data="containerSlotData" :columns="slotColumns"></fl-table>
 
     <h3 id="fl-layout-header-attrs">header属性</h3>
-    <fl-table :data="headerData" :columns="columns"></fl-table>
+    <fl-table style="height:200px;" :data="headerData" :columns="columns"></fl-table>
     <h3 id="fl-layout-header-slots">header插槽</h3>
-    <fl-table :data="headerSlotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:200px;" :data="headerSlotData" :columns="slotColumns"></fl-table>
 
     <h3 id="fl-layout-main-attrs">main属性</h3>
-    <fl-table :columns="columns"></fl-table>
+    <fl-table style="height:200px;" :columns="columns"></fl-table>
     <h3 id="fl-layout-main-slots">main插槽</h3>
-    <fl-table :data="mainSlotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:200px;" :data="mainSlotData" :columns="slotColumns"></fl-table>
 
     <h3 id="fl-layout-aside-attrs">aside属性</h3>
-    <fl-table :data="asideData" :columns="columns"></fl-table>
+    <fl-table style="height:200px;" :data="asideData" :columns="columns"></fl-table>
     <h3 id="fl-layout-aside-slots">aside插槽</h3>
-    <fl-table :data="asideSlotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:200px;" :data="asideSlotData" :columns="slotColumns"></fl-table>
 
     <h3 id="fl-layout-footer-attrs">footer属性</h3>
-    <fl-table :data="footerData" :columns="columns"></fl-table>
+    <fl-table style="height:200px;" :data="footerData" :columns="columns"></fl-table>
     <h3 id="fl-layout-footer-slots">footer插槽</h3>
-    <fl-table :data="footerSlotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:200px;" :data="footerSlotData" :columns="slotColumns"></fl-table>
   </ComponentLayout>
 </template>
 

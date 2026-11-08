@@ -26,15 +26,15 @@
     <fl-date-picker type="year" range v-model="selectedDate10" @change="handleChange" />
 
     <h3 id="fl-date-picker-attrs">属性</h3>
-    <fl-table :data="data" :columns="columns">
+    <fl-table style="height:500px;" :data="data" :columns="columns">
       <template #default="{ row }">
         <pre>{{ row.default }}</pre>
       </template>
     </fl-table>
     <h3 id="fl-date-picker-models">model</h3>
-    <fl-table :data="modelData" :columns="columns"></fl-table>
+    <fl-table style="height:200px;" :data="modelData" :columns="columns"></fl-table>
     <h3 id="fl-date-picker-events">事件</h3>
-    <fl-table :data="eventData" :columns="eventColumns"></fl-table>
+    <fl-table style="height:200px;" :data="eventData" :columns="eventColumns"></fl-table>
   </ComponentLayout>
 </template>
 

@@ -111,6 +111,11 @@ export default [
   },
   {
     icon: '🏠',
+    title: 'virtual-list 虚拟列表',
+    index: '/virtuallist-com'
+  },
+  {
+    icon: '🏠',
     title: 'loading 加载',
     index: '/loading-com'
   },

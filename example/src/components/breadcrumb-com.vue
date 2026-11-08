@@ -25,14 +25,14 @@
 
     </div>
     <h3 id="fl-breadcrumb-attrs">breadcrumb属性</h3>
-    <fl-table :data="data" :columns="columns"></fl-table>
+    <fl-table style="height:500px;" :data="data" :columns="columns"></fl-table>
     <h3 id="fl-breadcrumb-slots">breadcrumb插槽</h3>
-    <fl-table :data="slotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:200px;" :data="slotData" :columns="slotColumns"></fl-table>
 
     <h3 id="fl-breadcrumb-item-attrs">breadcrumb-item属性</h3>
-    <fl-table :data="itemData" :columns="columns"></fl-table>
+    <fl-table style="height:300px;" :data="itemData" :columns="columns"></fl-table>
     <h3 id="fl-breadcrumb-item-slots">breadcrumb-item插槽</h3>
-    <fl-table :data="itemSlotData" :columns="slotColumns"></fl-table>
+    <fl-table style="height:300px;" :data="itemSlotData" :columns="slotColumns"></fl-table>
   </ComponentLayout>
 </template>
 <script setup>
