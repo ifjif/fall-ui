@@ -8,7 +8,8 @@
     </fl-scrollbar>
 
     <fl-scrollbar ref="barref2" @resize="handleResize" style="background-color: green;" @top="topEvent2"
-      @bottom="bottomEvent" @left="leftEvent" @right="rightEvent" height="400" width="400">
+      @bottomPrev="bottomPrevEvent" @bottom="bottomEvent" @left="leftEvent" @right="rightEvent" height="400"
+      width="400">
       <p v-for="item in content2">
         {{ item }}
       </p>
@@ -23,13 +24,13 @@
       </p>
     </fl-scrollbar>
     <h3 id="fl-scrollbar-attrs">属性</h3>
-    <fl-table style="height:500px;" :data="data" :columns="columns"></fl-table>
+    <fl-table height="500" :data="data" :columns="columns"></fl-table>
     <h3 id="fl-scrollbar-slots">插槽</h3>
-    <fl-table style="height:200px;" :data="slotData" :columns="slotColumns"></fl-table>
+    <fl-table height="200" :data="slotData" :columns="slotColumns"></fl-table>
     <h3 id="fl-scrollbar-events">事件</h3>
-    <fl-table style="height:300px;" :data="eventData" :columns="eventColumns"></fl-table>
+    <fl-table height="500" :data="eventData" :columns="eventColumns"></fl-table>
     <h3 id="fl-scrollbar-expose">暴露</h3>
-    <fl-table style="height:500px;" :data="exposeData" :columns="exposeColumns"></fl-table>
+    <fl-table height="500" :data="exposeData" :columns="exposeColumns"></fl-table>
   </ComponentLayout>
 </template>
 <script setup>
@@ -143,6 +144,9 @@ fjdlsfjlsdjfsdlkfjdslfjsdlfjsdlkfjsdlfjsldfjsdlkfjsdklfjsdlfjsdlfjsfjdlsfjlsdjfs
 const topEvent = () => {
   console.log('触发顶部事件')
 }
+const bottomPrevEvent = () => {
+  console.log('触发bottom-prev事件')
+}
 const bottomEvent = () => {
   console.log('触发底部事件')
 }
@@ -178,6 +182,7 @@ const slotData = [
 const eventData = [
   { name: 'top', params: '', desc: '滚动到顶部事件' },
   { name: 'bottom', params: '', desc: '滚动到底部事件' },
+  { name: 'bottomPrev', params: '', desc: '滚动快到底部事件(距底部100px)' },
   { name: 'left', params: '', desc: '滚动到最左边事件' },
   { name: 'right', params: '', desc: '滚动到最右边事件' },
   {

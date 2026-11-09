@@ -48,20 +48,20 @@
       </fl-form>
     </div>
     <h3 id="fl-form-attrs">form属性</h3>
-    <fl-table style="height:500px;" :data="formData" :columns="columns">
+    <fl-table height="500" :data="formData" :columns="columns">
       <template #value="{ row }">
         <pre>{{ row.value }}</pre>
       </template>
     </fl-table>
     <h3 id="fl-form-slots">form插槽</h3>
-    <fl-table style="height:200px;" :data="slotData" :columns="slotColumns">
+    <fl-table height="200" :data="slotData" :columns="slotColumns">
     </fl-table>
     <h3 id="fl-form-expose">form暴露</h3>
-    <fl-table style="height:200px;" :data="formExposeData" :columns="exposeColumns"></fl-table>
+    <fl-table height="200" :data="formExposeData" :columns="exposeColumns"></fl-table>
     <h3 id="fl-form-item-attrs">form-item属性</h3>
-    <fl-table style="height:200px;" :data="formItemData" :columns="columns"></fl-table>
+    <fl-table height="200" :data="formItemData" :columns="columns"></fl-table>
     <h3 id="fl-form-item-slots">form-item插槽</h3>
-    <fl-table style="height:200px;" :data="formItemSlotData" :columns="slotColumns">
+    <fl-table height="200" :data="formItemSlotData" :columns="slotColumns">
     </fl-table>
   </ComponentLayout>
 </template>

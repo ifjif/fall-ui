@@ -171,6 +171,14 @@ import { watch, ref } from 'vue'
 const ns = useNamespace('table')
 
 const props = defineProps({
+  height: {
+    type: [String, Number],
+    default: () => ''
+  },
+  width: {
+    type: [String, Number],
+    default: () => ''
+  },
   data: {
     type: Array,
     default: () => []

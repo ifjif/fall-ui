@@ -1,3 +1,4 @@
+import { useStyle } from "@fall-ui/hooks"
 import { generateStyle } from "../tools/generateStyle"
 import { computed } from 'vue'
 
@@ -7,10 +8,15 @@ export function useTableStyle(
   sortStates,
   isTreeData
 ) {
+  const uStyle = useStyle()
 
   const styles = computed(() => {
+    const width = uStyle.width(props.width)
+    const height = uStyle.height(props.height)
     const styles = {
-      ...generateStyle(props.styles)
+      ...generateStyle(props.styles),
+      ...width,
+      ...height,
     }
 
     return styles

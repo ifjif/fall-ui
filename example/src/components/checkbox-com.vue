@@ -106,35 +106,35 @@
     </div>
 
     <h3 id="checkbox-attrs">checkbox属性</h3>
-    <fl-table style="height:500px;" :data="data" :columns="columns">
+    <fl-table height='500' :data="data" :columns="columns">
       <template #value="{ row }">
         <pre>{{ row.value }}</pre>
       </template>
     </fl-table>
     <h3 id="checkbox-models">checkbox model</h3>
-    <fl-table style="height:200px;" :data="modelData" :columns="columns"></fl-table>
+    <fl-table height='200' :data="modelData" :columns="columns"></fl-table>
     <h3 id="checkbox-slots">checkbox插槽</h3>
-    <fl-table style="height:200px;" :data="slotData" :columns="slotColumns"></fl-table>
+    <fl-table height='200' :data="slotData" :columns="slotColumns"></fl-table>
     <h3 id="checkbox-events">checkbox事件</h3>
-    <fl-table style="height:200px;" :data="eventData" :columns="eventColumns"></fl-table>
+    <fl-table height='200' :data="eventData" :columns="eventColumns"></fl-table>
 
     <h3 id="checkbox-group-attrs">checkbox-group属性</h3>
-    <fl-table style="height:200px;" :data="groupData" :columns="columns"></fl-table>
+    <fl-table height='200' :data="groupData" :columns="columns"></fl-table>
     <h3 id="checkbox-group-models">checkbox-group model</h3>
-    <fl-table style="height:200px;" :data="groupModel" :columns="columns"></fl-table>
+    <fl-table height='200' :data="groupModel" :columns="columns"></fl-table>
     <h3 id="checkbox-group-slots">checkbox-group插槽</h3>
-    <fl-table style="height:200px;" :data="groupSlotData" :columns="slotColumns"></fl-table>
+    <fl-table height='200' :data="groupSlotData" :columns="slotColumns"></fl-table>
     <h3 id="checkbox-group-events">checkbox-group事件</h3>
-    <fl-table style="height:200px;" :data="groupEventData" :columns="eventColumns"></fl-table>
+    <fl-table height='200' :data="groupEventData" :columns="eventColumns"></fl-table>
 
     <h3 id="checkbox-all-attrs">checkbox-all属性</h3>
-    <fl-table style="height:200px;" :data="allData" :columns="columns"></fl-table>
+    <fl-table height='200' :data="allData" :columns="columns"></fl-table>
     <h3 id="checkbox-all-models">checkbox-all model</h3>
-    <fl-table style="height:200px;" :data="allModel" :columns="columns"></fl-table>
+    <fl-table height='200' :data="allModel" :columns="columns"></fl-table>
     <h3 id="checkbox-all-slots">checkbox-all插槽</h3>
-    <fl-table style="height:200px;" :data="allSlotData" :columns="slotColumns"></fl-table>
+    <fl-table height='200' :data="allSlotData" :columns="slotColumns"></fl-table>
     <h3 id="checkbox-all-events">checkbox-all事件</h3>
-    <fl-table style="height:200px;" :data="allEventData" :columns="eventColumns"></fl-table>
+    <fl-table height='200' :data="allEventData" :columns="eventColumns"></fl-table>
   </ComponentLayout>
 </template>
 <script setup>

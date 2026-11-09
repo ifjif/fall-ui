@@ -69,18 +69,18 @@
       <fl-switch scale="2"></fl-switch>
     </div>
     <h3 id="fl-switch-attrs">属性</h3>
-    <fl-table style="height:500px;" :data="data" :columns="columns">
+    <fl-table height="500" :data="data" :columns="columns">
       <template #value="{ row }">
         <pre>{{ row.value }}</pre>
       </template>
     </fl-table>
 
     <h3 id="fl-switch-models">model</h3>
-    <fl-table style="height:200px;" :data="modelData" :columns="columns">
+    <fl-table height="200" :data="modelData" :columns="columns">
     </fl-table>
 
     <h3 id="fl-switch-events">事件</h3>
-    <fl-table style="height:200px;" :data="eventData" :columns="eventColumns">
+    <fl-table height="200" :data="eventData" :columns="eventColumns">
     </fl-table>
   </ComponentLayout>
 </template>

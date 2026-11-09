@@ -32,11 +32,11 @@
       </template>
     </fl-textarea>
     <h3 id="fl-textarea-attrs">属性</h3>
-    <fl-table style="height:500px;" :data="data" :columns="columns"></fl-table>
+    <fl-table height="500" :data="data" :columns="columns"></fl-table>
     <h3 id="fl-textarea-models">model</h3>
-    <fl-table style="height:200px;" :data="modelData" :columns="columns"></fl-table>
+    <fl-table height="200" :data="modelData" :columns="columns"></fl-table>
     <h3 id="fl-textarea-slots">插槽</h3>
-    <fl-table style="height:200px;" :data="slotData" :columns="slotColumns"></fl-table>
+    <fl-table height="200" :data="slotData" :columns="slotColumns"></fl-table>
   </ComponentLayout>
 </template>
 

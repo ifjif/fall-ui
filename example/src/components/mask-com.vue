@@ -23,10 +23,10 @@
     </fl-mask>
 
     <h3 id="fl-mask-attrs">属性</h3>
-    <fl-table style="height:200px;" :data="data" :columns="columns"></fl-table>
+    <fl-table height="500" :data="data" :columns="columns"></fl-table>
 
     <h3 id="fl-mask-events">事件</h3>
-    <fl-table style="height:200px;" :data="eventData" :columns="eventColumns"></fl-table>
+    <fl-table height="200" :data="eventData" :columns="eventColumns"></fl-table>
   </ComponentLayout>
 </template>
 <script setup>

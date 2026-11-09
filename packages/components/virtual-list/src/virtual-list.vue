@@ -1,5 +1,6 @@
 <template>
-  <FlScrollBar @resize="handleResize" ref="scrollbarRef" @scroll="onScroll">
+  <FlScrollBar @left="handleLeft" @right="handleRight" @top="handleTop" @bottomPrev="handleBottomPrev"
+    @resize="handleResize" ref="scrollbarRef" @scroll="onScroll">
     <!-- 虚拟内容-->
     <div ref="phantomRef" class="virtual-list-phantom"
       :style="{ width: `${totalWidth}px`, height: `${totalHeight}px` }">
@@ -48,7 +49,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['scroll', 'visibleRangeChange'])
+const emit = defineEmits(['scroll', 'resize', 'visibleRangeChange', 'top', 'bottom', 'left', 'right'])
 let scrollbarRef = ref(null)
 let phantomRef = ref(null)
 let contentRef = ref(null)
@@ -204,7 +205,7 @@ function initMutationObserver() {
 
       // 修正滚动位置，防止跳动
       //console.log(scrollbarRef.value.getScrollContainer().scrollTop, scrollTop.value)
-      //scrollbarRef.value.getScrollContainer().scrollTop = scrollTop.value
+      //scrollbarRef.value.scrollTop(scrollTop.value)
       //const container = containerRef.value
       //if (container) {
       //  container.scrollTop = scrollTop.value
@@ -229,8 +230,52 @@ function onScroll({ top, left }) {
 
 }
 
-function handleResize({ clientWidth, clientHeight }) {
+function handleResize({ clientWidth, clientHeight, scrollWidth, scrollHeight }) {
   containerHeight.value = clientHeight
+  emit('resize', { clientWidth, clientHeight, scrollWidth, scrollHeight })
+}
+
+function handleLeft() {
+  emit('left')
+}
+
+function handleRight() {
+  emit('right')
+}
+
+function handleTop() {
+  emit('top')
+}
+
+// 虚拟滚动很难触发真正的 触底
+//function handleBottom() {
+//  console.log('滚动到底部')
+//  emit('bottom')
+//}
+function handleBottomPrev() {
+  emit('bottom')
+}
+
+function scrollToTop() {
+  scrollbarRef.value.scrollToTop()
+}
+function scrollTopX(newTop) {
+  scrollbarRef.value.scrollTop(newTop)
+}
+function scrollToBottom() {
+  scrollbarRef.value.scrollToBottom(true)
+}
+function scrollToLeft() {
+  scrollbarRef.value.scrollToLeft()
+}
+function scrollLeftX(newLeft) {
+  scrollbarRef.value.scrollLeft(newLeft)
+}
+function scrollToRight() {
+  scrollbarRef.value.scrollToRight(true)
+}
+function getScrollContainer() {
+  return scrollbarRef.value.getScrollContainer()
 }
 
 onMounted(() => {
@@ -261,7 +306,14 @@ watch(() => props.items, () => {
 defineExpose({
   markDirty(id) {
     heightCache.delete(id)
-  }
+  },
+  scrollToTop,
+  scrollTop: scrollTopX,
+  scrollToBottom,
+  scrollToLeft,
+  scrollLeft: scrollLeftX,
+  scrollToRight,
+  getScrollContainer,
 })
 
 </script>

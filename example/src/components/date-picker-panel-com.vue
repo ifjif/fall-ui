@@ -23,9 +23,9 @@
     <fl-date-picker-panel range type="year"></fl-date-picker-panel>
 
     <h3 id="fl-date-picker-panel-attrs">属性</h3>
-    <fl-table style="height:500px;" :data="data" :columns="columns"></fl-table>
+    <fl-table height='500' :data="data" :columns="columns"></fl-table>
     <h3 id="fl-date-picker-panel-models">model</h3>
-    <fl-table style="height:200px;" :data="modelData" :columns="columns"></fl-table>
+    <fl-table height='200' :data="modelData" :columns="columns"></fl-table>
   </ComponentLayout>
 </template>
 <script setup>

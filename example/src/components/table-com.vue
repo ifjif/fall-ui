@@ -86,17 +86,17 @@
     </div>
 
     <h3 id="fl-table-attrs">属性</h3>
-    <fl-table style="height:500px;" :data="data" :columns="columns_">
+    <fl-table height="500" :data="data" :columns="columns_">
       <template #value="{ row }">
         <pre>{{ row.value }}</pre>
       </template>
     </fl-table>
     <h3 id="fl-table-models">model</h3>
-    <fl-table style="height:200px;" :data="modelData" :columns="columns_"></fl-table>
+    <fl-table height="200" :data="modelData" :columns="columns_"></fl-table>
     <h3 id="fl-table-slots">插槽</h3>
-    <fl-table style="height:200px;" :data="slotData" :columns="slotColumns"></fl-table>
+    <fl-table height="200" :data="slotData" :columns="slotColumns"></fl-table>
     <h3 id="fl-table-events">事件</h3>
-    <fl-table style="height:200px;" :data="eventData" :columns="eventColumns"></fl-table>
+    <fl-table height="200" :data="eventData" :columns="eventColumns"></fl-table>
 
   </ComponentLayout>
 </template>
@@ -502,6 +502,8 @@ const columns__ = {
 
 
 const data = [
+  { name: 'height', type: 'String|Number', default: '', value: '', desc: '表格容器client height,单位px' },
+  { name: 'width', type: 'String|Number', default: '', value: '', desc: '表格容器client width,单位px' },
   { name: 'data', type: 'Array', default: '[]', value: '', desc: 'columns中prop对应的值就是它的key' },
   { name: 'columns', type: 'Array', default: '[]', value: JSON.stringify(columns__, null, 2), desc: '列配置,type,prop二选一' },
   { name: 'loading', type: 'Boolean', default: 'false', value: 'true, false', desc: '带加载屏障' },

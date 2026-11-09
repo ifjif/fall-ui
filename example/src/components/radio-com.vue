@@ -83,29 +83,29 @@
       <fl-radio scale="1.5" label="1.5倍"></fl-radio>
     </div>
     <h3 id="fl-radio-attrs">radio属性</h3>
-    <fl-table style="height:500px;" :data="data" :columns="columns">
+    <fl-table height="500" :data="data" :columns="columns">
       <template #value="{ row }">
         <pre>{{ row.value }}</pre>
       </template>
     </fl-table>
     <h3 id="fl-radio-models">radio model</h3>
-    <fl-table style="height:200px;" :data="modelData" :columns="columns">
+    <fl-table height="200" :data="modelData" :columns="columns">
     </fl-table>
     <h3 id="fl-radio-events">radio事件</h3>
-    <fl-table style="height:200px;" :data="eventData" :columns="eventColumns">
+    <fl-table height="200" :data="eventData" :columns="eventColumns">
     </fl-table>
 
     <h3 id="fl-radio-group-attrs">radio-group属性</h3>
-    <fl-table style="height:200px;" :data="groupData" :columns="columns">
+    <fl-table height="200" :data="groupData" :columns="columns">
     </fl-table>
     <h3 id="fl-radio-group-models">radio-group model</h3>
-    <fl-table style="height:200px;" :data="groupModelData" :columns="columns">
+    <fl-table height="200" :data="groupModelData" :columns="columns">
     </fl-table>
     <h3 id="fl-radio-group-slots">radio-group插槽</h3>
-    <fl-table style="height:200px;" :data="groupSlots" :columns="slotColumns">
+    <fl-table height="200" :data="groupSlots" :columns="slotColumns">
     </fl-table>
     <h3 id="fl-radio-group-events">radio-group事件</h3>
-    <fl-table style="height:200px;" :data="groupEventData" :columns="eventColumns">
+    <fl-table height="200" :data="groupEventData" :columns="eventColumns">
     </fl-table>
   </ComponentLayout>
 </template>

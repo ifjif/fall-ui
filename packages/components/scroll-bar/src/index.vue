@@ -8,6 +8,9 @@
       <slot />
     </div>
 
+    <!-- 哨兵，只负责预触底检测 -->
+    <div ref="sentinelRef"></div>
+
     <div @mousedown="scrollDown" v-if="existScrollBar" v-show="showScrollBar || dragging" :class="[ns.e('thumb')]"
       :style="[thumbTopStyle, thumbRightStyle, thumbHeightStyle]">
     </div>
@@ -63,7 +66,7 @@ const props = defineProps({
     default: true,
   }
 })
-const emit = defineEmits(['top', 'bottom', 'left', 'right', 'resize', 'scroll'])
+const emit = defineEmits(['top', 'bottom', 'left', 'right', 'resize', 'scroll', 'bottomPrev'])
 
 const {
   containerRef,
@@ -132,20 +135,33 @@ const scrollTopInc = (x) => {
   scrollTop(newTop)
 }
 /*
+ * 需是连续的
  * changed 表示 是否是容器大小改变完成后 再进行 滚动到底部
  * true 滚动到改变后的真实的底部
  * false 未发生改变，滚动到当前底部
  */
+//let scrollToBottomForChange = null
 const scrollToBottom = (changed = false) => {
   onDragEnd()
   nextTick(() => {
-    if (changed && !resizeChange.value) scrollToBottomForChange = scrollToBottom
+    if (changed && !resizeChange.value) {
+      //scrollToBottomForChange = scrollToBottom
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          // 无论第二是否resize,第三一定触发
+          requestAnimationFrame(() => {
+            scrollToBottom(false)
+          })
+        })
+      })
+
+    }
     containerRef.value.scrollTop = maxScrollTop.value
     topPosition.value = false
-    endPosition.value = false
+    endPosition.value = true
   })
+
 }
-let scrollToBottomForChange = null
 
 const scrollToLeft = () => {
   onDragEnd()
@@ -177,17 +193,29 @@ const scrollLeftInc = (x) => {
   scrollLeft(newLeft)
 }
 
+// 需是连续的
+// 往right滚动，导致容器变化后，changed为true会再次滚动
+//let scrollToRightForChange = null
 const scrollToRight = (changed) => {
   onDragEnd()
   nextTick(() => {
-    if (changed && !resizeChange.value) scrollToRightForChange = scrollToRight
+    if (changed && !resizeChange.value) {
+      //scrollToRightForChange = scrollToRight
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          // 无论第二是否resize,第三一定触发
+          requestAnimationFrame(() => {
+            scrollToRight(false)
+          })
+        })
+      })
+    }
     containerRef.value.scrollLeft = maxScrollLeft.value
     leftPosition.value = false
     rightPostion.value = true
   })
 }
 
-let scrollToRightForChange = null
 
 const getScrollContainer = () => {
   return containerRef.value
@@ -290,11 +318,11 @@ const handleResize = (entries) => {
       ? 0.101
       : wr
 
-    scrollToBottomForChange && scrollToBottomForChange(false)
-    scrollToRightForChange && scrollToRightForChange(false)
+    //scrollToBottomForChange && scrollToBottomForChange(false)
+    //scrollToRightForChange && scrollToRightForChange(false)
     resizeChange.value = false
-    scrollToBottomForChange = null
-    scrollToRightForChange = null
+    //scrollToBottomForChange = null
+    //scrollToRightForChange = null
 
     //校准thumb top rate 和thumb left rate
     updateThumbRate()
@@ -303,14 +331,44 @@ const handleResize = (entries) => {
 
   })
 }
+const sentinelRef = ref(null)
+let sentinelObserver = null
+function initSentinel() {
+  if (sentinelObserver) sentinelObserver.disconnect()
+
+  sentinelObserver = new IntersectionObserver(
+    (entries) => {
+      const entry = entries[0]
+      if (!entry) return
+
+      // 哨兵进入视口
+      if (entry.isIntersecting) {
+        emit('bottomPrev')
+      }
+    },
+    {
+      root: containerRef.value ?? null,
+      rootMargin: `0px 0px 100px 0px`,
+      threshold: 0
+    }
+  )
+
+  nextTick(() => {
+    if (sentinelRef.value) {
+      sentinelObserver.observe(sentinelRef.value)
+    }
+  })
+}
 onMounted(() => {
   resizeObserver = new ResizeObserver(handleResize)
   resizeObserver.observe(containerRef.value)
   resizeObserver.observe(innerContentRef.value)
+  initSentinel()
 })
 
 onUnmounted(() => {
   if (resizeObserver) resizeObserver.disconnect()
   if (rafId) cancelAnimationFrame(rafId)
+  if (sentinelObserver) sentinelObserver.disconnect()
 })
 </script>

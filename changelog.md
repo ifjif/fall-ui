@@ -1,3 +1,38 @@
+## 0.3.1 - 2026-11-09
+
+### 修复(Fixed)
+
+- fl-scrollbar
+  滚动到最底部(scrollToBottom(changed))和滚动到最右边(scrollToRight(false))时，参数设置为true，在滚动后容器变化后重新滚动到最新位置, 会进行设置scrollToBottomForChange和scrollToRightForChange
+  原先在resize中进行，调用 scrollToBottomForChange和scrollToRightForChange,如果它们触发了，但是resize没有触发,会导致之后resize触发时，调用scrollToBottomForChange和scrollToRightForChange,造成为期待的影响.
+  改进在scrollToBottom和scrollToRight当changed为true且resizeChange没有时，使用三层requestAnimationFrame来重新触发scrollToBottom或scrollToRight, 因为第二层是容器变化成，需要在变化后重新滚动所有在第三层。
+
+### 增加(Added)
+
+- fl-scrollbar
+  内部添加`<div ref="sentinelRef"></div>`底部哨兵节点, 并使用IntersectionObserver进行监听。
+  当快出现在容器可视范围(当前为距底部100px)内是触发bottomPrev事件
+
+- fl-table
+  添加height和width属性
+
+- fl-virtual-list
+  添加暴露方法
+  scrollToTop
+  scrollTop
+  scrollToBottom
+  scrollToLeft
+  scrollLeft
+  scrollToRight
+  getScrollContainer
+
+  添加暴露事件
+  resize
+  top
+  bottom
+  right
+  left
+
 ## 0.3.0 - 2026-11-08
 
 ### 修复(Fixed)

@@ -142,13 +142,13 @@
     </div>
 
     <h3 id="fl-modal-attrs">属性</h3>
-    <fl-table style="height:500px;" :data="data" :columns="columns"></fl-table>
+    <fl-table height="500" :data="data" :columns="columns"></fl-table>
     <h3 id="fl-modal-models">model</h3>
-    <fl-table style="height:200px;" :data="modelData" :columns="columns"></fl-table>
+    <fl-table height="200" :data="modelData" :columns="columns"></fl-table>
     <h3 id="fl-modal-slots">插槽</h3>
-    <fl-table style="height:200px;" :data="slotData" :columns="slotColumns"></fl-table>
+    <fl-table height="200" :data="slotData" :columns="slotColumns"></fl-table>
     <h3 id="fl-modal-event">事件</h3>
-    <fl-table style="height:200px;" :data="eventData" :columns="eventColumns"></fl-table>
+    <fl-table height="200" :data="eventData" :columns="eventColumns"></fl-table>
   </ComponentLayout>
 </template>
 <script setup>

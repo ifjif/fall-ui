@@ -138,15 +138,15 @@
     </div>
 
     <h3 id="fl-row-col-attrs-row">row属性</h3>
-    <fl-table style="height:200px;" :data="rowData" :columns="columns"></fl-table>
+    <fl-table height="200" :data="rowData" :columns="columns"></fl-table>
     <h3 id="fl-row-col-attrs-row-slots">row插槽</h3>
-    <fl-table style="height:200px;" :data="rowSlotData" :columns="slotColumns"></fl-table>
+    <fl-table height="200" :data="rowSlotData" :columns="slotColumns"></fl-table>
 
 
     <h3 id="fl-row-col-attrs-col">col属性</h3>
-    <fl-table style="height:200px;" :data="colData" :columns="columns"></fl-table>
+    <fl-table height="200" :data="colData" :columns="columns"></fl-table>
     <h3 id="fl-row-col-attrs-col-slots">col插槽</h3>
-    <fl-table style="height:200px;" :data="colSlotData" :columns="slotColumns"></fl-table>
+    <fl-table height="200" :data="colSlotData" :columns="slotColumns"></fl-table>
 
   </ComponentLayout>
 </template>

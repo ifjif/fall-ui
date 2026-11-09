@@ -24,9 +24,9 @@
     </div>
     <fl-button @click="clickAll">关闭所有</fl-button>
     <h3 id="fl-message-attrs">属性</h3>
-    <fl-table style="height:500px;" :data="data" :columns="columns"></fl-table>
+    <fl-table height="500" :data="data" :columns="columns"></fl-table>
     <h3 id="fl-message-expose">暴露</h3>
-    <fl-table style="height:200px;" :data="exposeData" :columns="exposeColumns"></fl-table>
+    <fl-table height="200" :data="exposeData" :columns="exposeColumns"></fl-table>
     <p>通过FlMessage.closeAll()可关闭所有</p>
   </ComponentLayout>
 </template>
