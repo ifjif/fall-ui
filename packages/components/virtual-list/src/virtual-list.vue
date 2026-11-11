@@ -58,6 +58,10 @@ let contentRef = ref(null)
 let stickToBottom = false // 是否处于 吸附底部 模式
 let syncingBottom = false // 标记：当前scroll 事件由程序贴底触发
 const AT_BOTTOM_THRESHOLD = 8    // 距底多少像素算"贴底"
+//  标记「当前 scroll 事件由测量补偿（rebuildTops 锚定）触发」
+// 与 syncingBottom 同族：程序滚动事件回流时，只同步 scrollTop，不改动 stickToBottom
+let adjustingScroll = false
+
 const scrollTop = ref(0)
 const containerHeight = ref(0)
 // 每个元素的高度缓存
@@ -172,7 +176,13 @@ function measureFromMutations() {
   return needsUpdate
 }
 
+// 如果 顶部tops变了，scrollTop要相应的补偿
+// 这时，顶部才能稳定定
+//tops 变了，但 scrollTop 没变。
+//getStartIndex(scrollTop) 二分查出的 startIndex、offsetY=tops[begin] 都跟着跳 → content 整体瞬间位移
 function rebuildTops() {
+  // 1.备份重算前的tops,作为锚点插值基准
+  const oldTops = tops.slice()
   let top = 0
   for (let i = 0; i < props.items.length; i++) {
     const h = heightCache.get(String(props.items[i].id)) ?? props.estimatedHeight
@@ -183,10 +193,55 @@ function rebuildTops() {
 
   totalHeightComputed.value = top
 
-  // 高度变了，贴底态必须重新吸附
+  // 高度变了，贴底态必须重新吸附, 贴底态不做锚点补偿
   if (stickToBottom) {
     nextTick(() => syncToLastItem())
+    return
   }
+
+  adjustScroll(oldTops, top)
+}
+
+// 滚动补偿, top为总内容高度
+// oldTops必须是 tops.slice()
+function adjustScroll(oldTops, top) {
+  if (!oldTops) return
+  const oldLen = oldTops.length ?? 0
+  // 1) 列表结构变化时不做补偿（增删）
+  // 这时tops为整体位移，锚点插值不可信，交给外部的getAnchor/restoreAnchor
+  if (oldLen !== tops.length) return
+
+  const sc = getScrollContainer()
+  if (!sc) return
+  // 基准用 真实DOM 的scrollTop: 组件ref被rAF节流
+  const cur = sc.scrollTop
+
+  // 2)取锚点，当前视口的第一项
+  const startIndex = getStartIndex(cur)
+  // 顶部第一项之上没有累计高度，不可锚
+  if (startIndex <= 0) return
+
+  const oldTop = oldTops[startIndex] ?? 0
+  const newTop = tops[startIndex] ?? 0
+  const delta = newTop - oldTop
+
+  // 3)视口之上的累计高度确实变了才补偿（亚像素抖动忽略）
+  if (Math.abs(delta) <= 0.5) return
+
+  // 4)目标scrollTop: 保持scrollTop - tops[startIndex] 不变, 并夹在合法区间内
+  const maxScroll = Math.max(0, top - containerHeight.value)
+  const target = Math.max(0, Math.min(cur + delta, maxScroll))
+  if (Math.abs(target - cur) <= 0.5) return
+
+  // 5)施加补偿：先改内部状态再驱动真实滚动
+  //    并用 adjustingScroll 包住这次程序滚动，避免 onScroll 误判成用户滚动
+  adjustingScroll = true
+  scrollTop.value = target
+  updateVisibleItems()   // 让 begin / offsetY 与新的 scrollTop 同帧一致，避免闪一帧旧窗口
+  sc.scrollTop = target // 驱动 FlScrollBar 真实滚动（会异步回流 onScroll）
+
+  // 6) 下一帧释放：等本次程序滚动的 scroll 事件消费完再恢复用户判定
+  requestAnimationFrame(() => { adjustingScroll = false })
 }
 
 // MutationObserver 测量高度
@@ -214,11 +269,12 @@ function flushMeasure() {
 }
 
 // 滚动处理
-//区分用户滚动 / 程序贴底
+//区分用户滚动 / 程序贴底 / 程序锚点补偿
 let rafId = null
 function onScroll({ top, left }) {
-  // 程序贴底引发的滚动：只同步 scrollTop, 不改动stickToBottom
-  if (syncingBottom) {
+  //   程序贴底 或 程序锚定补偿 引发的滚动：只同步 scrollTop，
+  //   既不改动 stickToBottom，也不需要再重算可视窗口（调用方已自行同步）
+  if (syncingBottom || adjustingScroll) {
     scrollTop.value = top
     return
   }
@@ -226,7 +282,7 @@ function onScroll({ top, left }) {
   // 用户滚动：是否贴底决定 stickToBottom
   const sc = getScrollContainer()
   if (sc) {
-    console.log('scroll', top, sc.clientHeight, sc.scrollHeight)
+    //console.log('scroll', top, sc.clientHeight, sc.scrollHeight)
     stickToBottom = top + sc.clientHeight >= sc.scrollHeight - AT_BOTTOM_THRESHOLD
   }
 

@@ -1,6 +1,7 @@
 <template>
   <ComponentLayout :anchors="anchors">
     <h2>virtual-list 虚拟列表</h2>
+    <p style="color:red;">插槽数据不要有margin,否则height计算不正确,如要使用请改为padding</p>
 
     <h3 id="fl-virtual-list-stick-bottom">滚动底部吸附(10s后容器变高，存在底部吸附,自动进行)</h3>
     <div :style="{ height: `${height1}px` }" style="background-color: beige;">
@@ -8,13 +9,13 @@
         v-show="testMessages3.length > 0" ref="testRef3" @resize="testResize" :items="testMessages3">
         <template #default="{ item }">
           <div style="display:flex;flex-direction: column;box-sizing: border-box;">
-            <p>{{ item.content }}</p>
-            <p>{{ item.time }}</p>
-            <h3 v-if="item.type === 1">文本</h3>
-            <h3 style="background-color: blue;" :style="{ width: `${item.width}px`, height: `${item.height}px` }"
-              v-else-if="item.type === 2">图片</h3>
-            <p style="width:30px;height:30px;border-radius: 50%;background-color: red;">{{ item.avatar }}</p>
-            <p style="">{{ item.name }}</p>
+            <p style="margin:0;">{{ item.content }}</p>
+            <p style="margin:0;">{{ item.time }}</p>
+            <h3 style="margin:0;" v-if="item.type === 1">文本</h3>
+            <h3 style="margin:0;background-color: blue;"
+              :style="{ width: `${item.width}px`, height: `${item.height}px` }" v-else-if="item.type === 2">图片</h3>
+            <p style="margin:0;width:30px;height:30px;border-radius: 50%;background-color: red;">{{ item.avatar }}</p>
+            <p style="margin:0;">{{ item.name }}</p>
           </div>
         </template>
       </FlVirtualList>
