@@ -36,6 +36,7 @@ export function useScrollBarEvent(
   let dragTrackRateX = 0       // 水平：每 1px 轨道对应多少内容像素（冻结）
   let dragStartScrollLeft = 0  // 水平：手势起始的 scrollLeft（冻结）
   // 拖拽起始的 thumb rate和maxThumb 快照
+  // 几何冻结+实时换算方案
   // 上面4个已经没必要了
   let dragStartThumbRateY = 0
   let dragStartMaxThumbTop = 0

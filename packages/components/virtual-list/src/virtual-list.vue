@@ -213,7 +213,8 @@ function rebuildTops() {
 // 滚动补偿, top为总内容高度
 // oldTops必须是 tops.slice()
 function adjustScroll(oldTops, top) {
-  if (scrollbarRef.value.getDragging()) return
+  //scrollbar 采用  鼠标 rate + 几何冻结 需要进行补偿
+  //if (scrollbarRef.value.getDragging()) return
 
   if (!oldTops) return
   const oldLen = oldTops.length ?? 0

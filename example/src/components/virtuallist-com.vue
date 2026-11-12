@@ -215,9 +215,9 @@ const exposeData = [
 ]
 
 onMounted(() => {
-  //setTimeout(() => {
-  //  console.log('更新高度')
-  //  height1.value = 600
-  //}, 10000)
+  setTimeout(() => {
+    console.log('更新高度')
+    height1.value = 600
+  }, 10000)
 })
 </script>
