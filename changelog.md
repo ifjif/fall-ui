@@ -1,3 +1,21 @@
+## 0.3.5 - 2026-11-12
+
+### 增加(Added)
+
+- fl-scrollbar
+  暴露方法
+  getDragging() 判断是否是拖拽滚动
+- fl-virtual-list
+  属性
+  bottom-mode 触底模式(stick/load), 触底加载数据和底部吸附不能同时存在
+
+### 修复
+
+- fl-scrollbar
+  fl-virtual-list进行拖拽向上滚时，数据回滚（如顶部看到5后滚动到了4）
+  fl-virtual-list使用时，鼠标和滑块不一致
+  解决，scrollTop以滑块比来设置
+
 ## 0.3.4 - 2026-11-11
 
 ### 修复(Fixed)

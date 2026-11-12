@@ -101,7 +101,7 @@ const {
   onTouchMove,
   onTouchEnd,
   onDragEnd,
-  updateThumbRate
+  updateThumbRate,
 } = useScrollBar(props, emit)
 
 const resizeChange = ref(false)
@@ -220,6 +220,9 @@ const scrollToRight = (changed) => {
 const getScrollContainer = () => {
   return containerRef.value
 }
+const getDragging = () => {
+  return dragging.value
+}
 
 defineExpose({
   scrollTop,
@@ -230,7 +233,8 @@ defineExpose({
   scrollToLeft,
   scrollLeftInc,
   scrollToRight,
-  getScrollContainer
+  getScrollContainer,
+  getDragging
 })
 let resizeObserver = null
 let rafId = null // 用于取消动画帧

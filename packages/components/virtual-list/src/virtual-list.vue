@@ -46,6 +46,13 @@ const props = defineProps({
   buffer: {
     type: Number,
     default: () => 5,
+  },
+  bottomMode: {
+    type: String,
+    validate(v) {
+      return ['stick', 'load'].includes(v)
+    },
+    default: () => 'stick'
   }
 })
 
@@ -194,7 +201,8 @@ function rebuildTops() {
   totalHeightComputed.value = top
 
   // 高度变了，贴底态必须重新吸附, 贴底态不做锚点补偿
-  if (stickToBottom) {
+  // 必须是 stick模式
+  if (stickToBottom && props.bottomMode === 'stick') {
     nextTick(() => syncToLastItem())
     return
   }
@@ -205,6 +213,8 @@ function rebuildTops() {
 // 滚动补偿, top为总内容高度
 // oldTops必须是 tops.slice()
 function adjustScroll(oldTops, top) {
+  if (scrollbarRef.value.getDragging()) return
+
   if (!oldTops) return
   const oldLen = oldTops.length ?? 0
   // 1) 列表结构变化时不做补偿（增删）
@@ -546,7 +556,7 @@ watch(() => props.items, () => {
   }
   initPositions()
   // 贴底态，到底部
-  if (stickToBottom) {
+  if (stickToBottom && props.bottomMode === 'stick') {
     nextTick(() => scrollToBottom())
   }
 }, { deep: false })

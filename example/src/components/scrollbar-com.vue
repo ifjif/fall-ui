@@ -203,5 +203,6 @@ const exposeData = [
   { name: 'scrollLeftInc', type: '函数:(inc)', desc: '向左滚动增加值,接受一个数字' },
   { name: 'scrollToRight', type: '函数', desc: '滚动到最右边' },
   { name: 'getScrollContainer', type: '函数', desc: '得到内部滚动容器' },
+  { name: 'getDragging', type: '函数', desc: '是否是拖拽滚动' },
 ]
 </script>

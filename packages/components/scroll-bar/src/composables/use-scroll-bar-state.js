@@ -37,7 +37,6 @@ export function useScrollBarState() {
   })
 
   const startY = ref(0)
-  const trackOffset = ref(0)
   const dragging = ref(false)
 
   // 宽度比
@@ -52,7 +51,6 @@ export function useScrollBarState() {
   })
 
   const startX = ref(0)
-  const trackHorizontalOffset = ref(0)
   //计算右边的值
   const thumbLeftRate = ref(0)
   //往右滚动了多少
@@ -86,7 +84,6 @@ export function useScrollBarState() {
     maxScrollTop,
     thumbTop,
     startY,
-    trackOffset,
     dragging,
     thumbWidth,
     thumbWidthRate,
@@ -96,11 +93,12 @@ export function useScrollBarState() {
     maxScrollLeft,
     scrollLeft,
     thumbLeftRate,
-    trackHorizontalOffset,
     existHorizontalScrollBar,
     topPosition,
     endPosition,
     leftPosition,
     rightPostion,
+    maxThumbTop,
+    maxThumbLeft
   }
 }

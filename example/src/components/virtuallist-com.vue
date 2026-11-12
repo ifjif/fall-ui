@@ -42,11 +42,11 @@
       </FlVirtualList>
     </div>
 
-    <h3 id="fl-virtual-list-pull-down">消息,向下拉</h3>
+    <h3 id="fl-virtual-list-pull-down">消息,向下拉(必须设置bottom-mode="load")</h3>
     <div style="height:400px;background-color: green;">
-      <FlVirtualList @visibleRangeChange="visibleRangeChangeHandler" :estimatedHeight="80" :buffer="5"
-        @scroll="testScroll" v-show="testMessages2.length > 0" ref="testRef2" @resize="testResize" @bottom="testbottom"
-        :items="testMessages2">
+      <FlVirtualList bottom-mode="load" @visibleRangeChange="visibleRangeChangeHandler" :estimatedHeight="80"
+        :buffer="5" @scroll="testScroll" v-show="testMessages2.length > 0" ref="testRef2" @resize="testResize"
+        @bottom="testbottom" :items="testMessages2">
         <template #default="{ item }">
           <div style="display:flex;flex-direction: column;box-sizing: border-box;">
             <p>{{ item.content }}</p>
@@ -180,6 +180,7 @@ const data = [
   { name: 'items', type: 'Array', default: '[]', value: '', desc: '渲染内容,确保含id' },
   { name: 'estimatedHeight', type: 'Number', default: '80', value: '', desc: '初始预估高度' },
   { name: 'buffer', type: 'Number', default: '5', value: '', desc: '缓冲数量' },
+  { name: 'bottomMode', type: 'String', default: 'stick', value: 'load,stick', desc: '触底模式' },
 ]
 
 const slotData = [
@@ -214,9 +215,9 @@ const exposeData = [
 ]
 
 onMounted(() => {
-  setTimeout(() => {
-    console.log('更新高度')
-    height1.value = 600
-  }, 10000)
+  //setTimeout(() => {
+  //  console.log('更新高度')
+  //  height1.value = 600
+  //}, 10000)
 })
 </script>

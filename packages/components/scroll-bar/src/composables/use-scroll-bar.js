@@ -15,7 +15,6 @@ export function useScrollBar(props, emit) {
     maxScrollTop,
     thumbTop,
     startY,
-    trackOffset,
     dragging,
     thumbWidth,
     thumbWidthRate,
@@ -25,12 +24,13 @@ export function useScrollBar(props, emit) {
     maxScrollLeft,
     scrollLeft,
     thumbLeftRate,
-    trackHorizontalOffset,
     existHorizontalScrollBar,
     topPosition,
     endPosition,
     leftPosition,
     rightPostion,
+    maxThumbTop,
+    maxThumbLeft
   } = useScrollBarState()
   const {
     width,
@@ -66,17 +66,17 @@ export function useScrollBar(props, emit) {
     trackHeight,
     maxScrollTop,
     startY,
-    trackOffset,
     trackWidth,
     startX,
     maxScrollLeft,
     scrollLeft,
     thumbLeftRate,
-    trackHorizontalOffset,
     topPosition,
     endPosition,
     leftPosition,
     rightPostion,
+    maxThumbTop,
+    maxThumbLeft
   )
 
   return {
@@ -112,7 +112,7 @@ export function useScrollBar(props, emit) {
     onTouchMove,
     onTouchEnd,
     onDragEnd,
-    updateThumbRate
+    updateThumbRate,
   }
 }
 
